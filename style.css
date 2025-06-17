@@ -1,0 +1,13 @@
+.navbar img {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+.navbar ul {
+    list-style-type: none;
+}
+
+.navbar li {
+    display: inline-block;
+}
