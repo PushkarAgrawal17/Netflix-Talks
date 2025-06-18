@@ -19,15 +19,16 @@ A responsive front-end clone of Netflix built using **HTML**, **CSS**, and **Jav
 
 ## 📁 Folder Structure  _(Might be updated in the future)_
 
-/Netflix-Clone
-│
-├── index.html
-├── login.html
-├── signup.html
-├── style.css
-├── auth.css
-├── script.js
-└── README.md
+   ```/Netflix-Clone
+   │
+   ├── index.html
+   ├── login.html
+   ├── signup.html
+   ├── style.css
+   ├── auth.css
+   ├── script.js
+   └── README.md
+```
 
 
 ## 🧰 Setup Instructions
