@@ -1,0 +1,256 @@
+/* --------------- Signup page ------------------ */
+
+.signup-body {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.signup-container {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 40px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.signup-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.signup-form button:hover {
+    background-color: #f40612;
+}
+
+.signup-container a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* --------------- Signup page: FAQ Section ------------------ */
+.faq {
+    background-color: #222;
+    color: white;
+    padding: 2rem;
+}
+
+.faq-item {
+    background-color: #333;
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+.faq-item button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: left;
+}
+
+.answer {
+    margin-top: 0.5rem;
+}
+
+/* --------------- Signup page: Footer Section ------------------ */
+.footer {
+    background-color: black;
+    color: gray;
+    padding: 2rem;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.footer-links a {
+    color: gray;
+    text-decoration: none;
+}
+
+/* ---------------Login page------------------ */
+
+.login-body {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.login-container {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 40px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-form button:hover {
+    background-color: #f40612;
+}
+
+.login-container a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+
+/*  ---------------------------------------------------- */
+
+/* ===== Auth Shared Styles ===== */
+.auth-body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.auth-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -2;
+}
+
+.auth-background-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4);
+}
+
+.auth-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.auth-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+}
+
+.auth-logo {
+    width: 120px;
+    margin-bottom: 30px;
+}
+
+/* ===== Auth Container ===== */
+.auth-container {
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 40px 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(3px);
+}
+
+.auth-container h1 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.auth-form input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background: #333;
+    color: #fff;
+}
+
+.auth-form input::placeholder {
+    color: #aaa;
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.auth-form button:hover {
+    background-color: #f40612;
+}
+
+.auth-container p {
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.auth-container a {
+    color: #fff;
+    text-decoration: underline;
+}

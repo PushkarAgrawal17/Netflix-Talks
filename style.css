@@ -1,4 +1,4 @@
-/* ===== Reset & Base ===== */
+/* ---------- Base ----------- */
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +13,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ===== Navbar ===== */
+/* ---------- Navbar ----------- */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -51,7 +51,7 @@ body {
     cursor: pointer;
 }
 
-/* ===== Hero Section ===== */
+/* ---------- Hero Section ----------- */
 .hero {
     background: url("banner.jpg") no-repeat center center/cover;
     height: 70vh;
@@ -111,7 +111,7 @@ body {
     opacity: 0.8;
 }
 
-/* ===== Rows ===== */
+/* ---------- Rows ----------- */
 .row {
     margin: 30px 20px;
 }
@@ -146,7 +146,7 @@ body {
     display: none;
 }
 
-/* ===== Responsive ===== */
+/* ---------- Responsive ----------- */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2rem;
