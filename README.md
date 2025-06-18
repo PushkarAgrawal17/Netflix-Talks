@@ -40,7 +40,7 @@ A responsive front-end clone of Netflix built using **HTML**, **CSS**, and **Jav
 
 2. Open index.html in a browser.
 
-3. Make sure your Firebase config is correctly added in script.js:
+3. Make sure your Firebase config is correctly added in script.js: _(To be updated)_
     ```js
     const firebaseConfig = {
       apiKey: "YOUR_API_KEY",
