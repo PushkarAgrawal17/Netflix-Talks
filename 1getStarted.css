@@ -178,43 +178,52 @@ body {
     z-index: 2;
 }
 
-/* === Reasons to Join Section === */
+/* --------------- More Reasons to Join Section ------------------ */
 .reasons-to-join {
-    padding: 2rem;
-    background-color: #000;
+    padding: 3rem 1.5rem;
+    color: white;
 }
 
 .reasons-to-join h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
 }
 
 .reason-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .reason-card {
-    background: linear-gradient(145deg, #1c1c1c, #111);
-    padding: 1.5rem;
+    background: linear-gradient(to bottom right, #0d0d9561, #89161c6c);
     border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: left;
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 .reason-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
 }
 
 .reason-card p {
     font-size: 0.95rem;
-    margin-bottom: 1rem;
     color: #ccc;
+    margin-bottom: 1.2rem;
 }
 
 .reason-card img {
-    width: 40px;
+    width: 58px;
+    height: auto;
     align-self: flex-end;
 }
 
@@ -266,39 +275,91 @@ body {
 
 /* === Footer === */
 .footer {
+    width: 100%;
     background-color: black;
-    color: gray;
-    padding: 2rem;
-    text-align: center;
+    color: #b3b3b3;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+    text-align: left;
 }
 
-.footer-links {
+.footer a {
+    color: #b3b3b3;
+    text-decoration: underline;
+    margin-bottom: 0.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.footer-column {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.footer-links a {
-    color: gray;
-    text-decoration: none;
+
+/* ✅ Align other elements with the grid */
+.footer .footer-content-wrapper {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5rem;
 }
 
-.answer {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 1s ease, opacity 1s ease, padding 1s ease;
-    padding: 0 1rem;
-    border-top: 1px solid #444;
-    color: #ddd;
+.footer .footer-content-wrapper p,
+.footer .footer-content-wrapper select {
+    margin-left: 0;
+    text-align: left;
+    display: block;
 }
 
-.faq-item.open .answer {
-    max-height: 500px; /* Adjust if needed */
-    opacity: 1;
-    padding: 1rem;
-    background: #333232;
+.footer select {
+    margin-top: 2rem;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
+    border-radius: 4px;
 }
 
+.footer p {
+    margin: 0.5rem 0;
+}
+
+.recaptcha-msg {
+    font-size: 0.75rem;
+    color: #b3b3b3bf;
+    margin-top: 1rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recaptcha-msg a {
+    color: dodgerblue;
+}
+
+/* 🔁 Responsive: 4 columns → 2 columns → 1 */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-column {
+        align-items: flex-start;
+    }
+}
