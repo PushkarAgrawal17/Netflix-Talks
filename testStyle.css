@@ -220,44 +220,63 @@ body {
 
 /* === FAQ Section === */
 .faq {
-    background-color: #000000;
+    background-color: #222;
     padding: 2rem;
     max-width: 800px;
     margin: auto;
 }
 
 .faq h2 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-align: center;
-    background-color: black;
+    font-size: 2rem;
+}
+
+.faq-item {
+    margin-bottom: 8px;
 }
 
 .faq-question {
-    background: #333232;
-    border: none;
+    background-color: #2d2d2d;
     color: white;
     font-size: 1.2rem;
     width: 100%;
     text-align: left;
-    padding: 1rem;
+    padding: 1.2rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     cursor: pointer;
-    margin-top: 10px;
+    border: 2px solid #000;
+    transition: all 0.2s ease;
 }
-.faq-question:hover{
-    background: #504e4e;
+
+.faq-question:hover {
+    background-color: #414141;
+}
+
+.toggle-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
 }
 
 .answer {
-    padding: 1rem;
-    display: none;
-    border-top: 1px solid #444;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+    padding: 0 1.2rem;
+    background-color: #2d2d2d;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
     color: #ddd;
 }
 
 .faq-item.open .answer {
-    display: block;
+    max-height: 500px; /* Adjust based on your content */
+    opacity: 1;
+    padding: 1.2rem;
 }
 
 .faq-item.open .toggle-icon {
@@ -285,7 +304,7 @@ body {
     text-decoration: none;
 }
 
-.answer {
+/* .answer {
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -296,9 +315,8 @@ body {
 }
 
 .faq-item.open .answer {
-    max-height: 500px; /* Adjust if needed */
+    max-height: 500px; Adjust if needed 
     opacity: 1;
     padding: 1rem;
-    background: #333232;
-}
+} */
 
