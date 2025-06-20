@@ -126,7 +126,7 @@
 }
 
 .reason-card {
-    background: linear-gradient(135deg, #0f0fcb, #e50914);
+    background: linear-gradient(to bottom right, #0d0d9561, #89161c6c);
     border-radius: 12px;
     padding: 2rem 1.5rem;
     text-align: left;
@@ -155,7 +155,7 @@
 }
 
 .reason-card img {
-    width: 48px;
+    width: 58px;
     height: auto;
     align-self: flex-end;
 }
