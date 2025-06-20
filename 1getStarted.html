@@ -30,7 +30,7 @@
             <p>Ready to watch? Enter your email to create or restart your membership.</p>
             <form class="email-form">
                 <input type="email" placeholder="Email address" required />
-                <button type="submit">Get Started <span>&#x25B6;</span></button>
+                <button type="submit">Get Started &gt;</button>
             </form>
         </div>
 
@@ -98,7 +98,8 @@
         </div>
         <div class="faq-item">
             <button class="faq-question">How much does Netflix cost?<span class="toggle-icon">+</span></button>
-            <div class="answer">Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts.</div>
+            <div class="answer">Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for
+                one fixed monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts.</div>
         </div>
         <div class="faq-item">
             <button class="faq-question">Where can I watch?<span class="toggle-icon">+</span></button>
@@ -108,7 +109,8 @@
         </div>
         <div class="faq-item">
             <button class="faq-question">How do I cancel?<span class="toggle-icon">+</span></button>
-            <div class="answer">Netflix is flexible. No contracts and no commitments. Cancel online anytime. No cancellation fees.</div>
+            <div class="answer">Netflix is flexible. No contracts and no commitments. Cancel online anytime. No
+                cancellation fees.</div>
         </div>
         <div class="faq-item">
             <button class="faq-question">What can I watch on Netflix?<span class="toggle-icon">+</span></button>
@@ -117,7 +119,8 @@
         </div>
         <div class="faq-item">
             <button class="faq-question">Is Netflix good for kids?<span class="toggle-icon">+</span></button>
-            <div class="answer">The Netflix Kids experience gives parents control while kids enjoy family-friendly content in their own space.</div>
+            <div class="answer">The Netflix Kids experience gives parents control while kids enjoy family-friendly
+                content in their own space.</div>
         </div>
     </section>
 
@@ -156,10 +159,10 @@
                 <option>English</option>
                 <option>हिन्दी</option>
             </select>
-            
-            <br>
-            <p>Netflix India</p>
 
+            <br><br>
+            <p>Netflix India</p>
+            <br>
             <p class="recaptcha-msg">
                 This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a>
             </p>
@@ -167,17 +170,14 @@
 
     </footer>
 
-
     <script>
-    document.querySelectorAll('.faq-question').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const item = btn.closest('.faq-item');
-            item.classList.toggle('open');
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                item.classList.toggle('open');
+            });
         });
-    });
     </script>
-
-
 
 </body>
 
