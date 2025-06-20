@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #000;
+    background-color: rgb(3, 3, 16);
     color: #fff;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
@@ -22,8 +22,10 @@ body {
 
 .background-img {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 90%;
     object-fit: cover;
     z-index: -2;
     filter: brightness(0.4);
@@ -31,25 +33,40 @@ body {
 
 .hero-overlay {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    height: 90%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+    overflow: visible;
+    border-bottom: 5px solid red;
+}
+
+.hero-overlay::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, rgb(50, 4, 4), red, rgb(50, 4, 4));
     z-index: -1;
 }
+
 
 /* === Navbar === */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
+    padding: 20px 100px;
     background: linear-gradient(to bottom, #000, transparent);
     z-index: 10;
     position: relative;
 }
 
 .logo {
-    height: 40px;
+    width: 150px;
 }
 
 .navbar-actions {
@@ -82,7 +99,7 @@ body {
 /* === Center Content === */
 .center-content {
     position: relative;
-    top: 25%;
+    top: 15%;
     max-width: 800px;
     margin: auto;
     text-align: center;
@@ -90,17 +107,17 @@ body {
 }
 
 .center-content h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: bold;
 }
 
 .center-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: 20px;
 }
 
 .center-content p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin: 20px 0;
 }
 
@@ -115,10 +132,18 @@ body {
 .email-form input[type="email"] {
     padding: 12px;
     font-size: 1rem;
+    background-color: transparent;
+    color: white;
+    outline: 1px solid grey;
+    text-transform: lowercase;
     width: 300px;
     border: none;
     border-radius: 4px;
-    outline: none;
+}
+
+.email-form input::placeholder {
+    color: #ccc;
+    text-transform:capitalize;
 }
 
 .email-form button {
@@ -142,7 +167,6 @@ body {
 /* === Trending Now Section === */
 .trending-now {
     padding: 2rem;
-    background-color: #000;
 }
 
 .trending-now h2 {
@@ -154,6 +178,11 @@ body {
     display: flex;
     gap: 1rem;
     overflow-x: auto;
+}
+
+/* Hide scrollbar but keep functionality */
+.trending-row::-webkit-scrollbar {
+    display: none;
 }
 
 .poster-card {
@@ -187,6 +216,7 @@ body {
 .reasons-to-join h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
+    margin-left: 9rem;;
 }
 
 .reason-grid {
@@ -229,7 +259,7 @@ body {
 
 /* === FAQ Section === */
 .faq {
-    background-color: #000000;
+    background-color:rgb(3, 3, 10);
     padding: 2rem;
     max-width: 800px;
     margin: auto;
@@ -238,7 +268,6 @@ body {
 .faq h2 {
     margin-bottom: 1rem;
     text-align: center;
-    background-color: black;
 }
 
 .faq-question {
@@ -254,7 +283,8 @@ body {
     cursor: pointer;
     margin-top: 10px;
 }
-.faq-question:hover{
+
+.faq-question:hover {
     background: #504e4e;
 }
 
