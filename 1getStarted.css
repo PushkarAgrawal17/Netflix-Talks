@@ -267,6 +267,7 @@ body {
 
 .faq-item.open .answer {
     display: block;
+    background-color: #333232;
 }
 
 .faq-item.open .toggle-icon {
