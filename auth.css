@@ -1,181 +1,14 @@
-/* --------------- Signup page ------------------ */
+/* ===== Auth Pages: Sign Up & Sign In ===== */
 
-.signup-body {
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, sans-serif;
-}
-
-.signup-container {
-    background: rgba(0, 0, 0, 0.75);
-    padding: 40px;
-    border-radius: 10px;
-    text-align: center;
-    width: 90%;
-    max-width: 300px;
-}
-
-.signup-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-}
-
-.signup-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #e50914;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.signup-form button:hover {
-    background-color: #f40612;
-}
-
-.signup-container a {
-    color: #fff;
-    text-decoration: underline;
-}
-
-/* --------------- Signup page: FAQ Section ------------------ */
-.faq {
-    background-color: #222;
-    color: white;
-    padding: 2rem;
-    max-width: 800px;
-    margin: auto;
-}
-
-.faq-question {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    width: 100%;
-    text-align: left;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-.answer {
-    padding: 1rem;
-    display: none;
-    border-top: 1px solid #444;
-    color: #ddd;
-}
-
-.faq-item.open .answer {
-    display: block;
-}
-
-.faq-item.open .toggle-icon {
-    transform: rotate(45deg);
-    /* changes "+" to "×" */
-}
-
-.answer {
-    /* display: none; */
-    margin-top: 0.5rem;
-    color: #ddd;
-}
-
-/* --------------- Signup page: Footer Section ------------------ */
-.footer {
-    background-color: black;
-    color: gray;
-    padding: 2rem;
-    text-align: center;
-}
-
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.footer-links a {
-    color: gray;
-    text-decoration: none;
-}
-
-/* ---------------Login page------------------ */
-
-.login-body {
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-}
-
-.login-container {
-    background: rgba(0, 0, 0, 0.75);
-    padding: 40px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-}
-
-.login-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-}
-
-.login-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #e50914;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.login-form button:hover {
-    background-color: #f40612;
-}
-
-.login-container a {
-    color: #fff;
-    text-decoration: underline;
-}
-
-
-/*  ---------------------------------------------------- */
-
-/* ===== Auth Shared Styles ===== */
-.auth-body {
+body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     color: white;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
+    background-color: #000;
 }
 
+/* 🔒 Background */
 .auth-bg {
     position: absolute;
     top: 0;
@@ -204,6 +37,7 @@
     z-index: -1;
 }
 
+/* 🔝 Navbar */
 .navbar {
     display: flex;
     width: 100%;
@@ -211,7 +45,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #00000000;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     position: relative;
     top: 0;
@@ -232,73 +65,71 @@
     cursor: pointer;
 }
 
-.auth-content {
+/* 🔒 Shared Auth Container */
+.signup-body,
+.login-body {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding-top: 60px;
+    height: 100vh;
+    flex-direction: column;
 }
 
-.auth-logo {
-    width: 120px;
-    margin-bottom: 30px;
-}
-
-/* ===== Auth Container ===== */
-.auth-container {
-    background-color: rgba(0, 0, 0, 0.75);
-    padding: 40px 30px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 350px;
+.signup-container,
+.login-container {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 40px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 300px;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(3px);
+    z-index: 2;
 }
 
-.auth-container h1 {
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-
-.auth-form input {
+/* 🔒 Form Styles */
+.signup-form input,
+.login-form input {
     width: 100%;
+    padding: 10px;
     margin: 10px 0;
-    padding: 12px;
     border: none;
-    border-radius: 4px;
-    background: #333;
+    border-radius: 5px;
+    outline: none;
+    background-color: #333;
     color: #fff;
 }
 
-.auth-form input::placeholder {
+.signup-form input::placeholder,
+.login-form input::placeholder {
     color: #aaa;
 }
 
-.auth-form button {
+.signup-form button,
+.login-form button {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
+    padding: 10px;
     background-color: #e50914;
     color: #fff;
     border: none;
-    border-radius: 4px;
-    font-weight: bold;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
+    font-weight: bold;
+    transition: background 0.3s ease;
 }
 
-.auth-form button:hover {
+.signup-form button:hover,
+.login-form button:hover {
     background-color: #f40612;
 }
 
-.auth-container p {
-    margin-top: 15px;
-    font-size: 0.9rem;
-}
-
-.auth-container a {
+.signup-container a,
+.login-container a {
     color: #fff;
     text-decoration: underline;
+}
+
+.signup-container p,
+.login-container p {
+    margin-top: 15px;
+    font-size: 0.9rem;
 }
