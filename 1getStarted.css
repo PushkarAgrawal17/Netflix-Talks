@@ -177,6 +177,7 @@ a:hover {
 
 /* === Trending Now Section === */
 .trending-now {
+    position: relative;
     padding: 2rem;
     justify-content: center;
     padding-left: 10vw;
@@ -239,6 +240,29 @@ a:hover {
         1px 1px 0 white;
 }
 
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  color: white;
+  cursor: pointer;
+  z-index: 1;
+  padding: 10px;
+  background-color: #262424;
+  border-radius: 10%;
+  user-select: none;
+}
+.arrow:hover {
+    background-color: #4f4e4e;
+}
+.arrow.left {
+  left: 68px;
+}
+
+.arrow.right {
+  right: 68px;
+}
 /* --------------- More Reasons to Join Section ------------------ */
 .reasons-to-join {
     padding: 3rem 1.5rem;
