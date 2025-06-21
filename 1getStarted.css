@@ -177,6 +177,8 @@ a:hover {
 /* === Trending Now Section === */
 .trending-now {
     padding: 2rem;
+    justify-content: center;
+    padding-left: 10vw;
 }
 
 .trending-now h2 {
@@ -186,8 +188,9 @@ a:hover {
 
 .trending-row {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     overflow-x: auto;
+    width: 79vw;
 }
 
 /* Hide scrollbar but keep functionality */
@@ -208,13 +211,18 @@ a:hover {
 
 .rank {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    font-size: 2.5rem;
+    top: 130px;
+    left: -15px;
+    font-size: 5rem;
     font-weight: bold;
-    color: white;
-    text-shadow: 2px 2px 4px black;
+    color: black;
     z-index: 2;
+
+    text-shadow:
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 white,
+        1px 1px 0 white;
 }
 
 /* --------------- More Reasons to Join Section ------------------ */
