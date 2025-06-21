@@ -40,7 +40,6 @@ body {
     background: rgba(0, 0, 0, 0.6);
     z-index: -1;
     overflow: visible;
-    border-bottom: 5px solid red;
 }
 
 .hero-overlay::after {
@@ -49,7 +48,7 @@ body {
     bottom: -5px;
     width: 100%;
     height: 5px;
-    background: linear-gradient(to right, rgb(50, 4, 4), red, rgb(50, 4, 4));
+    background: linear-gradient(to right, rgb(20, 4, 4), red, rgb(20, 4, 4));
     z-index: -1;
 }
 
