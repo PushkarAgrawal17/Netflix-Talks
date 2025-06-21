@@ -80,6 +80,7 @@ body {
     color: #ebdedede;
     border: 1px solid white;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .language-select option {
