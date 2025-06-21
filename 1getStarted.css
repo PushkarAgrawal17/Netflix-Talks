@@ -208,12 +208,13 @@ a:hover {
 .poster-card img {
     width: 100%;
     border-radius: 5px;
+    margin-left: 11px;
 }
 
 .rank {
     position: absolute;
     top: 130px;
-    left: -15px;
+    left: -5px;
     font-size: 5rem;
     font-weight: bold;
     color: black;
