@@ -1,4 +1,3 @@
-/* === General Reset === */
 * {
     margin: 0;
     padding: 0;
@@ -19,7 +18,7 @@ body {
 }
 
 
-/* === Hero Section === */
+/* ==================== Hero Section ==================== */
 .hero-section {
     position: relative;
     width: 100%;
@@ -60,7 +59,7 @@ body {
 }
 
 
-/* === Navbar === */
+/* ======================= Navbar ======================= */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -94,7 +93,7 @@ body {
 }
 
 
-/* === Sign Up Content === */
+/* =================== Sign Up Content =================== */
 .signup-container {
     background-color: rgba(0, 0, 0, 0.65);
     padding: 40px;
@@ -172,7 +171,7 @@ body {
 }
 
 
-/* === Sign In Content === */
+/* =================== Sign In Content =================== */
 .container {
     background-color: rgba(0, 0, 0, 0.65);
     padding: 40px;
@@ -288,7 +287,7 @@ body {
 }
 
 
-/* === Footer === */
+/* ======================= Footer ======================= */
 .footer {
     width: 100%;
     background-color: black;
@@ -321,7 +320,7 @@ body {
 }
 
 
-/* ✅ Align other elements with the grid */
+/* Align other elements with the grid */
 .footer .footer-content-wrapper {
     max-width: 1000px;
     margin-left: auto;
@@ -362,7 +361,7 @@ body {
     color: dodgerblue;
 }
 
-/* 🔁 Responsive: 4 columns → 2 columns → 1 */
+/* Responsive: 4 columns → 2 columns → 1 */
 @media (max-width: 768px) {
     .footer-grid {
         grid-template-columns: repeat(2, 1fr);
