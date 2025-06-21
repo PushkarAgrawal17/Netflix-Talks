@@ -84,6 +84,7 @@ body {
 
 .language-select option {
     background-color: black;
+    cursor: pointer;
 }
 
 .sign-in-btn {
@@ -191,6 +192,9 @@ a:hover {
     gap: 2rem;
     overflow-x: auto;
     width: 79vw;
+    height: 256px;
+    padding-top: 20px;
+    padding-left: 6px;
 }
 
 /* Hide scrollbar but keep functionality */
@@ -202,17 +206,25 @@ a:hover {
     position: relative;
     flex-shrink: 0;
     width: 160px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.poster-card:hover {
+      transform: scale(1.08);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+    }
 
 .poster-card img {
     width: 100%;
     border-radius: 5px;
+    margin-left: 11px;
+    margin-right: 11px;
 }
 
 .rank {
     position: absolute;
     top: 130px;
-    left: -15px;
+    left: -5px;
     font-size: 5rem;
     font-weight: bold;
     color: black;
