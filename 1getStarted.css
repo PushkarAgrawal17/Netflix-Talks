@@ -189,8 +189,10 @@ a:hover {
 
 .trending-row {
     display: flex;
+    flex-wrap: nowrap;
     gap: 2rem;
     overflow-x: auto;
+    overflow-y: hidden;
     width: 79vw;
     height: 256px;
     padding-top: 20px;
@@ -209,7 +211,7 @@ a:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .poster-card:hover {
-      transform: scale(1.08);
+      transform: scale(1.05);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
       z-index: 10;
     }
