@@ -84,6 +84,7 @@ body {
 
 .language-select option {
     background-color: black;
+    cursor: pointer;
 }
 
 .sign-in-btn {
