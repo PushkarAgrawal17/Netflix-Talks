@@ -25,10 +25,10 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 99vh;
+    height: 99%;
     object-fit: cover;
     z-index: -2;
-    filter: brightness(0.4);
+    filter: brightness(0.6);
 }
 
 .hero-overlay {
@@ -36,8 +36,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 99vh;
-    background: rgba(0, 0, 0, 0.4);
+    height: 99%;
+    background: rgba(0, 0, 0, 0.6);
     z-index: -1;
     overflow: visible;
     border-bottom: 5px solid red;
@@ -59,14 +59,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 100px;
+    padding: 10px 100px;
     background: linear-gradient(to bottom, #000, transparent);
     z-index: 10;
     position: relative;
 }
 
 .logo {
-    width: 150px;
+    width: 180px;
 }
 
 .navbar-actions {
@@ -96,9 +96,14 @@ body {
     cursor: pointer;
 }
 
-a{
+a {
     color: white;
-  text-decoration: none;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: underline;
 }
 
 /* === Center Content === */
@@ -148,7 +153,7 @@ a{
 
 .email-form input::placeholder {
     color: #ccc;
-    text-transform:capitalize;
+    text-transform: capitalize;
 }
 
 .email-form button {
@@ -221,7 +226,8 @@ a{
 .reasons-to-join h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    margin-left: 9rem;;
+    margin-left: 9rem;
+    ;
 }
 
 .reason-grid {
@@ -264,7 +270,7 @@ a{
 
 /* === FAQ Section === */
 .faq {
-    background-color:rgb(3, 3, 10);
+    background-color: rgb(3, 3, 10);
     padding: 2rem;
     max-width: 800px;
     margin: auto;
