@@ -93,8 +93,86 @@ body {
     background-color: black;
 }
 
-/* === Center Content === */
 
+/* === Sign Up Content === */
+.signup-container {
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 40px;
+    width: 400px;
+    height: 550px;
+    z-index: 2;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signup-container h1 {
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.signup-form input {
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(62, 61, 61, 0.3);
+    border: 1px solid #333;
+    color: white;
+    width: 100%;
+}
+
+.signup-form input[type="email"] {
+    text-transform: lowercase;
+}
+
+.signup-form input::placeholder {
+    color: #ccc;
+    text-transform: capitalize;
+}
+
+.signup-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e50914;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.signup-form button:hover {
+    background-color: #f6121d;
+}
+
+.signup-container p {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-top: 20px;
+}
+
+.signup-container a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-container a:hover {
+    text-decoration: underline;
+}
+
+
+/* === Sign In Content === */
 .container {
     background-color: rgba(0, 0, 0, 0.65);
     padding: 40px;
@@ -102,11 +180,9 @@ body {
     height: 550px;
     z-index: 2;
     color: white;
-    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Optional: space between items */
 }
 
 .center-wrapper {
@@ -136,6 +212,15 @@ body {
     background: rgba(62, 61, 61, 0.3);
     border: 1px solid #333;
     color: white;
+}
+
+.input-box input[type="email"] {
+    text-transform: lowercase;
+}
+
+.input-box input::placeholder {
+    color: #ccc;
+    text-transform: capitalize;
 }
 
 .sign-in-btn {
@@ -173,9 +258,14 @@ body {
     margin-right: 5px;
 }
 
-.link {
+.signup {
     color: #b3b3b3;
+}
+
+.link {
+    color: white;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .link:hover {

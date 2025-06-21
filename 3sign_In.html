@@ -9,21 +9,81 @@
     <link rel="icon" type="image/png" href="./Images/favicon.png">
 </head>
 
-<body class="login-body">
-    <div class="auth-bg">
-        <img src="Images/signup-bg.jpeg" alt="Background" class="auth-background-img">
-        <div class="auth-overlay"></div>
+<body class="auth-body">
+    <div class="hero-section">
+        <!-- Navbar -->
+        <header class="navbar">
+            <img src="Images/Netflix-Logo-2.png" alt="Netflix Logo" class="logo" />
+            <div class="navbar-actions">
+                <select class="language-select">
+                    <option>English</option>
+                    <option>हिन्दी</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- Main Center Content -->
+        <div class="center-wrapper">
+            <div class="container">
+                <h1>Sign In</h1>
+                <div class="input-box">
+                    <input type="email" placeholder="Email Address" />
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" />
+                </div>
+                <button class="sign-in-btn">Sign In</button>
+                <div class="options">
+                    <label><input type="checkbox" checked /> Remember me</label>
+                    <a class="link" href="#">Forgot password?</a>
+                </div>
+                <div class="signup">New to Netflix? <a class="link" href="2sign_Up.html">Sign up now.</a></div><br>
+                <div class="captcha">
+                    This page is protected by Google reCAPTCHA to ensure you're not a bot.
+                    <br><br>
+                    <a href="#">Learn more.</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Overlay -->
+        <div class="hero-overlay"></div>
+        <img src="Images/signup-bg.jpeg" alt="Background" class="background-img" />
     </div>
 
-    <div class="login-container">
-        <h1>Sign In</h1>
-        <form class="login-form">
-            <input type="email" placeholder="Email" required />
-            <input type="password" placeholder="Password" required />
-            <button type="submit">Login</button>
-        </form>
-        <p>New to Netflix? <a href="2sign_Up.html">Sign up now</a></p>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content-wrapper">
+            <p>Questions? Call <a href="#">000-800-919-1743</a></p> <br>
+
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="#">FAQ</a>
+                    <a href="#">Cookie Preferences</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">Help Centre</a>
+                    <a href="#">Corporate Information</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">Account</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+
+            <select>
+                <option>English</option>
+                <option>हिन्दी</option>
+            </select>
+
+            <br><br>
+            <p>Netflix India</p>
+            <br>
+        </div>
+    </footer>
 
 </body>
 
