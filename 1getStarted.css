@@ -96,9 +96,14 @@ body {
     cursor: pointer;
 }
 
-a{
+a {
     color: white;
-  text-decoration: none;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: underline;
 }
 
 /* === Center Content === */
@@ -148,7 +153,7 @@ a{
 
 .email-form input::placeholder {
     color: #ccc;
-    text-transform:capitalize;
+    text-transform: capitalize;
 }
 
 .email-form button {
@@ -221,7 +226,8 @@ a{
 .reasons-to-join h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    margin-left: 9rem;;
+    margin-left: 9rem;
+    ;
 }
 
 .reason-grid {
@@ -264,7 +270,7 @@ a{
 
 /* === FAQ Section === */
 .faq {
-    background-color:rgb(3, 3, 10);
+    background-color: rgb(3, 3, 10);
     padding: 2rem;
     max-width: 800px;
     margin: auto;
