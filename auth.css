@@ -1,57 +1,343 @@
-/* ===== Auth Pages: Sign Up & Sign In ===== */
-
-body {
+/* === General Reset === */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(3, 3, 16);
+    color: #fff;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: white;
-    background-color: #000;
 }
 
-/* 🔒 Background */
-.auth-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
+
+/* === Hero Section === */
+.hero-section {
+    position: relative;
     width: 100%;
-    height: 80%;
+    height: 100vh;
     overflow: hidden;
-    z-index: -2;
-    opacity: 60%;
 }
 
-.auth-background-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.4);
-}
-
-.auth-overlay {
+.background-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 1);
+    height: 99%;
+    object-fit: cover;
+    z-index: -2;
+    filter: brightness(0.6);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 99%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+    overflow: visible;
+}
+
+.hero-overlay::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, rgb(20, 4, 4), red, rgb(20, 4, 4));
     z-index: -1;
 }
 
-/* 🔝 Navbar */
+
+/* === Navbar === */
 .navbar {
     display: flex;
-    width: 100%;
-    height: 130px;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    padding: 10px 100px;
+    background: linear-gradient(to bottom, #000, transparent);
+    z-index: 10;
     position: relative;
-    top: 0;
-    z-index: 1000;
 }
 
-.navbar select {
+.logo {
+    width: 180px;
+}
+
+.navbar-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.language-select {
+    padding: 5px 10px;
+    background: transparent;
+    color: #ebdedede;
+    border: 1px solid white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.language-select option {
+    background-color: black;
+}
+
+
+/* === Sign Up Content === */
+.signup-container {
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 40px;
+    width: 400px;
+    height: 550px;
+    z-index: 2;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signup-container h1 {
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.signup-form input {
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(62, 61, 61, 0.3);
+    border: 1px solid #333;
+    color: white;
+    width: 100%;
+}
+
+.signup-form input[type="email"] {
+    text-transform: lowercase;
+}
+
+.signup-form input::placeholder {
+    color: #ccc;
+    text-transform: capitalize;
+}
+
+.signup-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e50914;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.signup-form button:hover {
+    background-color: #f6121d;
+}
+
+.signup-container p {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-top: 20px;
+}
+
+.signup-container a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-container a:hover {
+    text-decoration: underline;
+}
+
+
+/* === Sign In Content === */
+.container {
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 40px;
+    width: 400px;
+    height: 550px;
+    z-index: 2;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.center-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    min-height: calc(100vh - 210px);
+}
+
+.container h1 {
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+.input-box {
+    margin-bottom: 20px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(62, 61, 61, 0.3);
+    border: 1px solid #333;
+    color: white;
+}
+
+.input-box input[type="email"] {
+    text-transform: lowercase;
+}
+
+.input-box input::placeholder {
+    color: #ccc;
+    text-transform: capitalize;
+}
+
+.sign-in-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #e50914;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.options input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 8px;
+    margin-left: 3px;
+}
+
+.sign-in-btn:hover {
+    background-color: #f6121d;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.options input {
+    margin-right: 5px;
+}
+
+.signup {
+    color: #b3b3b3;
+}
+
+.link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.signup {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.captcha {
+    font-size: 12px;
+    color: #b3b3b3;
+    margin-top: 10px;
+}
+
+.captcha a {
+    color: dodgerblue;
+}
+
+
+/* === Footer === */
+.footer {
+    width: 100%;
+    background-color: black;
+    color: #b3b3b3;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.footer a {
+    color: #b3b3b3;
+    text-decoration: underline;
+    margin-bottom: 0.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+/* ✅ Align other elements with the grid */
+.footer .footer-content-wrapper {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5rem;
+}
+
+.footer .footer-content-wrapper p,
+.footer .footer-content-wrapper select {
+    margin-left: 0;
+    text-align: left;
+    display: block;
+}
+
+.footer select {
+    margin-top: 2rem;
     padding: 5px;
     background-color: black;
     color: white;
@@ -59,77 +345,36 @@ body {
     border-radius: 4px;
 }
 
-.logo {
-    height: 120px;
-    width: auto;
-    cursor: pointer;
+.footer p {
+    margin: 0.5rem 0;
 }
 
-/* 🔒 Shared Auth Container */
-.signup-body,
-.login-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
+.recaptcha-msg {
+    font-size: 0.75rem;
+    color: #b3b3b3bf;
+    margin-top: 1rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.signup-container,
-.login-container {
-    background: rgba(0, 0, 0, 0.75);
-    padding: 40px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 300px;
-    text-align: center;
-    z-index: 2;
+.recaptcha-msg a {
+    color: dodgerblue;
 }
 
-/* 🔒 Form Styles */
-.signup-form input,
-.login-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    background-color: #333;
-    color: #fff;
+/* 🔁 Responsive: 4 columns → 2 columns → 1 */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.signup-form input::placeholder,
-.login-form input::placeholder {
-    color: #aaa;
-}
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
 
-.signup-form button,
-.login-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #e50914;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
-
-.signup-form button:hover,
-.login-form button:hover {
-    background-color: #f40612;
-}
-
-.signup-container a,
-.login-container a {
-    color: #fff;
-    text-decoration: underline;
-}
-
-.signup-container p,
-.login-container p {
-    margin-top: 15px;
-    font-size: 0.9rem;
+    .footer-column {
+        align-items: flex-start;
+    }
 }

@@ -9,33 +9,71 @@
     <link rel="icon" type="image/png" href="./Images/favicon.png">
 </head>
 
-<body class="signup-body">
-    <div class="auth-bg">
-        <img src="Images/signup-bg.jpeg" alt="Background" class="auth-background-img">
-        <div class="auth-overlay"></div>
+<body class="auth-body">
+    <div class="hero-section">
+        <!-- Navbar -->
+        <header class="navbar">
+            <img src="Images/Netflix-Logo-2.png" alt="Netflix Logo" class="logo" />
+            <div class="navbar-actions">
+                <select class="language-select">
+                    <option>English</option>
+                    <option>हिन्दी</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- Main Center Content -->
+        <div class="center-wrapper">
+            <div class="signup-container">
+                <h1>Sign Up</h1>
+                <form class="signup-form">
+                    <input type="text" placeholder="Full Name" required />
+                    <input type="email" placeholder="Email" required />
+                    <input type="password" placeholder="Password" required />
+                    <input type="password" placeholder="Confirm Password" required />
+                    <button type="submit">Create Account</button>
+                </form>
+                <p>Already have an account? <a href="3sign_In.html">Sign in here.</a></p>  </div>
+        </div>
+
+        <!-- Background Overlay -->
+        <div class="hero-overlay"></div>
+        <img src="Images/signup-bg.jpeg" alt="Background" class="background-img" />
     </div>
 
-    <!-- 🔝 Navbar -->
-    <header class="navbar">
-        <img src="Images/Netflix-Logo-2.png" alt="Netflix Logo" class="logo" />
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content-wrapper">
+            <p>Questions? Call <a href="#">000-800-919-1743</a></p> <br>
 
-        <select>
-            <option>English</option>
-            <option>हिन्दी</option>
-        </select>
-    </header>
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="#">FAQ</a>
+                    <a href="#">Cookie Preferences</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">Help Centre</a>
+                    <a href="#">Corporate Information</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">Account</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
 
-    <div class="signup-container">
-        <h1>Sign Up</h1>
-        <form class="signup-form">
-            <input type="text" placeholder="Full Name" required />
-            <input type="email" placeholder="Email" required />
-            <input type="password" placeholder="Password" required />
-            <input type="password" placeholder="Confirm Password" required />
-            <button type="submit">Create Account</button>
-        </form>
-        <p>Already have an account? <a href="3sign_In.html">Login here</a></p>
-    </div>
+            <select>
+                <option>English</option>
+                <option>हिन्दी</option>
+            </select>
+
+            <br><br>
+            <p>Netflix India</p>
+            <br>
+        </div>
+    </footer>
 
 </body>
 
