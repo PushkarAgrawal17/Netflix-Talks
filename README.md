@@ -58,7 +58,7 @@ A responsive front-end clone of Netflix built using **HTML**, **CSS**, and **Jav
 ## 🧑‍💻 Collaborators
 
 - [Pushkar Agrawal](https://github.com/PushkarAgrawal17)
-- [Aditya Garg](https://github.com/.....)   _(To be added)_
+- [Aditya Garg](https://github.com/AdiiGarg)
 - [Ishita Arora](https://github.com/er-ishita)
 - [Sparsh Agrawal](https://github.com/SparshAgrawal64)
 
