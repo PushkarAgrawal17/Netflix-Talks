@@ -1,6 +1,7 @@
 // firebase-auth.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+import { fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -57,5 +58,31 @@ window.login = function () {
     })
     .catch((error) => {
       alert("Error: " + error.message);
+    });
+};
+ //GET STARTED EMAIL 
+ window.checkEmailAndRedirect = function (event) {
+  event.preventDefault();
+  const emailInput = document.querySelector('.email-form input[type="email"]');
+  const email = emailInput.value.trim();
+
+  if (!email) {
+    alert("Please enter an email.");
+    return;
+  }
+
+  fetchSignInMethodsForEmail(auth, email)
+    .then((methods) => {
+      console.log("Sign-in methods for email:", methods); 
+      if (methods.length > 0) {
+        // Email exists: redirect to Sign In
+        window.location.href = `3sign_In.html?email=${encodeURIComponent(email)}`;
+      } else {
+        // Email does not exist: redirect to Sign Up
+        window.location.href = `2sign_Up.html?email=${encodeURIComponent(email)}`;
+      }
+    })
+    .catch((error) => {
+      alert("Error checking email: " + error.message);
     });
 };
