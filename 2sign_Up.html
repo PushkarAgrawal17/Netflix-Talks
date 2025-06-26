@@ -26,11 +26,11 @@
         <div class="center-wrapper">
             <div class="signup-container">
                 <h1>Sign Up</h1>
-                <form class="signup-form">
-                    <input type="text" placeholder="Full Name" required />
-                    <input type="email" placeholder="Email" required />
-                    <input type="password" placeholder="Password" required />
-                    <input type="password" placeholder="Confirm Password" required />
+                <form class="signup-form" id="signup-form">
+                    <input type="text" id="fullName" placeholder="Full Name" required />
+                    <input type="email" id="regEmail" placeholder="Email" required />
+                    <input type="password" id="regPassword" placeholder="Password" required />
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
                     <button type="submit">Create Account</button>
                 </form>
                 <p>Already have an account? <a href="3sign_In.html">Sign in here.</a></p>  </div>
@@ -74,7 +74,7 @@
             <br>
         </div>
     </footer>
-
+    <script type="module" src="2AuthFirebase.js"></script>
 </body>
 
 </html>
