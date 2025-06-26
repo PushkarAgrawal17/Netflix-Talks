@@ -207,6 +207,7 @@ a:hover {
     display: none;
 }
 
+/* Poster styles */
 .poster-card {
     position: relative;
     flex-shrink: 0;
@@ -269,8 +270,7 @@ a:hover {
     right: 6vw;
 }
 
-
-
+/* Popup on clicking the poster */
 .popup {
   display: none;
   position: fixed;
@@ -296,7 +296,6 @@ a:hover {
   font-size: 24px;
   cursor: pointer;
 }
-
 
 .popup {
   animation: fadeIn 0.3s ease;
