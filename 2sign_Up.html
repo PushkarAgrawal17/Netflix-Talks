@@ -74,6 +74,17 @@
             <br>
         </div>
     </footer>
+    <script>
+        //GET STARTED EMAIL
+        window.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const email = params.get("email");
+            if (email) {
+                const emailInput = document.querySelector('input[type="email"]');
+                if (emailInput) emailInput.value = email;
+            }
+        });
+    </script>
     <script type="module" src="2AuthFirebase.js"></script>
 </body>
 
