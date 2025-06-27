@@ -319,7 +319,7 @@ a:hover {
     background-color: #141414;
     border-radius: 10px;
     padding: 0;
-    width: 56%;
+    width: 40%;
     /* max-width: 700px; */
     color: white;
     z-index: 10001;
@@ -331,7 +331,21 @@ a:hover {
     box-sizing: border-box;
     /* padding-right: 10px; */
 }
+.popup-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    pointer-events: none; /* Let clicks pass through */
+    z-index: 1;
 
+    background: 
+      linear-gradient(15deg, rgb(22, 22, 22) 42.16%, rgba(6, 10, 23, 0) 64.61%), 
+      linear-gradient(-15deg, rgb(22, 22, 22) 42.91%, rgba(6, 10, 23, 0) 64.26%)
+
+}
 
 /* Poster + title */
 .poster-wrapper {
@@ -348,7 +362,8 @@ a:hover {
     width: 55%;
     position: absolute;
     left: 2px;
-    top: 69%
+    top: 69%;
+    z-index: 2;
 }
 
 /* Tags */
@@ -357,7 +372,7 @@ a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .popup-tags span {
@@ -365,14 +380,17 @@ a:hover {
   padding: 4px 8px;
   border-radius: 4px;
   margin: 6px ;
+  z-index: 2;
 }
 
 /* Description */
 .popup-description {
+    position: relative;
     margin: 1rem;
     line-height: 1.6;
     color: #ccc;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    z-index: 20;
 }
 
 /* Close button */
