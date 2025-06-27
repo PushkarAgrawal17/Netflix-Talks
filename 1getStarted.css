@@ -319,14 +319,14 @@ a:hover {
     background-color: #141414;
     border-radius: 10px;
     padding: 0;
-    width: 56%;
+    max-width: 550px;
     /* max-width: 700px; */
     color: white;
     z-index: 10001;
     animation: popup-zoom 0.35s ease;
     box-shadow: 0 0 15px rgb(222 25 25 / 83%);
     margin: 2% auto;
-    height: 90vh;
+    min-height: 80vh;
     overflow-y: auto;
     box-sizing: border-box;
     /* padding-right: 10px; */
@@ -348,7 +348,8 @@ a:hover {
     width: 55%;
     position: absolute;
     left: 2px;
-    top: 69%
+    top: 69%;
+    max-height: 100px;    
 }
 
 /* Tags */
@@ -358,6 +359,7 @@ a:hover {
     flex-wrap: wrap;
     gap: 10px;
     font-size: 1.5rem;
+
 }
 
 .popup-tags span {
