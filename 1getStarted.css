@@ -531,6 +531,10 @@ body:has(.popup-css:target) {
     transform: rotate(45deg);
 }
 
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
 
 
 /* ======================= Footer ======================= */
