@@ -12,6 +12,7 @@ body {
 }
 
 
+
 /* ==================== Hero Section ==================== */
 .hero-section {
     position: relative;
@@ -51,6 +52,7 @@ body {
     background: linear-gradient(to right, rgb(20, 4, 4), red, rgb(20, 4, 4));
     z-index: -1;
 }
+
 
 
 /* ======================= Navbar ======================= */
@@ -106,6 +108,7 @@ a:hover {
     color: white;
     text-decoration: underline;
 }
+
 
 
 /* =================== Center Content =================== */
@@ -175,6 +178,7 @@ a:hover {
 .email-form button:hover {
     background-color: #f40612;
 }
+
 
 
 /* ================ Trending Now Section ================ */
@@ -272,146 +276,160 @@ a:hover {
 
 /* Popup on clicking the poster */
 .popup {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.6);
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .popup-content {
-  background-color: #000000;
-  margin: 10% auto;
-  padding: 20px;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 8px;
-  position: relative;
+    background-color: #000000;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
 }
 
 .close {
-  position: absolute;
-  top: 10px; right: 15px;
-  font-size: 24px;
-  cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .popup {
-  animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .popup-css {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  overflow-y: auto;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
 }
 
 .popup-css:target {
-  display: block;
+    display: block;
 }
 
 .popup-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .popup-box {
-  background: #000;
-  margin: 5% auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 500px;
-  border-radius: 10px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+    background: #000;
+    margin: 5% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
 }
 
 .poster-wrapper {
-  position: relative;
-  width:100%;
+    position: relative;
+    width: 100%;
 }
 
 .popup-movie-img {
-  width: 100%;
-  border-radius: 6px;
-  margin-bottom: 15px;
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 15px;
 }
 
 .popup-title-img {
-  width: 70%;
-  margin-bottom: 10px;
+    width: 70%;
+    margin-bottom: 10px;
 }
 
 .popup-description {
-  font-size: 1rem;
-  color: #ddd;
+    font-size: 1rem;
+    color: #ddd;
 }
 
 .popup-title-overlay {
-  position: absolute;
-  bottom: 10px;
-  left: 20px;
-  width: 50%;
-  max-width: 220px;
-  border-radius: 4px;
-  opacity: 0.95;
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    width: 50%;
+    max-width: 220px;
+    border-radius: 4px;
+    opacity: 0.95;
 }
 
 .popup-tags {
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .popup-tags span {
-  background: #333;
-  color: #fff;
-  padding: 5px 12px;
-  font-size: 0.8rem;
-  border-radius: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+    background: #333;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .popup-description {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: #ddd;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #ddd;
 }
 
 .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 28px;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  z-index: 1001;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 1001;
 }
 
 .close-btn:hover {
-  color: red;
+    color: red;
 }
 
 body:has(.popup-css:target) {
-  overflow: hidden;
+    overflow: hidden;
 }
+
+
 
 /* ============ More Reasons to Join Section ============ */
 .reasons-to-join {
@@ -465,6 +483,7 @@ body:has(.popup-css:target) {
 }
 
 
+
 /* ===================== FAQ Section ===================== */
 .faq {
     background-color: rgb(3, 3, 9);
@@ -511,6 +530,7 @@ body:has(.popup-css:target) {
 .faq-item.open .toggle-icon {
     transform: rotate(45deg);
 }
+
 
 
 /* ======================= Footer ======================= */
