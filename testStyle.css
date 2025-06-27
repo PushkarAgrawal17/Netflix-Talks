@@ -1,4 +1,3 @@
-/* === General Reset === */
 * {
     margin: 0;
     padding: 0;
@@ -6,13 +5,14 @@
 }
 
 body {
-    background-color: #000;
+    background-color: rgb(3, 3, 16);
     color: #fff;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
 }
 
-/* === Hero Section === */
+
+/* ==================== Hero Section ==================== */
 .hero-section {
     position: relative;
     width: 100%;
@@ -22,34 +22,50 @@ body {
 
 .background-img {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 99vh;
     object-fit: cover;
     z-index: -2;
-    filter: brightness(0.4);
+    filter: brightness(0.6);
 }
 
 .hero-overlay {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    height: 99vh;
+    background: rgba(6, 6, 6, 0.6);
+    z-index: -1;
+    overflow: visible;
+}
+
+.hero-overlay::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, rgb(20, 4, 4), red, rgb(20, 4, 4));
     z-index: -1;
 }
 
-/* === Navbar === */
+
+/* ======================= Navbar ======================= */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
+    padding: 10px 100px;
     background: linear-gradient(to bottom, #000, transparent);
     z-index: 10;
     position: relative;
 }
 
 .logo {
-    height: 40px;
+    width: 180px;
 }
 
 .navbar-actions {
@@ -63,10 +79,12 @@ body {
     color: #ebdedede;
     border: 1px solid white;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .language-select option {
     background-color: black;
+    cursor: pointer;
 }
 
 .sign-in-btn {
@@ -79,10 +97,21 @@ body {
     cursor: pointer;
 }
 
-/* === Center Content === */
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+
+/* =================== Center Content =================== */
 .center-content {
     position: relative;
-    top: 25%;
+    top: 15%;
     max-width: 800px;
     margin: auto;
     text-align: center;
@@ -90,21 +119,21 @@ body {
 }
 
 .center-content h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: bold;
 }
 
 .center-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: 20px;
 }
 
 .center-content p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin: 20px 0;
 }
 
-/* === Email Form === */
+/* Email Form */
 .email-form {
     display: flex;
     justify-content: center;
@@ -115,10 +144,18 @@ body {
 .email-form input[type="email"] {
     padding: 12px;
     font-size: 1rem;
+    background-color: transparent;
+    color: white;
+    outline: 1px solid grey;
+    text-transform: lowercase;
     width: 300px;
     border: none;
     border-radius: 4px;
-    outline: none;
+}
+
+.email-form input::placeholder {
+    color: #ccc;
+    text-transform: capitalize;
 }
 
 .email-form button {
@@ -139,10 +176,13 @@ body {
     background-color: #f40612;
 }
 
-/* === Trending Now Section === */
+
+/* ================ Trending Now Section ================ */
 .trending-now {
+    position: relative;
     padding: 2rem;
-    background-color: #000;
+    justify-content: center;
+    padding-left: 10vw;
 }
 
 .trending-now h2 {
@@ -152,171 +192,408 @@ body {
 
 .trending-row {
     display: flex;
-    gap: 1rem;
+    flex-wrap: nowrap;
+    gap: 2rem;
     overflow-x: auto;
+    overflow-y: hidden;
+    width: 79vw;
+    height: 256px;
+    padding-top: 20px;
+    padding-left: 6px;
 }
 
+/* Hide scrollbar but keep functionality */
+.trending-row::-webkit-scrollbar {
+    display: none;
+}
+
+/* Poster styles */
 .poster-card {
     position: relative;
     flex-shrink: 0;
     width: 160px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.poster-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    z-index: 2;
 }
 
 .poster-card img {
     width: 100%;
     border-radius: 5px;
+    margin-left: 11px;
+    margin-right: 11px;
 }
 
 .rank {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    font-size: 2.5rem;
+    top: 130px;
+    left: -5px;
+    font-size: 5rem;
     font-weight: bold;
-    color: white;
-    text-shadow: 2px 2px 4px black;
+    color: black;
     z-index: 2;
+
+    text-shadow:
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 white,
+        1px 1px 0 white;
 }
 
-/* === Reasons to Join Section === */
+.arrow {
+    position: absolute;
+    top: 57.5%;
+    transform: translateY(-50%);
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+    z-index: 3;
+    padding: 99px 10px;
+    background-color: #262424;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.arrow:hover {
+    background-color: #2e2e2e;
+}
+
+.arrow.left {
+    left: 6vw;
+}
+
+.arrow.right {
+    right: 6vw;
+}
+
+/* Popup on clicking the poster */
+/* Start hidden */
+/* .popup-css.hidden {
+  display: none;
+} */
+
+/* Overlay + Popup container */
+.popup-css {
+  display: none;  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  z-index: 9999;
+  animation: popup-fade 0.3s ease;
+}
+
+/* Overlay part (clickable background) */
+.popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+
+/* Popup content box */
+/* for vanishing scrollbar */
+.popup-box::-webkit-scrollbar {
+    display: none;
+}
+.popup-box {
+    position: relative;
+    background-color: #141414;
+    border-radius: 10px;
+    padding: 0;
+    width: 56%;
+    /* max-width: 700px; */
+    color: white;
+    z-index: 10001;
+    animation: popup-zoom 0.35s ease;
+    box-shadow: 0 0 15px rgb(222 25 25 / 83%);
+    margin: 2% auto;
+    height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    /* padding-right: 10px; */
+}
+
+
+/* Poster + title */
+.poster-wrapper {
+  position: relative;
+}
+
+.popup-movie-img {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.popup-title-img {
+    width: 55%;
+    position: absolute;
+    left: 2px;
+    top: 69%
+}
+
+/* Tags */
+.popup-tags {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 1.5rem;
+}
+
+.popup-tags span {
+  background-color: #333;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 6px ;
+}
+
+/* Description */
+.popup-description {
+    margin: 1rem;
+    line-height: 1.6;
+    color: #ccc;
+    font-size: 1.5rem;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10001;
+  transition: transform 0.2s;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Animations */
+@keyframes popup-fade {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+  }
+}
+
+@keyframes popup-zoom {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* ============ More Reasons to Join Section ============ */
 .reasons-to-join {
-    padding: 2rem;
-    background-color: #000;
+    padding: 3rem 1.5rem;
+    color: white;
 }
 
 .reasons-to-join h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 9rem;
+    ;
 }
 
 .reason-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .reason-card {
-    background: linear-gradient(145deg, #1c1c1c, #111);
-    padding: 1.5rem;
+    background: linear-gradient(to bottom right, #0d0d9561, #89161c6c);
     border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: left;
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 .reason-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
 }
 
 .reason-card p {
     font-size: 0.95rem;
-    margin-bottom: 1rem;
     color: #ccc;
+    margin-bottom: 1.2rem;
 }
 
 .reason-card img {
-    width: 40px;
+    width: 58px;
+    height: auto;
     align-self: flex-end;
 }
 
-/* === FAQ Section === */
+
+/* ===================== FAQ Section ===================== */
 .faq {
-    background-color: #222;
+    background-color: rgb(3, 3, 9);
     padding: 2rem;
     max-width: 800px;
     margin: auto;
 }
 
 .faq h2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     text-align: center;
-    font-size: 2rem;
-}
-
-.faq-item {
-    margin-bottom: 8px;
 }
 
 .faq-question {
-    background-color: #2d2d2d;
+    background: #333232;
+    border: none;
     color: white;
     font-size: 1.2rem;
     width: 100%;
     text-align: left;
-    padding: 1.2rem;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     cursor: pointer;
-    border: 2px solid #000;
-    transition: all 0.2s ease;
+    margin-top: 10px;
 }
 
 .faq-question:hover {
-    background-color: #414141;
-}
-
-.toggle-icon {
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
+    background: #504e4e;
 }
 
 .answer {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-    padding: 0 1.2rem;
-    background-color: #2d2d2d;
-    border-left: 2px solid #000;
-    border-right: 2px solid #000;
-    border-bottom: 2px solid #000;
+    padding: 1rem;
+    display: none;
+    border-top: 1px solid #444;
     color: #ddd;
 }
 
 .faq-item.open .answer {
-    max-height: 500px; /* Adjust based on your content */
-    opacity: 1;
-    padding: 1.2rem;
+    display: block;
+    background-color: #333232;
 }
 
 .faq-item.open .toggle-icon {
     transform: rotate(45deg);
 }
 
-/* === Footer === */
+
+/* ======================= Footer ======================= */
 .footer {
+    width: 100%;
     background-color: black;
-    color: gray;
-    padding: 2rem;
-    text-align: center;
+    color: #b3b3b3;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+    text-align: left;
 }
 
-.footer-links {
+.footer a {
+    color: #b3b3b3;
+    text-decoration: underline;
+    margin-bottom: 0.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.footer-column {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.footer-links a {
-    color: gray;
-    text-decoration: none;
+.footer .footer-content-wrapper {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5rem;
 }
 
-/* .answer {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 1s ease, opacity 1s ease, padding 1s ease;
-    padding: 0 1rem;
-    border-top: 1px solid #444;
-    color: #ddd;
+.footer .footer-content-wrapper p,
+.footer .footer-content-wrapper select {
+    margin-left: 0;
+    text-align: left;
+    display: block;
 }
 
-.faq-item.open .answer {
-    max-height: 500px; Adjust if needed 
-    opacity: 1;
-    padding: 1rem;
-} */
+.footer select {
+    margin-top: 2rem;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
 
+.footer p {
+    margin: 0.5rem 0;
+}
+
+.recaptcha-msg {
+    font-size: 0.75rem;
+    color: #b3b3b3bf;
+    margin-top: 1rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recaptcha-msg a {
+    color: dodgerblue;
+}
+
+/* Responsive: 4 columns → 2 columns → 1 */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-column {
+        align-items: flex-start;
+    }
+}

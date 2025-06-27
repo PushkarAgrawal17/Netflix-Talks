@@ -275,158 +275,143 @@ a:hover {
 }
 
 /* Popup on clicking the poster */
-.popup {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-}
 
-.popup-content {
-    background-color: #000000;
-    margin: 10% auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 8px;
-    position: relative;
-}
+/* Start hidden */
+/* .popup-css.hidden {
+  display: none;
+} */
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.popup {
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
+/* Overlay + Popup container */
 .popup-css {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    overflow-y: auto;
+  display: none;  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  z-index: 9999;
+  animation: popup-fade 0.3s ease;
 }
 
-.popup-css:target {
-    display: block;
-}
-
+/* Overlay part (clickable background) */
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+
+/* Popup content box */
+/* for vanishing scrollbar */
+.popup-box::-webkit-scrollbar {
+    display: none;
 }
 
 .popup-box {
-    background: #000;
-    margin: 5% auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 10px;
-    text-align: center;
     position: relative;
-    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+    background-color: #141414;
+    border-radius: 10px;
+    padding: 0;
+    width: 56%;
+    /* max-width: 700px; */
+    color: white;
+    z-index: 10001;
+    animation: popup-zoom 0.35s ease;
+    box-shadow: 0 0 15px rgb(222 25 25 / 83%);
+    margin: 2% auto;
+    height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    /* padding-right: 10px; */
 }
 
+
+/* Poster + title */
 .poster-wrapper {
-    position: relative;
-    width: 100%;
+  position: relative;
 }
 
 .popup-movie-img {
-    width: 100%;
-    border-radius: 6px;
-    margin-bottom: 15px;
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
 }
 
 .popup-title-img {
-    width: 70%;
-    margin-bottom: 10px;
-}
-
-.popup-description {
-    font-size: 1rem;
-    color: #ddd;
-}
-
-.popup-title-overlay {
+    width: 55%;
     position: absolute;
-    bottom: 10px;
-    left: 20px;
-    width: 50%;
-    max-width: 220px;
-    border-radius: 4px;
-    opacity: 0.95;
+    left: 2px;
+    top: 69%
 }
 
+/* Tags */
 .popup-tags {
-    margin-top: 15px;
+    margin-top: 1rem;
     display: flex;
-    justify-content: center;
-    gap: 10px;
     flex-wrap: wrap;
+    gap: 10px;
+    font-size: 1.5rem;
 }
 
 .popup-tags span {
-    background: #333;
-    color: #fff;
-    padding: 5px 12px;
-    font-size: 0.8rem;
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  background-color: #333;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 6px ;
 }
 
+/* Description */
 .popup-description {
-    margin-top: 10px;
-    font-size: 1rem;
-    color: #ddd;
+    margin: 1rem;
+    line-height: 1.6;
+    color: #ccc;
+    font-size: 1.5rem;
 }
 
+/* Close button */
 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 28px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    z-index: 1001;
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10001;
+  transition: transform 0.2s;
 }
 
 .close-btn:hover {
-    color: red;
+  transform: scale(1.2);
 }
 
-body:has(.popup-css:target) {
-    overflow: hidden;
+/* Animations */
+@keyframes popup-fade {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+  }
+}
+
+@keyframes popup-zoom {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 
