@@ -12,6 +12,7 @@ body {
 }
 
 
+
 /* ==================== Hero Section ==================== */
 .hero-section {
     position: relative;
@@ -51,6 +52,7 @@ body {
     background: linear-gradient(to right, rgb(20, 4, 4), red, rgb(20, 4, 4));
     z-index: -1;
 }
+
 
 
 /* ======================= Navbar ======================= */
@@ -106,6 +108,7 @@ a:hover {
     color: white;
     text-decoration: underline;
 }
+
 
 
 /* =================== Center Content =================== */
@@ -175,6 +178,7 @@ a:hover {
 .email-form button:hover {
     background-color: #f40612;
 }
+
 
 
 /* ================ Trending Now Section ================ */
@@ -271,6 +275,7 @@ a:hover {
 }
 
 /* Popup on clicking the poster */
+
 /* Start hidden */
 /* .popup-css.hidden {
   display: none;
@@ -308,6 +313,7 @@ a:hover {
 .popup-box::-webkit-scrollbar {
     display: none;
 }
+
 .popup-box {
     position: relative;
     background-color: #141414;
@@ -409,6 +415,7 @@ a:hover {
 }
 
 
+
 /* ============ More Reasons to Join Section ============ */
 .reasons-to-join {
     padding: 3rem 1.5rem;
@@ -461,6 +468,7 @@ a:hover {
 }
 
 
+
 /* ===================== FAQ Section ===================== */
 .faq {
     background-color: rgb(3, 3, 9);
@@ -507,6 +515,11 @@ a:hover {
 .faq-item.open .toggle-icon {
     transform: rotate(45deg);
 }
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
 
 
 /* ======================= Footer ======================= */

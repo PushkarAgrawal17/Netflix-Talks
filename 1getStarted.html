@@ -45,6 +45,7 @@
 
         <button class="arrow left" id="leftArrow">&#10094;</button>
         <div class="trending-row" id="scrollContainer">
+
             <div class="poster-card">
                 <span class="rank">1</span>
                 <img src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABWbVt8SbLqwQtrRbCG9VpQXX_Z6c57wYpD_UHJSW-eTT-oVf11K79jU-gQjcRfKqQ4aqPgsRjrPNLPcxfS1P6INHzVIQqhI7huMP5no6v-7or-WycCWfHPXs4xQmfZx0CvOY.webp?r=b91"
@@ -158,7 +159,6 @@
             <p class="popup-description"></p> <!-- ← description injected -->
         </div>
     </div>
-
 
 
     <!-- More reasons to join -->
@@ -277,9 +277,13 @@
 
     </footer>
 
+
+    <!-- Authentication Script -->
     <script type="module" src="2AuthFirebase.js"></script>
+
+    <!-- Trending Now Script -->
     <script>
-        //trending now arrows
+        // Arrows
         const scrollContainer = document.getElementById("scrollContainer");
 
         document.getElementById("leftArrow").addEventListener("click", () => {
@@ -325,6 +329,7 @@
             popup.style.display = "none";
 
         });
+    </script>
 
         overlay.addEventListener("click", e => {
             popup.style.display = "none";
@@ -332,10 +337,14 @@
     </script>
     <script>
         //faq plus to cross
+
         document.querySelectorAll('.faq-question').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.closest('.faq-item');
+            btn.addEventListener('click', (e) => {
+                const item = e.currentTarget.closest('.faq-item');
                 item.classList.toggle('open');
+
+                const icon = item.querySelector('.toggle-icon');
+                icon.textContent = item.classList.contains('open') ? '×' : '+';
             });
         });
     </script>
