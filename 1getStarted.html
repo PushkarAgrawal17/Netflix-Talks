@@ -294,8 +294,9 @@
             scrollContainer.scrollBy({ left: 1200, behavior: "smooth" });
         });
     </script>
+
     <script>
-        //trending now posters        
+        //trending now posters
         const popup = document.getElementById("popup1");
         const posterImg = popup.querySelector(".popup-movie-img");
         const titleImg = popup.querySelector(".popup-title-img");
@@ -327,17 +328,15 @@
         // Close popup
         closeBtn.addEventListener("click", () => {
             popup.style.display = "none";
-
         });
-    </script>
-
+    
         overlay.addEventListener("click", e => {
             popup.style.display = "none";
         });
     </script>
-    <script>
-        //faq plus to cross
 
+    <!-- FAQ plus to cross -->
+    <script>
         document.querySelectorAll('.faq-question').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const item = e.currentTarget.closest('.faq-item');
