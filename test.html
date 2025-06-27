@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Get Started | Netflix Clone</title>
-    <link rel="stylesheet" href="1getStarted.css" />
+    <link rel="stylesheet" href="testStyle.css" />
     <link rel="icon" type="image/png" href="./Images/favicon.png">
 </head>
 
@@ -45,6 +45,7 @@
 
         <button class="arrow left" id="leftArrow">&#10094;</button>
         <div class="trending-row" id="scrollContainer">
+
             <div class="poster-card">
                 <span class="rank">1</span>
                 <img src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABWbVt8SbLqwQtrRbCG9VpQXX_Z6c57wYpD_UHJSW-eTT-oVf11K79jU-gQjcRfKqQ4aqPgsRjrPNLPcxfS1P6INHzVIQqhI7huMP5no6v-7or-WycCWfHPXs4xQmfZx0CvOY.webp?r=b91"
@@ -158,7 +159,6 @@
             <p class="popup-description"></p> <!-- ← description injected -->
         </div>
     </div>
-
 
 
     <!-- More reasons to join -->
@@ -277,9 +277,13 @@
 
     </footer>
 
+
+    <!-- Authentication Script -->
     <script type="module" src="2AuthFirebase.js"></script>
+
+    <!-- Trending Now Script -->
     <script>
-        //trending now arrows
+        // Arrows
         const scrollContainer = document.getElementById("scrollContainer");
 
         document.getElementById("leftArrow").addEventListener("click", () => {
@@ -290,8 +294,9 @@
             scrollContainer.scrollBy({ left: 1200, behavior: "smooth" });
         });
     </script>
+
     <script>
-        //trending now posters        
+        //trending now posters
         const popup = document.getElementById("popup1");
         const posterImg = popup.querySelector(".popup-movie-img");
         const titleImg = popup.querySelector(".popup-title-img");
@@ -323,15 +328,15 @@
         // Close popup
         closeBtn.addEventListener("click", () => {
             popup.style.display = "none";
-
         });
-
+    
         overlay.addEventListener("click", e => {
             popup.style.display = "none";
         });
     </script>
+
+    <!-- FAQ plus to cross -->
     <script>
-        //faq plus to cross
         document.querySelectorAll('.faq-question').forEach(btn => {
             btn.addEventListener('click', () => {
                 const item = btn.closest('.faq-item');
