@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 import { fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+import {  getFirestore,  doc,  setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js"; 
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,6 +17,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+
 
 // Register function
 document.addEventListener("DOMContentLoaded", function () {
@@ -37,10 +40,22 @@ window.register = function (event) {
   }
 
   createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
+      const user = userCredential.user;
+
+      // Optional: set display name in Auth
+      // await updateProfile(user, { displayName: fullName });
+
+      // ✅ Store fullName in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        fullName: fullName,
+        email: email,
+        createdAt: new Date()
+      });
+
       alert("User registered successfully!");
-      console.log("Full Name:", fullName); // You can optionally store this in Firestore later
-      // Redirect or reset form if needed
+
+      // You can now redirect or stay on page — full name is saved.
     })
     .catch((error) => {
       alert("Error: " + error.message);
