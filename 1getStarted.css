@@ -362,7 +362,7 @@ a:hover {
     width: 55%;
     position: absolute;
     left: 2px;
-    top: 69%;
+    bottom:-4%;
     z-index: 2;
 }
 
