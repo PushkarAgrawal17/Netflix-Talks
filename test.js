@@ -1,4 +1,4 @@
-const apiKey = "675abfca53fb3ac33f6a90826ade779b"; 
+const apiKey = "675abfca53fb3ac33f6a90826ade779b";
 const trendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`;
 const trendingContainer = document.getElementById("test");
 
@@ -15,8 +15,8 @@ function fetchTrendingMovies() {
 
                 card.innerHTML = `
                     <span class="rank">${rank++}</span>
-                    <img 
-                        src="https://image.tmdb.org/t/p/w500${movie.poster_path}" 
+                    <img
+                        src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                         alt="${movie.title}"
                         class="movie-poster"
                         data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
