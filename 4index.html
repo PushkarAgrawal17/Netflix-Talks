@@ -34,12 +34,9 @@
             <i class="fas fa-search"></i>
             <i class="fas fa-bell"></i>
             <img src="Images/profile-icon.jpg" alt="Profile" class="profile-pic" />
-
-
         </div>
 
     </header>
-
 
 
     <!-- Hero Section -->
@@ -57,7 +54,6 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
@@ -72,7 +68,6 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
@@ -87,7 +82,6 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
@@ -102,7 +96,6 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
@@ -117,7 +110,6 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
@@ -132,7 +124,6 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
@@ -147,7 +138,6 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
@@ -162,7 +152,6 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
@@ -177,12 +166,11 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
             <div class="carousel-slide"
-                style="background-image: url(https://occ-0-4189-3647.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABdtAMUiEx9igcNFRSIK0KxNMzqJM7X1uBg6lwQF_Q_aZSmqvyiMCa4EWmScPyoYVqOcPL2ZKbDpAAt_U5e2A_VRkYOw6Y2y4QM.webp?r=190);">
+                style="background-image: url(https://occ-0-4189-3647.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABdtAMUiEx9igcNFRSIK0KxNMzqJM7X1uBg6lwQF__Q_aZSmqvyiMCa4EWmScPyoYVqOcPL2ZKbDpAAt__U5e2A_VRkYOw6Y2y4QM.webp?r=190);">
                 <div class="hero-content">
                     <img src="https://occ-0-4189-3647.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABR9pRDQkqJZ3p-sukukGpY-6aAjiH3_13rg2QAQuRZJSxha0mxHgi1exDGAclTbUY9M6PTPlwtXpNdED0FR3wKEGfXf1x4PgqQ.webp?r=c94"
                         alt="Movie Title" class="movie-title-img" />
@@ -192,7 +180,6 @@
                         <button><i class="fas fa-play"></i> Play</button>
                         <button><i class="fas fa-plus"></i> My List</button>
                     </div>
-
                 </div>
             </div>
 
@@ -200,7 +187,6 @@
 
 
         <!-- Bottom Dots -->
-
         <div class="carousel-dots">
             <span class="dot active"></span>
             <span class="dot"></span>
@@ -239,11 +225,8 @@
             dot.addEventListener('click', () => {
                 showSlide(i);
             });
-
-
         });
     </script>
-
 
     <!--Navbar fadeout animation on scrolling-->
     <script>
@@ -256,17 +239,19 @@
                 // Top: Fully visible
                 header.style.opacity = "1";
                 header.style.transform = "translateY(0)";
-            } else if (scrollY < 400) {
+            }
+            else if (scrollY < 400) {
                 // Scrolling: Slowly fade + move up
                 const fade = 1 - (scrollY - 100) / 300;
                 header.style.opacity = fade;
-                header.style.transform = translateY(`-${(scrollY - 100) / 2}px`);
-    } else {
-            // Gone completely
-            header.style.opacity = "0";
-            header.style.transform = "translateY(-100px)";
-        }
-  });
+                header.style.transform = `translateY(-${(scrollY - 100) / 2}px)`;
+            }
+            else {
+                // Gone completely
+                header.style.opacity = "0";
+                header.style.transform = "translateY(-100px)";
+            }
+        });
     </script>
 
 
@@ -303,7 +288,7 @@
             </div>
             <div class="poster-card">
                 <span class="rank">5</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYVcRfFB91jy3f8-_Alb6H4RUzqXFRA7ejjOfCOXF20XLRVeCyT3ZFEimKbZAimt2ayVUWXSnp6ApNxpoK0mA3XzJD__irrDkdMD6lDrOFPSvQqP8s0xn2dNBaU9JxIu4lUd.webp?r=63b"
+                <img src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYVcRfFB91jy3f8-_Alb6H4RUzqXFRA7ejjOfCOXF20XLRVeCyT3ZFEimKbZAimt2ayVUWXSnp6ApNxpoK0mA3XzJD__irrDkdMD6lDrOFPSvQqP8s0xn2dNBaU9JxIu4lUd.webp?r=63b"
                     alt="Movie 5" class="movie-poster" data-id="post5" data-title="Movie 5"
                     data-description="Description for movie 5." />
             </div>
@@ -338,7 +323,9 @@
                     data-description="Description for movie 10." />
             </div>
         </div>
+
         <button class="arrow right" id="rightArrow">&#10095;</button>
+
         <!-- ONE single popup box -->
         <div id="popup" class="popup">
             <div class="popup-content">
@@ -348,7 +335,6 @@
                 <div id="comment-section"></div> <!-- comments will go here -->
             </div>
         </div>
-
 
     </section>
 
@@ -360,8 +346,6 @@
             <!-- <img src="movie3.jpg" class="row-poster" />
             <img src="movie4.jpg" class="row-poster" /> -->
             <!-- More posters -->
-
-
         </div>
     </section>
 
@@ -404,7 +388,6 @@
             <!-- More posters -->
         </div>
     </section>
-
 
 
     <!-- Footer -->
@@ -453,6 +436,8 @@
 
     </footer>
 
+
+    <!-- Scipts -->
     <script>
         //faq plus to cross
         document.querySelectorAll('.faq-question').forEach(btn => {
@@ -500,8 +485,8 @@
             if (e.target === popup) popup.style.display = "none";
         });
     </script>
+
     <script src="test.js"></script>
 
 </body>
-
 </html>
