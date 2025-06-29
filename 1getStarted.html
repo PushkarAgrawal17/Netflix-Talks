@@ -142,22 +142,22 @@
     </section>
 
 
-    <!-- shared popup -->
+    <!-- Shared Popup -->
     <div id="popup1" class="popup-css">
         <div class="popup-overlay"></div>
 
         <div class="popup-box">
-            <div class="popup-gradient-overlay"></div>
-            <span class="close-btn">&times;</span> <!-- ← anchor replaced by span -->
+            <span class="close-btn">&times;</span>
 
             <div class="poster-wrapper">
                 <img src="" class="popup-movie-img" alt="Movie Poster" />
                 <img src="" class="popup-title-img" alt="Title" />
+                <div class="popup-gradient-overlay"></div>
             </div>
 
-            <div class="popup-tags"></div> <!-- ← tags will be injected -->
+            <div class="popup-tags"></div>
 
-            <p class="popup-description"></p> <!-- ← description injected -->
+            <p class="popup-description"></p>
         </div>
     </div>
 
@@ -309,12 +309,11 @@
         // open popup on poster click
         document.querySelectorAll(".movie-poster").forEach(poster => {
             poster.addEventListener("click", () => {
-                console.log("Poster clicked!");
                 posterImg.src = poster.getAttribute("data-poster");
                 titleImg.src = poster.getAttribute("data-title");
                 descElem.textContent = poster.getAttribute("data-description");
 
-                // build the tags
+                // build tags
                 tagsWrap.innerHTML = "";
                 poster.getAttribute("data-tags").split(",").forEach(tag => {
                     const span = document.createElement("span");
@@ -322,15 +321,17 @@
                     tagsWrap.appendChild(span);
                 });
 
-                popup.style.display = "block";  // show popup
+                // ✅ SHOW POPUP only on click
+                popup.style.display = "flex";
             });
         });
+
 
         // Close popup
         closeBtn.addEventListener("click", () => {
             popup.style.display = "none";
         });
-    
+
         overlay.addEventListener("click", e => {
             popup.style.display = "none";
         });
