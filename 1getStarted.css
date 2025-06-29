@@ -1,3 +1,4 @@
+/* =================== Global Reset =================== */
 * {
     margin: 0;
     padding: 0;
@@ -40,7 +41,6 @@ body {
     height: 99vh;
     background: rgba(6, 6, 6, 0.6);
     z-index: -1;
-    overflow: visible;
 }
 
 .hero-overlay::after {
@@ -79,19 +79,19 @@ body {
     padding: 5px 10px;
     background: transparent;
     color: #ebdedede;
-    border: 1px solid white;
+    border: 1px solid #fff;
     border-radius: 3px;
     cursor: pointer;
 }
 
 .language-select option {
-    background-color: black;
+    background-color: #000;
     cursor: pointer;
 }
 
 .sign-in-btn {
     background-color: #e50914;
-    color: white;
+    color: #fff;
     padding: 7px 15px;
     border: none;
     border-radius: 4px;
@@ -100,12 +100,11 @@ body {
 }
 
 a {
-    color: white;
+    color: #fff;
     text-decoration: none;
 }
 
 a:hover {
-    color: white;
     text-decoration: underline;
 }
 
@@ -147,8 +146,8 @@ a:hover {
 .email-form input[type="email"] {
     padding: 12px;
     font-size: 1rem;
-    background-color: transparent;
-    color: white;
+    background: transparent;
+    color: #fff;
     outline: 1px solid grey;
     text-transform: lowercase;
     width: 300px;
@@ -164,7 +163,7 @@ a:hover {
 .email-form button {
     padding: 12px 20px;
     background-color: #e50914;
-    color: white;
+    color: #fff;
     font-size: 1rem;
     border: none;
     border-radius: 4px;
@@ -184,9 +183,7 @@ a:hover {
 /* ================ Trending Now Section ================ */
 .trending-now {
     position: relative;
-    padding: 2rem;
-    justify-content: center;
-    padding-left: 10vw;
+    padding: 2rem 0 2rem 10vw;
 }
 
 .trending-now h2 {
@@ -196,14 +193,12 @@ a:hover {
 
 .trending-row {
     display: flex;
-    flex-wrap: nowrap;
     gap: 2rem;
     overflow-x: auto;
     overflow-y: hidden;
     width: 79vw;
     height: 256px;
-    padding-top: 20px;
-    padding-left: 6px;
+    padding: 20px 0 0 6px;
 }
 
 /* Hide scrollbar but keep functionality */
@@ -211,7 +206,7 @@ a:hover {
     display: none;
 }
 
-/* Poster styles */
+/* Poster Styles */
 .poster-card {
     position: relative;
     flex-shrink: 0;
@@ -228,8 +223,7 @@ a:hover {
 .poster-card img {
     width: 100%;
     border-radius: 5px;
-    margin-left: 11px;
-    margin-right: 11px;
+    margin: 0 11px;
 }
 
 .rank {
@@ -238,14 +232,9 @@ a:hover {
     left: -5px;
     font-size: 5rem;
     font-weight: bold;
-    color: black;
+    color: #000;
     z-index: 2;
-
-    text-shadow:
-        -1px -1px 0 white,
-        1px -1px 0 white,
-        -1px 1px 0 white,
-        1px 1px 0 white;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
 .arrow {
@@ -253,7 +242,7 @@ a:hover {
     top: 57.5%;
     transform: translateY(-50%);
     font-size: 25px;
-    color: white;
+    color: #fff;
     cursor: pointer;
     z-index: 3;
     padding: 99px 10px;
@@ -274,99 +263,79 @@ a:hover {
     right: 6vw;
 }
 
-/* Popup on clicking the poster */
-
-/* Start hidden */
-/* .popup-css.hidden {
-  display: none;
-} */
-
-/* Overlay + Popup container */
+/* ============ Popup on Poster Click ============ */
 .popup-css {
-  display: none;  
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(5px);
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  z-index: 9999;
-  animation: popup-fade 0.3s ease;
-}
-
-/* Overlay part (clickable background) */
-.popup-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10000;
-}
-
-/* Popup content box */
-/* for vanishing scrollbar */
-.popup-box::-webkit-scrollbar {
     display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    animation: popup-fade 0.3s ease;
+    overflow: auto;
+}
+
+.popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
 }
 
 .popup-box {
     position: relative;
     background-color: #141414;
     border-radius: 10px;
-    padding: 0;
     width: 40%;
-    /* max-width: 700px; */
-    color: white;
+    max-width: 800px;
+    min-width: 340px;
+    color: #fff;
     z-index: 10001;
     animation: popup-zoom 0.35s ease;
-    box-shadow: 0 0 15px rgb(222 25 25 / 83%);
-    margin: 2% auto;
-    min-height: 80vh;
+    box-shadow: 0 0 15px rgba(222, 25, 25, 0.83);
     overflow-y: auto;
-    box-sizing: border-box;
-    /* padding-right: 10px; */
+    max-height: 90vh;
+    margin: 0;
 }
+
+.popup-box::-webkit-scrollbar {
+    display: none;
+}
+
 .popup-gradient-overlay {
     position: absolute;
-    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 10px;
-    pointer-events: none; /* Let clicks pass through */
+    height: 80%;
+    border-radius: 0 0 6px 6px;
+    pointer-events: none;
     z-index: 1;
-
-    background: 
-      linear-gradient(15deg, rgb(22, 22, 22) 42.16%, rgba(6, 10, 23, 0) 64.61%), 
-      linear-gradient(-15deg, rgb(22, 22, 22) 42.91%, rgba(6, 10, 23, 0) 64.26%)
-
+    background: linear-gradient(to top,rgb(22, 22, 22) 0%,rgba(6, 10, 23, 0) 100%);
 }
 
-/* Poster + title */
 .poster-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .popup-movie-img {
-  width: 100%;
-  border-radius: 6px;
-  object-fit: cover;
+    width: 100%;
+    border-radius: 6px;
+    object-fit: cover;
 }
 
 .popup-title-img {
     width: 55%;
     position: absolute;
-    left: 2px;
-    bottom:-4%;
+    left: 5px;
+    bottom: 5px;
     z-index: 2;
 }
 
-/* Tags */
 .popup-tags {
     margin-top: 1rem;
     display: flex;
@@ -376,14 +345,13 @@ a:hover {
 }
 
 .popup-tags span {
-  background-color: #333;
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin: 6px ;
-  z-index: 2;
+    background-color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 6px;
+    z-index: 2;
 }
 
-/* Description */
 .popup-description {
     position: relative;
     margin: 1rem;
@@ -393,58 +361,64 @@ a:hover {
     z-index: 20;
 }
 
-/* Close button */
 .close-btn {
-  position: absolute;
-  top: 12px;
-  right: 14px;
-  font-size: 28px;
-  color: #fff;
-  cursor: pointer;
-  z-index: 10001;
-  transition: transform 0.2s;
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10001;
+    transition: transform 0.2s;
 }
 
 .close-btn:hover {
-  transform: scale(1.2);
+    transform: scale(1.2);
 }
 
-/* Animations */
+/* Popup Animations */
 @keyframes popup-fade {
-  from {
-    background-color: rgba(0, 0, 0, 0);
-    backdrop-filter: blur(0px);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-  }
+    from {
+        background-color: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+    }
 }
 
 @keyframes popup-zoom {
-  from {
-    transform: scale(0.85);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 
 
 /* ============ More Reasons to Join Section ============ */
 .reasons-to-join {
-    padding: 3rem 1.5rem;
-    color: white;
+    padding: 3rem 10vw;
+    color: #fff;
+    box-sizing: border-box;
 }
 
-.reasons-to-join h2 {
-    font-size: 2rem;
+.reasons-to-join>h2 {
+    font-size: 1.8rem;
     margin-bottom: 2rem;
-    margin-left: 9rem;
-    ;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
 }
 
 .reason-grid {
@@ -452,7 +426,10 @@ a:hover {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     max-width: 1200px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .reason-card {
@@ -485,6 +462,25 @@ a:hover {
     align-self: flex-end;
 }
 
+/* Two cards per row on medium screens */
+@media (max-width: 1200px) {
+    .reason-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* One card per row on small screens */
+@media (max-width: 600px) {
+    .reason-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Ensure reason-card never shrinks below 250px */
+.reason-card {
+    min-width: 250px;
+}
+
 
 
 /* ===================== FAQ Section ===================== */
@@ -503,7 +499,7 @@ a:hover {
 .faq-question {
     background: #333232;
     border: none;
-    color: white;
+    color: #fff;
     font-size: 1.2rem;
     width: 100%;
     text-align: left;
@@ -543,7 +539,7 @@ a:hover {
 /* ======================= Footer ======================= */
 .footer {
     width: 100%;
-    background-color: black;
+    background-color: #000;
     color: #b3b3b3;
     padding: 2rem 1rem;
     font-size: 0.9rem;
@@ -561,9 +557,7 @@ a:hover {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
+    margin: auto;
 }
 
 .footer-column {
@@ -574,14 +568,12 @@ a:hover {
 
 .footer .footer-content-wrapper {
     max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     padding: 0 0.5rem;
 }
 
 .footer .footer-content-wrapper p,
 .footer .footer-content-wrapper select {
-    margin-left: 0;
     text-align: left;
     display: block;
 }
@@ -589,8 +581,8 @@ a:hover {
 .footer select {
     margin-top: 2rem;
     padding: 5px;
-    background-color: black;
-    color: white;
+    background-color: #000;
+    color: #fff;
     border: 1px solid gray;
     border-radius: 4px;
 }
@@ -602,17 +594,15 @@ a:hover {
 .recaptcha-msg {
     font-size: 0.75rem;
     color: #b3b3b3bf;
-    margin-top: 1rem;
+    margin: 1rem auto 0;
     max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .recaptcha-msg a {
     color: dodgerblue;
 }
 
-/* Responsive: 4 columns → 2 columns → 1 */
+/* Footer Responsive */
 @media (max-width: 768px) {
     .footer-grid {
         grid-template-columns: repeat(2, 1fr);
