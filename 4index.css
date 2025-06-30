@@ -6,7 +6,7 @@
 }
 
 body {
-    background:linear-gradient(black,rgb(12, 10, 22));
+    background: linear-gradient(black, rgb(12, 10, 22));
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #fff;
     line-height: 1.4;
@@ -15,91 +15,92 @@ body {
 
 /* ---------- Navbar ----------- */
 .netflix-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
-  height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 100px;
 
-  background: linear-gradient(to bottom, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0));
-  transition: background 0.3s ease;
+    background: linear-gradient(to bottom, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0));
+    transition: background 0.3s ease;
 
-  
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-  overflow: hidden;
-  transition: opacity 0.7s ease, transform 0.7s ease;
+
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    overflow: hidden;
+    transition: opacity 0.7s ease, transform 0.7s ease;
 
 }
 
 .header-icons i {
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  margin-right: 15px;
-  transition: color 0.2s ease;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: color 0.2s ease;
 }
 
 .header-icons i:hover {
-  color: #b3b3b3;
+    color: #b3b3b3;
 }
 
 
 .logo img {
-  height: 60px;
+    height: 60px;
 }
 
 .nav-links ul {
-  display: flex;
-  list-style: none;
-  gap: 24px;
-  margin: 0;
-  padding: 0;
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links li {
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  transition: color 0.2s;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s;
 }
 
 .nav-links li:hover {
-  color: #b3b3b3;
+    color: #b3b3b3;
 }
 
 .header-icons {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .icon {
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
 }
 
 .profile-pic {
-  height: 32px;
-  width: 32px;
-  border-radius: 4px;
-  cursor: pointer;
+    height: 32px;
+    width: 32px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 
 /* ---------- Hero Section ----------- */
 .hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Dark tint */
-  z-index: 0;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* Dark tint */
+    z-index: 0;
 }
 
 .hero {
@@ -117,111 +118,115 @@ body {
 }
 
 .hero-carousel {
-  position: relative;
-  height: 80vh;
-  overflow: hidden;
+    position: relative;
+    height: 80vh;
+    overflow: hidden;
 
-  align-items: center;
-  justify-content: flex-start; /* left align */
+    align-items: center;
+    justify-content: flex-start;
+    /* left align */
 
-   
 
-  padding-top: 100px; /* equal to navbar height */
+
+    padding-top: 100px;
+    /* equal to navbar height */
 }
 
 
 
 .carousel-slide::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-  z-index: 0;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    z-index: 0;
 }
+
 .carousel-slide {
-  background-size: cover;
-  background-position: center;
-  height: 80vh;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  display: flex;
-  align-items: flex-end;
-  padding: 60px 30px;
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    align-items: flex-end;
+    padding: 60px 30px;
 }
 
 .carousel-slide.active {
-  opacity: 1;
-  z-index: 1;
+    opacity: 1;
+    z-index: 1;
 }
 
 .carousel-slide::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  height: 200px;
-  width: 100%;
-  background: linear-gradient(to top, #00000000, transparent);
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 200px;
+    width: 100%;
+    background: linear-gradient(to top, #00000000, transparent);
 }
 
 .horizontal-scroll_2 {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  display: flex;
-  height: 100vh;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    height: 100vh;
 }
 
 .carousel-wrapper {
-  display: flex;
-  width: max-content;
+    display: flex;
+    width: max-content;
 }
 
 .carousel-slide_2 {
-  flex: 0 0 100vw;
-  height: 100vh;
-  scroll-snap-align: start;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  padding: 60px;
+    flex: 0 0 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 60px;
 }
 
 .hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 500px;
-  color: white;
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    color: white;
 }
 
 .carousel-dots {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
 }
 
 .carousel-dots .dot {
-  display: inline-block;
-  height: 5px;
-  width: 5px;
-  margin: 0 1px;
-  background-color: rgba(255,255,255,0.5);
-  border-radius: 50%;
-  cursor: pointer;
+    display: inline-block;
+    height: 5px;
+    width: 5px;
+    margin: 0 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .carousel-dots .dot.active {
-  background-color: white;
-   transform: scale(1.5);
+    background-color: white;
+    transform: scale(1.5);
 }
 
 
@@ -238,14 +243,15 @@ body {
 /* Play/My list Buttons Animation */
 
 @keyframes slideUpFade {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .hero-content {
@@ -286,7 +292,7 @@ body {
 }
 
 .hero-buttons button i {
-  margin-right: 8px;
+    margin-right: 8px;
 }
 
 .hero-buttons button:first-child {
@@ -400,38 +406,46 @@ body {
 
 /* Popup on clicking the poster */
 .popup {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.6);
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .popup-content {
-  background-color: #000000;
-  margin: 10% auto;
-  padding: 20px;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 8px;
-  position: relative;
+    background-color: #000000;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
 }
 
 .close {
-  position: absolute;
-  top: 10px; right: 15px;
-  font-size: 24px;
-  cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .popup {
-  animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 
