@@ -460,10 +460,10 @@ body {
 }
 
 .row-posters {
-    display: flex;
-    overflow-x: scroll;
-    gap: 10px;
-    padding-bottom: 10px;
+  display: flex;
+  overflow-x: scroll;
+  gap: 25px;
+  padding-bottom: 10px;
 }
 
 .row-poster {
