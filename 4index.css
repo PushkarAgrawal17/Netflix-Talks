@@ -462,7 +462,7 @@ body {
 .row-posters {
   display: flex;
   overflow-x: scroll;
-  gap: 10px;
+  gap: 25px;
   padding-bottom: 10px;
 }
 
