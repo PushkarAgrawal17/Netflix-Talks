@@ -1,4 +1,6 @@
-const apiKey = "675abfca53fb3ac33f6a90826ade779b";
+if (typeof apiKey === "undefined") {
+    alert("API key is missing. Please create config.js with your TMDB API key.");
+}
 
 const endpoints = {
     trending: `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`,
