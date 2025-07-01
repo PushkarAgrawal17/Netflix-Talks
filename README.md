@@ -37,20 +37,15 @@ A responsive front-end clone of Netflix built using **HTML**, **CSS**, and **Jav
    ```bash
    git clone https://github.com/PushkarAgrawal17/Netflix-Clone.git
    ```
+2. Create a `config.js` file in the root folder.
 
-2. Open index.html in a browser.
+3. Paste your TMDB API key like this:
+   ```js
+   const apiKey = "your_actual_api_key_here";
+   ```
+4. Open index.html in a browser.
 
-3. Make sure your Firebase config is correctly added in script.js: _(To be updated)_
-    ```js
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      // other Firebase config values
-    };
-    ```
-
-4. Connect Firebase Auth & Firestore from the Firebase Console.
+5. Connect Firebase Auth & Firestore from the Firebase Console.
 
 ✅ That’s it! You're ready to go.
 
