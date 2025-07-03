@@ -42,7 +42,10 @@ function fetchAndDisplayMovies(url, containerId) {
 
             addPopupListeners();
         })
-        .catch(err => console.error("TMDB fetch failed", err));
+        .catch(err => {
+            console.error("TMDB fetch failed", err);
+            container.innerHTML = "<p>Failed to load movies. Please try again later.</p>";
+        });
 }
 
 // Fetch all rows

@@ -20,16 +20,14 @@ body {
     justify-content: space-between;
     padding: 0 40px;
     height: 100px;
-
     background: linear-gradient(to bottom, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0));
-    transition: background 0.3s ease;
 
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 10;
     overflow: hidden;
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition: background 0.3s ease, opacity 0.7s ease, transform 0.7s ease;
 }
 
 .header-icons i {
@@ -88,29 +86,6 @@ body {
 
 
 /* ---------- Hero Section ----------- */
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 0;
-}
-
-.hero {
-    background: url("banner.jpg") no-repeat center center/cover;
-    height: 70vh;
-    display: flex;
-    align-items: flex-end;
-    height: 80vh;
-    width: 100%;
-    padding: 100px 60px 30px;
-    position: relative;
-    box-sizing: border-box;
-}
-
-
 /* Doubt */
 .hero-carousel {
     position: relative;
@@ -153,21 +128,6 @@ body {
     z-index: 1;
 }
 
-.carousel-slide::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    height: 200px;
-    width: 100%;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 500px;
-    color: white;
-}
-
 .carousel-dots {
     position: absolute;
     bottom: 15px;
@@ -191,17 +151,7 @@ body {
     transform: scale(1.5);
 }
 
-.hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    height: 200px;
-    width: 100%;
-    background: linear-gradient(to top, #141414, transparent);
-}
-
 /* Play/My list Buttons Animation */
-
 @keyframes slideUpFade {
     from {
         transform: translateY(20px);
@@ -216,26 +166,14 @@ body {
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: 500px;
+    color: white;
     animation: slideUpFade 1s ease-out;
-}
-
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
 }
 
 .hero-content p {
     font-size: 0.9rem;
-    margin-bottom: 20px;
-    color: #ccc;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.hero p {
-    font-size: 1.2rem;
     margin-bottom: 20px;
     color: #ccc;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
@@ -270,38 +208,8 @@ body {
 }
 
 
-
-/* ================ Trending Now Section ================ */
-.trending-now {
-    position: relative;
-    padding: 2rem;
-    justify-content: center;
-    padding-left: 10vw;
-}
-
-.trending-now h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
-.trending-row {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 2rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    width: 79vw;
-    height: 256px;
-    padding-top: 20px;
-    padding-left: 6px;
-}
-
-/* Hide scrollbar but keep functionality */
-.trending-row::-webkit-scrollbar {
-    display: none;
-}
-
-/* Poster styles */
+/* ================ Movie Rows and Posters ================ */
+/* ------- Poster styles --------- */
 .poster-card {
     position: relative;
     flex-shrink: 0;
@@ -336,32 +244,6 @@ body {
         1px -1px 0 white,
         -1px 1px 0 white,
         1px 1px 0 white;
-}
-
-.arrow {
-    position: absolute;
-    top: 57.5%;
-    transform: translateY(-50%);
-    font-size: 25px;
-    color: white;
-    cursor: pointer;
-    z-index: 3;
-    padding: 99px 10px;
-    background-color: #262424;
-    border-radius: 10px;
-    user-select: none;
-}
-
-.arrow:hover {
-    background-color: #2e2e2e;
-}
-
-.arrow.left {
-    left: 6vw;
-}
-
-.arrow.right {
-    right: 6vw;
 }
 
 /* Popup on clicking the poster */
@@ -420,10 +302,10 @@ body {
 }
 
 .row-posters {
-  display: flex;
-  overflow-x: scroll;
-  gap: 25px;
-  padding-bottom: 10px;
+    display: flex;
+    overflow-x: scroll;
+    gap: 25px;
+    padding-bottom: 10px;
 }
 
 .row-poster {
@@ -444,16 +326,8 @@ body {
     display: none;
 }
 
-/* ---------- Responsive ----------- */
+/* Responsive */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
     .nav-links {
         gap: 10px;
         font-size: 0.9rem;
@@ -464,7 +338,6 @@ body {
         max-height: 180px;
     }
 }
-
 
 
 /* ======================= Footer ======================= */

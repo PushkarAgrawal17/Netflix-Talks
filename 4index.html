@@ -202,6 +202,43 @@
     </section>
 
 
+    <!-------------------- Movie Rows -------------------->
+    <section class="row">
+        <h2>Trending Movies</h2>
+        <div class="row-posters" id="trending"></div>
+    </section>
+
+    <section class="row">
+        <h2>Top Rated</h2>
+        <div class="row-posters" id="top-rated"></div>
+    </section>
+
+    <section class="row">
+        <h2>Blockbuster Movies</h2>
+        <div class="row-posters" id="blockbuster"></div>
+    </section>
+
+    <section class="row">
+        <h2>Bollywood Movies</h2>
+        <div class="row-posters" id="bollywood"></div>
+    </section>
+
+    <section class="row">
+        <h2>Korean TV Shows</h2>
+        <div class="row-posters" id="koreanTV"></div>
+    </section>
+
+    <section class="row">
+        <h2>Action Movies</h2>
+        <div class="row-posters" id="action"></div>
+    </section>
+
+    <section class="row">
+        <h2>Horror Movies</h2>
+        <div class="row-posters" id="horror"></div>
+    </section>
+
+    <!-- Scipts -->
     <!--Hero Banner Slide show-->
     <script>
         const slides = document.querySelectorAll('.carousel-slide');
@@ -251,76 +288,6 @@
                 header.style.opacity = "0";
                 header.style.transform = "translateY(-100px)";
             }
-        });
-    </script>
-
-
-    <!-------------------- Movie Rows -------------------->
-    <section class="row">
-        <h2>Trending Movies</h2>
-        <div class="row-posters" id="trending"></div>
-    </section>
-
-    <section class="row">
-        <h2>Top Rated</h2>
-        <div class="row-posters" id="top-rated"></div>
-    </section>
-
-    <section class="row">
-        <h2>Blockbuster Movies</h2>
-        <div class="row-posters" id="blockbuster"></div>
-    </section>
-
-    <section class="row">
-        <h2>Bollywood Movies</h2>
-        <div class="row-posters" id="bollywood"></div>
-    </section>
-
-    <section class="row">
-        <h2>Korean TV Shows</h2>
-        <div class="row-posters" id="koreanTV"></div>
-    </section>
-
-    <section class="row">
-        <h2>Action Movies</h2>
-        <div class="row-posters" id="action"></div>
-    </section>
-
-    <section class="row">
-        <h2>Horror Movies</h2>
-        <div class="row-posters" id="horror"></div>
-    </section>
-
-
-    <!-- Scipts -->
-    <script>
-        //Trending now pop-up
-        const popup = document.getElementById("popup");
-        const popupTitle = document.getElementById("popup-title");
-        const popupDescription = document.getElementById("popup-description");
-        const closeBtn = document.querySelector(".close");
-
-        // Handle poster clicks
-        document.querySelectorAll(".movie-poster").forEach(poster => {
-            poster.addEventListener("click", () => {
-                const title = poster.getAttribute("data-title");
-                const description = poster.getAttribute("data-description");
-                popupTitle.textContent = title;
-                popupDescription.textContent = description;
-                popup.style.display = "block";
-            });
-        });
-
-        // Close popup
-        if (closeBtn) {
-            closeBtn.addEventListener("click", () => {
-                popup.style.display = "none";
-            });
-        }
-
-        // Close when clicking outside popup
-        window.addEventListener("click", (e) => {
-            if (e.target === popup) popup.style.display = "none";
         });
     </script>
 
