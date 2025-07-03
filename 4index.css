@@ -85,12 +85,12 @@ body {
 /* ---------- Hero Section ----------- */
 .hero-slideshow {
     position: relative;
-    height: 80vh;
+    height: 85vh;
     overflow: hidden;
-
+    display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding-top: 100px;
+    justify-content: center;
+    z-index: 0;
 }
 
 .hero-slide::before {
@@ -100,28 +100,45 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
     z-index: 0;
 }
 
 .hero-slide {
-    background-size: cover;
-    background-position: center;
-    height: 80vh;
     position: absolute;
     width: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+
     display: flex;
     align-items: flex-end;
+    justify-content: flex-start;
+
     padding: 60px 30px;
+
+    transition: transform 0.6s ease, opacity 0.4s ease;
+    opacity: 0;
+    transform: translateX(100%);
+    z-index: 1;
+
+    filter: brightness(1.2);
 }
 
 .hero-slide.active-slide {
     opacity: 1;
-    z-index: 1;
+    transform: translateX(0);
+    z-index: 2;
+}
+
+.hero-slide.slide-out-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.hero-slide.slide-out-right {
+    transform: translateX(100%);
+    opacity: 0;
 }
 
 .slide-content {
@@ -206,6 +223,15 @@ body {
     .slide-title-img {
         max-width: 80%;
         height: auto;
+    }
+
+    .slide-content p {
+        font-size: 0.75rem;
+    }
+
+    .slide-buttons button {
+        padding: 8px 12px;
+        font-size: 0.85rem;
     }
 }
 

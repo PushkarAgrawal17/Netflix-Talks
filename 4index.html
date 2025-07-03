@@ -239,28 +239,110 @@
     <!-- Scipts -->
     <!--Hero Banner Slide show-->
     <script>
+        // const slides = document.querySelectorAll('.hero-slide');
+        // const dots = document.querySelectorAll('.dot');
+        // let index = 0;
+
+        // function showSlide(i) {
+        //     slides.forEach((slide, idx) => {
+        //         slide.classList.toggle('active-slide', idx === i);
+        //         dots[idx].classList.toggle('active-dot', idx === i);
+        //     });
+        //     index = i;
+        // }
+
+        // setInterval(() => {
+        //     index = (index + 1) % slides.length;
+        //     showSlide(index);
+        // }, 5000);
+
+        // dots.forEach((dot, i) => {
+        //     dot.addEventListener('click', () => {
+        //         showSlide(i);
+        //     });
+        // });
+
         const slides = document.querySelectorAll('.hero-slide');
         const dots = document.querySelectorAll('.dot');
         let index = 0;
+        let previousIndex = 0;
 
-        function showSlide(i) {
-            slides.forEach((slide, idx) => {
-                slide.classList.toggle('active-slide', idx === i);
-                dots[idx].classList.toggle('active-dot', idx === i);
+        function showSlide(i, direction = 'right') {
+            if (i === index) return; // already showing
+
+            slides[previousIndex].classList.remove('active-slide', 'slide-out-left', 'slide-out-right');
+            slides[i].classList.remove('slide-out-left', 'slide-out-right');
+
+            if (i > previousIndex || direction === 'right') {
+                slides[previousIndex].classList.add('slide-out-left');
+            } else {
+                slides[previousIndex].classList.add('slide-out-right');
+            }
+
+            slides[i].classList.add('active-slide');
+
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active-dot', idx === i);
             });
+
+            previousIndex = i;
             index = i;
         }
 
-        setInterval(() => {
-            index = (index + 1) % slides.length;
-            showSlide(index);
-        }, 5000);
+        function startSlideShow() {
+            return setInterval(() => {
+                let next = (index + 1) % slides.length;
+                showSlide(next, 'right');
+            }, 5000);
+        }
+
+        let slideInterval = startSlideShow();
 
         dots.forEach((dot, i) => {
             dot.addEventListener('click', () => {
-                showSlide(i);
+                if (i === index) return; // don't do anything if same slide
+
+                clearInterval(slideInterval);
+                showSlide(i, i > index ? 'right' : 'left');
+                slideInterval = startSlideShow();
             });
         });
+
+    </script>
+
+    <script>
+        let startX = 0;
+        let endX = 0;
+
+        const slideshow = document.querySelector('.hero-slideshow');
+
+        slideshow.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        slideshow.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            let diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // swipe threshold
+                clearInterval(slideInterval);
+
+                if (diff > 0) {
+                    // Swipe Left → Next Slide
+                    let next = (index + 1) % slides.length;
+                    showSlide(next, 'right');
+                } else {
+                    // Swipe Right → Previous Slide
+                    let prev = (index - 1 + slides.length) % slides.length;
+                    showSlide(prev, 'left');
+                }
+            }
+        }
+
     </script>
 
     <!--Navbar fadeout animation on scrolling-->
