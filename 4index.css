@@ -6,7 +6,7 @@
 }
 
 body {
-    background: linear-gradient(black, rgb(12, 10, 22));
+    background: rgb(3, 3, 17);
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #fff;
     line-height: 1.4;
@@ -24,14 +24,12 @@ body {
     background: linear-gradient(to bottom, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0));
     transition: background 0.3s ease;
 
-
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 10;
     overflow: hidden;
     transition: opacity 0.7s ease, transform 0.7s ease;
-
 }
 
 .header-icons i {
@@ -45,7 +43,6 @@ body {
 .header-icons i:hover {
     color: #b3b3b3;
 }
-
 
 .logo img {
     height: 60px;
@@ -98,8 +95,6 @@ body {
     left: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    /* Dark tint */
     z-index: 0;
 }
 
@@ -109,14 +104,14 @@ body {
     display: flex;
     align-items: flex-end;
     height: 80vh;
-
     width: 100%;
-
     padding: 100px 60px 30px;
     position: relative;
     box-sizing: border-box;
 }
 
+
+/* Doubt */
 .hero-carousel {
     position: relative;
     height: 80vh;
@@ -124,15 +119,8 @@ body {
 
     align-items: center;
     justify-content: flex-start;
-    /* left align */
-
-
-
     padding-top: 100px;
-    /* equal to navbar height */
 }
-
-
 
 .carousel-slide::before {
     content: '';
@@ -171,32 +159,6 @@ body {
     bottom: 0;
     height: 200px;
     width: 100%;
-    background: linear-gradient(to top, #00000000, transparent);
-}
-
-.horizontal-scroll_2 {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    display: flex;
-    height: 100vh;
-}
-
-.carousel-wrapper {
-    display: flex;
-    width: max-content;
-}
-
-.carousel-slide_2 {
-    flex: 0 0 100vw;
-    height: 100vh;
-    scroll-snap-align: start;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    padding: 60px;
 }
 
 .hero-content {
@@ -228,8 +190,6 @@ body {
     background-color: white;
     transform: scale(1.5);
 }
-
-
 
 .hero::after {
     content: '';
@@ -546,8 +506,7 @@ body {
     padding: 0 0.5rem;
 }
 
-.footer .footer-content-wrapper p,
-.footer .footer-content-wrapper select {
+.footer .footer-content-wrapper p {
     margin-left: 0;
     text-align: left;
     display: block;
