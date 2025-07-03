@@ -83,7 +83,7 @@ body {
 }
 
 
-/* ---------- Hero Section ----------- */
+/* =================== Hero Section =================== */
 .hero-slideshow {
     position: relative;
     height: 85vh;
@@ -94,7 +94,7 @@ body {
     z-index: 0;
 }
 
-/* Gradient border below hero section */
+/* Gradient red line below hero section */
 .hero-slideshow::after {
     content: "";
     position: absolute;
@@ -102,10 +102,11 @@ body {
     left: 0;
     height: 5px;
     width: 100%;
-    background: linear-gradient(to right, rgb(20, 4, 4), red, rgb(20, 4, 4));
+    background: linear-gradient(to right, rgb(39, 6, 6), red, rgb(39, 6, 6));
     z-index: 3;
 }
 
+/* Overlay */
 .hero-slide::before {
     content: '';
     position: absolute;
@@ -117,6 +118,7 @@ body {
     z-index: 0;
 }
 
+/* ---------- Slide animation related properties ---------- */
 .hero-slide {
     position: absolute;
     width: 100%;
@@ -154,6 +156,7 @@ body {
     opacity: 0;
 }
 
+/* ---------- Content related properties ---------- */
 .slide-content {
     position: relative;
     z-index: 2;
@@ -232,6 +235,7 @@ body {
     }
 }
 
+/* Responsive */
 @media (max-width: 480px) {
     .slide-title-img {
         max-width: 80%;
@@ -249,8 +253,9 @@ body {
 }
 
 
-/* ================ Movie Rows and Posters ================ */
-/* ------- Poster styles --------- */
+/* =================== Movie Rows and Posters =================== */
+
+/* ---------- Poster styles ---------- */
 .poster-card {
     position: relative;
     flex-shrink: 0;
@@ -371,6 +376,7 @@ body {
 .footer {
     width: 100%;
     background-color: black;
+    border-top: 1px solid rgb(62, 62, 62);
     color: #b3b3b3;
     padding: 2rem 1rem;
     font-size: 0.9rem;
@@ -410,15 +416,6 @@ body {
     margin-left: 0;
     text-align: left;
     display: block;
-}
-
-.footer select {
-    margin-top: 2rem;
-    padding: 5px;
-    background-color: black;
-    color: white;
-    border: 1px solid gray;
-    border-radius: 4px;
 }
 
 .footer p {
