@@ -94,30 +94,6 @@ const endpoints = {
     horror: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=27&sort_by=popularity.desc`,
 };
 
-function createGlobalPopup() {
-    const popup = document.createElement("div");
-    popup.classList.add("popup-css");
-    popup.id = "global-popup";
-
-    popup.innerHTML = `
-    <div class="popup-overlay"></div>
-    <div class="popup-box">
-      <span class="close-btn">&times;</span>
-
-      <div class="poster-wrapper">
-        <img src="" class="popup-movie-img" alt="Movie Poster" />
-        <h1 class="popup-title-img"></h1>
-        <div class="popup-gradient-overlay"></div>
-      </div>
-
-      <div class="popup-tags"></div>
-      <p class="popup-description"></p>
-    </div>`;
-
-    document.body.appendChild(popup);
-    addGlobalPopupListeners(); // attach close listeners
-}
-
 function fetchAndDisplayMovies(url, containerId) {
     const container = document.getElementById(containerId);
 
@@ -137,15 +113,12 @@ function fetchAndDisplayMovies(url, containerId) {
                         src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                         alt="${movie.title}"
                         class="movie-poster"
-                        data-title="${movie.title}"
                         data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
                         data-description="${movie.overview}"
                         data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"/>
                 `;
                 container.appendChild(card);
             });
-            // Add listeners to newly created posters
-            addPosterListeners(container);
         })
         .catch(err => {
             console.error("TMDB fetch failed", err);
@@ -153,48 +126,31 @@ function fetchAndDisplayMovies(url, containerId) {
         });
 }
 
-// -------------------------- Movie Popup ----------------------------
-function addPosterListeners(container) {
-    const popup = document.getElementById("global-popup");
-    const posterTitle = popup.querySelector(".popup-title-img");
-    const posterImg = popup.querySelector(".popup-movie-img");
-    const descElem = popup.querySelector(".popup-description");
-    const tagsWrap = popup.querySelector(".popup-tags");
+function addPopup(containerId) {
+    const container = document.getElementById(containerId);
+    const section = container.closest("section")
+    const popLayout = document.createElement("div");
+    popLayout.classList.add("popup-css");
+    popLayout.id = `popup-${containerId}`;
+    popLayout.innerHTML = `
+    <div class="popup-overlay"></div>
+        <div class="popup-box">
+            <span class="close-btn">&times;</span>
 
-    container.querySelectorAll(".movie-poster").forEach(poster => {
-        poster.addEventListener("click", () => {
-            popup.style.display = "flex";
-            posterTitle.textContent=poster.getAttribute("data-title")
-            posterImg.src = poster.getAttribute("data-poster");
-            descElem.textContent = poster.getAttribute("data-description");
+            <div class="poster-wrapper">
+                <img src="" class="popup-movie-img" alt="Movie Poster" />
+                <div class="popup-gradient-overlay"></div>
+            </div>
 
-            // Populate tags
-            tagsWrap.innerHTML = "";
-            poster.getAttribute("data-tags").split(",").forEach(tag => {
-                const span = document.createElement("span");
-                span.textContent = tag.trim();
-                tagsWrap.appendChild(span);
-            });
-        });
-    });
+            <div class="popup-tags"></div>
+
+            <p class="popup-description"></p>
+        </div>`
+
+    section.appendChild(popLayout)
+
+    addPopupListeners(containerId);
 }
-
-
-function addGlobalPopupListeners() {
-    const popup = document.getElementById("global-popup");
-    const closeBtn = popup.querySelector(".close-btn");
-    const overlay = popup.querySelector(".popup-overlay");
-
-    closeBtn.addEventListener("click", () => {
-        popup.style.display = "none";
-    });
-
-    overlay.addEventListener("click", () => {
-        popup.style.display = "none";
-    });
-}
-
-createGlobalPopup();
 
 fetchAndDisplayMovies(endpoints.trending, "trending");
 fetchAndDisplayMovies(endpoints.topRated, "top-rated");
@@ -204,31 +160,51 @@ fetchAndDisplayMovies(endpoints.koreanTV, "koreanTV");
 fetchAndDisplayMovies(endpoints.action, "action");
 fetchAndDisplayMovies(endpoints.horror, "horror");
 
+addPopup("trending")
+addPopup("top-rated")
+addPopup("blockbuster")
+addPopup("bollywood")
+addPopup("koreanTV")
+addPopup("action")
+addPopup("horror")
+
+// -------------------------- Movie Popup ----------------------------
+function addPopupListeners(containerId) {
+    //trending now posters
+    const popup = document.getElementById(`popup-${containerId}`);
+    const posterImg = popup.querySelector(".popup-movie-img");
+    const descElem = popup.querySelector(".popup-description");
+    const tagsWrap = popup.querySelector(".popup-tags");
+    const closeBtn = popup.querySelector(".close-btn");
+    const overlay = popup.querySelector(".popup-overlay");
+
+    // open popup on poster click
+    const container = document.getElementById(containerId);
+    container.querySelectorAll(".movie-poster").forEach(poster => {
+        poster.addEventListener("click", () => {
+            posterImg.src = poster.getAttribute("data-poster");
+            descElem.textContent = poster.getAttribute("data-description");
+
+            // build tags
+            tagsWrap.innerHTML = "";
+            poster.getAttribute("data-tags").split(",").forEach(tag => {
+                const span = document.createElement("span");
+                span.textContent = tag.trim();
+                tagsWrap.appendChild(span);
+            });
+
+            // ✅ SHOW POPUP only on click
+            popup.style.display = "flex";
+        });
+    });
 
 
-// --------------------Navbar Profile dropdown ------------------
+    // Close popup
+    closeBtn.addEventListener("click", () => {
+        popup.style.display = "none";
+    });
 
-const profileIcon = document.getElementById("profileIcon");
-const profileDropdown = document.getElementById("profileDropdown");
-
-profileIcon.addEventListener("click", () => {
-    profileDropdown.style.display =
-        profileDropdown.style.display === "block" ? "none" : "block";
-});
-
-// Close dropdown if clicked outside
-document.addEventListener("click", (e) => {
-    if (
-        !profileDropdown.contains(e.target) &&
-        !profileIcon.contains(e.target)
-    ) {
-        profileDropdown.style.display = "none";
-    }
-});
-
-// Close dropdown when clicking on any dropdown item
-document.querySelectorAll("#profileDropdown li").forEach((item) => {
-  item.addEventListener("click", () => {
-    profileDropdown.style.display = "none";
-  });
-});
+    overlay.addEventListener("click", e => {
+        popup.style.display = "none";
+    });
+}
