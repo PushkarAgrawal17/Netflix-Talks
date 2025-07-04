@@ -232,3 +232,21 @@ document.querySelectorAll("#profileDropdown li").forEach((item) => {
     profileDropdown.style.display = "none";
   });
 });
+/*--------------Profile dropdown-------------*/
+// Redirect to Get Started on Sign Out
+document.getElementById("signOut").addEventListener("click", () => {
+  profileDropdown.style.display = "none"; // dropdown band karo
+  window.location.href = "1getStarted.html"; // redirect to get started
+});
+
+// Redirect on Account
+document.getElementById("accountBtn").addEventListener("click", () => {
+  profileDropdown.style.display = "none";
+  window.location.href = "account.html";
+});
+
+// Redirect on Settings
+document.getElementById("settingsBtn").addEventListener("click", () => {
+  profileDropdown.style.display = "none";
+  window.location.href = "settings.html";
+});

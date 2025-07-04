@@ -55,6 +55,12 @@ body {
     color: #b3b3b3;
 }
 
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
 /* Icons on the right */
 .nav-icons {
     display: flex;
