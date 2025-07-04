@@ -26,7 +26,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 10;
-    overflow: hidden;
+    overflow: visible;
     transition: background 0.3s ease, opacity 0.7s ease, transform 0.7s ease;
 }
 
@@ -60,6 +60,8 @@ body {
     display: flex;
     align-items: center;
     gap: 20px;
+    position: relative;
+    z-index: 1001
 }
 
 .nav-icons i {
@@ -73,7 +75,7 @@ body {
 .nav-icons i:hover {
     color: #b3b3b3;
 }
-
+/*Profile Icon and drowpdown*/
 .profile-pic {
     height: 32px;
     width: 32px;
@@ -83,15 +85,16 @@ body {
 
 .profile-dropdown {
     position: absolute;
-    top: 70px;
-    right: 40px;
+    top: 38px;
+    
+    right: -10px;
     background-color: rgba(20, 20, 20, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    padding: 10px 0;
+    border-radius: 10px;
+    padding: 10px;
     width: 160px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    z-index: 999;
+    z-index: 9999;
     display: none;
     animation: fadeIn 0.3s ease-in-out;
 }
@@ -103,9 +106,12 @@ body {
 }
 
 .profile-dropdown li {
-    padding: 10px 16px;
+    padding: 12px 16px;
     color: #fff;
     font-size: 14px;
+    display: flex;
+    align-items: centre;
+    gap: 10px;
     cursor: pointer;
     transition: background 0.2s;
 }
@@ -115,6 +121,9 @@ body {
 }
 
 .profile-dropdown li i {
+    font-size: 16px;
+    color: white;
+    min-width: 18px;
     margin-right: 10px;
     width: 18px;
 }
@@ -125,11 +134,12 @@ body {
 .hero-slideshow {
     position: relative;
     height: 85vh;
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 0;
+    padding: 100px;
 }
 
 /* Gradient red line below hero section */

@@ -185,3 +185,10 @@ document.addEventListener("click", (e) => {
         profileDropdown.style.display = "none";
     }
 });
+
+// Close dropdown when clicking on any dropdown item
+document.querySelectorAll("#profileDropdown li").forEach((item) => {
+  item.addEventListener("click", () => {
+    profileDropdown.style.display = "none";
+  });
+});
