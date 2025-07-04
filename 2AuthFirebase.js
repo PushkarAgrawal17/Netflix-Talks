@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 import { fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-import {  getFirestore,  doc,  setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js"; 
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -75,8 +75,8 @@ window.login = function () {
       alert("Error: " + error.message);
     });
 };
- //GET STARTED EMAIL 
- window.checkEmailAndRedirect = function (event) {
+//GET STARTED EMAIL
+window.checkEmailAndRedirect = function (event) {
   event.preventDefault();
   const emailInput = document.querySelector('.email-form input[type="email"]');
   const email = emailInput.value.trim();
@@ -88,7 +88,7 @@ window.login = function () {
 
   fetchSignInMethodsForEmail(auth, email)
     .then((methods) => {
-      console.log("Sign-in methods for email:", methods); 
+      console.log("Sign-in methods for email:", methods);
       if (methods.length > 0) {
         // Email exists: redirect to Sign In
         window.location.href = `3sign_In.html?email=${encodeURIComponent(email)}`;

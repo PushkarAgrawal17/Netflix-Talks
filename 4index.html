@@ -52,7 +52,9 @@
                     hilarious antics and his signature supporting cast.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -66,7 +68,9 @@
                     violent mission — restoring justice to its people.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -80,7 +84,9 @@
                     of killers and stop their grisly murder spree.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -94,7 +100,9 @@
                     from jail, the one mess he can't handle may be his own.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -108,7 +116,9 @@
                     startups collide in a whirlwind of romance and ambition.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -122,7 +132,9 @@
                     Aurangzeb to keep the Maratha Empire alive.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -136,7 +148,9 @@
                     his love, Rukmini. But his violent past won't let him go.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -150,7 +164,9 @@
                     corruption and greed — using any means necessary.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -164,7 +180,9 @@
                     marriage in Pakistan. Based on true events.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -178,7 +196,9 @@
                     powers to protect their fans from supernatural threats.</p>
                 <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
-                    <button><i class="fas fa-plus"></i> My List</button>
+                    <button class="add-to-list" data-movie-id="299534">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
                 </div>
             </div>
         </div>
@@ -208,6 +228,11 @@
     <section class="row">
         <h2>Top Rated</h2>
         <div class="row-posters" id="top-rated"></div>
+    </section>
+
+    <section id="watchlist">
+        <h2>My List</h2>
+        <div class="row-posters" id="user-watchlist"></div>
     </section>
 
     <section class="row">
@@ -338,6 +363,11 @@
             }
         });
     </script>
+
+    <!-- Firebase (COMPAT) scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
     <script src="config.js"></script>
     <script src="4index.js"></script>
