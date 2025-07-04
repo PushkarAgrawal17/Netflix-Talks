@@ -10,7 +10,9 @@
     <link rel="icon" type="image/png" href="./Images/favicon.png"> <!--Favicon -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap">
 </head>
 
 <body>
@@ -38,19 +40,19 @@
             <!-- Profile icon -->
             <img src="Images/profile-icon.jpg" alt="Profile" class="profile-pic" id="profileIcon" />
             <!-- Dropdown menu -->
-        <div class="profile-dropdown" id="profileDropdown">
-            <ul>
-                <li id="accountBtn"><i class="fas fa-user"></i> Account</li>
-                <li id="settingsBtn"><i class="fas fa-cog"></i> Settings</li>
-                <li id="signOut"><i class="fas fa-sign-out-alt"></i> Sign Out</li>
-            </ul>
+            <div class="profile-dropdown" id="profileDropdown">
+                <ul>
+                    <li id="accountBtn"><i class="fas fa-user"></i> Account</li>
+                    <li id="settingsBtn"><i class="fas fa-cog"></i> Settings</li>
+                    <li id="signOut"><i class="fas fa-sign-out-alt"></i> Sign Out</li>
+                </ul>
+            </div>
         </div>
-    </div>
     </header>
 
 
     <!-- Hero Section -->
-        <section class="hero-slideshow">
+    <section class="hero-slideshow">
         <div id="hero-slides-container"></div>
         <div class="slider-dots" id="slider-dots-container"></div>
     </section>
@@ -66,11 +68,6 @@
         <h2>Top Rated</h2>
         <div class="row-posters" id="top-rated"></div>
     </section>
-
-    <!-- <section id="watchlist">
-        <h2>My List</h2>
-        <div class="row-posters" id="user-watchlist"></div>
-    </section> -->
 
     <section class="row">
         <h2>Top Blockbuster Movies</h2>
