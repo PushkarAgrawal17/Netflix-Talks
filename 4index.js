@@ -179,6 +179,7 @@ function addPosterListeners(container) {
     });
 }
 
+
 function addGlobalPopupListeners() {
     const popup = document.getElementById("global-popup");
     const closeBtn = popup.querySelector(".close-btn");
@@ -202,3 +203,32 @@ fetchAndDisplayMovies(endpoints.bollywood, "bollywood");
 fetchAndDisplayMovies(endpoints.koreanTV, "koreanTV");
 fetchAndDisplayMovies(endpoints.action, "action");
 fetchAndDisplayMovies(endpoints.horror, "horror");
+
+
+
+// --------------------Navbar Profile dropdown ------------------
+
+const profileIcon = document.getElementById("profileIcon");
+const profileDropdown = document.getElementById("profileDropdown");
+
+profileIcon.addEventListener("click", () => {
+    profileDropdown.style.display =
+        profileDropdown.style.display === "block" ? "none" : "block";
+});
+
+// Close dropdown if clicked outside
+document.addEventListener("click", (e) => {
+    if (
+        !profileDropdown.contains(e.target) &&
+        !profileIcon.contains(e.target)
+    ) {
+        profileDropdown.style.display = "none";
+    }
+});
+
+// Close dropdown when clicking on any dropdown item
+document.querySelectorAll("#profileDropdown li").forEach((item) => {
+  item.addEventListener("click", () => {
+    profileDropdown.style.display = "none";
+  });
+});
