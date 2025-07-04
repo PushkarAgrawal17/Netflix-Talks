@@ -59,10 +59,10 @@
         <div class="row-posters" id="top-rated"></div>
     </section>
 
-    <section id="watchlist">
+    <!-- <section id="watchlist">
         <h2>My List</h2>
         <div class="row-posters" id="user-watchlist"></div>
-    </section>
+    </section> -->
 
     <section class="row">
         <h2>Top Blockbuster Movies</h2>
@@ -132,6 +132,33 @@
 
 
     <!------------------------- Scipts ------------------------->
+
+    <!--Navbar fadeout animation on scrolling-->
+    <script>
+        const header = document.querySelector(".nav-bar");
+
+        window.addEventListener("scroll", () => {
+            const scrollY = window.scrollY;
+
+            if (scrollY < 300) {
+                // Top: Fully visible
+                header.style.opacity = "1";
+                header.style.transform = "translateY(0)";
+            }
+            else if (scrollY < 400) {
+                // Scrolling: Slowly fade + move up
+                const fade = 1 - (scrollY - 100) / 300;
+                header.style.opacity = fade;
+                header.style.transform = `translateY(-${(scrollY - 100) / 2}px)`;
+            }
+            else {
+                // Gone completely
+                header.style.opacity = "0";
+                header.style.transform = "translateY(-100px)";
+            }
+        });
+    </script>
+
     <!-- Firebase (COMPAT) scripts -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
