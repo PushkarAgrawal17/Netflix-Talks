@@ -106,6 +106,7 @@ function createGlobalPopup() {
 
       <div class="poster-wrapper">
         <img src="" class="popup-movie-img" alt="Movie Poster" />
+        <h1 class="popup-title-img"></h1>
         <div class="popup-gradient-overlay"></div>
       </div>
 
@@ -136,6 +137,7 @@ function fetchAndDisplayMovies(url, containerId) {
                         src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                         alt="${movie.title}"
                         class="movie-poster"
+                        data-title="${movie.title}"
                         data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
                         data-description="${movie.overview}"
                         data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"/>
@@ -154,6 +156,7 @@ function fetchAndDisplayMovies(url, containerId) {
 // -------------------------- Movie Popup ----------------------------
 function addPosterListeners(container) {
     const popup = document.getElementById("global-popup");
+    const posterTitle = popup.querySelector(".popup-title-img");
     const posterImg = popup.querySelector(".popup-movie-img");
     const descElem = popup.querySelector(".popup-description");
     const tagsWrap = popup.querySelector(".popup-tags");
@@ -162,6 +165,7 @@ function addPosterListeners(container) {
         poster.addEventListener("click", () => {
             popup.style.display = "flex";
             document.body.style.overflow = "hidden"; // ← lock background scroll
+            posterTitle.textContent=poster.getAttribute("data-title")
             posterImg.src = poster.getAttribute("data-poster");
             descElem.textContent = poster.getAttribute("data-description");
 
@@ -175,6 +179,7 @@ function addPosterListeners(container) {
         });
     });
 }
+
 
 function addGlobalPopupListeners() {
     const popup = document.getElementById("global-popup");
@@ -201,3 +206,50 @@ fetchAndDisplayMovies(endpoints.bollywood, "bollywood");
 fetchAndDisplayMovies(endpoints.koreanTV, "koreanTV");
 fetchAndDisplayMovies(endpoints.action, "action");
 fetchAndDisplayMovies(endpoints.horror, "horror");
+
+
+
+// --------------------Navbar Profile dropdown ------------------
+
+const profileIcon = document.getElementById("profileIcon");
+const profileDropdown = document.getElementById("profileDropdown");
+
+profileIcon.addEventListener("click", () => {
+    profileDropdown.style.display =
+        profileDropdown.style.display === "block" ? "none" : "block";
+});
+
+// Close dropdown if clicked outside
+document.addEventListener("click", (e) => {
+    if (
+        !profileDropdown.contains(e.target) &&
+        !profileIcon.contains(e.target)
+    ) {
+        profileDropdown.style.display = "none";
+    }
+});
+
+// Close dropdown when clicking on any dropdown item
+document.querySelectorAll("#profileDropdown li").forEach((item) => {
+  item.addEventListener("click", () => {
+    profileDropdown.style.display = "none";
+  });
+});
+/*--------------Profile dropdown-------------*/
+// Redirect to Get Started on Sign Out
+document.getElementById("signOut").addEventListener("click", () => {
+  profileDropdown.style.display = "none"; // dropdown band karo
+  window.location.href = "1getStarted.html"; // redirect to get started
+});
+
+// Redirect on Account
+document.getElementById("accountBtn").addEventListener("click", () => {
+  profileDropdown.style.display = "none";
+  window.location.href = "account.html";
+});
+
+// Redirect on Settings
+document.getElementById("settingsBtn").addEventListener("click", () => {
+  profileDropdown.style.display = "none";
+  window.location.href = "settings.html";
+});
