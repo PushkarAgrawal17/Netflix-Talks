@@ -1,0 +1,164 @@
+/* ✅ account.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: white;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Navbar */
+.account-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-left i,
+.nav-right i {
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+.nav-center .nav-logo {
+  height: 40px;
+}
+
+/* Container */
+.account-container {
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* Profile Pic */
+.profile-pic-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.edit-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: #e50914;
+  color: white;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* Modal for profile options */
+.profile-modal {
+  background: #111;
+  border: 1px solid #444;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 380px;
+  border-radius: 10px;
+  display: none;
+}
+
+.profile-options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.option-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  cursor: pointer;
+  object-fit: cover;
+  transition: transform 0.2s;
+}
+
+.option-pic:hover {
+  transform: scale(1.1);
+}
+
+.upload-label {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  background: #222;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  cursor: pointer;
+  border: 1px dashed #777;
+}
+
+.upload-label input {
+  display: none;
+}
+
+/* Input Fields */
+.form-group {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: white;
+  font-size: 14px;
+}
+
+.form-group input[readonly] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Sign Out */
+.signout-btn {
+  margin-top: 30px;
+  padding: 12px 20px;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signout-btn i {
+  margin-right: 8px;
+}
+
+.signout-btn:hover {
+  background-color: #f40612;
+}
