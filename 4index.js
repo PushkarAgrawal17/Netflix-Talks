@@ -164,3 +164,24 @@ function addPopupListeners() {
         });
     });
 }
+
+
+// --------------------Navbar Profile dropdown ------------------
+
+const profileIcon = document.getElementById("profileIcon");
+const profileDropdown = document.getElementById("profileDropdown");
+
+profileIcon.addEventListener("click", () => {
+    profileDropdown.style.display =
+        profileDropdown.style.display === "block" ? "none" : "block";
+});
+
+// Close dropdown if clicked outside
+document.addEventListener("click", (e) => {
+    if (
+        !profileDropdown.contains(e.target) &&
+        !profileIcon.contains(e.target)
+    ) {
+        profileDropdown.style.display = "none";
+    }
+});
