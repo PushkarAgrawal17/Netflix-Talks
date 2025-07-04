@@ -153,6 +153,7 @@ function fetchAndDisplayMovies(url, containerId) {
         });
 }
 
+
 // -------------------------- Movie Popup ----------------------------
 function addPosterListeners(container) {
     const popup = document.getElementById("global-popup");
@@ -179,7 +180,6 @@ function addPosterListeners(container) {
         });
     });
 }
-
 
 function addGlobalPopupListeners() {
     const popup = document.getElementById("global-popup");
@@ -208,9 +208,7 @@ fetchAndDisplayMovies(endpoints.action, "action");
 fetchAndDisplayMovies(endpoints.horror, "horror");
 
 
-
 // --------------------Navbar Profile dropdown ------------------
-
 const profileIcon = document.getElementById("profileIcon");
 const profileDropdown = document.getElementById("profileDropdown");
 
@@ -235,6 +233,8 @@ document.querySelectorAll("#profileDropdown li").forEach((item) => {
     profileDropdown.style.display = "none";
   });
 });
+
+
 /*--------------Profile dropdown-------------*/
 // Redirect to Get Started on Sign Out
 document.getElementById("signOut").addEventListener("click", () => {
