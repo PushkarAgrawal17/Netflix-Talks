@@ -6,6 +6,8 @@ body {
   background-color: #000;
   color: white;
   font-family: 'Helvetica Neue', sans-serif;
+  background-color: #141414;
+
 }
 
 /* Navbar */
@@ -72,6 +74,7 @@ body {
   max-width: 380px;
   border-radius: 10px;
   display: none;
+  background: #141414;
 }
 
 .profile-options {
