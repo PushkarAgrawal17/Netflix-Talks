@@ -426,7 +426,7 @@ body {
     backdrop-filter: blur(5px);
     z-index: 9999;
     animation: popup-fade 0.3s ease;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .popup-overlay {
@@ -438,7 +438,7 @@ body {
     z-index: 10000;
 }
 
-.popup-box {
+/* .popup-box {
     position: relative;
     background-color: #141414;
     border-radius: 10px;
@@ -452,6 +452,31 @@ body {
     overflow-y: auto;
     max-height: 80vh;
     margin: 0;
+} */
+
+.popup-box {
+    position: relative;
+    background-color: #141414;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    max-width: 800px;
+    min-width: 340px;
+    color: #fff;
+    z-index: 10001;
+
+    /* scroll behavior */
+    max-height: 95vh;
+    height: 90vh;
+    overflow-y: auto;
+
+    margin-top: auto;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+
+    animation: popup-zoom 0.35s ease;
+    box-shadow: 0 0 15px rgba(222, 25, 25, 0.83);
+
+    scroll-behavior: smooth;
 }
 
 .popup-box::-webkit-scrollbar {
