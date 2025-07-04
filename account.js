@@ -1,0 +1,54 @@
+// ✅ account.js
+
+const editIcon = document.getElementById("editIcon");
+const profileModal = document.getElementById("profileModal");
+const mainProfilePic = document.getElementById("mainProfilePic");
+const uploadInput = document.getElementById("uploadInput");
+const signOutBtn = document.getElementById("signOutBtn");
+const goBack = document.getElementById("goBack");
+
+// Toggle profile modal
+editIcon.addEventListener("click", () => {
+  profileModal.style.display =
+    profileModal.style.display === "block" ? "none" : "block";
+});
+
+// Close modal when clicking outside
+window.addEventListener("click", (e) => {
+  if (e.target === profileModal) {
+    profileModal.style.display = "none";
+  }
+});
+
+// Change profile image from predefined
+const profileOptions = document.querySelectorAll(".option-pic");
+profileOptions.forEach((pic) => {
+  pic.addEventListener("click", () => {
+    mainProfilePic.src = pic.src;
+    profileModal.style.display = "none";
+  });
+});
+
+// Upload custom profile image
+uploadInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      mainProfilePic.src = event.target.result;
+      profileModal.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// Sign out and redirect
+signOutBtn.addEventListener("click", () => {
+  // In future: firebase.auth().signOut().then(() => ...)
+  window.location.href = "1getStarted.html";
+});
+
+// Go back to previous page
+goBack.addEventListener("click", () => {
+  window.history.back();
+});
