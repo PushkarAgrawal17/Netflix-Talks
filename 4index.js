@@ -161,6 +161,7 @@ function addPosterListeners(container) {
     container.querySelectorAll(".movie-poster").forEach(poster => {
         poster.addEventListener("click", () => {
             popup.style.display = "flex";
+            document.body.style.overflow = "hidden"; // ← lock background scroll
             posterImg.src = poster.getAttribute("data-poster");
             descElem.textContent = poster.getAttribute("data-description");
 
@@ -182,10 +183,12 @@ function addGlobalPopupListeners() {
 
     closeBtn.addEventListener("click", () => {
         popup.style.display = "none";
+        document.body.style.overflow = "auto"; // Re-enable background scroll
     });
 
     overlay.addEventListener("click", () => {
         popup.style.display = "none";
+        document.body.style.overflow = "auto"; // Re-enable background scroll
     });
 }
 
