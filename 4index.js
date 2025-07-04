@@ -192,3 +192,9 @@ document.querySelectorAll("#profileDropdown li").forEach((item) => {
     profileDropdown.style.display = "none";
   });
 });
+
+// Redirect to Get Started on Sign Out
+document.getElementById("signOut").addEventListener("click", () => {
+  profileDropdown.style.display = "none"; // dropdown band karo
+  window.location.href = "1getStarted.html"; // redirect to get started
+});
