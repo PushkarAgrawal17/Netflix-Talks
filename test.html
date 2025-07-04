@@ -4,237 +4,95 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Get Started | Netflix Clone</title>
-    <link rel="stylesheet" href="testStyle.css" />
-    <link rel="icon" type="image/png" href="./Images/favicon.png">
+    <title>Netflix Clone</title>
+
+    <link rel="stylesheet" href="4index.css" />
+    <link rel="icon" type="image/png" href="./Images/favicon.png"> <!--Favicon -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
 </head>
 
-<body class="auth-body">
-    <div class="hero-section">
-        <!-- Navbar -->
-        <header class="navbar">
-            <img src="Images/Netflix-Logo2.png" alt="Netflix Logo" class="logo" />
-            <div class="navbar-actions">
-                <select class="language-select">
-                    <option>English</option>
-                    <option>हिन्दी</option>
-                </select>
-                <button class="sign-in-btn"><a href="3sign_In.html">Sign In</a></button>
-            </div>
-        </header>
-
-        <!-- Main Center Content -->
-        <div class="center-content">
-            <h1>Unlimited movies, TV shows and more</h1>
-            <h3>Starts at ₹149. Cancel at any time.</h3>
-            <p>Ready to watch? Enter your email to create or restart your membership.</p>
-            <form class="email-form" onsubmit="checkEmailAndRedirect(event)">
-                <input type="email" placeholder="Email address" required />
-                <button type="submit">Get Started &gt;</button>
-            </form>
+<body>
+    <!-- Navbar -->
+    <header class="nav-bar">
+        <div class="logo">
+            <img src="Images/Netflix-Logo-removebg.png" alt="Netflix Logo" />
         </div>
 
-        <!-- Background Overlay -->
-        <div class="hero-overlay"></div>
-        <img src="Images/BG.png" alt="Background" class="background-img" />
-    </div>
+        <nav class="nav-links">
+            <ul>
+                <li>Home</li>
+                <li>TV Shows</li>
+                <li>Movies</li>
+                <li>New & Popular</li>
+                <li>My List</li>
+            </ul>
+        </nav>
 
-    <!-- Trending Now -->
-    <section class="trending-now">
-        <h2>Trending Now</h2>
-
-        <button class="arrow left" id="leftArrow">&#10094;</button>
-        <div class="trending-row" id="scrollContainer">
-
-            <div class="poster-card">
-                <span class="rank">1</span>
-                <img src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABWbVt8SbLqwQtrRbCG9VpQXX_Z6c57wYpD_UHJSW-eTT-oVf11K79jU-gQjcRfKqQ4aqPgsRjrPNLPcxfS1P6INHzVIQqhI7huMP5no6v-7or-WycCWfHPXs4xQmfZx0CvOY.webp?r=b91"
-                    alt="Movie 1" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
-
-            <div class="poster-card">
-                <span class="rank">2</span>
-                <img src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYUCgDPIk4LvnEw_j-dC5ca65oxm4yP2Z7RFKlRcN6WYzCwNA4MhTNqTRrSAK9zND3cSjrYEpbQculmTCXPD09ZbvdCosdbuOjc.webp?r=062"
-                    alt="Movie 2" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">3</span>
-                <img src="https://occ-0-2085-2164.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYGL4_ns5MGTE5-Yd3ZQVB5apyY9yxQ39lxjT_27ehdoGzrxRwNc4osgXEeifcv9yO_MgMySL-p6hMxtQZnIEkZmyglIJ7wm7ik.webp?r=c23"
-                    alt="Movie 3" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">4</span>
-                <img src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABZ2Btia34ViHOdbGThR2xD0XYVD9vkdTkUULeET8PcHeq12ebMOJyLaTD1yS26NaRfUqDMknk2XnomOCg78WEKeN3VEDdOKzFRayBGveEZ-MeOaVD-v0z5P25idICKgt-nXX.webp?r=a1c"
-                    alt="Movie 4" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">5</span>
-                <img src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYVcRfFB91jy3f8-_Alb6H4RUzqXFRA7ejjOfCOXF20XLRVeCyT3ZFEimKbZAimt2ayVUWXSnp6ApNxpoK0mA3XzJD__irrDkdMD6lDrOFPSvQqP8s0xn2dNBaU9JxIu4lUd.webp?r=63b"
-                    alt="Movie 5" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">6</span>
-                <img src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABWtQdcUd4n6VKz6HTm_IbI2cOq0VDU7fDQpomIXBLuCYqtJ4j8hj2pz7j6spnX2osjRgTMJQ9xkMieYZWqC6xC8G4tGlTLJBm3I.webp?r=cc2"
-                    alt="Movie 6" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">7</span>
-                <img src="https://occ-0-6247-2164.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABQqOh2yhpKE8385dV9hjlxxXtG63RjSjrlNOkx2yLuGMYe8JFTnA9ScVsioAhTa9Ds34ERhB2R4aBFUng1j54IFwl5JvjgVmGEU.webp?r=d66"
-                    alt="Movie 7" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">8</span>
-                <img src="https://occ-0-6247-2164.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABZFBdXweIqorvQIPkQbuKg9rFcZJJ8yCUzSX1ySYOsmrcMeUgLlY3YWvFcXee7lFjHwMT_Ofd03ttH-rTzAHPZskA6K-f4imBAY.webp?r=81d"
-                    alt="Movie 8" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">9</span>
-                <img src="https://occ-0-6247-2164.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABUbEuw4gn448vhUbeTgwsmEsA4ZhBFHAbPyFyAk414jH72BDs0ALdA2TEDez1mRZHuyUjlpB_EL0LxkrymlRyHs2joUg2Izzl4Q.webp?r=ad2"
-                    alt="Movie 9" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">10</span>
-                <img src="https://occ-0-6247-2164.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABeysJ_o0Fqo2Esnk8H3hp3V1VarIGpeg_GoiaL3A4_BLVb29OEEM1b17gQxKFblxZaEl42kzUG8QkRINoZ4HHxAN8N-WoN_YF_fcPYgiIiq03s81yru4DEvGn7SiPnW55-JK.webp?r=49b"
-                    alt="Movie 10" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
+        <div class="nav-icons">
+            <!-- Search icon -->
+            <i class="fas fa-search"></i>
+            <!-- Notification icon -->
+            <i class="fas fa-bell"></i>
+            <!-- Profile icon -->
+            <img src="Images/profile-icon.jpg" alt="Profile" class="profile-pic" />
         </div>
-        <button class="arrow right" id="rightArrow">&#10095;</button>
+    </header>
+
+
+    <!-- Hero Section -->
+        <section class="hero-slideshow">
+        <div id="hero-slides-container"></div>
+        <div class="slider-dots" id="slider-dots-container"></div>
     </section>
 
 
-    <!-- shared popup -->
-    <div id="popup1" class="popup-css">
-        <div class="popup-overlay"></div>
-
-        <div class="popup-box">
-            <div class="popup-gradient-overlay"></div>
-            <span class="close-btn">&times;</span> <!-- ← anchor replaced by span -->
-
-            <div class="poster-wrapper">
-                <img src="" class="popup-movie-img" alt="Movie Poster" />
-                <img src="" class="popup-title-img" alt="Title" />
-            </div>
-
-            <div class="popup-tags"></div> <!-- ← tags will be injected -->
-
-            <p class="popup-description"></p> <!-- ← description injected -->
-        </div>
-    </div>
-
-
-    <!-- More reasons to join -->
-    <section class="reasons-to-join">
-        <h2>More reasons to join</h2>
-        <div class="reason-grid">
-            <div class="reason-card">
-                <h3>Enjoy on your TV</h3>
-                <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
-                <img src="Images/MRTJ-Icon-1.png" alt="TV Icon" />
-            </div>
-            <div class="reason-card">
-                <h3>Download your shows to watch offline</h3>
-                <p>Save your favourites easily and always have something to watch.</p>
-                <img src="Images/MRTJ-Icon-2.png" alt="Download Icon" />
-            </div>
-            <div class="reason-card">
-                <h3>Watch everywhere</h3>
-                <p>Stream unlimited movies and TV shows on your phone, tablet, laptop and TV.</p>
-                <img src="Images/MRTJ-Icon-3.png" alt="Devices Icon" />
-            </div>
-            <div class="reason-card">
-                <h3>Create profiles for kids</h3>
-                <p>Send kids on adventures with their favourite characters in a space made just for them — free with
-                    your
-                    membership.</p>
-                <img src="Images/MRTJ-Icon-4.png" alt="Kids Icon" />
-            </div>
-        </div>
+    <!-------------------- Movie Rows -------------------->
+    <section class="row">
+        <h2>Trending Movies</h2>
+        <div class="row-posters" id="trending"></div>
     </section>
 
-    <!-- FAQs -->
-    <section class="faq">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-            <button class="faq-question">
-                What is Netflix?
-                <span class="toggle-icon">+</span>
-            </button>
-            <div class="answer">Netflix is a streaming service that offers a wide variety of award-winning TV shows,
-                movies, anime, documentaries and more - on thousands of internet-connected devices. <br><br>
-                You can watch as much as you want, whenever you want, without a single ad – all for one low monthly
-                price. There's always something new to discover, and new TV shows and movies are added every week!</div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">How much does Netflix cost?<span class="toggle-icon">+</span></button>
-            <div class="answer">Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for
-                one fixed monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts.</div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">Where can I watch?<span class="toggle-icon">+</span></button>
-            <div class="answer">Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web
-                at netflix.com or on any internet-connected device that offers the Netflix app. <br><br>
-                You can also download your favourite shows with the iOS or Android app.</div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">How do I cancel?<span class="toggle-icon">+</span></button>
-            <div class="answer">Netflix is flexible. No contracts and no commitments. Cancel online anytime. No
-                cancellation fees.</div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">What can I watch on Netflix?<span class="toggle-icon">+</span></button>
-            <div class="answer">Netflix has an extensive library of feature films, documentaries, TV shows, anime,
-                award-winning originals, and more.</div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">Is Netflix good for kids?<span class="toggle-icon">+</span></button>
-            <div class="answer">The Netflix Kids experience gives parents control while kids enjoy family-friendly
-                content in their own space.</div>
-        </div>
+    <section class="row">
+        <h2>Top Rated</h2>
+        <div class="row-posters" id="top-rated"></div>
     </section>
+
+    <!-- <section id="watchlist">
+        <h2>My List</h2>
+        <div class="row-posters" id="user-watchlist"></div>
+    </section> -->
+
+    <section class="row">
+        <h2>Top Blockbuster Movies</h2>
+        <div class="row-posters" id="blockbuster"></div>
+    </section>
+
+    <section class="row">
+        <h2>Trending Bollywood Movies</h2>
+        <div class="row-posters" id="bollywood"></div>
+    </section>
+
+    <section class="row">
+        <h2>Top Korean TV Shows</h2>
+        <div class="row-posters" id="koreanTV"></div>
+    </section>
+
+    <section class="row">
+        <h2>Top Action Movies</h2>
+        <div class="row-posters" id="action"></div>
+    </section>
+
+    <section class="row">
+        <h2>Top Horror Movies</h2>
+        <div class="row-posters" id="horror"></div>
+    </section><br>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content-wrapper">
+            <br>
             <p>Questions? Call <a href="#">000-800-919-1743</a></p> <br>
 
             <div class="footer-grid">
@@ -263,93 +121,51 @@
                 </div>
             </div>
 
-            <select>
-                <option>English</option>
-                <option>हिन्दी</option>
-            </select>
-
-            <br><br>
+            <br>
             <p>Netflix India</p>
             <br>
             <p class="recaptcha-msg">
                 This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a>
             </p>
         </div>
-
     </footer>
 
-<<<<<<< HEAD
-    <!-- API Script -->
+
+    <!------------------------- Scipts ------------------------->
+
+    <!--Navbar fadeout animation on scrolling-->
+    <script>
+        const header = document.querySelector(".nav-bar");
+
+        window.addEventListener("scroll", () => {
+            const scrollY = window.scrollY;
+
+            if (scrollY < 300) {
+                // Top: Fully visible
+                header.style.opacity = "1";
+                header.style.transform = "translateY(0)";
+            }
+            else if (scrollY < 400) {
+                // Scrolling: Slowly fade + move up
+                const fade = 1 - (scrollY - 100) / 300;
+                header.style.opacity = fade;
+                header.style.transform = `translateY(-${(scrollY - 100) / 2}px)`;
+            }
+            else {
+                // Gone completely
+                header.style.opacity = "0";
+                header.style.transform = "translateY(-100px)";
+            }
+        });
+    </script>
+
+    <!-- Firebase (COMPAT) scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
     <script src="config.js"></script>
-
-=======
->>>>>>> origin/main
-
-    <!-- Authentication Script -->
-    <script type="module" src="2AuthFirebase.js"></script>
-
-    <!-- Trending Now Script -->
-    <script>
-        // Arrows
-        const scrollContainer = document.getElementById("scrollContainer");
-
-        document.getElementById("leftArrow").addEventListener("click", () => {
-            scrollContainer.scrollBy({ left: -1200, behavior: "smooth" });
-        });
-
-        document.getElementById("rightArrow").addEventListener("click", () => {
-            scrollContainer.scrollBy({ left: 1200, behavior: "smooth" });
-        });
-    </script>
-
-    <script>
-        //trending now posters
-        const popup = document.getElementById("popup1");
-        const posterImg = popup.querySelector(".popup-movie-img");
-        const titleImg = popup.querySelector(".popup-title-img");
-        const descElem = popup.querySelector(".popup-description");
-        const tagsWrap = popup.querySelector(".popup-tags");
-        const closeBtn = popup.querySelector(".close-btn");
-        const overlay = popup.querySelector(".popup-overlay");
-
-        // open popup on poster click
-        document.querySelectorAll(".movie-poster").forEach(poster => {
-            poster.addEventListener("click", () => {
-                console.log("Poster clicked!");
-                posterImg.src = poster.getAttribute("data-poster");
-                titleImg.src = poster.getAttribute("data-title");
-                descElem.textContent = poster.getAttribute("data-description");
-
-                // build the tags
-                tagsWrap.innerHTML = "";
-                poster.getAttribute("data-tags").split(",").forEach(tag => {
-                    const span = document.createElement("span");
-                    span.textContent = tag.trim();
-                    tagsWrap.appendChild(span);
-                });
-
-                popup.style.display = "block";  // show popup
-            });
-        });
-
-        // Close popup
-        closeBtn.addEventListener("click", () => {
-            popup.style.display = "none";
-        });
-        overlay.addEventListener("click", e => {
-            popup.style.display = "none";
-        });
-    </script>
-
-    <!-- FAQ plus to cross -->
-    <script>
-        document.querySelectorAll('.faq-question').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.closest('.faq-item');
-                item.classList.toggle('open');
-            });
-        });
-    </script>
+    <script src="test.js"></script>
 
 </body>
 
