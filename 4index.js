@@ -106,6 +106,7 @@ function createGlobalPopup() {
 
       <div class="poster-wrapper">
         <img src="" class="popup-movie-img" alt="Movie Poster" />
+        <h1 class="popup-title-img"></h1>
         <div class="popup-gradient-overlay"></div>
       </div>
 
@@ -136,6 +137,7 @@ function fetchAndDisplayMovies(url, containerId) {
                         src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                         alt="${movie.title}"
                         class="movie-poster"
+                        data-title="${movie.title}"
                         data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
                         data-description="${movie.overview}"
                         data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"/>
@@ -154,6 +156,7 @@ function fetchAndDisplayMovies(url, containerId) {
 // -------------------------- Movie Popup ----------------------------
 function addPosterListeners(container) {
     const popup = document.getElementById("global-popup");
+    const posterTitle = popup.querySelector(".popup-title-img");
     const posterImg = popup.querySelector(".popup-movie-img");
     const descElem = popup.querySelector(".popup-description");
     const tagsWrap = popup.querySelector(".popup-tags");
@@ -161,6 +164,7 @@ function addPosterListeners(container) {
     container.querySelectorAll(".movie-poster").forEach(poster => {
         poster.addEventListener("click", () => {
             popup.style.display = "flex";
+            posterTitle.textContent=poster.getAttribute("data-title")
             posterImg.src = poster.getAttribute("data-poster");
             descElem.textContent = poster.getAttribute("data-description");
 

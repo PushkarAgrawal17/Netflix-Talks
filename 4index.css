@@ -428,9 +428,21 @@ body {
 .popup-title-img {
     width: 55%;
     position: absolute;
-    left: 5px;
-    bottom: 5px;
-    z-index: 2;
+    left: 10px;
+    bottom: 20px;
+    z-index: 20;
+    color: white;
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-family: cursive;
+    font-weight: bolder;
+    text-shadow:
+        2px 2px 4px rgba(255, 0, 0, 0.8),   /* main shadow */
+        -1px -1px 0 #ff0000,                /* outline top-left */
+        1px -1px 0 #ff0000,                 /* outline top-right */
+        -1px 1px 0 #ff0000,                 /* outline bottom-left */
+        1px 1px 0 #ff0000;  
+    font-weight: bold;
 }
 
 .popup-tags {
