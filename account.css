@@ -49,26 +49,20 @@ body {
 .profile-pic {
   width: 80px;
   height: 80px;
-  border-radius: 20px;
+  border-radius: 40px;
   object-fit: cover;
 }
 
 .edit-icon {
   position: absolute;
-  size: 200px;
   bottom: 5px;
-  right: 5px;
+  right: 0px;
   background-color: #e50914;
   color: white;
   border-radius: 50%;
-  padding: 8px;
+  padding: 4px;
   cursor: pointer;
   font-size: 12px;
-}
-
-.edit-icon:hover {
-  background-color: #f40612;
-  transform: scale(1.1);
 }
 
 
