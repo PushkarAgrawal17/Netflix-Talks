@@ -68,14 +68,11 @@ signOutBtn.addEventListener("click", () => {
         window.location.href = "1getStarted.html";
     });
 });
-
+// Back button
 goBack.addEventListener("click", () => {
     window.history.back();
 });
 
-settingsBtn?.addEventListener("click", () => {
-    window.location.href = "settings.html";
-});
 
 // Auth state
 onAuthStateChanged(auth, async (user) => {
