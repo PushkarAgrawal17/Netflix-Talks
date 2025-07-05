@@ -95,3 +95,18 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+/* account.js — Auto-save username on input  */
+
+const usernameInput = document.getElementById("username");
+
+usernameInput.addEventListener("input", () => {
+  localStorage.setItem("username", usernameInput.value);
+});
+
+// account.js — Page reload pe username restore karo
+
+const savedUsername = localStorage.getItem("username");
+if (savedUsername) {
+  usernameInput.value = savedUsername;
+}
