@@ -138,9 +138,10 @@ function fetchAndDisplayMovies(url, containerId) {
                         alt="${movie.title}"
                         class="movie-poster"
                         data-title="${movie.title}"
-                        data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
+                        data-poster="https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}"
                         data-description="${movie.overview}"
-                        data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"/>
+                        data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
+                    />
                 `;
                 container.appendChild(card);
             });
