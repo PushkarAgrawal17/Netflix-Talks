@@ -62,3 +62,11 @@ togglePassword.addEventListener("click", () => {
   togglePassword.classList.toggle("fa-eye");
   togglePassword.classList.toggle("fa-eye-slash");
 });
+
+/*Back botton redirecting last window*/
+
+const backBtn = document.querySelector('.back-btn');
+
+backBtn.addEventListener('click', () => {
+  window.history.back();
+});
