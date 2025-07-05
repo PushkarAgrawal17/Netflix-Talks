@@ -63,10 +63,20 @@ togglePassword.addEventListener("click", () => {
   togglePassword.classList.toggle("fa-eye-slash");
 });
 
-/*Back botton redirecting last window*/
+/*Back button redirecting last window*/
 
 const backBtn = document.querySelector('.back-btn');
 
 backBtn.addEventListener('click', () => {
   window.history.back();
 });
+
+/* setting button redirecting settings */
+
+const settingsBtn = document.querySelector('.settings-btn');
+
+if (settingsBtn) {
+  settingsBtn.addEventListener('click', () => {
+    window.location.href = "settings.html";  // ✅ point this to your settings page
+  });
+}
