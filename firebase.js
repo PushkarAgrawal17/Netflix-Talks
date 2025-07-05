@@ -70,6 +70,7 @@ window.login = function () {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             alert("Login successful!");
+            window.location.href = `4index.html`;
         })
         .catch((error) => {
             alert("Error: " + error.message);

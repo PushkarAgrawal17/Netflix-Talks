@@ -3,9 +3,12 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #000;
   color: white;
   font-family: 'Helvetica Neue', sans-serif;
-  background-color: #01000F;
+  background-color: #01000F
+;
+
 }
 
 /*-------------- Navbar ---------------*/
@@ -14,9 +17,9 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 60px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
   position: sticky;
-  top: 10;
+  top:10;
   z-index: 10;
 }
 
@@ -55,7 +58,7 @@ body {
   transform: translate(-50%, -50%);
   width: 140px;
   height: 140px;
-  background: radial-gradient(circle, rgba(229, 9, 20, 0.4) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(229,9,20,0.4) 0%, transparent 70%);
   border-radius: 0%;
   z-index: -1;
   filter: blur(2px);
@@ -63,13 +66,13 @@ body {
 }
 
 .profile-pic-wrapper:hover .profile-pic {
-  transform: scale(1.03);
-  transition: transform 0.3s;
+transform: scale(1.03);
+transition: transform 0.3s;
 }
 
 .edit-icon:hover {
-  transform: scale(1.15);
-  background-color: #f40612;
+transform: scale(1.15);
+background-color: #f40612;
 }
 
 .profile-pic {
@@ -157,6 +160,15 @@ body {
   font-size: 14px;
 }
 
+a{
+  text-decoration: solid;
+  color:white;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
 /* Input Fields */
 .form-group {
   margin: 20px 0;
@@ -180,8 +192,8 @@ body {
   font-size: 14px;
 
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(4px);
+border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .form-group input[readonly] {
@@ -209,32 +221,48 @@ body {
 
 .signout-btn:hover {
   background-color: #f40612;
+  text-decoration: underline;
+}
+
+.change-password-btn {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.change-password-btn:hover {
+  background-color: #f6121d;
 }
 
 @keyframes fadeInSlide {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+0% {
+opacity: 0;
+transform: translateY(30px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
 }
 
 @media (max-width: 480px) {
-  .account-container {
-    padding: 0 20px;
-  }
-
-  .profile-pic {
-    width: 100px;
-    height: 100px;
-  }
-
-  .edit-icon {
-    font-size: 12px;
-    padding: 6px;
-  }
+.account-container {
+padding: 0 20px;
+}
+.profile-pic {
+width: 100px;
+height: 100px;
+}
+.edit-icon {
+font-size: 12px;
+padding: 6px;
+}
 }
