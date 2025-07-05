@@ -56,7 +56,6 @@ goBack.addEventListener("click", () => {
 /* Possword revealing */
 const passwordField = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");
-
 togglePassword.addEventListener("click", () => {
   const isHidden = passwordField.type === "password";
   passwordField.type = isHidden ? "text" : "password";
