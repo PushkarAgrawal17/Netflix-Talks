@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Account | Netflix Clone</title>
   <link rel="stylesheet" href="account.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -51,7 +52,8 @@
       <label for="username">Username</label>
       <div style="position: relative;">
         <input type="text" id="username" readonly />
-        <i class="fa-solid fa-pen-to-square" id="editUsername" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+        <i class="fa-solid fa-pen-to-square" id="editUsername"
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
       </div>
     </div>
 
@@ -73,10 +75,11 @@
     </button>
   </main>
 
-  <script src="account.js"></script>
+  <!-- <script src="account.js"></script> -->
   <script type="module">
-     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, updateProfile, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
@@ -89,6 +92,7 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
     const usernameInput = document.getElementById("username");
     const emailInput = document.getElementById("email");
@@ -101,8 +105,18 @@
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        usernameInput.value = user.displayName || "Netflix User";
-        emailInput.value = user.email;
+        const userDocRef = doc(db, "users", user.uid);
+        getDoc(userDocRef).then((docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            usernameInput.value = data.fullName || "Netflix User";
+            emailInput.value = data.email || user.email; // fallback to auth email if not found
+          } else {
+            console.log("No user document found");
+          }
+        }).catch((error) => {
+          console.error("Error fetching user data from Firestore:", error);
+        });
 
         editUsernameIcon.addEventListener("click", () => {
           usernameInput.removeAttribute("readonly");
@@ -111,11 +125,12 @@
           usernameInput.addEventListener("blur", async () => {
             const newUsername = usernameInput.value;
             try {
-              await updateProfile(user, {
-                displayName: newUsername
+              await updateDoc(doc(db, "users", user.uid), {
+                fullName: newUsername
               });
+
               usernameInput.setAttribute("readonly", true);
-              alert("Username updated in Auth successfully!");
+              alert("Username updated successfully!");
             } catch (error) {
               alert("Error updating username: " + error.message);
             }
@@ -177,10 +192,10 @@
         }
 
       } else {
-        window.location.href = "2auth.html";
+        window.location.href = "3sign_In.html";
       }
     });
-    </script>
+  </script>
 </body>
 
 </html>
