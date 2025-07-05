@@ -15,7 +15,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 60px;
+    padding: 20px 120px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
     position: relative;
     top: 10;
@@ -24,7 +24,7 @@ body {
 
 .nav-left i,
 .nav-right i {
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
     color: white;
 }
