@@ -1,185 +1,188 @@
-<!-- ✅ account.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Account | Netflix Clone</title>
-  <link rel="stylesheet" href="account.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account | Netflix Clone</title>
+    <link rel="icon" type="image/png" href="./Images/favicon.png" />
+
+    <link rel="stylesheet" href="account.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="account-navbar">
-    <div class="nav-left">
-      <a href="4index.html"><i class="fas fa-arrow-left back-btn" id="goBack"></i></a>
-    </div>
-    <div class="nav-center">
-      <img src="Images/Netflix-Logo2.png" alt="Netflix Logo" class="nav-logo" />
-    </div>
-    <div class="nav-right">
-      <i class="fas fa-cog settings-btn"></i>
-    </div>
-  </nav>
+    <!-- Navbar -->
+    <nav class="account-navbar">
+        <div class="nav-left">
+            <a href="4index.html"><i class="fas fa-arrow-left back-btn" id="goBack"></i></a>
+        </div>
+        <div class="nav-center">
+            <img src="Images/Netflix-Logo2.png" alt="Netflix Logo" class="nav-logo" />
+        </div>
+        <div class="nav-right">
+            <i class="fas fa-cog settings-btn"></i>
+        </div>
+    </nav>
 
-  <!-- Main Profile Section -->
-  <main class="account-container">
-    <div class="profile-pic-wrapper">
-      <img src="Images/profileIcons/1.jpg" alt="Profile" class="profile-pic" id="mainProfilePic" />
-      <i class="fa-solid fa-pen-to-square edit-icon" id="editIcon"></i>
-    </div>
+    <!-- Main Profile Section -->
+    <main class="account-container">
+        <div class="profile-pic-wrapper">
+            <img src="Images/profileIcons/1.jpg" alt="Profile" class="profile-pic" id="mainProfilePic" />
+            <i class="fa-solid fa-pen-to-square edit-icon" id="editIcon"></i>
+        </div>
 
-    <!-- Profile Pic Options -->
-    <div class="profile-modal" id="profileModal">
-      <h3>Choose a Profile</h3>
-      <div class="profile-options">
-        <img src="Images/profileIcons/1.jpg" class="option-pic" />
-        <img src="Images/profileIcons/2.jpg" class="option-pic" />
-        <img src="Images/profileIcons/3.jpg" class="option-pic" />
-        <img src="Images/profileIcons/4.jpg" class="option-pic" />
-        <label class="upload-label">
-          <i class="fas fa-plus"></i>
-          <input type="file" id="uploadInput" accept="image/*" hidden />
-        </label>
-      </div>
-    </div>
+        <!-- Profile Pic Options -->
+        <div class="profile-modal" id="profileModal">
+            <h3>Choose a Profile</h3>
+            <div class="profile-options">
+                <img src="Images/profileIcons/1.jpg" class="option-pic" />
+                <img src="Images/profileIcons/2.jpg" class="option-pic" />
+                <img src="Images/profileIcons/3.jpg" class="option-pic" />
+                <img src="Images/profileIcons/4.jpg" class="option-pic" />
+                <label class="upload-label">
+                    <i class="fas fa-plus"></i>
+                    <input type="file" id="uploadInput" accept="image/*" hidden />
+                </label>
+            </div>
+        </div>
 
-    <!-- Username -->
-    <div class="form-group">
-      <label for="username">Username</label>
-      <div style="position: relative;">
-        <input type="text" id="username" readonly />
-        <i class="fa-solid fa-pen-to-square" id="editUsername" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
-      </div>
-    </div>
+        <!-- Username -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <div style="position: relative;">
+                <input type="text" id="username" readonly />
+                <i class="fa-solid fa-pen-to-square" id="editUsername"
+                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+            </div>
+        </div>
 
-    <!-- Email -->
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" readonly />
-    </div>
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" readonly />
+        </div>
 
 
-    <!-- Change Password Button -->
-    <button class="signout-btn" id="changePasswordBtn">
-      <i class="fas fa-key"></i> Change Password
-    </button>
+        <!-- Change Password Button -->
+        <button class="signout-btn" id="changePasswordBtn">
+            <i class="fas fa-key"></i> Change Password
+        </button>
 
-    <!-- Sign Out -->
-    <button class="signout-btn" id="signOutBtn">
-      <i class="fas fa-sign-out-alt"></i> <a href="3sign_In.html">Sign Out</a>
-    </button>
-  </main>
+        <!-- Sign Out -->
+        <button class="signout-btn" id="signOutBtn">
+            <i class="fas fa-sign-out-alt"></i> <a href="3sign_In.html">Sign Out</a>
+        </button>
+    </main>
 
-  <script src="account.js"></script>
-  <script type="module">
-     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged, updateProfile, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    <script src="account.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, updateProfile, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
-      authDomain: "netflix-web-project.firebaseapp.com",
-      projectId: "netflix-web-project",
-      storageBucket: "netflix-web-project.appspot.com",
-      messagingSenderId: "616557096999",
-      appId: "1:616557096999:web:027b9189b6f5b283115e02"
-    };
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
+            authDomain: "netflix-web-project.firebaseapp.com",
+            projectId: "netflix-web-project",
+            storageBucket: "netflix-web-project.appspot.com",
+            messagingSenderId: "616557096999",
+            appId: "1:616557096999:web:027b9189b6f5b283115e02"
+        };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
-    const usernameInput = document.getElementById("username");
-    const emailInput = document.getElementById("email");
-    const editUsernameIcon = document.getElementById("editUsername");
-    const signOutBtn = document.getElementById("signOutBtn");
-    const editIcon = document.getElementById("editIcon");
-    const profileModal = document.getElementById("profileModal");
-    const mainProfilePic = document.getElementById("mainProfilePic");
-    const uploadInput = document.getElementById("uploadInput");
+        const usernameInput = document.getElementById("username");
+        const emailInput = document.getElementById("email");
+        const editUsernameIcon = document.getElementById("editUsername");
+        const signOutBtn = document.getElementById("signOutBtn");
+        const editIcon = document.getElementById("editIcon");
+        const profileModal = document.getElementById("profileModal");
+        const mainProfilePic = document.getElementById("mainProfilePic");
+        const uploadInput = document.getElementById("uploadInput");
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        usernameInput.value = user.displayName || "Netflix User";
-        emailInput.value = user.email;
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                usernameInput.value = user.displayName || "Netflix User";
+                emailInput.value = user.email;
 
-        editUsernameIcon.addEventListener("click", () => {
-          usernameInput.removeAttribute("readonly");
-          usernameInput.focus();
+                editUsernameIcon.addEventListener("click", () => {
+                    usernameInput.removeAttribute("readonly");
+                    usernameInput.focus();
 
-          usernameInput.addEventListener("blur", async () => {
-            const newUsername = usernameInput.value;
-            try {
-              await updateProfile(user, {
-                displayName: newUsername
-              });
-              usernameInput.setAttribute("readonly", true);
-              alert("Username updated in Auth successfully!");
-            } catch (error) {
-              alert("Error updating username: " + error.message);
+                    usernameInput.addEventListener("blur", async () => {
+                        const newUsername = usernameInput.value;
+                        try {
+                            await updateProfile(user, {
+                                displayName: newUsername
+                            });
+                            usernameInput.setAttribute("readonly", true);
+                            alert("Username updated in Auth successfully!");
+                        } catch (error) {
+                            alert("Error updating username: " + error.message);
+                        }
+                    }, { once: true });
+                });
+
+                const changePasswordBtn = document.getElementById("changePasswordBtn");
+                changePasswordBtn.addEventListener("click", async () => {
+                    try {
+                        await sendPasswordResetEmail(auth, user.email);
+                        alert("Password reset email sent. Please check your inbox.");
+                    } catch (error) {
+                        alert("Failed to send password reset email: " + error.message);
+                    }
+                });
+
+                signOutBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    signOut(auth).then(() => {
+                        window.location.href = "3sign_In.html";
+                    });
+                });
+
+                // Handle profile image selection
+                document.querySelectorAll(".option-pic").forEach(pic => {
+                    pic.addEventListener("click", () => {
+                        mainProfilePic.src = pic.src;
+                        localStorage.setItem("profilePic", pic.src);
+                        profileModal.style.display = "none";
+                    });
+                });
+
+                uploadInput.addEventListener("change", (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            mainProfilePic.src = event.target.result;
+                            localStorage.setItem("profilePic", event.target.result);
+                            profileModal.style.display = "none";
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                editIcon.addEventListener("click", () => {
+                    profileModal.style.display = profileModal.style.display === "block" ? "none" : "block";
+                });
+
+                window.addEventListener("click", (e) => {
+                    if (e.target !== profileModal && !profileModal.contains(e.target) && e.target !== editIcon) {
+                        profileModal.style.display = "none";
+                    }
+                });
+
+                const savedPic = localStorage.getItem("profilePic");
+                if (savedPic) {
+                    mainProfilePic.src = savedPic;
+                }
+
+            } else {
+                window.location.href = "2auth.html";
             }
-          }, { once: true });
         });
-
-        const changePasswordBtn = document.getElementById("changePasswordBtn");
-        changePasswordBtn.addEventListener("click", async () => {
-          try {
-            await sendPasswordResetEmail(auth, user.email);
-            alert("Password reset email sent. Please check your inbox.");
-          } catch (error) {
-            alert("Failed to send password reset email: " + error.message);
-          }
-        });
-
-        signOutBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          signOut(auth).then(() => {
-            window.location.href = "3sign_In.html";
-          });
-        });
-
-        // Handle profile image selection
-        document.querySelectorAll(".option-pic").forEach(pic => {
-          pic.addEventListener("click", () => {
-            mainProfilePic.src = pic.src;
-            localStorage.setItem("profilePic", pic.src);
-            profileModal.style.display = "none";
-          });
-        });
-
-        uploadInput.addEventListener("change", (e) => {
-          const file = e.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (event) {
-              mainProfilePic.src = event.target.result;
-              localStorage.setItem("profilePic", event.target.result);
-              profileModal.style.display = "none";
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-
-        editIcon.addEventListener("click", () => {
-          profileModal.style.display = profileModal.style.display === "block" ? "none" : "block";
-        });
-
-        window.addEventListener("click", (e) => {
-          if (e.target !== profileModal && !profileModal.contains(e.target) && e.target !== editIcon) {
-            profileModal.style.display = "none";
-          }
-        });
-
-        const savedPic = localStorage.getItem("profilePic");
-        if (savedPic) {
-          mainProfilePic.src = savedPic;
-        }
-
-      } else {
-        window.location.href = "2auth.html";
-      }
-    });
     </script>
 </body>
 
