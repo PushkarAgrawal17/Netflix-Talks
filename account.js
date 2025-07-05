@@ -52,3 +52,14 @@ signOutBtn.addEventListener("click", () => {
 goBack.addEventListener("click", () => {
   window.history.back();
 });
+
+/* Possword revealing */
+const passwordField = document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
+
+togglePassword.addEventListener("click", () => {
+  const isHidden = passwordField.type === "password";
+  passwordField.type = isHidden ? "text" : "password";
+  togglePassword.classList.toggle("fa-eye");
+  togglePassword.classList.toggle("fa-eye-slash");
+});

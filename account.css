@@ -146,6 +146,20 @@ background-color: #f40612;
   display: none;
 }
 
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  cursor: pointer;
+  font-size: 14px;
+}
+
 /* Input Fields */
 .form-group {
   margin: 20px 0;
