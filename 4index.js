@@ -138,7 +138,8 @@ function fetchAndDisplayMovies(url, containerId) {
                         alt="${movie.title}"
                         class="movie-poster"
                         data-title="${movie.title}"
-                        data-poster="https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}"
+                        data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
+                        data-highres-poster="https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}"
                         data-description="${movie.overview}"
                         data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
                     />
@@ -167,8 +168,20 @@ function addPosterListeners(container) {
         poster.addEventListener("click", () => {
             popup.style.display = "flex";
             document.body.style.overflow = "hidden"; // ← lock background scroll
-            posterTitle.textContent=poster.getAttribute("data-title")
-            posterImg.src = poster.getAttribute("data-poster");
+            posterTitle.textContent = poster.getAttribute("data-title")
+
+            const lowRes = poster.getAttribute("data-poster");
+            const highRes = poster.getAttribute("data-highres-poster");
+
+            posterImg.src = lowRes;
+
+            // Preload high-res in background
+            const tempImg = new Image();
+            tempImg.src = highRes;
+            tempImg.onload = () => {
+                posterImg.src = highRes;
+            };
+
             descElem.textContent = poster.getAttribute("data-description");
 
             // Populate tags
@@ -230,38 +243,38 @@ document.addEventListener("click", (e) => {
 
 // Close dropdown when clicking on any dropdown item
 document.querySelectorAll("#profileDropdown li").forEach((item) => {
-  item.addEventListener("click", () => {
-    profileDropdown.style.display = "none";
-  });
+    item.addEventListener("click", () => {
+        profileDropdown.style.display = "none";
+    });
 });
 
 
 /*--------------Profile dropdown-------------*/
 // Redirect to Get Started on Sign Out
 document.getElementById("signOut").addEventListener("click", () => {
-  profileDropdown.style.display = "none"; // dropdown band karo
-  window.location.href = "1getStarted.html"; // redirect to get started
+    profileDropdown.style.display = "none"; // dropdown band karo
+    window.location.href = "1getStarted.html"; // redirect to get started
 });
 
 // Redirect on Account
 document.getElementById("accountBtn").addEventListener("click", () => {
-  profileDropdown.style.display = "none";
-  window.location.href = "account.html";
+    profileDropdown.style.display = "none";
+    window.location.href = "account.html";
 });
 
 // Redirect on Settings
 document.getElementById("settingsBtn").addEventListener("click", () => {
-  profileDropdown.style.display = "none";
-  window.location.href = "settings.html";
+    profileDropdown.style.display = "none";
+    window.location.href = "settings.html";
 });
 
 // Load profile pic from localStorage if available (Set profile pic)
 window.addEventListener("DOMContentLoaded", () => {
-  const savedProfilePic = localStorage.getItem("profilePic");
-  if (savedProfilePic) {
-    const profileIcon = document.getElementById("profileIcon");
-    if (profileIcon) {
-      profileIcon.src = savedProfilePic;
+    const savedProfilePic = localStorage.getItem("profilePic");
+    if (savedProfilePic) {
+        const profileIcon = document.getElementById("profileIcon");
+        if (profileIcon) {
+            profileIcon.src = savedProfilePic;
+        }
     }
-  }
 });
