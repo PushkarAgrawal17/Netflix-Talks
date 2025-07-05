@@ -16,6 +16,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export { app };
+
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -43,10 +45,7 @@ window.register = function (event) {
         .then(async (userCredential) => {
             const user = userCredential.user;
 
-            // Optional: set display name in Auth
-            // await updateProfile(user, { displayName: fullName });
-
-            // ✅ Store fullName in Firestore
+            // Store fullName in Firestore
             await setDoc(doc(db, "users", user.uid), {
                 fullName: fullName,
                 email: email,
@@ -55,7 +54,6 @@ window.register = function (event) {
 
             alert("User registered successfully!");
             window.location.href = `4index.html`;
-            // You can now redirect or stay on page — full name is saved.
         })
         .catch((error) => {
             alert("Error: " + error.message);
@@ -76,6 +74,7 @@ window.login = function () {
             alert("Error: " + error.message);
         });
 };
+
 //GET STARTED EMAIL
 window.checkEmailAndRedirect = function (event) {
     event.preventDefault();
