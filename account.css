@@ -1,269 +1,270 @@
 /* ✅ account.css */
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #000;
-  color: white;
-  font-family: 'Helvetica Neue', sans-serif;
-  background-color: #01000F
-;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #01000F;
 
 }
 
 /*-------------- Navbar ---------------*/
 .account-navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 60px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-  position: sticky;
-  top:10;
-  z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 60px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+    position: sticky;
+    top: 10;
+    z-index: 10;
 }
 
 .nav-left i,
 .nav-right i {
-  font-size: 20px;
-  cursor: pointer;
-  color: white;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
 }
 
 .nav-center .nav-logo {
-  height: 150px;
+    height: 150px;
 }
 
 /* Container */
 .account-container {
-  max-width: 400px;
-  margin: 20px auto;
-  text-align: center;
-  animation: fadeInSlide 0.8s ease;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    animation: fadeInSlide 0.8s ease;
 }
 
 
 /* Profile Pic */
 .profile-pic-wrapper {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
+    position: relative;
+    display: inline-block;
+    z-index: 1;
 }
 
 .profile-pic-wrapper::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 140px;
-  height: 140px;
-  background: radial-gradient(circle, rgba(229,9,20,0.4) 0%, transparent 70%);
-  border-radius: 0%;
-  z-index: -1;
-  filter: blur(2px);
-  transition: opacity 0.3s ease;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.4) 0%, transparent 70%);
+    border-radius: 0%;
+    z-index: -1;
+    filter: blur(2px);
+    transition: opacity 0.3s ease;
 }
 
 .profile-pic-wrapper:hover .profile-pic {
-transform: scale(1.03);
-transition: transform 0.3s;
+    transform: scale(1.03);
+    transition: transform 0.3s;
 }
 
 .edit-icon:hover {
-transform: scale(1.15);
-background-color: #f40612;
+    transform: scale(1.15);
+    background-color: #f40612;
 }
 
 .profile-pic {
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
-  object-fit: cover;
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    object-fit: cover;
 }
 
 .edit-icon {
-  position: absolute;
-  bottom: 5px;
-  right: 0px;
-  background-color: #e50914;
-  color: white;
-  border-radius: 50%;
-  padding: 4px;
-  cursor: pointer;
-  font-size: 12px;
+    position: absolute;
+    bottom: 5px;
+    right: 0px;
+    background-color: #e50914;
+    color: white;
+    border-radius: 50%;
+    padding: 4px;
+    cursor: pointer;
+    font-size: 12px;
 }
 
 
 /* Modal for profile options */
 .profile-modal {
-  background: #111;
-  border: 1px solid #444;
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 380px;
-  border-radius: 10px;
-  display: none;
-  background: #141414;
+    background: #111;
+    border: 1px solid #444;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 380px;
+    border-radius: 10px;
+    display: none;
+    background: #141414;
 }
 
 .profile-options {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 12px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 12px;
 }
 
 .option-pic {
-  width: 60px;
-  height: 60px;
-  border-radius: 6px;
-  cursor: pointer;
-  object-fit: cover;
-  transition: transform 0.2s;
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    cursor: pointer;
+    object-fit: cover;
+    transition: transform 0.2s;
 }
 
 .option-pic:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .upload-label {
-  width: 60px;
-  height: 60px;
-  border-radius: 6px;
-  background: #222;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 22px;
-  cursor: pointer;
-  border: 1px dashed #777;
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    background: #222;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    cursor: pointer;
+    border: 1px dashed #777;
 }
 
 .upload-label input {
-  display: none;
+    display: none;
 }
 
 .password-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .toggle-password {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-  cursor: pointer;
-  font-size: 14px;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    cursor: pointer;
+    font-size: 14px;
 }
 
-a{
-  text-decoration: solid;
-  color:white;
+a {
+    text-decoration: solid;
+    color: white;
 }
 
-a:hover{
-  text-decoration: underline;
+a:hover {
+    text-decoration: underline;
 }
 
 /* Input Fields */
 .form-group {
-  margin: 20px 0;
-  text-align: left;
+    margin: 20px 0;
+    text-align: left;
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #ccc;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #ccc;
 }
 
 .form-group input {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  background: #222;
-  color: white;
-  font-size: 14px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #222;
+    color: white;
+    font-size: 14px;
 
-  background: rgba(255, 255, 255, 0.08);
-backdrop-filter: blur(4px);
-border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .form-group input[readonly] {
-  opacity: 0.6;
-  cursor: not-allowed;
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 /* Sign Out */
 .signout-btn {
-  margin-top: 30px;
-  padding: 12px 20px;
-  background-color: #e50914;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    margin-top: 30px;
+    padding: 12px 20px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .signout-btn i {
-  margin-right: 8px;
+    margin-right: 8px;
 }
 
 .signout-btn:hover {
-  background-color: #f40612;
-  text-decoration: underline;
+    background-color: #f40612;
+    text-decoration: underline;
 }
 
 .change-password-btn {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
 }
 
 .change-password-btn:hover {
-  background-color: #f6121d;
+    background-color: #f6121d;
 }
 
 @keyframes fadeInSlide {
-0% {
-opacity: 0;
-transform: translateY(30px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 480px) {
-.account-container {
-padding: 0 20px;
-}
-.profile-pic {
-width: 100px;
-height: 100px;
-}
-.edit-icon {
-font-size: 12px;
-padding: 6px;
-}
-}
+    .account-container {
+        padding: 0 20px;
+    }
 
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+    }
+
+    .edit-icon {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
