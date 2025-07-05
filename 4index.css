@@ -114,13 +114,14 @@ body {
 }
 
 .profile-dropdown li {
-    padding: 12px 16px;
+    padding: 12px 14px;
     color: #fff;
     font-size: 14px;
     display: flex;
-    align-items: centre;
+    align-items: center;
     gap: 10px;
     cursor: pointer;
+    white-space: nowrap; /*remove this for sign <next line> out*/
     transition: background 0.2s;
 }
 
