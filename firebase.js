@@ -54,7 +54,7 @@ window.register = function (event) {
             });
 
             alert("User registered successfully!");
-
+            window.location.href = `4index.html`;
             // You can now redirect or stay on page — full name is saved.
         })
         .catch((error) => {
