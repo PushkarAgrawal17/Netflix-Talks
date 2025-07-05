@@ -1,0 +1,21 @@
+/* ---------- Base ----------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #01000F;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #fff;
+    line-height: 1.4;
+    overflow-x: hidden;
+}
+
+.heading{
+  display:flex;
+  justify-content: center;
+  padding: 40px;
+  color: white;
+}
