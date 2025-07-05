@@ -1,5 +1,4 @@
-// ✅ account.js
-
+// For profile section
 import { getAuth, onAuthStateChanged, updateProfile, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { app } from "./firebaseConfig.js"; // Your initialized Firebase app
