@@ -6,7 +6,7 @@ body {
   background-color: #000;
   color: white;
   font-family: 'Helvetica Neue', sans-serif;
-  background-color: #141414;
+  background-color: #01000F;
 
 }
 
@@ -41,6 +41,7 @@ body {
   animation: fadeInSlide 0.8s ease;
 }
 
+
 /* Profile Pic */
 .profile-pic-wrapper {
   position: relative;
@@ -48,7 +49,20 @@ body {
   z-index: 1;
 }
 
-
+.profile-pic-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(229,9,20,0.4) 0%, transparent 70%);
+  border-radius: 0%;
+  z-index: -1;
+  filter: blur(2px);
+  transition: opacity 0.3s ease;
+}
 
 .profile-pic-wrapper:hover .profile-pic {
 transform: scale(1.03);
