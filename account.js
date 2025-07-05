@@ -85,7 +85,7 @@ if (settingsBtn) {
   });
 }
 
-
+/*-- Set profile pic -- */
 window.addEventListener("DOMContentLoaded", () => {
   const savedPic = localStorage.getItem("profilePic");
   if (savedPic) {

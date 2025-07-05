@@ -254,7 +254,7 @@ document.getElementById("settingsBtn").addEventListener("click", () => {
   window.location.href = "settings.html";
 });
 
-// Load profile pic from localStorage if available
+// Load profile pic from localStorage if available (Set profile pic)
 window.addEventListener("DOMContentLoaded", () => {
   const savedProfilePic = localStorage.getItem("profilePic");
   if (savedProfilePic) {
