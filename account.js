@@ -25,6 +25,8 @@ const profileOptions = document.querySelectorAll(".option-pic");
 profileOptions.forEach((pic) => {
   pic.addEventListener("click", () => {
     mainProfilePic.src = pic.src;
+    localStorage.setItem("profilePic", pic.src);
+
     profileModal.style.display = "none";
   });
 });
@@ -36,6 +38,8 @@ uploadInput.addEventListener("change", (e) => {
     const reader = new FileReader();
     reader.onload = function (event) {
       mainProfilePic.src = event.target.result;
+        localStorage.setItem("profilePic", event.target.result);
+
       profileModal.style.display = "none";
     };
     reader.readAsDataURL(file);
@@ -80,3 +84,14 @@ if (settingsBtn) {
     window.location.href = "settings.html";  // ✅ point this to your settings page
   });
 }
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  const savedPic = localStorage.getItem("profilePic");
+  if (savedPic) {
+    const profileImg = document.getElementById("mainProfilePic");
+    if (profileImg) {
+      profileImg.src = savedPic;
+    }
+  }
+});

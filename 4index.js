@@ -253,3 +253,14 @@ document.getElementById("settingsBtn").addEventListener("click", () => {
   profileDropdown.style.display = "none";
   window.location.href = "settings.html";
 });
+
+// Load profile pic from localStorage if available
+window.addEventListener("DOMContentLoaded", () => {
+  const savedProfilePic = localStorage.getItem("profilePic");
+  if (savedProfilePic) {
+    const profileIcon = document.getElementById("profileIcon");
+    if (profileIcon) {
+      profileIcon.src = savedProfilePic;
+    }
+  }
+});
