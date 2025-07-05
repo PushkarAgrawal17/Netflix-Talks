@@ -13,9 +13,9 @@ body {
     overflow-x: hidden;
 }
 
-.heading{
-  display:flex;
-  justify-content: center;
-  padding: 40px;
-  color: white;
+.heading {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    color: white;
 }
