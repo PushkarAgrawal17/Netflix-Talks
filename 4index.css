@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 body {
@@ -141,7 +142,7 @@ body {
 .hero-slideshow {
     position: relative;
     height: 85vh;
-    overflow: visible;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -191,7 +192,6 @@ body {
 
     transition: opacity 1.5s ease-in-out;
     opacity: 0;
-    transform: translateX(100%);
     z-index: 1;
 
     filter: brightness(1.2);
@@ -487,6 +487,8 @@ body {
 .popup-movie-img {
     filter: none;
     width: 100%;
+    max-width: 100%;
+    height: auto;
     border-radius: 6px;
     object-fit: cover;
 }
