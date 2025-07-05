@@ -10,15 +10,15 @@ body {
 
 }
 
-/* Navbar */
+/*-------------- Navbar ---------------*/
 .account-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 0px;
+  padding: 10px 60px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
   position: sticky;
-  top: 0;
+  top:10;
   z-index: 10;
 }
 
@@ -30,26 +30,40 @@ body {
 }
 
 .nav-center .nav-logo {
-  height: 180px;
+  height: 150px;
 }
 
 /* Container */
 .account-container {
   max-width: 400px;
-  margin: 40px auto;
+  margin: 20px auto;
   text-align: center;
+  animation: fadeInSlide 0.8s ease;
 }
 
 /* Profile Pic */
 .profile-pic-wrapper {
   position: relative;
   display: inline-block;
+  z-index: 1;
+}
+
+
+
+.profile-pic-wrapper:hover .profile-pic {
+transform: scale(1.03);
+transition: transform 0.3s;
+}
+
+.edit-icon:hover {
+transform: scale(1.15);
+background-color: #f40612;
 }
 
 .profile-pic {
   width: 80px;
   height: 80px;
-  border-radius: 40px;
+  border-radius: 20px;
   object-fit: cover;
 }
 
@@ -138,6 +152,10 @@ body {
   background: #222;
   color: white;
   font-size: 14px;
+
+  background: rgba(255, 255, 255, 0.08);
+backdrop-filter: blur(4px);
+border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .form-group input[readonly] {
@@ -165,4 +183,29 @@ body {
 
 .signout-btn:hover {
   background-color: #f40612;
+}
+
+@keyframes fadeInSlide {
+0% {
+opacity: 0;
+transform: translateY(30px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@media (max-width: 480px) {
+.account-container {
+padding: 0 20px;
+}
+.profile-pic {
+width: 100px;
+height: 100px;
+}
+.edit-icon {
+font-size: 12px;
+padding: 6px;
+}
 }
