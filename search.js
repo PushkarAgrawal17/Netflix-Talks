@@ -1,50 +1,42 @@
-// --- Firebase Modular Import ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-
-// --- 🔥 TMDB API Key ---
 const apiKey = "675abfca53fb3ac33f6a90826ade779b";
-
-// --- 🔥 Firebase Config ---
-const firebaseConfig = {
-  apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
-  authDomain: "netflix-web-project.firebaseapp.com",
-  projectId: "netflix-web-project",
-  storageBucket: "netflix-web-project.firebasestorage.app",
-  messagingSenderId: "616557096999",
-  appId: "1:616557096999:web:027b9189b6f5b283115e02",
-};
-
-initializeApp(firebaseConfig);
-
-// --- Element References ---
-const searchInput = document.getElementById("searchInput");
-const resultsBox = document.getElementById("searchResults");
-const genreFilter = document.getElementById("genreFilter");
-const recentSearches = document.getElementById("recentSearches");
-const trendingList = document.getElementById("trendingList");
-const voiceBtn = document.getElementById("voiceBtn");
-
-// --- TMDB Constants ---
 const baseURL = "https://api.themoviedb.org/3";
 const imgURL = "https://image.tmdb.org/t/p/w500";
+
+// --- Elements ---
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+const searchResultsContainer = document.getElementById("searchResultsContainer");
+const searchResults = document.getElementById("searchResults");
+const noResultsMessage = document.getElementById("noResultsMessage");
+
+const genreFilter = document.getElementById("genreFilter");
+const genreResults = document.getElementById("genreResults");
+const genreResultsList = document.getElementById("genreResultsList");
+
+const trendingList = document.getElementById("trendingList");
+const recentSearches = document.getElementById("recentSearches");
+const recentContainer = document.getElementById("recentContainer");
+
+const voiceBtn = document.getElementById("voiceBtn");
 
 let allMovies = [];
 let trendingMovies = [];
 let recent = [];
 
-createGlobalPopup();
+// --- INIT ---
 fetchMovies();
 fetchGenres();
 
-// ================= Fetching ==================
+// --- Fetch Movies ---
 async function fetchMovies() {
   const res = await fetch(`${baseURL}/movie/popular?api_key=${apiKey}`);
   const data = await res.json();
   allMovies = data.results;
-  trendingMovies = data.results.slice(0, 5);
+  trendingMovies = data.results.slice(0, 10);
   showTrending();
 }
 
+// --- Fetch Genres ---
 async function fetchGenres() {
   const res = await fetch(`${baseURL}/genre/movie/list?api_key=${apiKey}`);
   const data = await res.json();
@@ -56,181 +48,133 @@ async function fetchGenres() {
   });
 }
 
-// ================ Search Logic =================
+// --- Live Search (No Recent Save) ---
 searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-  const genreVal = genreFilter.value;
-  resultsBox.innerHTML = "";
-
-  if (query.length > 0) {
-    const filtered = allMovies.filter((movie) => {
-      const matchTitle = movie.title.toLowerCase().includes(query);
-      const matchGenre = genreVal
-        ? movie.genre_ids.includes(Number(genreVal))
-        : true;
-      return matchTitle && matchGenre;
-    });
-
-    filtered.forEach((movie) => {
-  const poster = document.createElement("img");
-  poster.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
-  poster.alt = movie.title;
-  poster.classList.add("search-result-poster");
-
-  poster.addEventListener("click", () => {
-    saveRecentSearch(movie.title);
-    showMoviePopup(movie);
-  });
-
-  resultsBox.appendChild(poster);
+  performSearch(false); // don't save to recent while typing
 });
+
+// --- Save on Enter ---
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    performSearch(true); // save to recent
   }
 });
 
-// ============== Trending & Recent ===============
+// --- Save on Button Click ---
+searchBtn.addEventListener("click", () => {
+  performSearch(true); // save to recent
+});
+
+// --- Main Search Logic ---
+function performSearch(saveToRecent = false) {
+  const query = searchInput.value.toLowerCase().trim();
+  const genreVal = genreFilter.value;
+  searchResults.innerHTML = "";
+  searchResultsContainer.classList.add("hidden");
+  noResultsMessage.classList.add("hidden");
+
+  if (!query) return;
+
+  const filtered = allMovies.filter((movie) => {
+    const matchTitle = movie.title.toLowerCase().includes(query);
+    const matchGenre = genreVal ? movie.genre_ids.includes(+genreVal) : true;
+    return matchTitle && matchGenre;
+  });
+
+  if (filtered.length === 0) {
+    noResultsMessage.classList.remove("hidden");
+    searchResultsContainer.classList.remove("hidden");
+  } else {
+    filtered.forEach((movie) => {
+      const poster = createPoster(movie);
+      searchResults.appendChild(poster);
+    });
+    searchResultsContainer.classList.remove("hidden");
+
+    if (saveToRecent) {
+      saveRecentSearch(query);
+    }
+  }
+}
+
+// --- Genre Filter ---
+genreFilter.addEventListener("change", () => {
+  const genreId = genreFilter.value;
+  genreResultsList.innerHTML = "";
+  genreResults.classList.add("hidden");
+
+  if (!genreId) return;
+
+  const filtered = allMovies.filter((m) => m.genre_ids.includes(+genreId));
+  if (filtered.length > 0) {
+    filtered.forEach((movie) => {
+      const poster = createPoster(movie);
+      genreResultsList.appendChild(poster);
+    });
+    genreResults.classList.remove("hidden");
+  }
+});
+
+// --- Trending ---
 function showTrending() {
   trendingList.innerHTML = "";
   trendingMovies.forEach((movie) => {
-    const span = document.createElement("span");
-    span.innerText = movie.title;
-    span.onclick = () => showMoviePopup(movie);
-    trendingList.appendChild(span);
+    const poster = createPoster(movie);
+    trendingList.appendChild(poster);
   });
 }
 
+// --- Poster Generator ---
+function createPoster(movie) {
+  const poster = document.createElement("img");
+  poster.src = `${imgURL}${movie.poster_path}`;
+  poster.alt = movie.title;
+  poster.classList.add("search-result-poster");
+  return poster;
+}
+
+// --- Recent Search Logic ---
 function saveRecentSearch(title) {
-  if (!recent.includes(title)) {
-    recent.unshift(title);
-    if (recent.length > 5) recent.pop();
-    renderRecentSearches();
-  }
+  title = title.trim();
+  if (!title) return;
+
+  recent = recent.filter((item) => item !== title);
+  recent.unshift(title);
+  if (recent.length > 5) recent.pop();
+  renderRecentSearches();
 }
 
 function renderRecentSearches() {
   recentSearches.innerHTML = "";
-  recent.forEach((item) => {
+  if (recent.length === 0) {
+    recentContainer.classList.add("hidden");
+    return;
+  }
+
+  recent.forEach((title) => {
     const span = document.createElement("span");
-    span.innerText = item;
+    span.innerText = title;
     span.onclick = () => {
-      searchInput.value = item;
-      searchInput.dispatchEvent(new Event("input"));
+      searchInput.value = title;
+      performSearch(true);
     };
     recentSearches.appendChild(span);
   });
+
+  recentContainer.classList.remove("hidden");
 }
 
-// ============ Voice Search ===============
+// --- Voice Input ---
 voiceBtn?.addEventListener("click", () => {
-  const recognition = new (window.SpeechRecognition ||
-    window.webkitSpeechRecognition)();
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
   recognition.lang = "en-US";
   recognition.start();
 
-  recognition.onresult = function (event) {
-    const transcript = event.results[0][0].transcript;
+  recognition.onresult = (e) => {
+    const transcript = e.results[0][0].transcript;
     searchInput.value = transcript;
-    searchInput.dispatchEvent(new Event("input"));
+    performSearch(true);
   };
 
-  recognition.onerror = function (event) {
-    alert("Voice search failed: " + event.error);
-  };
+  recognition.onerror = (e) => alert("Voice search error: " + e.error);
 });
-
-// ============ Popup Setup ===============
-function createGlobalPopup() {
-  const popup = document.createElement("div");
-  popup.classList.add("popup-css");
-  popup.id = "global-popup";
-  popup.innerHTML = `
-    <div class="popup-overlay"></div>
-    <div class="popup-box">
-      <span class="close-btn">&times;</span>
-      <div class="poster-wrapper">
-        <img src="" class="popup-movie-img" alt="Movie Poster" />
-        <h1 class="popup-title-img"></h1>
-        <div class="popup-gradient-overlay"></div>
-      </div>
-      <div class="popup-tags"></div>
-      <p class="popup-description"></p>
-      <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
-    </div>`;
-  document.body.appendChild(popup);
-  addGlobalPopupListeners();
-}
-
-function showMoviePopup(movie) {
-  const popup = document.getElementById("global-popup");
-  const posterTitle = popup.querySelector(".popup-title-img");
-  const posterImg = popup.querySelector(".popup-movie-img");
-  const descElem = popup.querySelector(".popup-description");
-  const tagsWrap = popup.querySelector(".popup-tags");
-  const popupBtn = popup.querySelector("#popup-mylist-btn");
-
-  const highRes = `https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`;
-  const lowRes = `https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`;
-  const tags = `${movie.release_date?.split('-')[0] || "N/A"}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}`;
-
-  popup.style.display = "flex";
-  document.body.style.overflow = "hidden";
-  posterTitle.textContent = movie.title;
-  posterImg.src = lowRes;
-  descElem.textContent = movie.overview;
-
-  tagsWrap.innerHTML = "";
-  tags.split(",").forEach((tag) => {
-    const span = document.createElement("span");
-    span.textContent = tag.trim();
-    tagsWrap.appendChild(span);
-  });
-
-  const movieObj = {
-    title: movie.title,
-    poster: highRes,
-    description: movie.overview,
-    tags
-  };
-
-  const myList = JSON.parse(localStorage.getItem("myList")) || [];
-  const exists = myList.some((m) => m.title === movie.title);
-
-  popupBtn.innerHTML = exists
-    ? `<i class="fas fa-trash-alt"></i> Remove`
-    : `<i class="fas fa-plus"></i> My List`;
-
-  popupBtn.onclick = () => {
-    let updatedList = [...myList];
-    if (exists) {
-      updatedList = updatedList.filter((m) => m.title !== movie.title);
-      popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
-      alert("Removed from My List");
-    } else {
-      updatedList.push(movieObj);
-      popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
-      alert("Added to My List");
-    }
-    localStorage.setItem("myList", JSON.stringify(updatedList));
-  };
-
-  const tempImg = new Image();
-  tempImg.src = highRes;
-  tempImg.onload = () => {
-    posterImg.src = highRes;
-  };
-}
-
-function addGlobalPopupListeners() {
-  const popup = document.getElementById("global-popup");
-  const closeBtn = popup.querySelector(".close-btn");
-  const overlay = popup.querySelector(".popup-overlay");
-
-  closeBtn.addEventListener("click", () => {
-    popup.style.display = "none";
-    document.body.style.overflow = "auto";
-  });
-
-  overlay.addEventListener("click", () => {
-    popup.style.display = "none";
-    document.body.style.overflow = "auto";
-  });
-}
