@@ -8,15 +8,16 @@ const recentSearches = document.getElementById("recentSearches");
 const trendingList = document.getElementById("trendingList");
 const voiceBtn = document.getElementById("voiceBtn");
 
+// 💎 Your TMDB API key
+const apiKey = "675abfca53fb3ac33f6a90826ade779b";
+const baseURL = "https://api.themoviedb.org/3";
+const imgURL = "https://image.tmdb.org/t/p/w500";
+
 let allMovies = [];
 let trendingMovies = [];
 let recent = [];
 
 // Fetch movie data
-const apiKey = "https://www.themoviedb.org/settings/api";
-const baseURL = "https://api.themoviedb.org/3";
-const imgURL = "https://image.tmdb.org/t/p/w500";
-
 async function fetchMovies() {
   const res = await fetch(`${baseURL}/movie/popular?api_key=${apiKey}`);
   const data = await res.json();
