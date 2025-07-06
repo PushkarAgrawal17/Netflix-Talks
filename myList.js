@@ -49,7 +49,8 @@ window.addEventListener("DOMContentLoaded", () => {
       img.src = movie.poster;
       img.alt = movie.title;
       img.dataset.title = movie.title;
-      img.dataset.poster = movie.poster;
+      img.dataset.bgImgLow = movie.bgImgLowRes;
+      img.dataset.bgImgHigh = movie.bgImg;
       img.dataset.description = movie.description || "No description available";
       img.dataset.tags = movie.tags || "Movie";
 
@@ -66,8 +67,14 @@ window.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "hidden";
 
         popup.querySelector(".popup-title-img").textContent = poster.dataset.title;
-        popup.querySelector(".popup-movie-img").src = poster.dataset.poster;
+        popup.querySelector(".popup-movie-img").src = poster.dataset.bgImgLow;
         popup.querySelector(".popup-description").textContent = poster.dataset.description;
+
+        const tempImg = new Image();
+        tempImg.src = poster.dataset.bgImgHigh;
+        tempImg.onload = () => {
+          popup.querySelector(".popup-movie-img").src = poster.dataset.bgImgHigh;
+        };
 
         const tagsWrap = popup.querySelector(".popup-tags");
         tagsWrap.innerHTML = "";

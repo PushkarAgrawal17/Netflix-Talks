@@ -37,7 +37,7 @@ function showToast(message, color = "#00b09b") {
 
 // -------- Safety check for TMDB API Key --------
 if (typeof apiKey === "undefined") {
-    alert("API key is missing. Please create config.js with your TMDB API key.");
+  alert("API key is missing. Please create config.js with your TMDB API key.");
 }
 
 // -------- Hero Slideshow Setup --------
@@ -50,20 +50,20 @@ let index = 0;
 let slideInterval;
 
 function showSlide(i) {
-    slideElements.forEach((slide, idx) => {
-        slide.classList.remove("active-slide");
-        dotElements[idx].classList.remove("active-dot");
-    });
+  slideElements.forEach((slide, idx) => {
+    slide.classList.remove("active-slide");
+    dotElements[idx].classList.remove("active-dot");
+  });
 
-    slideElements[i].classList.add("active-slide");
-    dotElements[i].classList.add("active-dot");
-    index = i;
+  slideElements[i].classList.add("active-slide");
+  dotElements[i].classList.add("active-dot");
+  index = i;
 }
 
 function nextSlide() {
-    if (slideElements.length === 0) return;
-    index = (index + 1) % slideElements.length;
-    showSlide(index);
+  if (slideElements.length === 0) return;
+  index = (index + 1) % slideElements.length;
+  showSlide(index);
 }
 
 async function addToMyListFirestore(movie) {
@@ -85,6 +85,8 @@ async function addToMyListFirestore(movie) {
 
   await setDoc(movieRef, {
     title: movie.title,
+    bgImg: movie.bgImg,
+    bgImgLowRes: movie.bgImgLowRes,
     poster: movie.poster,
     description: movie.description || "No description available",
     tags: movie.tags || "Movie",
@@ -105,6 +107,8 @@ function loadHeroSlides() {
 
       slides.forEach((movie, i) => {
         const bgImg = `https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`;
+        const bgImgLowRes = `https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`;
+        const posterImg = `https://image.tmdb.org/t/p/original${movie.poster_path || movie.backdrop_path}`;
         const slide = document.createElement("div");
         slide.classList.add("hero-slide");
         if (i === 0) slide.classList.add("active-slide");
@@ -118,7 +122,9 @@ function loadHeroSlides() {
               <button><i class="fas fa-play"></i> Play</button>
               <button class="mylist-btn"
                 data-title="${movie.title}"
-                data-poster="${bgImg}"
+                data-bg="${bgImg}"
+                data-bg-low="${bgImgLowRes}"
+                data-poster="${posterImg}"
                 data-description="${movie.overview}"
                 data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
               ><i class="fas fa-plus"></i> My List</button>
@@ -147,6 +153,8 @@ function loadHeroSlides() {
           console.log("My List button clicked!");
           const movie = {
             title: btn.dataset.title,
+            bgImg: btn.dataset.bg,
+            bgImgLowRes: btn.dataset.bgLow,
             poster: btn.dataset.poster,
             description: btn.dataset.description,
             tags: btn.dataset.tags
@@ -163,13 +171,13 @@ slideInterval = setInterval(nextSlide, 5000);
 
 // -------- Movie Rows --------
 const endpoints = {
-    trending: `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`,
-    topRated: `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`,
-    blockbuster: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=revenue.desc&region=US`,
-    bollywood: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_original_language=hi&region=IN&sort_by=popularity.desc`,
-    koreanTV: `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_original_language=ko&sort_by=popularity.desc`,
-    action: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&sort_by=popularity.desc&language=en-US`,
-    horror: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=27&sort_by=popularity.desc`
+  trending: `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`,
+  topRated: `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`,
+  blockbuster: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=revenue.desc&region=US`,
+  bollywood: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_original_language=hi&region=IN&sort_by=popularity.desc`,
+  koreanTV: `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_original_language=ko&sort_by=popularity.desc`,
+  action: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&sort_by=popularity.desc&language=en-US`,
+  horror: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=27&sort_by=popularity.desc`
 };
 
 
@@ -184,10 +192,10 @@ fetchAndDisplayMovies(endpoints.action, "action");
 fetchAndDisplayMovies(endpoints.horror, "horror");
 
 function createGlobalPopup() {
-    const popup = document.createElement("div");
-    popup.classList.add("popup-css");
-    popup.id = "global-popup";
-    popup.innerHTML = `
+  const popup = document.createElement("div");
+  popup.classList.add("popup-css");
+  popup.id = "global-popup";
+  popup.innerHTML = `
     <div class="popup-overlay"></div>
     <div class="popup-box">
       <span class="close-btn">&times;</span>
@@ -200,43 +208,44 @@ function createGlobalPopup() {
       <p class="popup-description"></p>
       <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
     </div>`;
-    document.body.appendChild(popup);
-    addGlobalPopupListeners();
+  document.body.appendChild(popup);
+  addGlobalPopupListeners();
 }
 
 function fetchAndDisplayMovies(url, containerId) {
-    const container = document.getElementById(containerId);
+  const container = document.getElementById(containerId);
 
-    fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-            container.innerHTML = "";
-            let rank = 1;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      container.innerHTML = "";
+      let rank = 1;
 
-            data.results.forEach((movie) => {
-                const card = document.createElement("div");
-                card.classList.add("poster-card");
+      data.results.forEach((movie) => {
+        const card = document.createElement("div");
+        card.classList.add("poster-card");
 
-                card.innerHTML = `
+        card.innerHTML = `
                 <span class="rank">${rank++}</span>
                 <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                     alt="${movie.title}"
                     class="movie-poster"
                     data-title="${movie.title}"
+                    data-short-poster="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                     data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
                     data-highres-poster="https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}"
                     data-description="${movie.overview}"
                     data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
                 />`;
-                container.appendChild(card);
-            });
+        container.appendChild(card);
+      });
 
-            addPosterListeners(container);
-        })
-        .catch((err) => {
-            console.error("TMDB fetch failed", err);
-            container.innerHTML = "<p>Failed to load movies. Please try again later.</p>";
-        });
+      addPosterListeners(container);
+    })
+    .catch((err) => {
+      console.error("TMDB fetch failed", err);
+      container.innerHTML = "<p>Failed to load movies. Please try again later.</p>";
+    });
 }
 
 function addPosterListeners(container) {
@@ -254,6 +263,7 @@ function addPosterListeners(container) {
       const highRes = poster.dataset.highresPoster;
       const description = poster.dataset.description;
       const tags = poster.dataset.tags;
+      const displayPoster = poster.dataset.shortPoster;
 
       popup.style.display = "flex";
       document.body.style.overflow = "hidden";
@@ -270,7 +280,9 @@ function addPosterListeners(container) {
 
       const movie = {
         title,
-        poster: highRes,
+        bgImg: highRes,
+        bgImgLowRes: lowRes,
+        poster: displayPoster,
         description,
         tags
       };
@@ -294,20 +306,26 @@ function addPosterListeners(container) {
         popupBtn.disabled = false;
 
         popupBtn.onclick = async () => {
+          const uid = user.uid;
+          const movieRef = doc(db, "users", uid, "myList", movie.title);
+          const docSnap = await getDoc(movieRef);
+          const exists = docSnap.exists();
           if (exists) {
             await deleteDoc(movieRef);
             popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
-            showToast("Removed from My List","red")
+            showToast("Removed from My List", "red")
           } else {
             await setDoc(movieRef, {
               title,
-              poster: highRes,
+              bgImg: highRes,
+              bgImgLowRes: lowRes,
+              poster: displayPoster,
               description,
               tags,
               addedAt: new Date()
             });
             popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
-            showToast("Added to My List!","green");
+            showToast("Added to My List!", "green");
           }
         };
       });
@@ -323,25 +341,25 @@ function addPosterListeners(container) {
 
 
 function addGlobalPopupListeners() {
-    const popup = document.getElementById("global-popup");
-    const closeBtn = popup.querySelector(".close-btn");
-    const overlay = popup.querySelector(".popup-overlay");
+  const popup = document.getElementById("global-popup");
+  const closeBtn = popup.querySelector(".close-btn");
+  const overlay = popup.querySelector(".popup-overlay");
 
-    closeBtn.addEventListener("click", () => {
-        popup.style.display = "none";
-        document.body.style.overflow = "auto";
-    });
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+    document.body.style.overflow = "auto";
+  });
 
-    overlay.addEventListener("click", () => {
-        popup.style.display = "none";
-        document.body.style.overflow = "auto";
-    });
+  overlay.addEventListener("click", () => {
+    popup.style.display = "none";
+    document.body.style.overflow = "auto";
+  });
 }
 
 createGlobalPopup();
 
 Object.entries(endpoints).forEach(([key, url]) =>
-    fetchAndDisplayMovies(url, key)
+  fetchAndDisplayMovies(url, key)
 );
 
 // -------- Navbar Dropdown --------
@@ -349,41 +367,41 @@ const profileIcon = document.getElementById("profileIcon");
 const profileDropdown = document.getElementById("profileDropdown");
 
 profileIcon.addEventListener("click", () => {
-    profileDropdown.style.display =
-        profileDropdown.style.display === "block" ? "none" : "block";
+  profileDropdown.style.display =
+    profileDropdown.style.display === "block" ? "none" : "block";
 });
 
 document.addEventListener("click", (e) => {
-    if (
-        !profileDropdown.contains(e.target) &&
-        !profileIcon.contains(e.target)
-    ) {
-        profileDropdown.style.display = "none";
-    }
+  if (
+    !profileDropdown.contains(e.target) &&
+    !profileIcon.contains(e.target)
+  ) {
+    profileDropdown.style.display = "none";
+  }
 });
 
 document.querySelectorAll("#profileDropdown li").forEach((item) => {
-    item.addEventListener("click", () => {
-        profileDropdown.style.display = "none";
-    });
+  item.addEventListener("click", () => {
+    profileDropdown.style.display = "none";
+  });
 });
 
 document.getElementById("signOut").addEventListener("click", () => {
-    window.location.href = "1getStarted.html";
+  window.location.href = "1getStarted.html";
 });
 
 document.getElementById("accountBtn").addEventListener("click", () => {
-    window.location.href = "account.html";
+  window.location.href = "account.html";
 });
 
 document.getElementById("settingsBtn")?.addEventListener("click", () => {
-    window.location.href = "settings.html";
+  window.location.href = "settings.html";
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-    const savedProfilePic = localStorage.getItem("profilePic");
-    if (savedProfilePic) {
-        const profileIcon = document.getElementById("profileIcon");
-        if (profileIcon) profileIcon.src = savedProfilePic;
-    }
+  const savedProfilePic = localStorage.getItem("profilePic");
+  if (savedProfilePic) {
+    const profileIcon = document.getElementById("profileIcon");
+    if (profileIcon) profileIcon.src = savedProfilePic;
+  }
 });
