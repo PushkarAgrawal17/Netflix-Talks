@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="account.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 
 <body>
@@ -74,6 +77,8 @@
             <i class="fas fa-sign-out-alt"></i> <a href="3sign_In.html">Sign Out</a>
         </button>
     </main>
+    <!-- Toastify JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <!-- <script src="account.js"></script> -->
     <script type="module">
@@ -160,6 +165,13 @@
                         mainProfilePic.src = pic.src;
                         localStorage.setItem("profilePic", pic.src);
                         profileModal.style.display = "none";
+                        Toastify({
+                            text: "Profile picture updated successfully!",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#00b09b",
+                        }).showToast();
                     });
                 });
 
@@ -171,6 +183,13 @@
                             mainProfilePic.src = event.target.result;
                             localStorage.setItem("profilePic", event.target.result);
                             profileModal.style.display = "none";
+                            Toastify({
+                                text: "Profile picture updated successfully!",
+                                duration: 3000,
+                                gravity: "top",
+                                position: "right",
+                                backgroundColor: "#00b09b",
+                            }).showToast();
                         };
                         reader.readAsDataURL(file);
                     }
