@@ -42,7 +42,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         snapshot.forEach((docSnap) => {
             const movie = docSnap.data();
-            
+
             const card = document.createElement("div");
             card.classList.add("poster-card");
 
