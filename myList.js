@@ -9,14 +9,14 @@ window.addEventListener("DOMContentLoaded", () => {
         const card = document.createElement("div");
         card.classList.add("poster-card");
         card.innerHTML = `
-      <img src="${movie.poster}" alt="${movie.title}"
-        class="poster"
-        data-title="${movie.title}"
-        data-poster="${movie.poster}"
-        data-description="${movie.description || 'No description available'}"
-        data-tags="${movie.tags || 'Movie'}"
-      />
-    `;
+        <img src="${movie.poster}" alt="${movie.title}"
+            class="poster"
+            data-title="${movie.title}"
+            data-poster="${movie.poster}"
+            data-description="${movie.description || 'No description available'}"
+            data-tags="${movie.tags || 'Movie'}"
+        />
+        `;
         container.appendChild(card);
     });
 

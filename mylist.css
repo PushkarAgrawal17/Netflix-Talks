@@ -17,8 +17,8 @@ body {
 /*--Back button--*/
 .back-btn {
     position: absolute;
-    top: 80px;
-    left: 80px;
+    top: 75px;
+    left: 105px;
     color: white;
     font-size: 25px;
     text-decoration: none;
@@ -37,10 +37,11 @@ body {
 
 .mylist-heading {
     text-align: center;
-    font-size: 2.0rem;
+    font-size: 2.5rem;
     font-weight: 1110;
     margin-bottom: 80px;
     margin-top: 40px;
+    color: red;
 }
 
 .poster-grid {
