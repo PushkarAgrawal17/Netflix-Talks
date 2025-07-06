@@ -4,20 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Bar| Netflix Clone</title>
+    <link rel="stylesheet" href="search.css">
 </head>
 <body>
-    <div class="search-container">
+    <!-- Search + Genre Filter -->
+<div class="search-container">
   <input type="text" id="searchInput" placeholder="Search for movies..." />
+  <button id="voiceBtn">🎤</button>
+  <select id="genreFilter">
+    <option value="">All Genres</option>
+  </select>
   <div id="searchResults" class="results-box"></div>
 </div>
 
-<!-- Popup modal -->
+<!-- Recent & Trending -->
+<div class="quick-suggestions">
+  <h3>Recent Searches:</h3>
+  <div id="recentSearches" class="chips"></div>
+
+  <h3>Trending Now:</h3>
+  <div id="trendingList" class="chips"></div>
+</div>
+
+<!-- Movie Popup -->
 <div id="movieModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
     <div id="modalDetails"></div>
   </div>
 </div>
+
 
 </body>
 </html>

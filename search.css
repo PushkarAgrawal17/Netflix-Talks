@@ -1,0 +1,103 @@
+.search-container {
+  position: relative;
+  max-width: 500px;
+  margin: auto;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.results-box {
+  position: absolute;
+  background: #000;
+  width: 100%;
+  border: 1px solid #555;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.result-item {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  border-bottom: 1px solid #333;
+}
+
+.result-item:hover {
+  background-color: #333;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #222;
+  padding: 20px;
+  color: #fff;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#voiceBtn {
+  padding: 8px;
+  margin-left: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  background: #e50914;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+#genreFilter {
+  margin-left: 8px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  background: #111;
+  color: white;
+}
+
+.quick-suggestions {
+  max-width: 600px;
+  margin: 20px auto;
+  color: white;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chips span {
+  background: #333;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.chips span:hover {
+  background-color: #e50914;
+}
