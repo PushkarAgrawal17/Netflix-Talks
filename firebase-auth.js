@@ -37,7 +37,13 @@ window.register = function (event) {
     const confirmPassword = document.getElementById("confirmPassword").value;
 
     if (password !== confirmPassword) {
-        alert("Passwords do not match!");
+        Toastify({
+            text: "Passwords do not match!",
+            duration: 5000,
+            gravity: "bottom",
+            position: "left",
+            backgroundColor: "#ff4d4d",
+        }).showToast();
         return;
     }
 
@@ -56,7 +62,13 @@ window.register = function (event) {
             window.location.href = `4index.html`;
         })
         .catch((error) => {
-            alert("Error: " + error.message);
+            Toastify({
+                text: `Error: ${error.message}`,
+                duration: 5000,
+                gravity: "bottom",
+                position: "left",
+                backgroundColor: "#ff4d4d",
+            }).showToast();
         });
 };
 
@@ -71,7 +83,13 @@ window.login = function () {
             window.location.href = `4index.html`;
         })
         .catch((error) => {
-            alert("Error: " + error.message);
+            Toastify({
+                text: `Error: ${error.message}`,
+                duration: 5000,
+                gravity: "bottom",
+                position: "left",
+                backgroundColor: "#ff4d4d",
+            }).showToast();
         });
 };
 
@@ -82,7 +100,13 @@ window.checkEmailAndRedirect = function (event) {
     const email = emailInput.value.trim();
 
     if (!email) {
-        alert("Please enter an email.");
+        Toastify({
+            text: `Error: ${error.message}`,
+            duration: 5000,
+            gravity: "bottom",
+            position: "left",
+            backgroundColor: "#FFFACD",
+        }).showToast();
         return;
     }
 
@@ -98,6 +122,12 @@ window.checkEmailAndRedirect = function (event) {
             }
         })
         .catch((error) => {
-            alert("Error checking email: " + error.message);
+            Toastify({
+                text: `Error: ${error.message}`,
+                duration: 5000,
+                gravity: "bottom",
+                position: "left",
+                backgroundColor: "#ff4d4d",
+            }).showToast();
         });
 };

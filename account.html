@@ -136,9 +136,21 @@
                             });
 
                             usernameInput.setAttribute("readonly", true);
-                            alert("Username updated successfully!");
+                            Toastify({
+                                text: "Username updated successfully!",
+                                duration: 5000,
+                                gravity: "bottom",
+                                position: "left",
+                                backgroundColor: "#00b09b",
+                            }).showToast();
                         } catch (error) {
-                            alert("Error updating username: " + error.message);
+                            Toastify({
+                                text: "Error updating username: " + error.message,
+                                duration: 5000,
+                                gravity: "bottom",
+                                position: "left",
+                                backgroundColor: "#ff4d4d",
+                            }).showToast();
                         }
                     }, { once: true });
                 });
@@ -147,9 +159,21 @@
                 changePasswordBtn.addEventListener("click", async () => {
                     try {
                         await sendPasswordResetEmail(auth, user.email);
-                        alert("Password reset email sent. Please check your inbox.");
+                        Toastify({
+                            text: "Password reset email sent. Please check your inbox.",
+                            duration: 5000,
+                            gravity: "bottom",
+                            position: "left",
+                            backgroundColor: "#00b09b",
+                        }).showToast();
                     } catch (error) {
-                        alert("Failed to send password reset email: " + error.message);
+                        Toastify({
+                            text: "Failed to send password reset email: " + error.message,
+                            duration: 5000,
+                            gravity: "bottom",
+                            position: "left",
+                            backgroundColor: "#ff4d4d",
+                        }).showToast();
                     }
                 });
 
@@ -168,9 +192,9 @@
                         profileModal.style.display = "none";
                         Toastify({
                             text: "Profile picture updated successfully!",
-                            duration: 3000,
-                            gravity: "top",
-                            position: "right",
+                            duration: 5000,
+                            gravity: "bottom",
+                            position: "left",
                             backgroundColor: "#00b09b",
                         }).showToast();
                     });
@@ -186,9 +210,9 @@
                             profileModal.style.display = "none";
                             Toastify({
                                 text: "Profile picture updated successfully!",
-                                duration: 3000,
-                                gravity: "top",
-                                position: "right",
+                                duration: 5000,
+                                gravity: "bottom",
+                                position: "left",
                                 backgroundColor: "#00b09b",
                             }).showToast();
                         };
