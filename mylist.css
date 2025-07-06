@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 body {
@@ -12,6 +13,130 @@ body {
     line-height: 1.4;
     overflow-x: hidden;
 }
+
+/* ---------- Navbar ----------- */
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0));
+
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    overflow: visible;
+    transition: background 0.3s ease, opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Netflix Logo */
+.logo img {
+    height: 60px;
+}
+
+/* Links\Tabs in the center */
+.nav-links ul {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.nav-links li:hover {
+    color: #b3b3b3;
+}
+
+.nav-links a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* Icons on the right */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    z-index: 1001
+}
+
+.nav-icons i {
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: color 0.2s ease;
+}
+
+.nav-icons i:hover {
+    color: #b3b3b3;
+}
+
+/*Profile Icon and drowpdown*/
+.profile-pic {
+    height: 32px;
+    width: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 38px;
+
+    right: 0px;
+    background-color: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.profile-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-dropdown li {
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    white-space: nowrap; /*remove this for sign <next line> out*/
+    transition: background 0.2s;
+}
+
+.profile-dropdown li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-dropdown li i {
+    font-size: 16px;
+    color: white;
+    min-width: 18px;
+    margin-right: 10px;
+    width: 18px;
+}
+
 
 .heading {
     display: flex;
