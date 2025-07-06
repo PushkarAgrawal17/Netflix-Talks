@@ -1,67 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Search Bar | Netflix Clone</title>
     <link rel="icon" type="image/png" href="./Images/favicon.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="search.css" />
-  </head>
-  <body>
+</head>
+
+<body>
     <!--  Netflix Logo Header -->
     <header class="netflix-header">
-      <a href="4index.html" class="back-btn">
-        <i class="fas fa-arrow-left"></i>
-      </a>
+        <a href="4index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+        </a>
     </header>
 
     <!--  Back Button -->
 
     <!-- Search Bar + Genre Filter -->
     <section class="search-section">
-      <div class="search-container">
-        <button id="voiceBtn" title="Voice Search">
-          <i class="fas fa-microphone"></i>
-        </button>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search for movies..."
-        />
-        <button id="searchBtn" title="Search">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
+        <div class="search-container">
+            <button id="voiceBtn" title="Voice Search">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <input type="text" id="searchInput" placeholder="Search for movies..." />
+            <button id="searchBtn" title="Search">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
 
-      <select id="genreFilter">
-        <option value="">All Genres</option>
-      </select>
+        <select id="genreFilter">
+            <option value="">All Genres</option>
+        </select>
     </section>
 
     <!-- Genre Filtered Results (if selected) -->
     <div id="genreResults" class="section-container hidden">
-      <h3>Genre Results:</h3>
-      <div class="row-posters" id="genreResultsList"></div>
+        <h3>Genre Results:</h3>
+        <div class="row-posters" id="genreResultsList"></div>
     </div>
 
     <!-- Search Results -->
     <div id="searchResultsContainer" class="section-container hidden">
-      <h3>Search Results:</h3>
-      <div class="row-posters" id="searchResults"></div>
-      <p id="noResultsMessage" class="no-results hidden">No results found.</p>
+        <h3>Search Results:</h3>
+        <div class="row-posters" id="searchResults"></div>
+        <p id="noResultsMessage" class="no-results hidden">No results found.</p>
     </div>
 
     <!--  Recent Searches -->
     <div id="recentContainer" class="section-container hidden">
-      <h3>Recent Searches:</h3>
-      <div id="recentSearches" class="recent-searches"></div>
+        <h3>Recent Searches:</h3>
+        <div id="recentSearches" class="recent-searches"></div>
     </div>
 
     <!-- JS for Search -->
+    <script src="config.js"></script>
     <script type="module" src="search.js"></script>
-  </body>
+</body>
+
 </html>
