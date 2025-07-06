@@ -51,7 +51,7 @@ body {
 .poster-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
+    gap: 30px;
     justify-items: center;
 }
 
@@ -64,7 +64,7 @@ body {
 
 .poster-card img {
     width: 100%;
-    border-radius: 2px;
+    border-radius: 6px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
     transition: transform 0.3s ease;
 }
