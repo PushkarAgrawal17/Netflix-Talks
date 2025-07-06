@@ -13,14 +13,12 @@ const genreFilter = document.getElementById("genreFilter");
 const genreResults = document.getElementById("genreResults");
 const genreResultsList = document.getElementById("genreResultsList");
 
-const trendingList = document.getElementById("trendingList");
 const recentSearches = document.getElementById("recentSearches");
 const recentContainer = document.getElementById("recentContainer");
 
 const voiceBtn = document.getElementById("voiceBtn");
 
 let allMovies = [];
-let trendingMovies = [];
 let recent = [];
 
 // --- INIT ---
@@ -32,8 +30,6 @@ async function fetchMovies() {
   const res = await fetch(`${baseURL}/movie/popular?api_key=${apiKey}`);
   const data = await res.json();
   allMovies = data.results;
-  trendingMovies = data.results.slice(0, 10);
-  showTrending();
 }
 
 // --- Fetch Genres ---
