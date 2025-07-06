@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Bar| Netflix Clone</title>
-    <link rel="stylesheet" href="search.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netflix Search</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- 🔥 Your search.css -->
+  <link rel="stylesheet" href="search.css" />
 </head>
 <body>
-    <!-- Search + Genre Filter -->
-<div class="search-container">
-  <input type="text" id="searchInput" placeholder="Search for movies..." />
-  <button id="voiceBtn">🎤</button>
-  <select id="genreFilter">
-    <option value="">All Genres</option>
-  </select>
-  <div id="searchResults" class="results-box"></div>
-</div>
 
-<!-- Recent & Trending -->
-<div class="quick-suggestions">
-  <h3>Recent Searches:</h3>
-  <div id="recentSearches" class="chips"></div>
+  <!-- 🔍 Search Bar Section -->
+   <section class="search-section">
+    <div class="search-container">
+      <button id="voiceBtn" title="Voice Search"><i class="fas fa-microphone"></i></button>
+      <input type="text" id="searchInput" placeholder="Search for movies..." />
+      <button id="searchBtn" title="Search"><i class="fas fa-search"></i></button>
+    </div>
 
-  <h3>Trending Now:</h3>
-  <div id="trendingList" class="chips"></div>
-</div>
+    <select id="genreFilter">
+      <option value="">All Genres</option>
+    </select>
+  </section>
 
-<!-- Movie Popup -->
-<div id="movieModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div id="modalDetails"></div>
-  </div>
-</div>
+    <!-- 📍 Recent Searches -->
+    <div class="recent-container">
+      <h3>Recent Searches:</h3>
+      <div id="recentSearches" class="recent-searches"></div>
+    </div>
 
-<script type="module" src="search.js"></script>
+    <!-- 📈 Trending -->
+    <div class="trending-container">
+      <h3>Trending:</h3>
+      <div id="trendingList" class="trending-list"></div>
+    </div>
+  </section>
 
+  <!-- 🔎 Search Results -->
+  <section class="results-section">
+    <div id="searchResults" class="search-results"></div>
+  </section>
+
+  <!-- 👑 Popup injected by JS -->
+  <!-- (No need to add popup HTML here manually) -->
+
+  <!-- 💖 Modular Firebase Search Script -->
+  <script type="module" src="search.js"></script>
 </body>
 </html>
