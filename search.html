@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Netflix Search</title>
 
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- 🔥 Your search.css -->
   <link rel="stylesheet" href="search.css" />
 </head>
 <body>
 
-  <!-- 🔍 Search Bar Section -->
+  <!--Search Bar Section -->
    <section class="search-section">
     <div class="search-container">
       <button id="voiceBtn" title="Voice Search"><i class="fas fa-microphone"></i></button>
@@ -26,28 +23,27 @@
     </select>
   </section>
 
-    <!-- 📍 Recent Searches -->
+    <!--Recent Searches -->
     <div class="recent-container">
       <h3>Recent Searches:</h3>
       <div id="recentSearches" class="recent-searches"></div>
     </div>
 
-    <!-- 📈 Trending -->
+    <!-- Trending -->
     <div class="trending-container">
       <h3>Trending:</h3>
       <div id="trendingList" class="trending-list"></div>
     </div>
   </section>
 
-  <!-- 🔎 Search Results -->
+  <!-- Search Results -->
   <section class="results-section">
-    <div id="searchResults" class="search-results"></div>
+<div id="searchResults" class="row-posters"></div>
   </section>
 
-  <!-- 👑 Popup injected by JS -->
-  <!-- (No need to add popup HTML here manually) -->
-
-  <!-- 💖 Modular Firebase Search Script -->
+  <!-- Popup injected by JS -->
+  
+  <!-- Modular Firebase Search Script -->
   <script type="module" src="search.js"></script>
 </body>
 </html>

@@ -366,3 +366,36 @@ body {
   color: white;
   outline: none;
 }
+
+#searchResults {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px;
+  margin-top: 20px;
+  scroll-behavior: smooth;
+}
+
+#searchResults::-webkit-scrollbar {
+  height: 8px;
+}
+
+#searchResults::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.search-result-poster {
+  flex-shrink: 0;
+  width: 160px;
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 8px 15px rgba(255, 0, 0, 0.3);
+}
+
+.search-result-poster:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 20px rgba(255, 0, 0, 0.5);
+}
+

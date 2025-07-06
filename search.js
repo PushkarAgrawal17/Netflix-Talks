@@ -72,15 +72,18 @@ searchInput.addEventListener("input", () => {
     });
 
     filtered.forEach((movie) => {
-      const item = document.createElement("div");
-      item.classList.add("result-item");
-      item.innerText = movie.title;
-      item.addEventListener("click", () => {
-        saveRecentSearch(movie.title);
-        showMoviePopup(movie);
-      });
-      resultsBox.appendChild(item);
-    });
+  const poster = document.createElement("img");
+  poster.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
+  poster.alt = movie.title;
+  poster.classList.add("search-result-poster");
+
+  poster.addEventListener("click", () => {
+    saveRecentSearch(movie.title);
+    showMoviePopup(movie);
+  });
+
+  resultsBox.appendChild(poster);
+});
   }
 });
 
