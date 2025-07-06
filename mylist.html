@@ -20,26 +20,27 @@
 
     <!---------------My lists Posters--------------->
     <div class="mylist-container">
-    <h1 class="mylist-heading">My List</h1>
-    <div class="poster-grid">
-        <script type="module" src="myList.js"></script>
-    </div>
+        <h1 class="mylist-heading">My List</h1>
+        <div class="poster-grid">
+            <script type="module" src="myList.js"></script>
+        </div>
 
-    <!--To show popups on clicking on posters-->
-    <div class="popup-css" id="mylist-popup" style="display: none">
-        <div class="popup-overlay"></div>
-        <div class="popup-box"> <span class="close-btn">&times;</span>
-            <div class="poster-wrapper"> <img class="popup-movie-img" src="" alt="Movie Poster" />
-                <h1 class="popup-title-img">
-                </h1>
-                <div class="popup-gradient-overlay">
+        <!--To show popups on clicking on posters-->
+        <div class="popup-css" id="mylist-popup" style="display: none">
+            <div class="popup-overlay"></div>
+            <div class="popup-box"> <span class="close-btn">&times;</span>
+                <div class="poster-wrapper"> <img class="popup-movie-img" src="" alt="Movie Poster" />
+                    <h1 class="popup-title-img">
+                    </h1>
+                    <div class="popup-gradient-overlay">
+                    </div>
                 </div>
+                <div class="popup-tags"></div>
+                <p class="popup-description"></p>
+                <button id="remove-btn"
+                    style="margin-left: 1rem; padding: 10px 16px; background: red; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Remove
+                    from My List</button>
             </div>
-            <div class="popup-tags"></div>
-            <p class="popup-description"></p>
-            <button id="remove-btn"
-                style="margin-left: 1rem; padding: 10px 16px; background: red; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Remove
-                from My List</button>
         </div>
     </div>
 </body>

@@ -96,7 +96,7 @@ async function addToMyListFirestore(movie) {
 }
 
 function loadHeroSlides() {
-  const heroEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+  const heroEndpoint = https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1;
 
   fetch(heroEndpoint)
     .then((res) => res.json())
@@ -106,13 +106,13 @@ function loadHeroSlides() {
       dotsContainer.innerHTML = "";
 
       slides.forEach((movie, i) => {
-        const bgImg = `https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`;
-        const bgImgLowRes = `https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`;
-        const posterImg = `https://image.tmdb.org/t/p/original${movie.poster_path || movie.backdrop_path}`;
+        const bgImg = https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path};
+        const bgImgLowRes = https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path};
+        const posterImg = https://image.tmdb.org/t/p/original${movie.poster_path || movie.backdrop_path};
         const slide = document.createElement("div");
         slide.classList.add("hero-slide");
         if (i === 0) slide.classList.add("active-slide");
-        slide.style.backgroundImage = `url(${bgImg})`;
+        slide.style.backgroundImage = url(${bgImg});
 
         slide.innerHTML = `
           <div class="slide-content">
@@ -171,13 +171,13 @@ slideInterval = setInterval(nextSlide, 5000);
 
 // -------- Movie Rows --------
 const endpoints = {
-  trending: `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`,
-  topRated: `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`,
-  blockbuster: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=revenue.desc&region=US`,
-  bollywood: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_original_language=hi&region=IN&sort_by=popularity.desc`,
-  koreanTV: `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_original_language=ko&sort_by=popularity.desc`,
-  action: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&sort_by=popularity.desc&language=en-US`,
-  horror: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=27&sort_by=popularity.desc`
+  trending: https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey},
+  topRated: https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey},
+  blockbuster: https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=revenue.desc&region=US,
+  bollywood: https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_original_language=hi&region=IN&sort_by=popularity.desc,
+  koreanTV: https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_original_language=ko&sort_by=popularity.desc,
+  action: https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&sort_by=popularity.desc&language=en-US,
+  horror: https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=27&sort_by=popularity.desc
 };
 
 
@@ -289,7 +289,7 @@ function addPosterListeners(container) {
 
       onAuthStateChanged(auth, async (user) => {
         if (!user) {
-          popupBtn.innerHTML = `<a href="3sign_In.html"><i class="fas fa-lock"></i> Sign In to Save</a>`;
+          popupBtn.innerHTML = <a href="3sign_In.html"><i class="fas fa-lock"></i> Sign In to Save</a>;
           popupBtn.disabled = true;
           return;
         }
@@ -300,8 +300,8 @@ function addPosterListeners(container) {
         const exists = docSnap.exists();
 
         popupBtn.innerHTML = exists
-          ? `<i class="fas fa-trash-alt"></i> Remove`
-          : `<i class="fas fa-plus"></i> My List`;
+          ? <i class="fas fa-trash-alt"></i> Remove
+          : <i class="fas fa-plus"></i> My List;
 
         popupBtn.disabled = false;
 
@@ -312,7 +312,7 @@ function addPosterListeners(container) {
           const exists = docSnap.exists();
           if (exists) {
             await deleteDoc(movieRef);
-            popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
+            popupBtn.innerHTML = <i class="fas fa-plus"></i> My List;
             showToast("Removed from My List", "red")
           } else {
             await setDoc(movieRef, {
@@ -324,7 +324,7 @@ function addPosterListeners(container) {
               tags,
               addedAt: new Date()
             });
-            popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
+            popupBtn.innerHTML = <i class="fas fa-check"></i> Added;
             showToast("Added to My List!", "green");
           }
         };

@@ -28,6 +28,10 @@ body {
     z-index: 1000;
 }
 
+.back-btn:hover {
+    color: rgb(144, 140, 140);
+}
+
 /*-----Posters-----*/
 .mylist-container {
     padding: 40px 40px;
