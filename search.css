@@ -15,16 +15,10 @@ body {
 
 /* =============== Netflix Logo Header =============== */
 .netflix-header {
-  padding: 1.2rem 2rem;
+  padding: 1.5rem 2rem 0.5rem 2rem;
   background-color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
 }
 
-.netflix-logo {
-  height: 38px;
-}
 
 /* =============== Section Containers =============== */
 .section-container {
@@ -85,13 +79,11 @@ body {
   transition: background 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
-.search-container button:hover {
-  background: #e50914; 
+#voiceBtn:hover ,
+#searchBtn:hover{
+    background-color: #e4686e;
 }
 
-.search-container button:hover i {
-  color: #b3b3b3;
-}
 
 /* =============== Search Result Posters =============== */
 
@@ -147,4 +139,26 @@ body {
 /* =============== Utility Classes =============== */
 .hidden {
   display: none !important;
+}
+
+/* ===============Back Button Style =============== */
+
+.back-btn {
+  top: 86px;
+  left: 80px;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+  z-index: 1000;
+  font-size: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

@@ -165,3 +165,8 @@ voiceBtn?.addEventListener("click", () => {
 
   recognition.onerror = (e) => alert("Voice search error: " + e.error);
 });
+
+// Back Button JS
+document.getElementById("backBtn").addEventListener("click", () => {
+  window.history.back();
+});
