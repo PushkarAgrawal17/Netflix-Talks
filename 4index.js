@@ -162,18 +162,6 @@ function fetchAndDisplayMovies(url, containerId) {
             // Add listeners to newly created posters
             addPosterListeners(container);
 
-            // click handling of MY LIST for popups
-            const popupAddBtn = document.querySelector(".popup-mylist-btn");
-            if (popupAddBtn) {
-            popupAddBtn.addEventListener("click", () => {
-                const movie = {
-                title: posterTitle.textContent,
-                poster: posterImg.src,
-                };
-                addToMyList(movie);
-            });
-            }
-
         })
         .catch(err => {
             console.error("TMDB fetch failed", err);
@@ -183,6 +171,7 @@ function fetchAndDisplayMovies(url, containerId) {
 
 
 // -------------------------- Movie Popup ----------------------------
+
 function addPosterListeners(container) {
     const popup = document.getElementById("global-popup");
     const posterTitle = popup.querySelector(".popup-title-img");
@@ -193,33 +182,83 @@ function addPosterListeners(container) {
     container.querySelectorAll(".movie-poster").forEach(poster => {
         poster.addEventListener("click", () => {
             popup.style.display = "flex";
-            document.body.style.overflow = "hidden"; // ← lock background scroll
-            posterTitle.textContent = poster.getAttribute("data-title")
+            document.body.style.overflow = "hidden";
 
+            // Set popup content
+            const title = poster.getAttribute("data-title");
             const lowRes = poster.getAttribute("data-poster");
             const highRes = poster.getAttribute("data-highres-poster");
 
+            posterTitle.textContent = title;
             posterImg.src = lowRes;
-
-            // Preload high-res in background
-            const tempImg = new Image();
-            tempImg.src = highRes;
-            tempImg.onload = () => {
-                posterImg.src = highRes;
-            };
-
             descElem.textContent = poster.getAttribute("data-description");
 
-            // Populate tags
             tagsWrap.innerHTML = "";
             poster.getAttribute("data-tags").split(",").forEach(tag => {
                 const span = document.createElement("span");
                 span.textContent = tag.trim();
                 tagsWrap.appendChild(span);
             });
+
+            const tempImg = new Image();
+            tempImg.src = highRes;
+            tempImg.onload = () => {
+                posterImg.src = highRes;
+            };
+
+            // ✅ Attach "+ My List" click here after popup is shown
+            const popupAddBtn = document.querySelector(".popup-mylist-btn");
+            if (popupAddBtn) {
+                popupAddBtn.onclick = () => {
+                    const movie = {
+                        title,
+                        poster: highRes,
+                    };
+                    addToMyList(movie);
+                };
+            }
         });
     });
 }
+
+
+// function addPosterListeners(container) {
+//     const popup = document.getElementById("global-popup");
+//     const posterTitle = popup.querySelector(".popup-title-img");
+//     const posterImg = popup.querySelector(".popup-movie-img");
+//     const descElem = popup.querySelector(".popup-description");
+//     const tagsWrap = popup.querySelector(".popup-tags");
+
+//     container.querySelectorAll(".movie-poster").forEach(poster => {
+//         poster.addEventListener("click", () => {
+//             popup.style.display = "flex";
+//             document.body.style.overflow = "hidden"; // ← lock background scroll
+//             posterTitle.textContent = poster.getAttribute("data-title")
+
+//             const lowRes = poster.getAttribute("data-poster");
+//             const highRes = poster.getAttribute("data-highres-poster");
+
+//             posterImg.src = lowRes;
+
+//             // Preload high-res in background
+//             const tempImg = new Image();
+//             tempImg.src = highRes;
+//             tempImg.onload = () => {
+//                 posterImg.src = highRes;
+//             };
+
+//             descElem.textContent = poster.getAttribute("data-description");
+
+//             // Populate tags
+//             tagsWrap.innerHTML = "";
+//             poster.getAttribute("data-tags").split(",").forEach(tag => {
+//                 const span = document.createElement("span");
+//                 span.textContent = tag.trim();
+//                 tagsWrap.appendChild(span);
+//             });
+//         });
+//     });
+// }
 
 function addGlobalPopupListeners() {
     const popup = document.getElementById("global-popup");
