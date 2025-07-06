@@ -1,3 +1,30 @@
+// ===== Firebase Setup =====
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
+  authDomain: "netflix-web-project.firebaseapp.com",
+  projectId: "netflix-web-project",
+  storageBucket: "netflix-web-project.appspot.com",
+  messagingSenderId: "616557096999",
+  appId: "1:616557096999:web:027b9189b6f5b283115e02"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
 // -------- Safety check for TMDB API Key --------
 if (typeof apiKey === "undefined") {
   alert("API key is missing. Please create config.js with your TMDB API key.");
@@ -29,21 +56,31 @@ function nextSlide() {
   showSlide(index);
 }
 
-function addToMyList(movie) {
-const currentList = JSON.parse(localStorage.getItem("myList")) || [];
-const exists = currentList.some((m) => m.title === movie.title);
-if (!exists) {
-currentList.push({
-title: movie.title,
-poster: movie.poster,
-description: movie.description || "No description available",
-tags: movie.tags || "Movie"
-});
-localStorage.setItem("myList", JSON.stringify(currentList));
-alert("Added to My List!");
-} else {
-alert("Already in My List");
-}
+async function addToMyListFirestore(movie) {
+  console.log("auth.currentUser:", auth.currentUser);
+  const user = auth.currentUser;
+  if (!user) {
+    alert("Please sign in to add to your list.");
+    return;
+  }
+
+  const uid = user.uid;
+  const movieRef = doc(db, "users", uid, "myList", movie.title);
+  const docSnap = await getDoc(movieRef);
+
+  if (docSnap.exists()) {
+    alert("Already in My List");
+    return;
+  }
+
+  await setDoc(movieRef, {
+    title: movie.title,
+    poster: movie.poster,
+    description: movie.description || "No description available",
+    tags: movie.tags || "Movie",
+    addedAt: new Date()
+  });
+  alert("Added to My List!");
 }
 
 function loadHeroSlides() {
@@ -97,21 +134,26 @@ function loadHeroSlides() {
 
       document.querySelectorAll(".mylist-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
+          console.log("My List button clicked!");
           const movie = {
             title: btn.dataset.title,
             poster: btn.dataset.poster,
             description: btn.dataset.description,
             tags: btn.dataset.tags
           };
-          addToMyList(movie);
+          addToMyListFirestore(movie);
         });
       });
     })
     .catch((err) => console.error("Failed to load hero slides", err));
 }
 
+// 🔁 No changes needed below unless you want to migrate popup too
 loadHeroSlides();
 slideInterval = setInterval(nextSlide, 5000);
+
+// (Rest of the file remains same)
+
 
 // -------- Movie Rows --------
 const endpoints = {
@@ -227,26 +269,42 @@ function addPosterListeners(container) {
         tags
       };
 
-      const myList = JSON.parse(localStorage.getItem("myList")) || [];
-      const exists = myList.some((m) => m.title === movie.title);
-
-      popupBtn.innerHTML = exists
-        ? `<i class="fas fa-trash-alt"></i> Remove`
-        : `<i class="fas fa-plus"></i> My List`;
-
-      popupBtn.onclick = () => {
-        let updatedList = [...myList];
-        if (exists) {
-          updatedList = updatedList.filter((m) => m.title !== movie.title);
-          popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
-          alert("Removed from My List");
-        } else {
-          updatedList.push(movie);
-          popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
-          alert("Added to My List");
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          popupBtn.innerHTML = `<i class="fas fa-lock"></i> Sign In to Save`;
+          popupBtn.disabled = true;
+          return;
         }
-        localStorage.setItem("myList", JSON.stringify(updatedList));
-      };
+
+        const uid = user.uid;
+        const movieRef = doc(db, "users", uid, "myList", movie.title);
+        const docSnap = await getDoc(movieRef);
+        const exists = docSnap.exists();
+
+        popupBtn.innerHTML = exists
+          ? `<i class="fas fa-trash-alt"></i> Remove`
+          : `<i class="fas fa-plus"></i> My List`;
+
+        popupBtn.disabled = false;
+
+        popupBtn.onclick = async () => {
+          if (exists) {
+            await deleteDoc(movieRef);
+            popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
+            alert("Removed from My List");
+          } else {
+            await setDoc(movieRef, {
+              title,
+              poster: highRes,
+              description,
+              tags,
+              addedAt: new Date()
+            });
+            popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
+            alert("Added to My List!");
+          }
+        };
+      });
 
       const tempImg = new Image();
       tempImg.src = highRes;
@@ -256,6 +314,7 @@ function addPosterListeners(container) {
     });
   });
 }
+
 
 function addGlobalPopupListeners() {
   const popup = document.getElementById("global-popup");
