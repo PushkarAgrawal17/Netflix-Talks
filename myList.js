@@ -87,6 +87,7 @@ window.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    // Close pop up
     document.querySelector(".popup-overlay")?.addEventListener("click", closePopup);
     document.querySelector(".close-btn")?.addEventListener("click", closePopup);
 
