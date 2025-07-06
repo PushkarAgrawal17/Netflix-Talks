@@ -55,6 +55,7 @@ function loadHeroSlides() {
                         <p>${description}</p>
                         <div class="slide-buttons">
                             <button><i class="fas fa-play"></i> Play</button>
+                            <button class="mylist-btn" data-title="${movie.title}" data-poster="${bgImg}">+ My List</button>
                         </div>
                     </div>
                 `;
