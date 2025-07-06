@@ -312,6 +312,7 @@ function addPosterListeners(container) {
         posterImg.src = highRes;
       };
     });
+  });
 }
 
 
