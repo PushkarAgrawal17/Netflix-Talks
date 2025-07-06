@@ -25,6 +25,16 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+function showToast(message, color = "#00b09b") {
+  Toastify({
+    text: message,
+    duration: 5000,
+    gravity: "bottom",
+    position: "left",
+    backgroundColor: color
+  }).showToast();
+}
+
 // -------- Safety check for TMDB API Key --------
 if (typeof apiKey === "undefined") {
     alert("API key is missing. Please create config.js with your TMDB API key.");
@@ -60,7 +70,7 @@ async function addToMyListFirestore(movie) {
   console.log("auth.currentUser:", auth.currentUser);
   const user = auth.currentUser;
   if (!user) {
-    alert("Please sign in to add to your list.");
+    showToast("Please sign in to add to your list.", "#FFD700");
     return;
   }
 
@@ -69,7 +79,7 @@ async function addToMyListFirestore(movie) {
   const docSnap = await getDoc(movieRef);
 
   if (docSnap.exists()) {
-    alert("Already in My List");
+    showToast("Already in My List", "#FFD700");
     return;
   }
 
@@ -80,7 +90,7 @@ async function addToMyListFirestore(movie) {
     tags: movie.tags || "Movie",
     addedAt: new Date()
   });
-  alert("Added to My List!");
+  showToast("Added to My List!", "green");
 }
 
 function loadHeroSlides() {
@@ -148,12 +158,8 @@ function loadHeroSlides() {
     .catch((err) => console.error("Failed to load hero slides", err));
 }
 
-// 🔁 No changes needed below unless you want to migrate popup too
 loadHeroSlides();
 slideInterval = setInterval(nextSlide, 5000);
-
-// (Rest of the file remains same)
-
 
 // -------- Movie Rows --------
 const endpoints = {
@@ -291,7 +297,7 @@ function addPosterListeners(container) {
           if (exists) {
             await deleteDoc(movieRef);
             popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
-            alert("Removed from My List");
+            showToast("Removed from My List","red")
           } else {
             await setDoc(movieRef, {
               title,
@@ -301,7 +307,7 @@ function addPosterListeners(container) {
               addedAt: new Date()
             });
             popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
-            alert("Added to My List!");
+            showToast("Added to My List!","green");
           }
         };
       });
