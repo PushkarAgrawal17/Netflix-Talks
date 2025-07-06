@@ -1,164 +1,175 @@
 /* =============== Global Reset =============== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  background-color:rgb(3, 3,16);
-  color: #fff;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
-  padding-bottom: 40px;
+    background-color: rgb(3, 3, 16);
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    padding-bottom: 40px;
 }
 
 /* =============== Netflix Logo Header =============== */
 .netflix-header {
-  padding: 1.5rem 2rem 0.5rem 2rem;
-  background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: black;
+    border-bottom: 1px solid #2a2a2a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-
-/* =============== Section Containers =============== */
-.section-container {
-  padding: 1.5rem 2rem;
+/* Optional logo styling inside header */
+.netflix-header img {
+    height: 40px;
 }
 
 /* =============== Search Section =============== */
 .search-section {
-  background-color: #1c1c1c;
-  padding: 1.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    background-color: #141414;
+    padding: 2rem 2.5rem;
+    border-top: 1px solid #2d2d2d;
+    border-bottom: 1px solid #2d2d2d;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .search-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 #searchInput {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  border: none;
-  outline: none;
+    flex: 1;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: none;
+    outline: none;
 }
 
 #voiceBtn,
 #searchBtn {
-  background-color: #e50914;
-  border: none;
-  padding: 0.6rem 1rem;
-  color: white;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
+    background-color: #e50914;
+    border: none;
+    padding: 0.6rem 1rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 #genreFilter {
-  width: 200px;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  background-color: #333;
-  color: white;
-  border: none;
-}
-.search-container button {
-  background: #333;
-  border: none;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+    width: 200px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    border: none;
 }
 
-#voiceBtn:hover ,
-#searchBtn:hover{
-    background-color: #e4686e;
+.search-container button {
+    background: #333;
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+#voiceBtn:hover,
+#searchBtn:hover {
+    color: #b3b3b3;
 }
 
 
 /* =============== Search Result Posters =============== */
+h3 {
+    border: none;
+    color: white;
+    padding: 25px 30px;
+}
 
 .row-posters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0px 30px;
 }
 
 .row-posters img {
-  width: 150px;
-  height: 225px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 150px;
+    height: 225px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .row-posters img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(229, 9, 20, 0.8); /* Netflix red shadow */
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
 }
 
 /* =============== Recent & Trending =============== */
 .recent-searches {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-left: 30px;
 }
 
 .recent-searches span {
-  background-color: #333;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  font-size: 0.95rem;
-  cursor: pointer;
+    background-color: #333;
+    padding: 0.4rem 2rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
 }
 
 .recent-searches span:hover {
-  background-color: #555;
+    background-color: #555;
 }
 
 /* =============== No Results Message =============== */
 .no-results {
-  color: #aaa;
-  margin-top: 1rem;
-  font-size: 1.1rem;
+    color: #aaa;
+    margin-top: 1rem;
+    font-size: 1.1rem;
 }
 
 /* =============== Utility Classes =============== */
 .hidden {
-  display: none !important;
+    display: none !important;
 }
 
 /* ===============Back Button Style =============== */
 
 .back-btn {
-  top: 86px;
-  left: 80px;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 8px;
-  transition: background 0.3s ease;
-  z-index: 1000;
-  font-size: 28px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  text-decoration: none;
+    top: 75px;
+    left: 105px;
+    color: white;
+    font-size: 25px;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: color 0.3s ease;
+    z-index: 1000;
+    cursor: pointer;
 }
 
 .back-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+    color: rgb(200, 200, 200);
 }
