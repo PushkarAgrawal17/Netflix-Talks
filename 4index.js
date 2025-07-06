@@ -1,3 +1,30 @@
+// ===== Firebase Setup =====
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
+  authDomain: "netflix-web-project.firebaseapp.com",
+  projectId: "netflix-web-project",
+  storageBucket: "netflix-web-project.appspot.com",
+  messagingSenderId: "616557096999",
+  appId: "1:616557096999:web:027b9189b6f5b283115e02"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
 // -------- Safety check for TMDB API Key --------
 if (typeof apiKey === "undefined") {
     alert("API key is missing. Please create config.js with your TMDB API key.");
@@ -29,97 +56,104 @@ function nextSlide() {
     showSlide(index);
 }
 
-function addToMyList(movie) {
-    const currentList = JSON.parse(localStorage.getItem("myList")) || [];
-    const exists = currentList.some((m) => m.title === movie.title);
-    if (!exists) {
-        currentList.push({
-            title: movie.title,
-            poster: movie.poster,
-            description: movie.description || "No description available",
-            tags: movie.tags || "Movie"
-        });
-        localStorage.setItem("myList", JSON.stringify(currentList));
-        alert("Added to My List!");
-    } else {
-        alert("Already in My List");
-    }
+async function addToMyListFirestore(movie) {
+  console.log("auth.currentUser:", auth.currentUser);
+  const user = auth.currentUser;
+  if (!user) {
+    alert("Please sign in to add to your list.");
+    return;
+  }
+
+  const uid = user.uid;
+  const movieRef = doc(db, "users", uid, "myList", movie.title);
+  const docSnap = await getDoc(movieRef);
+
+  if (docSnap.exists()) {
+    alert("Already in My List");
+    return;
+  }
+
+  await setDoc(movieRef, {
+    title: movie.title,
+    poster: movie.poster,
+    description: movie.description || "No description available",
+    tags: movie.tags || "Movie",
+    addedAt: new Date()
+  });
+  alert("Added to My List!");
 }
 
 function loadHeroSlides() {
-    const heroEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+  const heroEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
 
-    fetch(heroEndpoint)
-        .then((res) => res.json())
-        .then((data) => {
-            const slides = data.results.slice(0, 10);
-            heroContainer.innerHTML = "";
-            dotsContainer.innerHTML = "";
+  fetch(heroEndpoint)
+    .then((res) => res.json())
+    .then((data) => {
+      const slides = data.results.slice(0, 10);
+      heroContainer.innerHTML = "";
+      dotsContainer.innerHTML = "";
 
-            slides.forEach((movie, i) => {
-                const bgImg = `https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`;
-                const slide = document.createElement("div");
-                slide.classList.add("hero-slide");
-                if (i === 0) slide.classList.add("active-slide");
-                slide.style.backgroundImage = `url(${bgImg})`;
+      slides.forEach((movie, i) => {
+        const bgImg = `https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`;
+        const slide = document.createElement("div");
+        slide.classList.add("hero-slide");
+        if (i === 0) slide.classList.add("active-slide");
+        slide.style.backgroundImage = `url(${bgImg})`;
 
-                slide.innerHTML = `
-                <div class="slide-content">
-                    <h1 class="slide-title">${movie.title}</h1>
-                    <p>${movie.overview}</p>
-                    <div class="slide-buttons">
+        slide.innerHTML = `
+          <div class="slide-content">
+            <h1 class="slide-title">${movie.title}</h1>
+            <p>${movie.overview}</p>
+            <div class="slide-buttons">
+              <button><i class="fas fa-play"></i> Play</button>
+              <button class="mylist-btn"
+                data-title="${movie.title}"
+                data-poster="${bgImg}"
+                data-description="${movie.overview}"
+                data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
+              ><i class="fas fa-plus"></i> My List</button>
+            </div>
+          </div>`;
 
-                    <button class="info-btn"
-                        data-title="${movie.title}"
-                        data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
-                        data-highres-poster="https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}"
-                        data-description="${movie.overview}"
-                        data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
-                    ><i class="fas fa-info-circle"></i> Info</button>
+        heroContainer.appendChild(slide);
 
-                    <button class="mylist-btn"
-                        data-title="${movie.title}"
-                        data-poster="${bgImg}"
-                        data-description="${movie.overview}"
-                        data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
-                    ><i class="fas fa-plus"></i> My List</button>
-                    </div>
-                </div>`;
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        if (i === 0) dot.classList.add("active-dot");
+        dot.addEventListener("click", () => {
+          clearInterval(slideInterval);
+          showSlide(i);
+          slideInterval = setInterval(nextSlide, 5000);
+        });
+        dotsContainer.appendChild(dot);
+      });
 
-                heroContainer.appendChild(slide);
+      slideElements = document.querySelectorAll(".hero-slide");
+      dotElements = document.querySelectorAll(".dot");
+      showSlide(0);
 
-                const dot = document.createElement("span");
-                dot.classList.add("dot");
-                if (i === 0) dot.classList.add("active-dot");
-                dot.addEventListener("click", () => {
-                    clearInterval(slideInterval);
-                    showSlide(i);
-                    slideInterval = setInterval(nextSlide, 5000);
-                });
-                dotsContainer.appendChild(dot);
-            });
-
-            slideElements = document.querySelectorAll(".hero-slide");
-            dotElements = document.querySelectorAll(".dot");
-            showSlide(0);
-
-            document.querySelectorAll(".mylist-btn").forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    const movie = {
-                        title: btn.dataset.title,
-                        poster: btn.dataset.poster,
-                        description: btn.dataset.description,
-                        tags: btn.dataset.tags
-                    };
-                    addToMyList(movie);
-                });
-            });
-        })
-        .catch((err) => console.error("Failed to load hero slides", err));
+      document.querySelectorAll(".mylist-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          console.log("My List button clicked!");
+          const movie = {
+            title: btn.dataset.title,
+            poster: btn.dataset.poster,
+            description: btn.dataset.description,
+            tags: btn.dataset.tags
+          };
+          addToMyListFirestore(movie);
+        });
+      });
+    })
+    .catch((err) => console.error("Failed to load hero slides", err));
 }
 
+// 🔁 No changes needed below unless you want to migrate popup too
 loadHeroSlides();
 slideInterval = setInterval(nextSlide, 5000);
+
+// (Rest of the file remains same)
+
 
 // -------- Movie Rows --------
 const endpoints = {
@@ -200,70 +234,86 @@ function fetchAndDisplayMovies(url, containerId) {
 }
 
 function addPosterListeners(container) {
-    const popup = document.getElementById("global-popup");
-    const posterTitle = popup.querySelector(".popup-title-img");
-    const posterImg = popup.querySelector(".popup-movie-img");
-    const descElem = popup.querySelector(".popup-description");
-    const tagsWrap = popup.querySelector(".popup-tags");
-    const popupBtn = popup.querySelector("#popup-mylist-btn");
+  const popup = document.getElementById("global-popup");
+  const posterTitle = popup.querySelector(".popup-title-img");
+  const posterImg = popup.querySelector(".popup-movie-img");
+  const descElem = popup.querySelector(".popup-description");
+  const tagsWrap = popup.querySelector(".popup-tags");
+  const popupBtn = popup.querySelector("#popup-mylist-btn");
 
-    container.querySelectorAll(".movie-poster").forEach((poster) => {
-        poster.addEventListener("click", () => {
-            const title = poster.dataset.title;
-            const lowRes = poster.dataset.poster;
-            const highRes = poster.dataset.highresPoster;
-            const description = poster.dataset.description;
-            const tags = poster.dataset.tags;
+  container.querySelectorAll(".movie-poster").forEach((poster) => {
+    poster.addEventListener("click", () => {
+      const title = poster.dataset.title;
+      const lowRes = poster.dataset.poster;
+      const highRes = poster.dataset.highresPoster;
+      const description = poster.dataset.description;
+      const tags = poster.dataset.tags;
 
-            popup.style.display = "flex";
-            document.body.style.overflow = "hidden";
-            posterTitle.textContent = title;
-            posterImg.src = lowRes;
-            descElem.textContent = description;
+      popup.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      posterTitle.textContent = title;
+      posterImg.src = lowRes;
+      descElem.textContent = description;
 
-            tagsWrap.innerHTML = "";
-            tags.split(",").forEach((tag) => {
-                const span = document.createElement("span");
-                span.textContent = tag.trim();
-                tagsWrap.appendChild(span);
+      tagsWrap.innerHTML = "";
+      tags.split(",").forEach((tag) => {
+        const span = document.createElement("span");
+        span.textContent = tag.trim();
+        tagsWrap.appendChild(span);
+      });
+
+      const movie = {
+        title,
+        poster: highRes,
+        description,
+        tags
+      };
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          popupBtn.innerHTML = `<i class="fas fa-lock"></i> Sign In to Save`;
+          popupBtn.disabled = true;
+          return;
+        }
+
+        const uid = user.uid;
+        const movieRef = doc(db, "users", uid, "myList", movie.title);
+        const docSnap = await getDoc(movieRef);
+        const exists = docSnap.exists();
+
+        popupBtn.innerHTML = exists
+          ? `<i class="fas fa-trash-alt"></i> Remove`
+          : `<i class="fas fa-plus"></i> My List`;
+
+        popupBtn.disabled = false;
+
+        popupBtn.onclick = async () => {
+          if (exists) {
+            await deleteDoc(movieRef);
+            popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
+            alert("Removed from My List");
+          } else {
+            await setDoc(movieRef, {
+              title,
+              poster: highRes,
+              description,
+              tags,
+              addedAt: new Date()
             });
+            popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
+            alert("Added to My List!");
+          }
+        };
+      });
 
-            const movie = {
-                title,
-                poster: highRes,
-                description,
-                tags
-            };
-
-            const myList = JSON.parse(localStorage.getItem("myList")) || [];
-            const exists = myList.some((m) => m.title === movie.title);
-
-            popupBtn.innerHTML = exists
-                ? `<i class="fas fa-trash-alt"></i> Remove`
-                : `<i class="fas fa-plus"></i> My List`;
-
-            popupBtn.onclick = () => {
-                let updatedList = [...myList];
-                if (exists) {
-                    updatedList = updatedList.filter((m) => m.title !== movie.title);
-                    popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
-                    alert("Removed from My List");
-                } else {
-                    updatedList.push(movie);
-                    popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
-                    alert("Added to My List");
-                }
-                localStorage.setItem("myList", JSON.stringify(updatedList));
-            };
-
-            const tempImg = new Image();
-            tempImg.src = highRes;
-            tempImg.onload = () => {
-                posterImg.src = highRes;
-            };
-        });
+      const tempImg = new Image();
+      tempImg.src = highRes;
+      tempImg.onload = () => {
+        posterImg.src = highRes;
+      };
     });
 }
+
 
 function addGlobalPopupListeners() {
     const popup = document.getElementById("global-popup");
