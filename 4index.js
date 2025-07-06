@@ -64,19 +64,27 @@ function loadHeroSlides() {
                 slide.style.backgroundImage = `url(${bgImg})`;
 
                 slide.innerHTML = `
-          <div class="slide-content">
-            <h1 class="slide-title">${movie.title}</h1>
-            <p>${movie.overview}</p>
-            <div class="slide-buttons">
-              <button><i class="fas fa-play"></i> Play</button>
-              <button class="mylist-btn"
-                data-title="${movie.title}"
-                data-poster="${bgImg}"
-                data-description="${movie.overview}"
-                data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
-              ><i class="fas fa-plus"></i> My List</button>
-            </div>
-          </div>`;
+                <div class="slide-content">
+                    <h1 class="slide-title">${movie.title}</h1>
+                    <p>${movie.overview}</p>
+                    <div class="slide-buttons">
+
+                    <button class="info-btn"
+                        data-title="${movie.title}"
+                        data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
+                        data-highres-poster="https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}"
+                        data-description="${movie.overview}"
+                        data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
+                    ><i class="fas fa-info-circle"></i> Info</button>
+
+                    <button class="mylist-btn"
+                        data-title="${movie.title}"
+                        data-poster="${bgImg}"
+                        data-description="${movie.overview}"
+                        data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
+                    ><i class="fas fa-plus"></i> My List</button>
+                    </div>
+                </div>`;
 
                 heroContainer.appendChild(slide);
 
@@ -170,16 +178,16 @@ function fetchAndDisplayMovies(url, containerId) {
                 card.classList.add("poster-card");
 
                 card.innerHTML = `
-          <span class="rank">${rank++}</span>
-          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
-            alt="${movie.title}"
-            class="movie-poster"
-            data-title="${movie.title}"
-            data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
-            data-highres-poster="https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}"
-            data-description="${movie.overview}"
-            data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
-          />`;
+                <span class="rank">${rank++}</span>
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+                    alt="${movie.title}"
+                    class="movie-poster"
+                    data-title="${movie.title}"
+                    data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
+                    data-highres-poster="https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}"
+                    data-description="${movie.overview}"
+                    data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
+                />`;
                 container.appendChild(card);
             });
 
