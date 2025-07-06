@@ -1,6 +1,6 @@
 // -------- Safety check for TMDB API Key --------
 if (typeof apiKey === "undefined") {
-  alert("API key is missing. Please create config.js with your TMDB API key.");
+    alert("API key is missing. Please create config.js with your TMDB API key.");
 }
 
 // -------- Hero Slideshow Setup --------
@@ -13,57 +13,57 @@ let index = 0;
 let slideInterval;
 
 function showSlide(i) {
-  slideElements.forEach((slide, idx) => {
-    slide.classList.remove("active-slide");
-    dotElements[idx].classList.remove("active-dot");
-  });
+    slideElements.forEach((slide, idx) => {
+        slide.classList.remove("active-slide");
+        dotElements[idx].classList.remove("active-dot");
+    });
 
-  slideElements[i].classList.add("active-slide");
-  dotElements[i].classList.add("active-dot");
-  index = i;
+    slideElements[i].classList.add("active-slide");
+    dotElements[i].classList.add("active-dot");
+    index = i;
 }
 
 function nextSlide() {
-  if (slideElements.length === 0) return;
-  index = (index + 1) % slideElements.length;
-  showSlide(index);
+    if (slideElements.length === 0) return;
+    index = (index + 1) % slideElements.length;
+    showSlide(index);
 }
 
 function addToMyList(movie) {
-const currentList = JSON.parse(localStorage.getItem("myList")) || [];
-const exists = currentList.some((m) => m.title === movie.title);
-if (!exists) {
-currentList.push({
-title: movie.title,
-poster: movie.poster,
-description: movie.description || "No description available",
-tags: movie.tags || "Movie"
-});
-localStorage.setItem("myList", JSON.stringify(currentList));
-alert("Added to My List!");
-} else {
-alert("Already in My List");
-}
+    const currentList = JSON.parse(localStorage.getItem("myList")) || [];
+    const exists = currentList.some((m) => m.title === movie.title);
+    if (!exists) {
+        currentList.push({
+            title: movie.title,
+            poster: movie.poster,
+            description: movie.description || "No description available",
+            tags: movie.tags || "Movie"
+        });
+        localStorage.setItem("myList", JSON.stringify(currentList));
+        alert("Added to My List!");
+    } else {
+        alert("Already in My List");
+    }
 }
 
 function loadHeroSlides() {
-  const heroEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+    const heroEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
 
-  fetch(heroEndpoint)
-    .then((res) => res.json())
-    .then((data) => {
-      const slides = data.results.slice(0, 10);
-      heroContainer.innerHTML = "";
-      dotsContainer.innerHTML = "";
+    fetch(heroEndpoint)
+        .then((res) => res.json())
+        .then((data) => {
+            const slides = data.results.slice(0, 10);
+            heroContainer.innerHTML = "";
+            dotsContainer.innerHTML = "";
 
-      slides.forEach((movie, i) => {
-        const bgImg = `https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`;
-        const slide = document.createElement("div");
-        slide.classList.add("hero-slide");
-        if (i === 0) slide.classList.add("active-slide");
-        slide.style.backgroundImage = `url(${bgImg})`;
+            slides.forEach((movie, i) => {
+                const bgImg = `https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`;
+                const slide = document.createElement("div");
+                slide.classList.add("hero-slide");
+                if (i === 0) slide.classList.add("active-slide");
+                slide.style.backgroundImage = `url(${bgImg})`;
 
-        slide.innerHTML = `
+                slide.innerHTML = `
           <div class="slide-content">
             <h1 class="slide-title">${movie.title}</h1>
             <p>${movie.overview}</p>
@@ -78,36 +78,36 @@ function loadHeroSlides() {
             </div>
           </div>`;
 
-        heroContainer.appendChild(slide);
+                heroContainer.appendChild(slide);
 
-        const dot = document.createElement("span");
-        dot.classList.add("dot");
-        if (i === 0) dot.classList.add("active-dot");
-        dot.addEventListener("click", () => {
-          clearInterval(slideInterval);
-          showSlide(i);
-          slideInterval = setInterval(nextSlide, 5000);
-        });
-        dotsContainer.appendChild(dot);
-      });
+                const dot = document.createElement("span");
+                dot.classList.add("dot");
+                if (i === 0) dot.classList.add("active-dot");
+                dot.addEventListener("click", () => {
+                    clearInterval(slideInterval);
+                    showSlide(i);
+                    slideInterval = setInterval(nextSlide, 5000);
+                });
+                dotsContainer.appendChild(dot);
+            });
 
-      slideElements = document.querySelectorAll(".hero-slide");
-      dotElements = document.querySelectorAll(".dot");
-      showSlide(0);
+            slideElements = document.querySelectorAll(".hero-slide");
+            dotElements = document.querySelectorAll(".dot");
+            showSlide(0);
 
-      document.querySelectorAll(".mylist-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const movie = {
-            title: btn.dataset.title,
-            poster: btn.dataset.poster,
-            description: btn.dataset.description,
-            tags: btn.dataset.tags
-          };
-          addToMyList(movie);
-        });
-      });
-    })
-    .catch((err) => console.error("Failed to load hero slides", err));
+            document.querySelectorAll(".mylist-btn").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const movie = {
+                        title: btn.dataset.title,
+                        poster: btn.dataset.poster,
+                        description: btn.dataset.description,
+                        tags: btn.dataset.tags
+                    };
+                    addToMyList(movie);
+                });
+            });
+        })
+        .catch((err) => console.error("Failed to load hero slides", err));
 }
 
 loadHeroSlides();
@@ -115,13 +115,13 @@ slideInterval = setInterval(nextSlide, 5000);
 
 // -------- Movie Rows --------
 const endpoints = {
-  trending: `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`,
-  topRated: `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`,
-  blockbuster: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=revenue.desc&region=US`,
-  bollywood: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_original_language=hi&region=IN&sort_by=popularity.desc`,
-  koreanTV: `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_original_language=ko&sort_by=popularity.desc`,
-  action: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&sort_by=popularity.desc&language=en-US`,
-  horror: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=27&sort_by=popularity.desc`
+    trending: `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`,
+    topRated: `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`,
+    blockbuster: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=revenue.desc&region=US`,
+    bollywood: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_original_language=hi&region=IN&sort_by=popularity.desc`,
+    koreanTV: `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_original_language=ko&sort_by=popularity.desc`,
+    action: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&sort_by=popularity.desc&language=en-US`,
+    horror: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=27&sort_by=popularity.desc`
 };
 
 
@@ -136,10 +136,10 @@ fetchAndDisplayMovies(endpoints.action, "action");
 fetchAndDisplayMovies(endpoints.horror, "horror");
 
 function createGlobalPopup() {
-  const popup = document.createElement("div");
-  popup.classList.add("popup-css");
-  popup.id = "global-popup";
-  popup.innerHTML = `
+    const popup = document.createElement("div");
+    popup.classList.add("popup-css");
+    popup.id = "global-popup";
+    popup.innerHTML = `
     <div class="popup-overlay"></div>
     <div class="popup-box">
       <span class="close-btn">&times;</span>
@@ -152,24 +152,24 @@ function createGlobalPopup() {
       <p class="popup-description"></p>
       <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
     </div>`;
-  document.body.appendChild(popup);
-  addGlobalPopupListeners();
+    document.body.appendChild(popup);
+    addGlobalPopupListeners();
 }
 
 function fetchAndDisplayMovies(url, containerId) {
-  const container = document.getElementById(containerId);
+    const container = document.getElementById(containerId);
 
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      container.innerHTML = "";
-      let rank = 1;
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+            container.innerHTML = "";
+            let rank = 1;
 
-      data.results.forEach((movie) => {
-        const card = document.createElement("div");
-        card.classList.add("poster-card");
+            data.results.forEach((movie) => {
+                const card = document.createElement("div");
+                card.classList.add("poster-card");
 
-        card.innerHTML = `
+                card.innerHTML = `
           <span class="rank">${rank++}</span>
           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
             alt="${movie.title}"
@@ -180,103 +180,103 @@ function fetchAndDisplayMovies(url, containerId) {
             data-description="${movie.overview}"
             data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
           />`;
-        container.appendChild(card);
-      });
+                container.appendChild(card);
+            });
 
-      addPosterListeners(container);
-    })
-    .catch((err) => {
-      console.error("TMDB fetch failed", err);
-      container.innerHTML = "<p>Failed to load movies. Please try again later.</p>";
-    });
+            addPosterListeners(container);
+        })
+        .catch((err) => {
+            console.error("TMDB fetch failed", err);
+            container.innerHTML = "<p>Failed to load movies. Please try again later.</p>";
+        });
 }
 
 function addPosterListeners(container) {
-  const popup = document.getElementById("global-popup");
-  const posterTitle = popup.querySelector(".popup-title-img");
-  const posterImg = popup.querySelector(".popup-movie-img");
-  const descElem = popup.querySelector(".popup-description");
-  const tagsWrap = popup.querySelector(".popup-tags");
-  const popupBtn = popup.querySelector("#popup-mylist-btn");
+    const popup = document.getElementById("global-popup");
+    const posterTitle = popup.querySelector(".popup-title-img");
+    const posterImg = popup.querySelector(".popup-movie-img");
+    const descElem = popup.querySelector(".popup-description");
+    const tagsWrap = popup.querySelector(".popup-tags");
+    const popupBtn = popup.querySelector("#popup-mylist-btn");
 
-  container.querySelectorAll(".movie-poster").forEach((poster) => {
-    poster.addEventListener("click", () => {
-      const title = poster.dataset.title;
-      const lowRes = poster.dataset.poster;
-      const highRes = poster.dataset.highresPoster;
-      const description = poster.dataset.description;
-      const tags = poster.dataset.tags;
+    container.querySelectorAll(".movie-poster").forEach((poster) => {
+        poster.addEventListener("click", () => {
+            const title = poster.dataset.title;
+            const lowRes = poster.dataset.poster;
+            const highRes = poster.dataset.highresPoster;
+            const description = poster.dataset.description;
+            const tags = poster.dataset.tags;
 
-      popup.style.display = "flex";
-      document.body.style.overflow = "hidden";
-      posterTitle.textContent = title;
-      posterImg.src = lowRes;
-      descElem.textContent = description;
+            popup.style.display = "flex";
+            document.body.style.overflow = "hidden";
+            posterTitle.textContent = title;
+            posterImg.src = lowRes;
+            descElem.textContent = description;
 
-      tagsWrap.innerHTML = "";
-      tags.split(",").forEach((tag) => {
-        const span = document.createElement("span");
-        span.textContent = tag.trim();
-        tagsWrap.appendChild(span);
-      });
+            tagsWrap.innerHTML = "";
+            tags.split(",").forEach((tag) => {
+                const span = document.createElement("span");
+                span.textContent = tag.trim();
+                tagsWrap.appendChild(span);
+            });
 
-      const movie = {
-        title,
-        poster: highRes,
-        description,
-        tags
-      };
+            const movie = {
+                title,
+                poster: highRes,
+                description,
+                tags
+            };
 
-      const myList = JSON.parse(localStorage.getItem("myList")) || [];
-      const exists = myList.some((m) => m.title === movie.title);
+            const myList = JSON.parse(localStorage.getItem("myList")) || [];
+            const exists = myList.some((m) => m.title === movie.title);
 
-      popupBtn.innerHTML = exists
-        ? `<i class="fas fa-trash-alt"></i> Remove`
-        : `<i class="fas fa-plus"></i> My List`;
+            popupBtn.innerHTML = exists
+                ? `<i class="fas fa-trash-alt"></i> Remove`
+                : `<i class="fas fa-plus"></i> My List`;
 
-      popupBtn.onclick = () => {
-        let updatedList = [...myList];
-        if (exists) {
-          updatedList = updatedList.filter((m) => m.title !== movie.title);
-          popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
-          alert("Removed from My List");
-        } else {
-          updatedList.push(movie);
-          popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
-          alert("Added to My List");
-        }
-        localStorage.setItem("myList", JSON.stringify(updatedList));
-      };
+            popupBtn.onclick = () => {
+                let updatedList = [...myList];
+                if (exists) {
+                    updatedList = updatedList.filter((m) => m.title !== movie.title);
+                    popupBtn.innerHTML = `<i class="fas fa-plus"></i> My List`;
+                    alert("Removed from My List");
+                } else {
+                    updatedList.push(movie);
+                    popupBtn.innerHTML = `<i class="fas fa-check"></i> Added`;
+                    alert("Added to My List");
+                }
+                localStorage.setItem("myList", JSON.stringify(updatedList));
+            };
 
-      const tempImg = new Image();
-      tempImg.src = highRes;
-      tempImg.onload = () => {
-        posterImg.src = highRes;
-      };
+            const tempImg = new Image();
+            tempImg.src = highRes;
+            tempImg.onload = () => {
+                posterImg.src = highRes;
+            };
+        });
     });
-  });
 }
 
 function addGlobalPopupListeners() {
-  const popup = document.getElementById("global-popup");
-  const closeBtn = popup.querySelector(".close-btn");
-  const overlay = popup.querySelector(".popup-overlay");
+    const popup = document.getElementById("global-popup");
+    const closeBtn = popup.querySelector(".close-btn");
+    const overlay = popup.querySelector(".popup-overlay");
 
-  closeBtn.addEventListener("click", () => {
-    popup.style.display = "none";
-    document.body.style.overflow = "auto";
-  });
+    closeBtn.addEventListener("click", () => {
+        popup.style.display = "none";
+        document.body.style.overflow = "auto";
+    });
 
-  overlay.addEventListener("click", () => {
-    popup.style.display = "none";
-    document.body.style.overflow = "auto";
-  });
+    overlay.addEventListener("click", () => {
+        popup.style.display = "none";
+        document.body.style.overflow = "auto";
+    });
 }
 
 createGlobalPopup();
 
 Object.entries(endpoints).forEach(([key, url]) =>
-  fetchAndDisplayMovies(url, key)
+    fetchAndDisplayMovies(url, key)
 );
 
 // -------- Navbar Dropdown --------
@@ -284,41 +284,41 @@ const profileIcon = document.getElementById("profileIcon");
 const profileDropdown = document.getElementById("profileDropdown");
 
 profileIcon.addEventListener("click", () => {
-  profileDropdown.style.display =
-    profileDropdown.style.display === "block" ? "none" : "block";
+    profileDropdown.style.display =
+        profileDropdown.style.display === "block" ? "none" : "block";
 });
 
 document.addEventListener("click", (e) => {
-  if (
-    !profileDropdown.contains(e.target) &&
-    !profileIcon.contains(e.target)
-  ) {
-    profileDropdown.style.display = "none";
-  }
+    if (
+        !profileDropdown.contains(e.target) &&
+        !profileIcon.contains(e.target)
+    ) {
+        profileDropdown.style.display = "none";
+    }
 });
 
 document.querySelectorAll("#profileDropdown li").forEach((item) => {
-  item.addEventListener("click", () => {
-    profileDropdown.style.display = "none";
-  });
+    item.addEventListener("click", () => {
+        profileDropdown.style.display = "none";
+    });
 });
 
 document.getElementById("signOut").addEventListener("click", () => {
-  window.location.href = "1getStarted.html";
+    window.location.href = "1getStarted.html";
 });
 
 document.getElementById("accountBtn").addEventListener("click", () => {
-  window.location.href = "account.html";
+    window.location.href = "account.html";
 });
 
 document.getElementById("settingsBtn")?.addEventListener("click", () => {
-  window.location.href = "settings.html";
+    window.location.href = "settings.html";
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-  const savedProfilePic = localStorage.getItem("profilePic");
-  if (savedProfilePic) {
-    const profileIcon = document.getElementById("profileIcon");
-    if (profileIcon) profileIcon.src = savedProfilePic;
-  }
+    const savedProfilePic = localStorage.getItem("profilePic");
+    if (savedProfilePic) {
+        const profileIcon = document.getElementById("profileIcon");
+        if (profileIcon) profileIcon.src = savedProfilePic;
+    }
 });
