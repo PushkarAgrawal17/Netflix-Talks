@@ -666,3 +666,23 @@ body {
         align-items: flex-start;
     }
 }
+
+/*Styling for My list button */
+
+.mylist-btn,
+.popup-mylist-btn {
+  background-color: #e50914;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.mylist-btn:hover,
+.popup-mylist-btn:hover {
+  background-color: #f40612;
+}

@@ -76,6 +76,17 @@ function loadHeroSlides() {
             dotElements = document.querySelectorAll(".dot");
 
             showSlide(0);
+//MY LIST button working ---for hero slides
+            document.querySelectorAll(".mylist-btn").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const movie = {
+              title: btn.getAttribute("data-title"),
+              poster: btn.getAttribute("data-poster"),
+            };
+            addToMyList(movie);
+          });
+            });
+
         })
         .catch(err => console.error("Failed to load hero slides", err));
 }
@@ -150,6 +161,19 @@ function fetchAndDisplayMovies(url, containerId) {
             });
             // Add listeners to newly created posters
             addPosterListeners(container);
+
+            // click handling of MY LIST for popups
+            const popupAddBtn = document.querySelector(".popup-mylist-btn");
+            if (popupAddBtn) {
+            popupAddBtn.addEventListener("click", () => {
+                const movie = {
+                title: posterTitle.textContent,
+                poster: posterImg.src,
+                };
+                addToMyList(movie);
+            });
+            }
+
         })
         .catch(err => {
             console.error("TMDB fetch failed", err);
@@ -280,3 +304,18 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+
+// ADD TO MY LIST after clicking on the My list button
+
+function addToMyList(movie) {
+  const currentList = JSON.parse(localStorage.getItem("myList")) || [];
+  const exists = currentList.some(m => m.title === movie.title);
+  if (!exists) {
+    currentList.push(movie);
+    localStorage.setItem("myList", JSON.stringify(currentList));
+    alert("Added to My List!");
+  } else {
+    alert("Already in My List");
+  }
+}
