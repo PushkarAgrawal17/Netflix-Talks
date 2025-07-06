@@ -42,8 +42,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
         snapshot.forEach((docSnap) => {
             const movie = docSnap.data();
+            
             const card = document.createElement("div");
             card.classList.add("poster-card");
+
             const img = document.createElement("img");
             img.classList.add("poster");
             img.src = movie.poster;

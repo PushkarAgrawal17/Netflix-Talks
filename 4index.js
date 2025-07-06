@@ -101,17 +101,26 @@ function loadHeroSlides() {
                 slide.style.backgroundImage = `url(${bgImg})`;
 
                 slide.innerHTML = `
-          <div class="slide-content">
-            <h1 class="slide-title">${movie.title}</h1>
-            <p>${movie.overview}</p>
-            <div class="slide-buttons">
-              <button><i class="fas fa-play"></i> Play</button>
-              <button class="mylist-btn"
-                data-title="${movie.title}"
-                data-poster="${bgImg}"
-                data-description="${movie.overview}"
-                data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
-              ><i class="fas fa-plus"></i> My List</button>
+            <div class="slide-content">
+                <h1 class="slide-title">${movie.title}</h1>
+                <p>${movie.overview}</p>
+                <div class="slide-buttons">
+
+                <!-- Info button -->
+                <button class="info-btn"
+                    data-title="${movie.title}"
+                    data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
+                    data-highres-poster="https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}"
+                    data-description="${movie.overview}"
+                    data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
+                ><i class="fas fa-info-circle"></i> Info</button>
+
+                <button class="mylist-btn"
+                    data-title="${movie.title}"
+                    data-poster="${bgImg}"
+                    data-description="${movie.overview}"
+                    data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
+                ><i class="fas fa-plus"></i> My List</button>
             </div>
           </div>`;
 
@@ -148,12 +157,8 @@ function loadHeroSlides() {
         .catch((err) => console.error("Failed to load hero slides", err));
 }
 
-// 🔁 No changes needed below unless you want to migrate popup too
 loadHeroSlides();
 slideInterval = setInterval(nextSlide, 5000);
-
-// (Rest of the file remains same)
-
 
 // -------- Movie Rows --------
 const endpoints = {
@@ -184,15 +189,15 @@ function createGlobalPopup() {
     popup.innerHTML = `
     <div class="popup-overlay"></div>
     <div class="popup-box">
-      <span class="close-btn">&times;</span>
-      <div class="poster-wrapper">
-        <img src="" class="popup-movie-img" alt="Movie Poster" />
-        <h1 class="popup-title-img"></h1>
-        <div class="popup-gradient-overlay"></div>
-      </div>
-      <div class="popup-tags"></div>
-      <p class="popup-description"></p>
-      <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
+        <span class="close-btn">&times;</span>
+        <div class="poster-wrapper">
+            <img src="" class="popup-movie-img" alt="Movie Poster" />
+            <h1 class="popup-title-img"></h1>
+            <div class="popup-gradient-overlay"></div>
+        </div>
+        <div class="popup-tags"></div>
+        <p class="popup-description"></p>
+        <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
     </div>`;
     document.body.appendChild(popup);
     addGlobalPopupListeners();
