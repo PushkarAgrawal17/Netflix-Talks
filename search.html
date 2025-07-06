@@ -5,20 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Netflix Search</title>
 
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  
-  <!-- 💅 Your Stylesheet -->
   <link rel="stylesheet" href="search.css" />
 </head>
 <body>
 
-  <!-- 🌟 Netflix Logo Header -->
+  <!--  Netflix Logo Header -->
   <header class="netflix-header">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo" class="netflix-logo" />
   </header>
 
-  <!-- 🔍 Search Bar + Genre Filter -->
+  <!-- Search Bar + Genre Filter -->
   <section class="search-section">
     <div class="search-container">
       <button id="voiceBtn" title="Voice Search"><i class="fas fa-microphone"></i></button>
@@ -31,32 +28,27 @@
     </select>
   </section>
 
-  <!-- 🎯 Genre Filtered Results (if selected) -->
+  <!-- Genre Filtered Results (if selected) -->
   <div id="genreResults" class="section-container hidden">
     <h3>Genre Results:</h3>
     <div class="row-posters" id="genreResultsList"></div>
   </div>
 
-  <!-- 🔎 Search Results -->
+  <!-- Search Results -->
   <div id="searchResultsContainer" class="section-container hidden">
     <h3>Search Results:</h3>
     <div class="row-posters" id="searchResults"></div>
     <p id="noResultsMessage" class="no-results hidden">No results found.</p>
   </div>
 
-  <!-- ❤️ Recent Searches -->
+  <!--  Recent Searches -->
   <div id="recentContainer" class="section-container hidden">
     <h3>Recent Searches:</h3>
     <div id="recentSearches" class="recent-searches"></div>
   </div>
 
-  <!-- 📈 Trending Movies -->
-  <div class="section-container">
-    <h3>Trending:</h3>
-    <div id="trendingList" class="row-posters"></div>
-  </div>
 
-  <!-- 🍿 JS for Search -->
+  <!-- JS for Search -->
   <script type="module" src="search.js"></script>
 
 </body>

@@ -115,15 +115,6 @@ genreFilter.addEventListener("change", () => {
   }
 });
 
-// --- Trending ---
-function showTrending() {
-  trendingList.innerHTML = "";
-  trendingMovies.forEach((movie) => {
-    const poster = createPoster(movie);
-    trendingList.appendChild(poster);
-  });
-}
-
 // --- Poster Generator ---
 function createPoster(movie) {
   const poster = document.createElement("img");
