@@ -60,7 +60,8 @@ function loadHeroSlides() {
       data-poster="${bgImg}"
       data-description="${movie.overview}"
       data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
-    >+ My List</button>
+    ><i class="fas fa-plus"></i> My List
+    </button>
   </div>
 </div>`;
 
@@ -132,7 +133,8 @@ function createGlobalPopup() {
 
       <div class="popup-tags"></div>
       <p class="popup-description"></p>
-      <button class="popup-mylist-btn" style="margin-left: 1rem; padding: 10px 16px; background: red; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">+ My List </button>
+      <button class="popup-mylist-btn" style="margin-left: 1rem; padding: 10px 16px; background: red; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;"><i class="fas fa-plus"></i> My List
+        </button>
     </div>`;
 
     document.body.appendChild(popup);
