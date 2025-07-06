@@ -271,7 +271,7 @@ function addPosterListeners(container) {
 
       onAuthStateChanged(auth, async (user) => {
         if (!user) {
-          popupBtn.innerHTML = `<i class="fas fa-lock"></i> Sign In to Save`;
+          popupBtn.innerHTML = `<a href="3sign_In.html"><i class="fas fa-lock"></i> Sign In to Save</a>`;
           popupBtn.disabled = true;
           return;
         }
