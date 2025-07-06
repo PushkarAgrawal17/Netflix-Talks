@@ -50,15 +50,20 @@ function loadHeroSlides() {
                 slide.style.backgroundImage = `url(${bgImg})`;
 
                 slide.innerHTML = `
-                    <div class="slide-content">
-                        <h1 class="slide-title">${movie.title}</h1>
-                        <p>${description}</p>
-                        <div class="slide-buttons">
-                            <button><i class="fas fa-play"></i> Play</button>
-                            <button class="mylist-btn" data-title="${movie.title}" data-poster="${bgImg}">+ My List</button>
-                        </div>
-                    </div>
-                `;
+<div class="slide-content">
+  <h1 class="slide-title">${movie.title}</h1>
+  <p>${description}</p>
+  <div class="slide-buttons">
+    <button><i class="fas fa-play"></i> Play</button>
+    <button class="mylist-btn"
+      data-title="${movie.title}"
+      data-poster="${bgImg}"
+      data-description="${movie.overview}"
+      data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
+    >+ My List</button>
+  </div>
+</div>`;
+
                 heroContainer.appendChild(slide);
 
                 const dot = document.createElement("span");
@@ -76,15 +81,18 @@ function loadHeroSlides() {
             dotElements = document.querySelectorAll(".dot");
 
             showSlide(0);
-//MY LIST button working ---for hero slides
+
+            // MY LIST button working ---for hero slides
             document.querySelectorAll(".mylist-btn").forEach((btn) => {
-              btn.addEventListener("click", () => {
-                const movie = {
-              title: btn.getAttribute("data-title"),
-              poster: btn.getAttribute("data-poster"),
-            };
-            addToMyList(movie);
-          });
+                btn.addEventListener("click", () => {
+                    const movie = {
+                        title: btn.getAttribute("data-title"),
+                        poster: btn.getAttribute("data-poster"),
+                        description: btn.getAttribute("data-description"),
+                        tags: btn.getAttribute("data-tags")
+                    };
+                    addToMyList(movie);
+                });
             });
 
         })
@@ -128,7 +136,7 @@ function createGlobalPopup() {
     </div>`;
 
     document.body.appendChild(popup);
-    addGlobalPopupListeners(); // attach close listeners
+    addGlobalPopupListeners();
 }
 
 function fetchAndDisplayMovies(url, containerId) {
@@ -159,18 +167,13 @@ function fetchAndDisplayMovies(url, containerId) {
                 `;
                 container.appendChild(card);
             });
-            // Add listeners to newly created posters
             addPosterListeners(container);
-
         })
         .catch(err => {
             console.error("TMDB fetch failed", err);
             container.innerHTML = "<p>Failed to load movies. Please try again later.</p>";
         });
 }
-
-
-// -------------------------- Movie Popup ----------------------------
 
 function addPosterListeners(container) {
     const popup = document.getElementById("global-popup");
@@ -184,7 +187,6 @@ function addPosterListeners(container) {
             popup.style.display = "flex";
             document.body.style.overflow = "hidden";
 
-            // Set popup content
             const title = poster.getAttribute("data-title");
             const lowRes = poster.getAttribute("data-poster");
             const highRes = poster.getAttribute("data-highres-poster");
@@ -206,13 +208,16 @@ function addPosterListeners(container) {
                 posterImg.src = highRes;
             };
 
-            // ✅ Attach "+ My List" click here after popup is shown
             const popupAddBtn = document.querySelector(".popup-mylist-btn");
             if (popupAddBtn) {
                 popupAddBtn.onclick = () => {
                     const movie = {
                         title,
                         poster: highRes,
+                        description: descElem.textContent,
+                        tags: Array.from(tagsWrap.querySelectorAll("span"))
+                            .map((span) => span.textContent)
+                            .join(", ")
                     };
                     addToMyList(movie);
                 };
@@ -221,45 +226,6 @@ function addPosterListeners(container) {
     });
 }
 
-
-// function addPosterListeners(container) {
-//     const popup = document.getElementById("global-popup");
-//     const posterTitle = popup.querySelector(".popup-title-img");
-//     const posterImg = popup.querySelector(".popup-movie-img");
-//     const descElem = popup.querySelector(".popup-description");
-//     const tagsWrap = popup.querySelector(".popup-tags");
-
-//     container.querySelectorAll(".movie-poster").forEach(poster => {
-//         poster.addEventListener("click", () => {
-//             popup.style.display = "flex";
-//             document.body.style.overflow = "hidden"; // ← lock background scroll
-//             posterTitle.textContent = poster.getAttribute("data-title")
-
-//             const lowRes = poster.getAttribute("data-poster");
-//             const highRes = poster.getAttribute("data-highres-poster");
-
-//             posterImg.src = lowRes;
-
-//             // Preload high-res in background
-//             const tempImg = new Image();
-//             tempImg.src = highRes;
-//             tempImg.onload = () => {
-//                 posterImg.src = highRes;
-//             };
-
-//             descElem.textContent = poster.getAttribute("data-description");
-
-//             // Populate tags
-//             tagsWrap.innerHTML = "";
-//             poster.getAttribute("data-tags").split(",").forEach(tag => {
-//                 const span = document.createElement("span");
-//                 span.textContent = tag.trim();
-//                 tagsWrap.appendChild(span);
-//             });
-//         });
-//     });
-// }
-
 function addGlobalPopupListeners() {
     const popup = document.getElementById("global-popup");
     const closeBtn = popup.querySelector(".close-btn");
@@ -267,12 +233,12 @@ function addGlobalPopupListeners() {
 
     closeBtn.addEventListener("click", () => {
         popup.style.display = "none";
-        document.body.style.overflow = "auto"; // Re-enable background scroll
+        document.body.style.overflow = "auto";
     });
 
     overlay.addEventListener("click", () => {
         popup.style.display = "none";
-        document.body.style.overflow = "auto"; // Re-enable background scroll
+        document.body.style.overflow = "auto";
     });
 }
 
@@ -287,7 +253,7 @@ fetchAndDisplayMovies(endpoints.action, "action");
 fetchAndDisplayMovies(endpoints.horror, "horror");
 
 
-// --------------------Navbar Profile dropdown ------------------
+// -------------------- Navbar Profile Dropdown ------------------
 const profileIcon = document.getElementById("profileIcon");
 const profileDropdown = document.getElementById("profileDropdown");
 
@@ -296,44 +262,33 @@ profileIcon.addEventListener("click", () => {
         profileDropdown.style.display === "block" ? "none" : "block";
 });
 
-// Close dropdown if clicked outside
 document.addEventListener("click", (e) => {
-    if (
-        !profileDropdown.contains(e.target) &&
-        !profileIcon.contains(e.target)
-    ) {
+    if (!profileDropdown.contains(e.target) && !profileIcon.contains(e.target)) {
         profileDropdown.style.display = "none";
     }
 });
 
-// Close dropdown when clicking on any dropdown item
 document.querySelectorAll("#profileDropdown li").forEach((item) => {
     item.addEventListener("click", () => {
         profileDropdown.style.display = "none";
     });
 });
 
-
-/*--------------Profile dropdown-------------*/
-// Redirect to Get Started on Sign Out
 document.getElementById("signOut").addEventListener("click", () => {
-    profileDropdown.style.display = "none"; // dropdown band karo
-    window.location.href = "1getStarted.html"; // redirect to get started
+    profileDropdown.style.display = "none";
+    window.location.href = "1getStarted.html";
 });
 
-// Redirect on Account
 document.getElementById("accountBtn").addEventListener("click", () => {
     profileDropdown.style.display = "none";
     window.location.href = "account.html";
 });
 
-// Redirect on Settings
 document.getElementById("settingsBtn").addEventListener("click", () => {
     profileDropdown.style.display = "none";
     window.location.href = "settings.html";
 });
 
-// Load profile pic from localStorage if available (Set profile pic)
 window.addEventListener("DOMContentLoaded", () => {
     const savedProfilePic = localStorage.getItem("profilePic");
     if (savedProfilePic) {
@@ -345,16 +300,20 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ADD TO MY LIST after clicking on the My list button
-
+// -------------------- Add to My List ------------------
 function addToMyList(movie) {
-  const currentList = JSON.parse(localStorage.getItem("myList")) || [];
-  const exists = currentList.some(m => m.title === movie.title);
-  if (!exists) {
-    currentList.push(movie);
-    localStorage.setItem("myList", JSON.stringify(currentList));
-    alert("Added to My List!");
-  } else {
-    alert("Already in My List");
-  }
+    const currentList = JSON.parse(localStorage.getItem("myList")) || [];
+    const exists = currentList.some((m) => m.title === movie.title);
+    if (!exists) {
+        currentList.push({
+            title: movie.title,
+            poster: movie.poster,
+            description: movie.description || "No description available",
+            tags: movie.tags || "Movie"
+        });
+        localStorage.setItem("myList", JSON.stringify(currentList));
+        alert("Added to My List!");
+    } else {
+        alert("Already in My List");
+    }
 }
