@@ -1,0 +1,164 @@
+/* =============== Global Reset =============== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color:rgb(3, 3,16);
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+}
+
+/* =============== Netflix Logo Header =============== */
+.netflix-header {
+  padding: 1.5rem 2rem 0.5rem 2rem;
+  background-color: #000;
+}
+
+
+/* =============== Section Containers =============== */
+.section-container {
+  padding: 1.5rem 2rem;
+}
+
+/* =============== Search Section =============== */
+.search-section {
+  background-color: #1c1c1c;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+
+#voiceBtn,
+#searchBtn {
+  background-color: #e50914;
+  border: none;
+  padding: 0.6rem 1rem;
+  color: white;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#genreFilter {
+  width: 200px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  background-color: #333;
+  color: white;
+  border: none;
+}
+.search-container button {
+  background: #333;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+#voiceBtn:hover ,
+#searchBtn:hover{
+    background-color: #e4686e;
+}
+
+
+/* =============== Search Result Posters =============== */
+
+.row-posters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 0;
+}
+
+.row-posters img {
+  width: 150px;
+  height: 225px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.row-posters img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.8); /* Netflix red shadow */
+}
+
+/* =============== Recent & Trending =============== */
+.recent-searches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.recent-searches span {
+  background-color: #333;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.recent-searches span:hover {
+  background-color: #555;
+}
+
+/* =============== No Results Message =============== */
+.no-results {
+  color: #aaa;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+/* =============== Utility Classes =============== */
+.hidden {
+  display: none !important;
+}
+
+/* ===============Back Button Style =============== */
+
+.back-btn {
+  top: 86px;
+  left: 80px;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+  z-index: 1000;
+  font-size: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
