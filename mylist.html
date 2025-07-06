@@ -7,30 +7,39 @@
     <title>My List | Netflix Clone</title>
     <link rel="icon" type="image/png" href="./Images/favicon.png" />
     <link rel="stylesheet" href="mylist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <body>
-    <header class="navbar">
-        <img src="Images/Netflix-Logo2.png" alt="Logo" class="logo" />
-        <h2>My List</h2>
-    </header>
-    <h1 class="heading">My List (Coming Soon...)</h1>
-    <main class="movie-grid">
-        <!-- Movie boxes will be dynamically inserted here -->
-    </main>
 
-    <!-- Popup -->
-    <div class="popup" id="popup">
-        <div class="popup-content">
-            <span class="close-btn" id="closePopup">&times;</span>
-            <img id="popupPoster" src="" alt="Poster" />
-            <h3 id="popupTitle"></h3>
-            <p id="popupDescription"></p>
-        </div>
+    <!--Back button-->
+    <a href="4index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!---------------My lists Posters---------------> 
+    <div class="mylist-container">
+    <h1 class="mylist-heading">My List</h1>
+    <div class="poster-grid">
+        <script src="myList.js"></script>
     </div>
+    <!-- <script src="mylist.js"></script> -->
+  </div>
 
-    <script src="mylist.js" type="module"></script>
-
+  <!--To show popups on clicking on posters-->
+  <div class="popup-css" id="mylist-popup" style="display: none"> 
+    <div class="popup-overlay"></div> 
+    <div class="popup-box"> <span class="close-btn">&times;</span> 
+    <div class="poster-wrapper"> <img class="popup-movie-img" src="" alt="Movie Poster" /> 
+        <h1 class="popup-title-img">
+        </h1> <div class="popup-gradient-overlay">
+        </div> </div> 
+        <div class="popup-tags"></div> 
+        <p class="popup-description"></p> 
+        <button id="remove-btn" style="margin-left: 1rem; padding: 10px 16px; background: red; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Remove from My List</button> 
+    </div> 
+    </div>
 </body>
 
 </html>

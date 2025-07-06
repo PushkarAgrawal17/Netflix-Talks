@@ -95,7 +95,7 @@ body {
     position: absolute;
     top: 38px;
 
-    right: -10px;
+    right: 0px;
     background-color: rgba(20, 20, 20, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -114,13 +114,14 @@ body {
 }
 
 .profile-dropdown li {
-    padding: 12px 16px;
+    padding: 12px 14px;
     color: #fff;
     font-size: 14px;
     display: flex;
-    align-items: centre;
+    align-items: center;
     gap: 10px;
     cursor: pointer;
+    white-space: nowrap; /*remove this for sign <next line> out*/
     transition: background 0.2s;
 }
 
@@ -664,4 +665,25 @@ body {
     .footer-column {
         align-items: flex-start;
     }
+}
+
+/*Styling for My list button */
+
+.mylist-btn,
+.popup-mylist-btn {
+  background-color: #e50914;
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  margin-top: 10px;
+  margin-left: 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.mylist-btn:hover,
+.popup-mylist-btn:hover {
+  background-color: #f40612;
 }

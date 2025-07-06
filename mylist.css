@@ -1,21 +1,281 @@
 /* ---------- Base ----------- */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 body {
-    background-color: #01000F;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #fff;
-    line-height: 1.4;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(3, 3, 16);
+  font-family: 'Helvetica Neue', sans-serif;
+  color: white;
 }
 
-.heading {
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-    color: white;
+/*--Back button--*/
+.back-btn {
+  position: absolute;
+  top: 86px;
+  left: 80px;
+  color: white;
+  font-size: 28px;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+  z-index: 1000;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/*-----Posters-----*/
+.mylist-container {
+  padding: 40px 40px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.mylist-heading {
+  text-align: center;
+  font-size: 3.0rem;
+  font-weight: 1110;
+  margin-bottom: 80px;
+  margin-top: 40px;
+}
+
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  justify-items: center;
+}
+
+.poster-card {
+  position: relative;
+  width: 100%;
+  max-width: 180px;
+  transition: transform 0.3s ease;
+}
+
+.poster-card img {
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.poster-card:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1200px) {
+  .poster-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .poster-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .poster-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =================== Popup for My List =================== */
+.popup-css {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+  animation: popup-fade 0.3s ease;
+  overflow: hidden;
+}
+
+.popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+
+.popup-box {
+  position: relative;
+  background-color: #141414;
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  max-width: 800px;
+  min-width: 340px;
+  color: #fff;
+  z-index: 10001;
+  max-height: 95vh;
+  height: 90vh;
+  overflow-y: auto;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+  animation: popup-zoom 0.35s ease;
+  box-shadow: 0 0 15px rgba(222, 25, 25, 0.83);
+  scroll-behavior: smooth;
+}
+
+.popup-box::-webkit-scrollbar {
+  display: none;
+}
+
+.poster-wrapper {
+  position: relative;
+}
+
+.popup-movie-img {
+  filter: none;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.popup-title-img {
+  width: 55%;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  z-index: 20;
+  color: white;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-family: "Merriweather", Times, serif;
+  font-weight: bolder;
+  text-shadow:
+    2px 2px 4px rgba(255, 0, 0, 0.8),
+    -1px -1px 0 #ff0000,
+    1px -1px 0 #ff0000,
+    -1px 1px 0 #ff0000,
+    1px 1px 0 #ff0000;
+}
+
+.popup-gradient-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80%;
+  border-radius: 0 0 6px 6px;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(22, 22, 22, 1) 0%, rgba(6, 10, 23, 0) 100%);
+}
+
+.popup-tags {
+  margin-left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.popup-tags span {
+  background-color: #333;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 6px;
+  z-index: 2;
+}
+
+.popup-description {
+  position: relative;
+  margin: 1rem;
+  line-height: 1.6;
+  color: #ccc;
+  font-size: 1rem;
+  z-index: 20;
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 30px;
+  font-size: 35px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10001;
+  transition: transform 0.2s;
+  filter: drop-shadow(0 0 5px black);
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+/* ========== Popup Buttons (My List / Remove) ========== */
+.popup-btn {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  padding: 10px 16px;
+  background-color: red;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s ease;
+}
+
+.popup-btn i {
+  font-size: 1.1rem;
+}
+
+.popup-btn:hover {
+  background-color: #c30000;
+}
+
+.popup-btn.added {
+  background-color: green;
+}
+
+.popup-btn.removed {
+  background-color: #444;
+}
+
+/* Animations */
+@keyframes popup-fade {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+  }
+}
+
+@keyframes popup-zoom {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
