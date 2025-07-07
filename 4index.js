@@ -5,11 +5,13 @@ import {
     doc,
     setDoc,
     getDoc,
+    getDocs,
     deleteDoc,
     updateDoc,
     deleteField,
     arrayUnion,
-    arrayRemove
+    arrayRemove,
+    collection
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 import {
     getAuth,
@@ -216,6 +218,14 @@ function createGlobalPopup() {
         <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i><span id="dislike-count"> 0</span></button>
         <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
       </div>
+      <div class="comment-section">
+        <h3>Comments</h3>
+        <div class="comment-input-box">
+            <textarea id="comment-input" placeholder="Add a comment..."></textarea>
+            <button id="post-comment">Post</button>
+        </div>
+        <div id="comments-list"></div>
+       </div>
     </div>`;
     document.body.appendChild(popup);
     addGlobalPopupListeners();
@@ -483,6 +493,138 @@ function addPosterListeners(container) {
                     });
                 };
 
+                //Comment Section
+                const commentInput = popup.querySelector("#comment-input");
+                const postCommentBtn = popup.querySelector("#post-comment");
+                const commentsList = popup.querySelector("#comments-list");
+
+                postCommentBtn.onclick = async () => {
+                    const commentText = commentInput.value.trim();
+                    if (!commentText) return;
+
+                    const commentRef = doc(collection(mmovieRef, "comments"));
+                    await setDoc(commentRef, {
+                        username: user.email || user.displayName,
+                        comment: commentText,
+                        timestamp: new Date()
+                    });
+
+                    commentInput.value = "";
+                    showToast("Comment posted!", "#1db954");
+                    loadComments();
+                };
+
+                async function loadComments() {
+                    commentsList.innerHTML = "";
+                    const commentsSnapshot = await getDocs(collection(mmovieRef, "comments"));
+                    commentsSnapshot.forEach(async (docSnap) => {
+                        const data = docSnap.data();
+                        const commentId = docSnap.id;
+
+                        const div = document.createElement("div");
+                        div.classList.add("comment-card");
+                        div.innerHTML = `
+            <p>${data.username}</p>
+            <h4>${data.comment}</h4>
+            <div class="comment-meta">${new Date(data.timestamp?.toDate?.() || data.timestamp).toLocaleString()}</div>
+            <div class="reply-btn" data-id="${commentId}">Reply</div>
+            <div class="reply-box" id="reply-${commentId}" style="display:none;">
+                <textarea placeholder="Write a reply..."></textarea>
+                <button>Post Reply</button>
+            </div>
+            <button class="toggle-replies-btn" data-id="${commentId}">💬 View Replies</button>
+            <div class="replies-container" id="replies-${commentId}" style="display:none;"></div>
+        `;
+                        // Fetch reply count for this comment
+                        const repliesSnap = await getDocs(collection(mmovieRef, "comments", commentId, "replies"));
+                        const replyCount = repliesSnap.size;
+                        div.querySelector(".toggle-replies-btn").textContent = `💬 View ${replyCount} repl${replyCount === 1 ? 'y' : 'ies'}`;
+
+                        commentsList.appendChild(div);
+
+                        // Reply button toggle
+                        div.querySelector(".reply-btn").addEventListener("click", () => {
+                            const box = div.querySelector(`#reply-${commentId}`);
+                            box.style.display = box.style.display === "none" ? "block" : "none";
+                        });
+
+                        // Reply post
+                        div.querySelector(`#reply-${commentId} button`).addEventListener("click", async () => {
+                            const replyText = div.querySelector(`#reply-${commentId} textarea`).value.trim();
+                            if (!replyText) return;
+                            const replyRef = doc(collection(doc(mmovieRef, "comments", commentId), "replies"));
+                            await setDoc(replyRef, {
+                                username: user.email || user.displayName,
+                                comment: replyText,
+                                timestamp: new Date()
+                            });
+                            showToast("Reply posted!", "gray");
+
+                            // ✅ Append reply directly to the replies container
+                            const replyContainer = div.querySelector(`#replies-${commentId}`);
+                            const replyDiv = document.createElement("div");
+                            replyDiv.classList.add("reply-card");
+                            replyDiv.innerHTML = `
+                                <p>${user.email || user.displayName}</p>
+                                <h4>${replyText}</h4>
+                                <div class="comment-meta">${new Date().toLocaleString()}</div>
+                            `;
+                            replyContainer.appendChild(replyDiv);
+                            replyContainer.style.display = "block";
+
+                            // ✅ Update reply count in toggle button
+                            const toggleBtn = div.querySelector(".toggle-replies-btn");
+                            const match = toggleBtn.textContent.match(/View (\d+)/);
+                            let currentCount = match ? parseInt(match[1]) : 0;
+                            currentCount++;
+                            toggleBtn.textContent = `💬 Hide ${currentCount} repl${currentCount === 1 ? 'y' : 'ies'}`;
+
+                            // Hide reply input
+                            div.querySelector(`#reply-${commentId} textarea`).value = "";
+                            div.querySelector(`#reply-${commentId}`).style.display = "none";
+
+                        });
+
+                        // Toggle showing replies
+                        div.querySelector(".toggle-replies-btn").addEventListener("click", async () => {
+                            const replyContainer = div.querySelector(`#replies-${commentId}`);
+
+                            // If already visible, just toggle
+                            if (replyContainer.style.display === "block") {
+                                replyContainer.style.display = "none";
+                                const count = replyContainer.children.length;
+                                toggleBtn.textContent = `💬 View ${count} repl${count === 1 ? 'y' : 'ies'}`;
+                                return;
+                            }
+
+                            // Clear before loading
+                            replyContainer.innerHTML = "";
+
+                            // Fetch replies
+                            const repliesSnap = await getDocs(collection(mmovieRef, "comments", commentId, "replies"));
+                            if (repliesSnap.empty) {
+                                replyContainer.innerHTML = `<p style="font-size:14px;color:#777;">No replies yet.</p>`;
+                            } else {
+                                repliesSnap.forEach((replyDoc) => {
+                                    const reply = replyDoc.data();
+                                    const replyDiv = document.createElement("div");
+                                    replyDiv.classList.add("reply-card");
+                                    replyDiv.innerHTML = `
+                                        <p>${reply.username}</p>
+                                        <h4>${reply.comment}</h4>
+                                        <div class="comment-meta">${new Date(reply.timestamp?.toDate?.() || reply.timestamp).toLocaleString()}</div>
+                                    `;
+                                    replyContainer.appendChild(replyDiv);
+                                });
+                            }
+
+                            replyContainer.style.display = "block";
+                        });
+
+                    });
+                }
+
+                loadComments();
             });
 
             const tempImg = new Image();
