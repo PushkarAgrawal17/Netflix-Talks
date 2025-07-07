@@ -11,30 +11,36 @@
 </head>
 
 <body>
-    <!--  Netflix Logo Header -->
-    <header class="netflix-header">
-        <a href="4index.html" class="back-btn">
-            <i class="fas fa-arrow-left"></i>
-        </a>
-    </header>
-
-    <!--  Back Button -->
+    
 
     <!-- Search Bar + Genre Filter -->
     <section class="search-section">
+        <a href="4index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
         <div class="search-container">
             <button id="voiceBtn" title="Voice Search">
                 <i class="fas fa-microphone"></i>
             </button>
+            <div id="searchBarContainer">
             <input type="text" id="searchInput" placeholder="Search for movies..." />
-            <button id="searchBtn" title="Search">
-                <i class="fas fa-search"></i>
-            </button>
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
         </div>
 
-        <select id="genreFilter">
-            <option value="">All Genres</option>
-        </select>
+    <!-- Genre Toggle Button -->
+    <button id="genreToggleBtn" title="Search by Genre">
+      <i class="fas fa-film"></i> Genre
+    </button>
+    
+    <!-- Genre Dropdown -->
+    <div class="genre-dropdown"> <!-- ✅ Only class here -->
+      <select id="genreFilter"> <!-- ✅ ID goes here -->
+        <option value="">Select Genre</option>
+      </select>
+    </div>
+
     </section>
 
     <!-- Genre Filtered Results (if selected) -->
