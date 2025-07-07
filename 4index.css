@@ -525,7 +525,7 @@ body {
     flex-wrap: wrap;
     gap: 5px;
     font-size: 0.9rem;
-    color: #ccc;
+    color: rgb(255, 255, 255);
 }
 
 .popup-tags span {
@@ -672,7 +672,7 @@ body {
 .popup-actions {
     margin-top: 15px;
     display: flex;
-  gap: 10px;
+    gap: 10px;
 }
 
 .popup-actions button {
@@ -686,7 +686,7 @@ body {
 
 .mylist-btn,
 .popup-mylist-btn {
-    background-color: #e50914;
+    background-color: #ff000d;
     color: white;
     font-weight: bold;
     padding: 8px 12px;
@@ -700,30 +700,41 @@ body {
 
 .mylist-btn:hover,
 .popup-mylist-btn:hover {
-    background-color: #f40612;
+    background-color: #bd0912;
 }
 
 .like-btn {
-  background-color: #1db954;
-  color: white;
+    background-color: #1db954;
+    color: white;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
-.like-btn.active ,.like-btn:hover{
-  background-color: #084522;
+.like-btn.active,
+.like-btn:hover {
+    background-color: #084522;
 }
 
 .dislike-btn {
-  background-color: #ff4d4d;
-  color: white;
+    background-color: #e80e0e;
+    color: white;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
-.dislike-btn.active, .dislike-btn:hover {
-  background-color: #670000;
+.dislike-btn.active,
+.dislike-btn:hover {
+    background-color: #670000;
 }
 
 .share-btn {
-  background-color: #008cba;
-  color: white;
+    background-color: #00bfff;
+    color: white;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .share-btn:hover {
@@ -798,4 +809,3 @@ body {
     font-size: 14px;
     margin-top: 5px;
 }
-

@@ -121,21 +121,21 @@ function loadHeroSlides() {
                 slide.style.backgroundImage = `url(${bgImg})`;
 
                 slide.innerHTML = `
-          <div class="slide-content">
-            <h1 class="slide-title">${movie.title}</h1>
-            <p>${movie.overview}</p>
-            <div class="slide-buttons">
-              <button><i class="fas fa-play"></i> Play</button>
-              <button class="mylist-btn"
-                data-title="${movie.title}"
-                data-bg="${bgImg}"
-                data-bg-low="${bgImgLowRes}"
-                data-poster="${posterImg}"
-                data-description="${movie.overview}"
-                data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
-              ><i class="fas fa-plus"></i> My List</button>
-            </div>
-          </div>`;
+                <div class="slide-content">
+                    <h1 class="slide-title">${movie.title}</h1>
+                    <p>${movie.overview}</p>
+                    <div class="slide-buttons">
+                    <button><i class="fas fa-play"></i> Play</button>
+                    <button class="mylist-btn"
+                        data-title="${movie.title}"
+                        data-bg="${bgImg}"
+                        data-bg-low="${bgImgLowRes}"
+                        data-poster="${posterImg}"
+                        data-description="${movie.overview}"
+                        data-tags="${movie.release_date?.split('-')[0]}, Rating: ${movie.vote_average}, Popularity: ${Math.round(movie.popularity)}"
+                    ><i class="fas fa-plus"></i> My List</button>
+                    </div>
+                </div>`;
 
                 heroContainer.appendChild(slide);
 
@@ -206,26 +206,26 @@ function createGlobalPopup() {
     <div class="popup-box">
       <span class="close-btn">&times;</span>
       <div class="poster-wrapper">
-        <img src="" class="popup-movie-img" alt="Movie Poster" />
-        <h1 class="popup-title-img"></h1>
-        <div class="popup-gradient-overlay"></div>
+          <img src="" class="popup-movie-img" alt="Movie Poster" />
+          <h1 class="popup-title-img"></h1>
+          <div class="popup-gradient-overlay"></div>
       </div>
       <div class="popup-tags"></div>
       <p class="popup-description"></p>
       <div class="popup-actions">
-        <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
-        <button id="like-btn" class="like-btn"><i class="fas fa-thumbs-up"></i><span id="like-count">0</span></button>
-        <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i><span id="dislike-count"> 0</span></button>
-        <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
+          <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
+          <button id="like-btn" class="like-btn"><i class="fas fa-thumbs-up"></i><span id="like-count">0</span></button>
+          <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i><span id="dislike-count"> 0</span></button>
+          <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
       </div>
       <div class="comment-section">
-        <h3>Comments</h3>
-        <div class="comment-input-box">
-            <textarea id="comment-input" placeholder="Add a comment..."></textarea>
-            <button id="post-comment">Post</button>
-        </div>
-        <div id="comments-list"></div>
-       </div>
+          <h3>Comments</h3>
+          <div class="comment-input-box">
+              <textarea id="comment-input" placeholder="Add a comment..."></textarea>
+              <button id="post-comment">Post</button>
+          </div>
+          <div id="comments-list"></div>
+      </div>
     </div>`;
     document.body.appendChild(popup);
     addGlobalPopupListeners();
@@ -245,7 +245,7 @@ function fetchAndDisplayMovies(url, containerId) {
                 card.classList.add("poster-card");
 
                 card.innerHTML = `
-                <span class="rank">${rank++}</span>
+                ${containerId === "trending" || containerId === "top-rated" ? `<span class="rank">${rank++}</span>` : ""}
                 <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                     alt="${movie.title}"
                     class="movie-poster"
@@ -350,7 +350,7 @@ function addPosterListeners(container) {
                     }
                 };
 
-                //LIKE/DISLIKE and SHARE BUTTONS 
+                //LIKE/DISLIKE and SHARE BUTTONS
                 const likeBtn = popup.querySelector("#like-btn");
                 const dislikeBtn = popup.querySelector("#dislike-btn");
                 const shareBtn = popup.querySelector("#share-btn");
