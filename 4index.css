@@ -668,6 +668,22 @@ body {
 }
 
 /*Styling for My list button in Navbar */
+
+.popup-actions {
+    margin-top: 15px;
+    display: flex;
+  gap: 10px;
+}
+
+.popup-actions button {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
 .mylist-btn,
 .popup-mylist-btn {
     background-color: #e50914;
@@ -685,4 +701,32 @@ body {
 .mylist-btn:hover,
 .popup-mylist-btn:hover {
     background-color: #f40612;
+}
+
+.like-btn {
+  background-color: #1db954;
+  color: white;
+}
+
+.like-btn.active ,.like-btn:hover{
+  background-color: #084522;
+}
+
+.dislike-btn {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.dislike-btn.active, .dislike-btn:hover {
+  background-color: #670000;
+}
+
+.share-btn {
+  background-color: #008cba;
+  color: white;
+}
+
+.share-btn:hover {
+  background-color: #00536e;
+  color: white;
 }

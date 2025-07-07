@@ -5,7 +5,11 @@ import {
     doc,
     setDoc,
     getDoc,
-    deleteDoc
+    deleteDoc,
+    updateDoc,
+    deleteField,
+    arrayUnion,
+    arrayRemove
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 import {
     getAuth,
@@ -206,7 +210,12 @@ function createGlobalPopup() {
       </div>
       <div class="popup-tags"></div>
       <p class="popup-description"></p>
-      <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
+      <div class="popup-actions">
+        <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
+        <button id="like-btn" class="like-btn"><i class="fas fa-thumbs-up"></i></button>
+        <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i></button>
+        <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
+      </div>
     </div>`;
     document.body.appendChild(popup);
     addGlobalPopupListeners();
@@ -230,6 +239,7 @@ function fetchAndDisplayMovies(url, containerId) {
                 <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                     alt="${movie.title}"
                     class="movie-poster"
+                    data-id="${movie.id}"
                     data-title="${movie.title}"
                     data-short-poster="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                     data-poster="https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}"
@@ -258,6 +268,7 @@ function addPosterListeners(container) {
 
     container.querySelectorAll(".movie-poster").forEach((poster) => {
         poster.addEventListener("click", () => {
+            const id = poster.dataset.id;
             const title = poster.dataset.title;
             const lowRes = poster.dataset.poster;
             const highRes = poster.dataset.highresPoster;
@@ -328,6 +339,128 @@ function addPosterListeners(container) {
                         showToast("Added to My List!", "green");
                     }
                 };
+
+                //LIKE/DISLIKE and SHARE BUTTONS 
+                const likeBtn = popup.querySelector("#like-btn");
+                const dislikeBtn = popup.querySelector("#dislike-btn");
+                const shareBtn = popup.querySelector("#share-btn");
+
+                likeBtn.classList.remove("active");
+                dislikeBtn.classList.remove("active");
+
+
+                const movieId = id; // use safe movie ID
+                const userRef = doc(db, "users", user.uid);
+                const mmovieRef = doc(db, "movies", movieId);
+
+                const userDocSnap = await getDoc(userRef);
+                const userData = userDocSnap.exists() ? userDocSnap.data() : {};
+                const likedArray = userData.liked || [];
+                const dislikedArray = userData.disliked || [];
+
+                if (likedArray.includes(movieId)) likeBtn.classList.add("active");
+                if (dislikedArray.includes(movieId)) dislikeBtn.classList.add("active");
+
+                // LIKE
+                likeBtn.onclick = async () => {
+                    const userDocSnap = await getDoc(userRef);
+                    const userData = userDocSnap.exists() ? userDocSnap.data() : {};
+                    const likedArray = userData.liked || [];
+                    const dislikedArray = userData.disliked || [];
+
+                    const isLiked = likedArray.includes(movieId);
+
+                    if (!isLiked) {
+                        // Add to liked, remove from disliked
+                        await updateDoc(userRef, {
+                            liked: arrayUnion(movieId),
+                            disliked: arrayRemove(movieId)
+                        });
+
+                        await setDoc(mmovieRef, {
+                            likedBy: arrayUnion(user.uid),
+                            dislikedBy: arrayRemove(user.uid)
+                        }, { merge: true });
+
+                        likeBtn.classList.add("active");
+                        dislikeBtn.classList.remove("active");
+                        showToast("You liked this movie!", "#1db954");
+                    } else {
+                        // Remove like
+                        await updateDoc(userRef, {
+                            liked: arrayRemove(movieId)
+                        });
+
+                        await updateDoc(mmovieRef, {
+                            likedBy: arrayRemove(user.uid)
+                        });
+
+                        likeBtn.classList.remove("active");
+                        showToast("Like removed", "gray");
+                    }
+
+                    // Clean up if arrays are now empty
+                    const updatedUser = (await getDoc(userRef)).data();
+                    const cleanUp = {};
+                    if (!(updatedUser.liked || []).length) cleanUp.liked = deleteField();
+                    if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
+                    if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
+                };
+
+                // DISLIKE
+                dislikeBtn.onclick = async () => {
+                    const userDocSnap = await getDoc(userRef);
+                    const userData = userDocSnap.exists() ? userDocSnap.data() : {};
+                    const likedArray = userData.liked || [];
+                    const dislikedArray = userData.disliked || [];
+
+                    const isDisliked = dislikedArray.includes(movieId);
+
+                    if (!isDisliked) {
+                        // Add to disliked, remove from liked
+                        await updateDoc(userRef, {
+                            disliked: arrayUnion(movieId),
+                            liked: arrayRemove(movieId)
+                        });
+
+                        await setDoc(mmovieRef, {
+                            dislikedBy: arrayUnion(user.uid),
+                            likedBy: arrayRemove(user.uid)
+                        }, { merge: true });
+
+                        dislikeBtn.classList.add("active");
+                        likeBtn.classList.remove("active");
+                        showToast("You disliked this movie!", "#e74c3c");
+                    } else {
+                        // Remove dislike
+                        await updateDoc(userRef, {
+                            disliked: arrayRemove(movieId)
+                        });
+
+                        await updateDoc(mmovieRef, {
+                            dislikedBy: arrayRemove(user.uid)
+                        });
+
+                        dislikeBtn.classList.remove("active");
+                        showToast("Dislike removed", "gray");
+                    }
+
+                    // Clean up if arrays are now empty
+                    const updatedUser = (await getDoc(userRef)).data();
+                    const cleanUp = {};
+                    if (!(updatedUser.liked || []).length) cleanUp.liked = deleteField();
+                    if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
+                    if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
+                };
+
+
+                shareBtn.onclick = () => {
+                    const shareUrl = window.location.href + `#${movieId}`;
+                    navigator.clipboard.writeText(shareUrl).then(() => {
+                        showToast("Movie link copied to clipboard!", "#3498db");
+                    });
+                };
+
             });
 
             const tempImg = new Image();
