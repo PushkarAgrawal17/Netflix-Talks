@@ -212,8 +212,8 @@ function createGlobalPopup() {
       <p class="popup-description"></p>
       <div class="popup-actions">
         <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
-        <button id="like-btn" class="like-btn"><i class="fas fa-thumbs-up"></i></button>
-        <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i></button>
+        <button id="like-btn" class="like-btn"><i class="fas fa-thumbs-up"></i><span id="like-count">0</span></button>
+        <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i><span id="dislike-count"> 0</span></button>
         <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
       </div>
     </div>`;
@@ -353,6 +353,16 @@ function addPosterListeners(container) {
                 const userRef = doc(db, "users", user.uid);
                 const mmovieRef = doc(db, "movies", movieId);
 
+                const likeCountSpan = popup.querySelector("#like-count");
+                const dislikeCountSpan = popup.querySelector("#dislike-count");
+
+                const movieDocSnap = await getDoc(mmovieRef);
+                const movieData = movieDocSnap.exists() ? movieDocSnap.data() : {};
+
+                likeCountSpan.textContent = (movieData.likedBy || []).length;
+                dislikeCountSpan.textContent = (movieData.dislikedBy || []).length;
+
+
                 const userDocSnap = await getDoc(userRef);
                 const userData = userDocSnap.exists() ? userDocSnap.data() : {};
                 const likedArray = userData.liked || [];
@@ -405,6 +415,12 @@ function addPosterListeners(container) {
                     if (!(updatedUser.liked || []).length) cleanUp.liked = deleteField();
                     if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
                     if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
+
+                    // ✅ UPDATE COUNTS
+                    const updatedMovieSnap = await getDoc(mmovieRef);
+                    const updatedMovieData = updatedMovieSnap.exists() ? updatedMovieSnap.data() : {};
+                    popup.querySelector("#like-count").textContent = (updatedMovieData.likedBy || []).length;
+                    popup.querySelector("#dislike-count").textContent = (updatedMovieData.dislikedBy || []).length;
                 };
 
                 // DISLIKE
@@ -451,6 +467,12 @@ function addPosterListeners(container) {
                     if (!(updatedUser.liked || []).length) cleanUp.liked = deleteField();
                     if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
                     if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
+
+                    // ✅ UPDATE COUNTS
+                    const updatedMovieSnap = await getDoc(mmovieRef);
+                    const updatedMovieData = updatedMovieSnap.exists() ? updatedMovieSnap.data() : {};
+                    popup.querySelector("#like-count").textContent = (updatedMovieData.likedBy || []).length;
+                    popup.querySelector("#dislike-count").textContent = (updatedMovieData.dislikedBy || []).length;
                 };
 
 
