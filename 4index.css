@@ -667,7 +667,7 @@ body {
     }
 }
 
-/*Styling for My list button in Navbar */
+/*Styling for My list, like, dislike, share buttons  */
 
 .popup-actions {
     margin-top: 15px;
@@ -730,3 +730,72 @@ body {
   background-color: #00536e;
   color: white;
 }
+
+
+.comment-section {
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #181818;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+.comment-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.comment-input-box textarea {
+  resize: none;
+  padding: 8px;
+  background: #2c2c2c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+.comment-input-box button {
+  align-self: flex-end;
+  background: #e50914;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.comment-card {
+  margin-top: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  background: #282828;
+  border-radius: 6px;
+}
+.comment-meta {
+  font-size: 12px;
+  color: #aaa;
+}
+.reply-btn {
+  font-size: 12px;
+  color: #3ea6ff;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.reply-box {
+  margin-top: 6px;
+}
+.reply-box textarea {
+  width: 100%;
+}
+.reply-card {
+    margin-left: 20px;
+    padding-left: 10px;
+    border-left: 2px solid #ccc;
+    margin-top: 5px;
+}
+.toggle-replies-btn {
+    background: none;
+    color: #1da1f2;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
