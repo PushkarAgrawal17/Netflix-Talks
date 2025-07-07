@@ -204,28 +204,28 @@ function createGlobalPopup() {
     popup.innerHTML = `
     <div class="popup-overlay"></div>
     <div class="popup-box">
-      <span class="close-btn">&times;</span>
-      <div class="poster-wrapper">
-          <img src="" class="popup-movie-img" alt="Movie Poster" />
-          <h1 class="popup-title-img"></h1>
-          <div class="popup-gradient-overlay"></div>
-      </div>
-      <div class="popup-tags"></div>
-      <p class="popup-description"></p>
-      <div class="popup-actions">
-          <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
-          <button id="like-btn" class="like-btn"><i class="fas fa-thumbs-up"></i><span id="like-count">0</span></button>
-          <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i><span id="dislike-count"> 0</span></button>
-          <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
-      </div>
-      <div class="comment-section">
-          <h3>Comments</h3>
-          <div class="comment-input-box">
-              <textarea id="comment-input" placeholder="Add a comment..."></textarea>
-              <button id="post-comment">Post</button>
-          </div>
-          <div id="comments-list"></div>
-      </div>
+        <span class="close-btn">&times;</span>
+        <div class="poster-wrapper">
+            <img src="" class="popup-movie-img" alt="Movie Poster" />
+            <h1 class="popup-title-img"></h1>
+            <div class="popup-gradient-overlay"></div>
+        </div>
+        <div class="popup-tags"></div>
+        <p class="popup-description"></p>
+        <div class="popup-actions">
+            <button id="popup-mylist-btn" class="popup-mylist-btn"></button>
+            <button id="like-btn" class="like-btn"><i class="fas fa-thumbs-up"></i><span id="like-count">0</span></button>
+            <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i><span id="dislike-count"> 0</span></button>
+            <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
+        </div>
+        <div class="comment-section">
+            <h3>Comments</h3>
+            <div class="comment-input-box">
+                <textarea id="comment-input" placeholder="Add a comment..."></textarea>
+                <button id="post-comment">Post</button>
+            </div>
+            <div id="comments-list"></div>
+        </div>
     </div>`;
     document.body.appendChild(popup);
     addGlobalPopupListeners();
