@@ -60,14 +60,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 100px;
+    padding: 35px 70px 40px 50px;
     background: linear-gradient(to bottom, #000, transparent);
     z-index: 10;
     position: relative;
 }
 
 .logo {
-    width: 180px;
+    width: 300px;
+    filter: drop-shadow(1px 1px white);
 }
 
 .navbar-actions {
