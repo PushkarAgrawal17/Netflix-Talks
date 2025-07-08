@@ -607,7 +607,7 @@ function addPosterListeners(container) {
                             replyContainer.innerHTML = "";
 
                             // Fetch replies
-                            const repliesSnap = await getDocs(collection(mmovieRef, "comments", commentId, "replies"));
+                            const repliesSnap = await getDocs(query(collection(mmovieRef, "comments", commentId, "replies"), orderBy("timestamp", "desc")));
                             if (repliesSnap.empty) {
                                 replyContainer.innerHTML = `<p style="font-size:14px;color:#777;">No replies yet.</p>`;
                             } else {
