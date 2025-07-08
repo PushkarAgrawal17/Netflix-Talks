@@ -695,6 +695,20 @@ const signOutBtn = document.getElementById("signOut");
 onAuthStateChanged(auth, (user) => {
     if (user) {
         // ✅ User is logged in
+        const userRef = doc(db, "users", user.uid);
+        getDoc(userRef).then((docSnap) => {
+            const profileIcon = document.getElementById("profileIcon");
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const profilePicPath = data.profilePic || "Images/profileIcons/1.jpg"; // fallback
+                profileIcon.src = profilePicPath;
+            } else {
+                profileIcon.src = "Images/profileIcons/1.jpg";
+            }
+        }).catch((error) => {
+            console.error("Error fetching profilePic:", error);
+            document.getElementById("profileIcon").src = "Images/profileIcons/1.jpg";
+        });
         signOutBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> Sign Out`;
         signOutBtn.onclick = () => {
             signOut(auth)
@@ -721,61 +735,3 @@ document.getElementById("accountBtn").addEventListener("click", () => {
 document.getElementById("settingsBtn")?.addEventListener("click", () => {
     window.location.href = "settings.html";
 });
-
-window.addEventListener("DOMContentLoaded", () => {
-    const savedProfilePic = localStorage.getItem("profilePic");
-    if (savedProfilePic) {
-        const profileIcon = document.getElementById("profileIcon");
-        if (profileIcon) profileIcon.src = savedProfilePic;
-    }
-});
-
-
-
-document.getElementById("searchIconBtn").addEventListener("click", () => {
-  document.getElementById("searchPopup").classList.remove("hidden");
-});
-
-// ✅ Wait for DOM to fully load
-window.addEventListener("DOMContentLoaded", () => {
-  const popup = document.getElementById("searchPopup");
-  const closeBtn = document.getElementById("closePopupBtn");
-  const searchIcon = document.getElementById("searchIconBtn");
-
-  if (searchIcon && popup) {
-    searchIcon.addEventListener("click", () => {
-      popup.classList.remove("hidden");
-      document.body.classList.add("popup-open");
-    });
-  }
-
-  if (closeBtn && popup) {
-    closeBtn.addEventListener("click", () => {
-      popup.classList.add("hidden");
-      document.body.classList.remove("popup-open");
-    });
-  }
-});
-
-
-
-
-
-// Genre toggle animation logic
-  const genreToggleBtn = document.getElementById("genreToggleBtn");
-const searchBarContainer = document.getElementById("searchBarContainer");
-// const voiceBtn = document.getElementById("voiceBtn");
-const genreDropdown = document.querySelector(".genre-dropdown");
-
-if (genreToggleBtn && searchBarContainer && voiceBtn && genreDropdown) {
-  genreToggleBtn.addEventListener("click", () => {
-    searchBarContainer.classList.add("hide");
-    voiceBtn.classList.add("hide");
-
-    setTimeout(() => {
-      genreDropdown.classList.add("show");
-    }, 400);
-  });
-} else {
-  console.warn("❌ Some elements not found: genreToggleBtn / searchBarContainer / voiceBtn / genreDropdown");
-}
