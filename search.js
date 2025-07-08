@@ -176,6 +176,67 @@ voiceBtn?.addEventListener("click", () => {
 });
 
 // --- Back Button ---
-document.getElementById("backBtn").addEventListener("click", () => {
+const backBtn = document.getElementById("backBtn");
+if (backBtn) {
+  backBtn.addEventListener("click", () => {
     window.history.back();
+  });
+}
+
+
+// Genre toggle animation logic
+  const genreToggleBtn = document.getElementById("genreToggleBtn");
+const searchBarContainer = document.getElementById("searchBarContainer");
+// const voiceBtn = document.getElementById("voiceBtn");
+const genreDropdown = document.querySelector(".genre-dropdown");
+
+if (genreToggleBtn && searchBarContainer && voiceBtn && genreDropdown) {
+  genreToggleBtn.addEventListener("click", () => {
+    searchBarContainer.classList.add("hide");
+    voiceBtn.classList.add("hide");
+
+    setTimeout(() => {
+      genreDropdown.classList.add("show");
+    }, 400);
+  });
+} else {
+  console.warn("❌ Some elements not found: genreToggleBtn / searchBarContainer / voiceBtn / genreDropdown");
+}
+
+
+//Working Genre button 
+
+
+
+document.getElementById("genreToggleBtn").addEventListener("click", () => {
+const popupContent = document.querySelector(".popup-content");
+popupContent.classList.add("genre-active");
+});
+
+
+
+// === Genre Mode Toggle ===
+// const genreToggleBtn = document.getElementById("genreToggleBtn");
+const backToSearchBtn = document.getElementById("backToSearchBtn");
+const popupContent = document.querySelector(".popup-content");
+const genreTitle = document.getElementById("genreFilterTitle");
+// const genreDropdown = document.querySelector(".genre-dropdown");
+// const genreResults = document.getElementById("genreResults"); // ✅ add this
+
+// Enable genre mode
+genreToggleBtn.addEventListener("click", () => {
+popupContent.classList.add("genre-active");
+backToSearchBtn.classList.remove("hidden");
+genreTitle.style.display = "block";
+genreDropdown.style.display = "flex";
+});
+
+// Back to normal search mode
+backToSearchBtn.addEventListener("click", () => {
+popupContent.classList.remove("genre-active");
+backToSearchBtn.classList.add("hidden");
+genreTitle.style.display = "none";
+genreDropdown.style.display = "none";
+genreResults.classList.add("hidden"); // ✅ Hide genre result section
+document.getElementById("genreFilter").selectedIndex = 0;
 });
