@@ -357,9 +357,10 @@ body {
 
 /* ---------- Rows ----------- */
 .row {
-    margin: 30px 20px;
+    margin: 0px 20px;
     padding: 20px 10px;
     position: relative;
+    top: 20px;
     z-index: 1;
 }
 
@@ -430,10 +431,9 @@ body {
     align-items: center;
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(2px);
     z-index: 9999;
-    animation: popup-fade 0.3s ease;
     overflow: hidden;
 }
 
@@ -524,7 +524,6 @@ body {
 }
 
 .popup-tags {
-    /* margin-top: 1rem; */
     margin-left: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -913,58 +912,61 @@ body {
 
 /* Hidden utility */
 .hidden {
-  display: none !important;
+    display: none !important;
 }
 
-/* Search section elements */
 
+/* ============================== Search Popup ============================== */
 .search-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .search-container {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.section-container h3 {
+    padding-top: 30px;
 }
 
 #searchInput {
-  flex: 1;
-  padding: 12px 18px;
-  font-size: 1rem;
-  border-radius: 8px;
-  background: #1c1c1c;
-  border: 1px solid #333;
-  color: white;
-  outline: none;
-  transition: border 0.3s ease;
+    flex: 1;
+    padding: 12px 18px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    color: white;
+    outline: none;
+    transition: border 0.3s ease;
 }
 
 #searchInput:focus {
-  border-color: #e50914;
+    border-color: #e50914;
 }
 
 #voiceBtn,
 #searchBtn {
-  background: #e50914;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 #voiceBtn:hover,
 #searchBtn:hover {
-  background: #b0060f;
+    background: #b0060f;
 }
 
-/* Crazyfying Genre button */
-
+/* Genre button */
 #genreToggleBtn {
     background: #333;
     color: white;
@@ -992,19 +994,19 @@ body {
     margin-top: 10px;
 }
 
-/* SEARCH POSTER FORMATTING */
-
+/* Search row posters */
 .search-row-posters {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
     margin-top: 1rem;
     margin-right: 20px;
     margin-left: 30px;
 }
 
 .search-row-posters img {
-    width: 160px; 
+    width: 160px;
     height: 225px;
     object-fit: cover;
     border-radius: 10px;
@@ -1019,7 +1021,6 @@ body {
 
 
 /* Recent searches */
-
 .recent-searches {
     display: flex;
     flex-wrap: wrap;
@@ -1044,10 +1045,7 @@ body.popup-open {
     overflow: hidden;
 }
 
-
-
 /* Popup closing button */
-
 #closePopupBtn {
     position: absolute;
     top: 20px;
@@ -1061,21 +1059,22 @@ body.popup-open {
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
-
 #closePopupBtn:hover {
     transform: scale(1.2);
-    color: #e50914; /* Netflix red */
+    color: #e50914;
+    /* Netflix red */
 }
 
 
 @keyframes popupFadeIn {
     from {
-      transform: scale(0.95);
-      opacity: 0;
+        transform: scale(0.95);
+        opacity: 0;
     }
+
     to {
-      transform: scale(1);
-      opacity: 1;
+        transform: scale(1);
+        opacity: 1;
     }
 }
 
@@ -1092,7 +1091,7 @@ body.popup-open {
 #voiceBtn {
     background: linear-gradient(145deg, #e50914, #b0060f);
     box-shadow: 0 4px 12px rgba(229, 9, 20, 0.5);
-    padding: 10px 16px;
+    padding: 10px 7px 10px 20px;
     border-radius: 8px;
     border: none;
     color: white;
@@ -1114,7 +1113,7 @@ body.popup-open {
     border: 1px solid #444;
     border-radius: 6px;
     padding: 10px 18px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
     align-self: flex-start;
@@ -1154,29 +1153,11 @@ body.popup-open {
     outline: none;
 }
 
-
-
-
-/* ---------- Base ----------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    max-width: 100%;
-}
-
-body {
-    background-color: #01000F;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #fff;
-    line-height: 1.4;
-    overflow-x: hidden;
-}
-
 /* ----Popup Styles---- */
 .popup-overlay {
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.75);
@@ -1195,8 +1176,8 @@ body {
     padding: 2rem;
     border-radius: 12px;
     overflow-y: auto;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-    scrollbar-width: thin; /* Firefox */
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    scrollbar-width: thin;
     scrollbar-color: black transparent;
 }
 
@@ -1212,9 +1193,6 @@ body {
 .popup-content::-webkit-scrollbar-track {
     background: transparent;
 }
-
-
-
 
 
 .genre-active #searchBarContainer,
@@ -1236,31 +1214,30 @@ body {
 }
 
 @keyframes genreHeadingZoomIn {
-  0% {
-    opacity: 0;
-    transform: scale(1) translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.2) translateY(-30px);
-  }
+    0% {
+        opacity: 0;
+        transform: scale(1) translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.2) translateY(-30px);
+    }
 }
 
 #genreFilterTitle {
     display: none;
+    padding-top: 30px;
 }
 
-
-/* back button */
-
+/* Back button in Search by genre*/
 .back-btn {
     position: absolute;
     top: 20px;
     left: 20px;
     background: rgba(255, 255, 255, 0.05);
-    border: 0px solid rgba(255, 255, 255, 0.2);
-    padding: 10px 12px;
-    border-radius: 5%;
+    padding: 10px 0px 10px 15px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 1.2rem;
     display: flex;
@@ -1271,10 +1248,6 @@ body {
 }
 
 .back-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: scale(1.1);
-}
-
-.hidden {
-    display: none !important;
+    background: rgb(38, 38, 38);
+    transform: scale(1.05);
 }
