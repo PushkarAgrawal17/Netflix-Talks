@@ -1090,37 +1090,37 @@ body.popup-open {
 }
 
 
-
+/* Popup closing button */
 
 #closePopupBtn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: transparent;
-  border: none;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-  z-index: 10001;
-  transition: transform 0.2s ease, color 0.2s ease;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 10001;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 
 #closePopupBtn:hover {
-  transform: scale(1.2);
-  color: #e50914; /* Netflix red */
+    transform: scale(1.2);
+    color: #e50914; /* Netflix red */
 }
 
 
 @keyframes popupFadeIn {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
 }
 
 
