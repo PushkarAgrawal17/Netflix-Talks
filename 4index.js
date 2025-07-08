@@ -11,7 +11,7 @@ import {
     deleteField,
     arrayUnion,
     arrayRemove,
-    collection
+    collection, query, orderBy
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 import {
     getAuth,
@@ -517,7 +517,8 @@ function addPosterListeners(container) {
 
                 async function loadComments() {
                     commentsList.innerHTML = "";
-                    const commentsSnapshot = await getDocs(collection(mmovieRef, "comments"));
+                    const commentsQuery = query(collection(mmovieRef, "comments"), orderBy("timestamp", "desc"));
+                    const commentsSnapshot = await getDocs(commentsQuery);
                     commentsSnapshot.forEach(async (docSnap) => {
                         const data = docSnap.data();
                         const commentId = docSnap.id;
