@@ -519,6 +519,10 @@ function addPosterListeners(container) {
                     commentsList.innerHTML = "";
                     const commentsQuery = query(collection(mmovieRef, "comments"), orderBy("timestamp", "desc"));
                     const commentsSnapshot = await getDocs(commentsQuery);
+                    if (commentsSnapshot.empty){
+                        commentsList.innerHTML=`<p style="font-size:14px; color:#777; text-align:center; ">No comments yet.</p>`;
+                        return;
+                    }
                     commentsSnapshot.forEach(async (docSnap) => {
                         const data = docSnap.data();
                         const commentId = docSnap.id;
