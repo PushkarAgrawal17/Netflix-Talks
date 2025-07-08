@@ -103,7 +103,7 @@ async function addToMyListFirestore(movie) {
 }
 
 function loadHeroSlides() {
-    const heroEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+    const heroEndpoint = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&language=en-US&page=1`;
 
     fetch(heroEndpoint)
         .then((res) => res.json())
