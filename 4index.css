@@ -1185,41 +1185,34 @@ body.popup-open {
     transform: scale(1.03);
 }
 
-/* ---------- Genre Dropdown ---------- */
+/* ----------- Genre Dropdown ----------- */
 .genre-dropdown {
-  display: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+    display: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .genre-dropdown.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .genre-dropdown select {
-  background: #1c1c1c;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  font-size: 1rem;
-  width: 100%;
-  margin-top: 10px;
-  transition: border-color 0.3s ease;
+    background: #1c1c1c;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 10px;
+    transition: border-color 0.3s ease;
 }
 
 .genre-dropdown select:focus {
-  border-color: #e50914;
-  outline: none;
+    border-color: #e50914;
+    outline: none;
 }
-
-
-
-
-
-
-
 
 
 
