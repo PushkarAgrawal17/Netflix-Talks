@@ -530,17 +530,17 @@ function addPosterListeners(container) {
                         const div = document.createElement("div");
                         div.classList.add("comment-card");
                         div.innerHTML = `
-            <p>${data.username}</p>
-            <h4>${data.comment}</h4>
-            <div class="comment-meta">${new Date(data.timestamp?.toDate?.() || data.timestamp).toLocaleString()}</div>
-            <div class="reply-btn" data-id="${commentId}">Reply</div>
-            <div class="reply-box" id="reply-${commentId}" style="display:none;">
-                <textarea placeholder="Write a reply..."></textarea>
-                <button>Post Reply</button>
-            </div>
-            <button class="toggle-replies-btn" data-id="${commentId}">💬 View Replies</button>
-            <div class="replies-container" id="replies-${commentId}" style="display:none;"></div>
-        `;
+                            <p>${data.username}</p>
+                            <h4>${data.comment}</h4>
+                            <div class="comment-meta">${new Date(data.timestamp?.toDate?.() || data.timestamp).toLocaleString()}</div>
+                            <div class="reply-btn" data-id="${commentId}">Reply</div>
+                            <div class="reply-box" id="reply-${commentId}" style="display:none;">
+                                <textarea placeholder="Write a reply..."></textarea>
+                                <button>Post Reply</button>
+                            </div>
+                            <button class="toggle-replies-btn" data-id="${commentId}">💬 View Replies</button>
+                            <div class="replies-container" id="replies-${commentId}" style="display:none;"></div>
+                        `;
                         // Fetch reply count for this comment
                         const repliesSnap = await getDocs(collection(mmovieRef, "comments", commentId, "replies"));
                         const replyCount = repliesSnap.size;
@@ -626,8 +626,6 @@ function addPosterListeners(container) {
                     const count = Array.from(replyContainer.children).filter(child => child.tagName === "DIV").length;
                     toggleBtn.textContent = `💬 Hide ${count} repl${count === 1 ? 'y' : 'ies'}`;
                 }
-
-
                 loadComments();
             });
 
@@ -694,7 +692,7 @@ const signOutBtn = document.getElementById("signOut");
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        // ✅ User is logged in
+        // User is logged in
         const userRef = doc(db, "users", user.uid);
         getDoc(userRef).then((docSnap) => {
             const profileIcon = document.getElementById("profileIcon");
@@ -720,7 +718,7 @@ onAuthStateChanged(auth, (user) => {
                 });
         };
     } else {
-        // ❌ User is not logged in — show "Sign In" instead
+        // User is not logged in — show "Sign In" instead
         signOutBtn.innerHTML = `<i class="fas fa-sign-in-alt"></i> Sign In`;
         signOutBtn.onclick = () => {
             window.location.replace("3sign_In.html");
