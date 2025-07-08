@@ -690,6 +690,20 @@ const signOutBtn = document.getElementById("signOut");
 onAuthStateChanged(auth, (user) => {
     if (user) {
         // ✅ User is logged in
+        const userRef = doc(db, "users", user.uid);
+        getDoc(userRef).then((docSnap) => {
+            const profileIcon = document.getElementById("profileIcon");
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const profilePicPath = data.profilePic || "Images/profileIcons/1.jpg"; // fallback
+                profileIcon.src = profilePicPath;
+            } else {
+                profileIcon.src = "Images/profileIcons/1.jpg";
+            }
+        }).catch((error) => {
+            console.error("Error fetching profilePic:", error);
+            document.getElementById("profileIcon").src = "Images/profileIcons/1.jpg";
+        });
         signOutBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> Sign Out`;
         signOutBtn.onclick = () => {
             signOut(auth)
@@ -715,12 +729,4 @@ document.getElementById("accountBtn").addEventListener("click", () => {
 
 document.getElementById("settingsBtn")?.addEventListener("click", () => {
     window.location.href = "settings.html";
-});
-
-window.addEventListener("DOMContentLoaded", () => {
-    const savedProfilePic = localStorage.getItem("profilePic");
-    if (savedProfilePic) {
-        const profileIcon = document.getElementById("profileIcon");
-        if (profileIcon) profileIcon.src = savedProfilePic;
-    }
 });
