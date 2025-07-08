@@ -32,9 +32,14 @@ body {
 }
 
 /* Netflix Logo */
-.logo img {
+.logo {
     width: 300px;
-    filter: drop-shadow(1px 1px black);
+    filter: drop-shadow(1px 1px white);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 /* Links\Tabs in the center */

@@ -69,6 +69,11 @@ body {
 .logo {
     width: 300px;
     filter: drop-shadow(1px 1px white);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .navbar-actions {
