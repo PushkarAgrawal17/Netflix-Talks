@@ -1012,27 +1012,27 @@ body {
     margin-top: 10px;
 }
 
-
+/* SEARCH POSTER FORMATTING */
 
 .search-row-posters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
 .search-row-posters img {
-  width: 150px;
-  height: 225px;
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .search-row-posters img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(229, 9, 20, 0.7);
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.7);
 }
 
 
