@@ -707,6 +707,8 @@ onAuthStateChanged(auth, (user) => {
             console.error("Error fetching profilePic:", error);
             document.getElementById("profileIcon").src = "Images/profileIcons/1.jpg";
         });
+
+        //sign out btn
         signOutBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> Sign Out`;
         signOutBtn.onclick = () => {
             signOut(auth)

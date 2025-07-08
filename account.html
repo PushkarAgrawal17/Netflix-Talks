@@ -193,7 +193,7 @@
                 // Pic selection + Firestore update
                 document.querySelectorAll(".option-pic").forEach((pic) => {
                     pic.addEventListener("click", async () => {
-                        const selectedPic = pic.src;
+                        const selectedPic = pic.src.substring(pic.src.indexOf("Images/"));
                         mainProfilePic.src = selectedPic;
 
                         try {
