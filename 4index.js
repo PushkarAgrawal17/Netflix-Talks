@@ -729,3 +729,53 @@ window.addEventListener("DOMContentLoaded", () => {
         if (profileIcon) profileIcon.src = savedProfilePic;
     }
 });
+
+
+
+document.getElementById("searchIconBtn").addEventListener("click", () => {
+  document.getElementById("searchPopup").classList.remove("hidden");
+});
+
+// ✅ Wait for DOM to fully load
+window.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("searchPopup");
+  const closeBtn = document.getElementById("closePopupBtn");
+  const searchIcon = document.getElementById("searchIconBtn");
+
+  if (searchIcon && popup) {
+    searchIcon.addEventListener("click", () => {
+      popup.classList.remove("hidden");
+      document.body.classList.add("popup-open");
+    });
+  }
+
+  if (closeBtn && popup) {
+    closeBtn.addEventListener("click", () => {
+      popup.classList.add("hidden");
+      document.body.classList.remove("popup-open");
+    });
+  }
+});
+
+
+
+
+
+// Genre toggle animation logic
+  const genreToggleBtn = document.getElementById("genreToggleBtn");
+const searchBarContainer = document.getElementById("searchBarContainer");
+// const voiceBtn = document.getElementById("voiceBtn");
+const genreDropdown = document.querySelector(".genre-dropdown");
+
+if (genreToggleBtn && searchBarContainer && voiceBtn && genreDropdown) {
+  genreToggleBtn.addEventListener("click", () => {
+    searchBarContainer.classList.add("hide");
+    voiceBtn.classList.add("hide");
+
+    setTimeout(() => {
+      genreDropdown.classList.add("show");
+    }, 400);
+  });
+} else {
+  console.warn("❌ Some elements not found: genreToggleBtn / searchBarContainer / voiceBtn / genreDropdown");
+}
