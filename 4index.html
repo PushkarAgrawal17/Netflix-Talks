@@ -249,22 +249,23 @@
     <script type="module" src="4index.js"></script>
 
 
+<!-- Pop up -->
 
-<script>
-  const openBtn = document.getElementById('openSearchBtn');
-  const popup = document.getElementById('searchPopup');
-  const closeBtn = document.getElementById('closePopupBtn');
-
-  openBtn?.addEventListener('click', () => {
-    popup.classList.remove('hidden');
-    document.body.classList.add('popup-open'); // Optional: disables background scroll
-  });
-
-  closeBtn?.addEventListener('click', () => {
-    popup.classList.add('hidden');
-    document.body.classList.remove('popup-open'); // Optional
-  });
-</script>
+    <script>
+        const openBtn = document.getElementById('openSearchBtn');
+        const popup = document.getElementById('searchPopup');
+        const closeBtn = document.getElementById('closePopupBtn');
+    
+        openBtn?.addEventListener('click', () => {
+          popup.classList.remove('hidden');
+          document.body.classList.add('popup-open'); // Optional: disables background scroll
+      });
+  
+        closeBtn?.addEventListener('click', () => {
+          popup.classList.add('hidden');
+          document.body.classList.remove('popup-open'); // Optional
+      });
+    </script>
 
 </body>
 
