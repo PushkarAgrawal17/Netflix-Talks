@@ -905,32 +905,6 @@ body {
 }
 
 
-/* Search popup added */
-
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.75); /* dark blur */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(0px);
-}
-
-.popup-content {
-  width: 80vw;
-  height: 80vh;
-  background: #141414;
-  padding: 2rem;
-  border-radius: 12px;
-  overflow-y: auto;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-}
-
 /* Hidden utility */
 .hidden {
   display: none !important;
@@ -1019,10 +993,12 @@ body {
     flex-wrap: wrap;
     gap: 1.5rem;
     margin-top: 1rem;
+    margin-right: 20px;
+    margin-left: 30px;
 }
 
 .search-row-posters img {
-    width: 150px;
+    width: 160px; 
     height: 225px;
     object-fit: cover;
     border-radius: 10px;
@@ -1062,32 +1038,6 @@ body.popup-open {
     overflow: hidden;
 }
 
-/* Popup setting */
-
-
-.popup-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.popup-content {
-    position: relative; /* ✅ THIS LINE IS CRUCIAL */
-    background: rgba(20, 20, 20, 0.95);
-    width: 80vw;
-    height: 80vh;
-    padding: 2rem;
-    border-radius: 12px;
-    overflow-y: auto;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-}
 
 
 /* Popup closing button */
@@ -1123,22 +1073,6 @@ body.popup-open {
     }
 }
 
-
-
-/* --------- Popup Content Styling --------- */
-
-.popup-content {
-    background: rgba(20, 20, 20, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    border-radius: 16px;
-    backdrop-filter: blur(20px);
-    padding: 2rem;
-    width: 80vw;
-    height: 80vh;
-    overflow-y: auto;
-    position: relative;
-}
 
 /* --------- Container Structure --------- */
 .search-top {
@@ -1233,7 +1167,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Popup Styles */
+/* ----Popup Styles---- */
 .popup-overlay {
     position: fixed;
     top: 0; left: 0;
@@ -1250,8 +1184,8 @@ body {
 .popup-content {
     position: relative;
     background: rgba(20, 20, 20, 0.95);
-    width: 80vw;
-    height: 80vh;
+    width: 100vw;
+    height: 100vh;
     padding: 2rem;
     border-radius: 12px;
     overflow-y: auto;
