@@ -38,14 +38,14 @@
 
         <!-- Profile Pic Options -->
         <div class="profile-modal" id="profileModal">
-    <h3>Choose a Profile</h3>
-    <div class="profile-options">
-        <img src="Images/profileIcons/1.jpg" class="option-pic" />
-        <img src="Images/profileIcons/2.jpg" class="option-pic" />
-        <img src="Images/profileIcons/3.jpg" class="option-pic" />
-        <img src="Images/profileIcons/4.jpg" class="option-pic" />
-    </div>
-</div>
+            <h3>Choose a Profile</h3>
+            <div class="profile-options">
+                <img src="Images/profileIcons/1.jpg" class="option-pic" />
+                <img src="Images/profileIcons/2.jpg" class="option-pic" />
+                <img src="Images/profileIcons/3.jpg" class="option-pic" />
+                <img src="Images/profileIcons/4.jpg" class="option-pic" />
+            </div>
+        </div>
 
         <!-- Username -->
         <div class="form-group">
@@ -74,170 +74,171 @@
             <i class="fas fa-sign-out-alt"></i> <a href="3sign_In.html">Sign Out</a>
         </button>
     </main>
+    
     <!-- Toastify JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <!-- <script src="account.js"></script> -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged,
-  sendPasswordResetEmail,
-  signOut,
-} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  updateDoc,
-} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import {
+            getAuth,
+            onAuthStateChanged,
+            sendPasswordResetEmail,
+            signOut,
+        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import {
+            getFirestore,
+            doc,
+            getDoc,
+            updateDoc,
+        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
-  authDomain: "netflix-web-project.firebaseapp.com",
-  projectId: "netflix-web-project",
-  storageBucket: "netflix-web-project.appspot.com",
-  messagingSenderId: "616557096999",
-  appId: "1:616557096999:web:027b9189b6f5b283115e02",
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
+            authDomain: "netflix-web-project.firebaseapp.com",
+            projectId: "netflix-web-project",
+            storageBucket: "netflix-web-project.appspot.com",
+            messagingSenderId: "616557096999",
+            appId: "1:616557096999:web:027b9189b6f5b283115e02",
+        };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-const usernameInput = document.getElementById("username");
-const emailInput = document.getElementById("email");
-const editUsernameIcon = document.getElementById("editUsername");
-const signOutBtn = document.getElementById("signOutBtn");
-const editIcon = document.getElementById("editIcon");
-const profileModal = document.getElementById("profileModal");
-const mainProfilePic = document.getElementById("mainProfilePic");
+        const usernameInput = document.getElementById("username");
+        const emailInput = document.getElementById("email");
+        const editUsernameIcon = document.getElementById("editUsername");
+        const signOutBtn = document.getElementById("signOutBtn");
+        const editIcon = document.getElementById("editIcon");
+        const profileModal = document.getElementById("profileModal");
+        const mainProfilePic = document.getElementById("mainProfilePic");
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const userRef = doc(db, "users", user.uid);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userRef = doc(db, "users", user.uid);
 
-    // Fetch existing data
-    getDoc(userRef).then((docSnap) => {
-      const data = docSnap.data();
-      usernameInput.value = data.fullName || "Netflix User";
-      emailInput.value = data.email || user.email;
+                // Fetch existing data
+                getDoc(userRef).then((docSnap) => {
+                    const data = docSnap.data();
+                    usernameInput.value = data.fullName || "Netflix User";
+                    emailInput.value = data.email || user.email;
 
-      // Set profilePic
-      if (data.profilePic) {
-        mainProfilePic.src = data.profilePic;
-      } else {
-        const defaultPic = "Images/profileIcons/1.jpg";
-        mainProfilePic.src = defaultPic;
-        updateDoc(userRef, { profilePic: defaultPic });
-      }
-    });
+                    // Set profilePic
+                    if (data.profilePic) {
+                        mainProfilePic.src = data.profilePic;
+                    } else {
+                        const defaultPic = "Images/profileIcons/1.jpg";
+                        mainProfilePic.src = defaultPic;
+                        updateDoc(userRef, { profilePic: defaultPic });
+                    }
+                });
 
-    // Username edit
-    editUsernameIcon.addEventListener("click", () => {
-      usernameInput.removeAttribute("readonly");
-      usernameInput.focus();
+                // Username edit
+                editUsernameIcon.addEventListener("click", () => {
+                    usernameInput.removeAttribute("readonly");
+                    usernameInput.focus();
 
-      usernameInput.addEventListener(
-        "blur",
-        async () => {
-          const newName = usernameInput.value;
-          await updateDoc(userRef, { fullName: newName });
-          usernameInput.setAttribute("readonly", true);
-          Toastify({
-            text: "Username updated successfully!",
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#00b09b",
-          }).showToast();
-        },
-        { once: true }
-      );
-    });
+                    usernameInput.addEventListener(
+                        "blur",
+                        async () => {
+                            const newName = usernameInput.value;
+                            await updateDoc(userRef, { fullName: newName });
+                            usernameInput.setAttribute("readonly", true);
+                            Toastify({
+                                text: "Username updated successfully!",
+                                duration: 3000,
+                                gravity: "bottom",
+                                position: "left",
+                                backgroundColor: "#00b09b",
+                            }).showToast();
+                        },
+                        { once: true }
+                    );
+                });
 
-    // Change Password
-    document
-      .getElementById("changePasswordBtn")
-      .addEventListener("click", async () => {
-        try {
-          await sendPasswordResetEmail(auth, user.email);
-          Toastify({
-            text: "Password reset email sent.",
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#00b09b",
-          }).showToast();
-        } catch (error) {
-          Toastify({
-            text: "Error: " + error.message,
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#ff4d4d",
-          }).showToast();
-        }
-      });
+                // Change Password
+                document
+                    .getElementById("changePasswordBtn")
+                    .addEventListener("click", async () => {
+                        try {
+                            await sendPasswordResetEmail(auth, user.email);
+                            Toastify({
+                                text: "Password reset email sent.",
+                                duration: 3000,
+                                gravity: "bottom",
+                                position: "left",
+                                backgroundColor: "#00b09b",
+                            }).showToast();
+                        } catch (error) {
+                            Toastify({
+                                text: "Error: " + error.message,
+                                duration: 3000,
+                                gravity: "bottom",
+                                position: "left",
+                                backgroundColor: "#ff4d4d",
+                            }).showToast();
+                        }
+                    });
 
-    // Sign Out
-    signOutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      signOut(auth).then(() => {
-        window.location.href = "3sign_In.html";
-      });
-    });
+                // Sign Out
+                signOutBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    signOut(auth).then(() => {
+                        window.location.href = "3sign_In.html";
+                    });
+                });
 
-    // Pic selection + Firestore update
-    document.querySelectorAll(".option-pic").forEach((pic) => {
-      pic.addEventListener("click", async () => {
-        const selectedPic = pic.src;
-        mainProfilePic.src = selectedPic;
+                // Pic selection + Firestore update
+                document.querySelectorAll(".option-pic").forEach((pic) => {
+                    pic.addEventListener("click", async () => {
+                        const selectedPic = pic.src;
+                        mainProfilePic.src = selectedPic;
 
-        try {
-          await updateDoc(userRef, { profilePic: selectedPic });
-          Toastify({
-            text: "Profile picture updated!",
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#00b09b",
-          }).showToast();
-        } catch (err) {
-          Toastify({
-            text: "Error updating pic: " + err.message,
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#ff4d4d",
-          }).showToast();
-        }
+                        try {
+                            await updateDoc(userRef, { profilePic: selectedPic });
+                            Toastify({
+                                text: "Profile picture updated!",
+                                duration: 3000,
+                                gravity: "bottom",
+                                position: "left",
+                                backgroundColor: "#00b09b",
+                            }).showToast();
+                        } catch (err) {
+                            Toastify({
+                                text: "Error updating pic: " + err.message,
+                                duration: 3000,
+                                gravity: "bottom",
+                                position: "left",
+                                backgroundColor: "#ff4d4d",
+                            }).showToast();
+                        }
 
-        profileModal.style.display = "none";
-      });
-    });
+                        profileModal.style.display = "none";
+                    });
+                });
 
-    // Toggle modal
-    editIcon.addEventListener("click", () => {
-      profileModal.style.display =
-        profileModal.style.display === "block" ? "none" : "block";
-    });
+                // Toggle modal
+                editIcon.addEventListener("click", () => {
+                    profileModal.style.display =
+                        profileModal.style.display === "block" ? "none" : "block";
+                });
 
-    // Hide modal on outside click
-    window.addEventListener("click", (e) => {
-      if (
-        e.target !== profileModal &&
-        !profileModal.contains(e.target) &&
-        e.target !== editIcon
-      ) {
-        profileModal.style.display = "none";
-      }
-    });
-  } else {
-    window.location.href = "3sign_In.html";
-  }
-});
+                // Hide modal on outside click
+                window.addEventListener("click", (e) => {
+                    if (
+                        e.target !== profileModal &&
+                        !profileModal.contains(e.target) &&
+                        e.target !== editIcon
+                    ) {
+                        profileModal.style.display = "none";
+                    }
+                });
+            } else {
+                window.location.href = "3sign_In.html";
+            }
+        });
     </script>
 </body>
 

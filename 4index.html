@@ -36,78 +36,70 @@
         </nav>
 
         <div class="nav-icons">
+
+            <!----------------------- Search section --------------------------->
             <!-- Search icon -->
             <a><i id="openSearchBtn" class="fas fa-search"></i></a>
 
-
+            <!-- Search popup -->
             <div id="searchPopup" class="popup-overlay hidden">
-              <div class="popup-content">
-             <button id="backToSearchBtn" class="back-btn hidden" title="Back to Search"> <i class="fas fa-arrow-left"></i></button>
-
-                 <!-- Search Bar + Genre Filter -->
-                <section class="search-section">
-
-                <!-- Cross Button -->
-                <button id="closePopupBtn" class="close-btn" title="Close">
-                  <i class="fas fa-xmark"></i>
-                </button>
-
-
-                <div class="search-container">
-                    <button id="voiceBtn" title="Voice Search">
-                        <i class="fas fa-microphone"></i>
+                <div class="popup-content">
+                    <button id="backToSearchBtn" class="back-btn hidden" title="Back to Search">
+                        <i class="fas fa-arrow-left"></i>
                     </button>
-                    <div id="searchBarContainer">
-                    <input type="text" id="searchInput" placeholder="Search for movies..." />
-                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+
+                    <!-- Search Bar + Genre Filter -->
+                    <section class="search-section">
+
+                        <!-- Cross Button -->
+                        <button id="closePopupBtn" class="close-btn" title="Close">
+                            <i class="fas fa-xmark"></i>
+                        </button>
+
+                        <div class="search-container">
+                            <button id="voiceBtn" title="Voice Search">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <div id="searchBarContainer">
+                                <input type="text" id="searchInput" placeholder="Search for movies..." />
+                            </div>
+                            <button id="searchBtn"><i class="fas fa-search"></i></button>
+                        </div>
+
+                        <!-- Genre Toggle Button -->
+                        <h2 id="genreFilterTitle">Search by Genre</h2>
+                        <button id="genreToggleBtn" title="Search by Genre">
+                            <i class="fas fa-film"></i> Genre
+                        </button>
+
+                        <!-- Genre Dropdown -->
+                        <div class="genre-dropdown">
+                            <select id="genreFilter">
+                                <option value="">Select Genre</option>
+                            </select>
+                        </div>
+                    </section>
+
+                    <!-- Genre Filtered Results (if selected) -->
+                    <div id="genreResults" class="section-container hidden">
+                        <h3>Genre Results:</h3>
+                        <div class="search-row-posters" id="genreResultsList"></div>
+                    </div>
+
+                    <!-- Search Results -->
+                    <div id="searchResultsContainer" class="section-container hidden">
+                        <h3>Search Results:</h3>
+                        <div class="search-row-posters" id="searchResults"></div>
+                        <p id="noResultsMessage" class="no-results hidden">No results found.</p>
+                    </div>
+
+                    <!--  Recent Searches -->
+                    <div id="recentContainer" class="section-container hidden">
+                        <h3>Recent Searches:</h3>
+                        <div id="recentSearches" class="recent-searches"></div>
                     </div>
                 </div>
-            
-            <!-- Genre Toggle Button -->
-             <h2 id="genreFilterTitle">Search by Genre</h2>
-            <button id="genreToggleBtn" title="Search by Genre">
-              <i class="fas fa-film"></i> Genre
-            </button>
-
-            <!-- Genre Dropdown -->
-            <div class="genre-dropdown"> <!-- ✅ Only class here -->
-              <select id="genreFilter"> <!-- ✅ ID goes here -->
-                <option value="">Select Genre</option>
-              </select>
             </div>
-        
-            </section>
-        
-            <!-- Genre Filtered Results (if selected) -->
-            <div id="genreResults" class="section-container hidden">
-                <h3>Genre Results:</h3>
-                <div class="search-row-posters" id="genreResultsList"></div>
-            </div>
-        
-            <!-- Search Results -->
-            <div id="searchResultsContainer" class="section-container hidden">
-                <h3>Search Results:</h3>
-                <div class="search-row-posters" id="searchResults"></div>
-                <p id="noResultsMessage" class="no-results hidden">No results found.</p>
-            </div>
-        
-            <!--  Recent Searches -->
-            <div id="recentContainer" class="section-container hidden">
-                <h3>Recent Searches:</h3>
-                <div id="recentSearches" class="recent-searches"></div>
-            </div>
-        
-            <!-- JS for Search -->
-            <script src="config.js"></script>
-            <script type="module" src="search.js"></script>
-                      </div>
-                    </div>
-                
-                
-                
-                
-                
-
 
             <!-- Notification icon -->
             <i class="fas fa-bell"></i>
@@ -210,7 +202,6 @@
 
 
     <!------------------------- Scipts ------------------------->
-
     <!--Navbar fadeout animation on scrolling-->
     <script>
         const header = document.querySelector(".nav-bar");
@@ -243,28 +234,30 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
     <script src="config.js"></script>
-    <!-- Toastify CSS -->
+
     <!-- Toastify JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <script type="module" src="4index.js"></script>
 
+    <!-- JS for Search -->
+    <script type="module" src="search.js"></script>
 
-<!-- Pop up -->
-
+    <!-- Pop up -->
     <script>
         const openBtn = document.getElementById('openSearchBtn');
         const popup = document.getElementById('searchPopup');
         const closeBtn = document.getElementById('closePopupBtn');
-    
+
         openBtn?.addEventListener('click', () => {
-          popup.classList.remove('hidden');
-          document.body.classList.add('popup-open'); // Optional: disables background scroll
-      });
-  
+            popup.classList.remove('hidden');
+            document.body.classList.add('popup-open'); // Disables background scroll
+        });
+
         closeBtn?.addEventListener('click', () => {
-          popup.classList.add('hidden');
-          document.body.classList.remove('popup-open'); // Optional
-      });
+            popup.classList.add('hidden');
+            document.body.classList.remove('popup-open');
+        });
     </script>
 
 </body>
