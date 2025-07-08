@@ -1036,35 +1036,30 @@ body {
 }
 
 
-
-
-
-
+/* Recent searches */
 
 .recent-searches {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
 }
 
 .recent-searches span {
-  background: #333;
-  color: white;
-  padding: 6px 16px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  cursor: pointer;
+    background: #333;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
 }
 
 .recent-searches span:hover {
-  background: #555;
+    background: #555;
 }
 
-
-
 body.popup-open {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 
