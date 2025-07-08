@@ -15,7 +15,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 import {
     getAuth,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -683,8 +684,29 @@ document.querySelectorAll("#profileDropdown li").forEach((item) => {
     });
 });
 
-document.getElementById("signOut").addEventListener("click", () => {
-    window.location.href = "1getStarted.html";
+//sign-out button fixed
+const signOutBtn = document.getElementById("signOut");
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // ✅ User is logged in
+        signOutBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> Sign Out`;
+        signOutBtn.onclick = () => {
+            signOut(auth)
+                .then(() => {
+                    window.location.replace("3sign_In.html");
+                })
+                .catch((error) => {
+                    console.error("Error during sign out:", error);
+                });
+        };
+    } else {
+        // ❌ User is not logged in — show "Sign In" instead
+        signOutBtn.innerHTML = `<i class="fas fa-sign-in-alt"></i> Sign In`;
+        signOutBtn.onclick = () => {
+            window.location.replace("3sign_In.html");
+        };
+    }
 });
 
 document.getElementById("accountBtn").addEventListener("click", () => {
