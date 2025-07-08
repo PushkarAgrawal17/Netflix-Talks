@@ -9,9 +9,11 @@
     <link rel="icon" type="image/png" href="./Images/favicon.png">
     <!-- Toastify CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 
 <body class="auth-body">
+    <div class="pixel-grid" id="pixelGrid"></div>
     <div class="hero-section">
         <!-- Navbar -->
         <header class="navbar">
@@ -38,42 +40,11 @@
                 <p>Already have an account? <a href="3sign_In.html">Sign in here.</a></p>
             </div>
         </div>
-
-        <!-- Background Overlay -->
-        <div class="glow-strip" id="glow-strip"></div>
-        <div class="tile-background" id="tile-bg"></div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content-wrapper">
-            <p>Questions? Call <a href="#">000-800-919-1743</a></p> <br>
-
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="#">FAQ</a>
-                    <a href="#">Cookie Preferences</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">Help Centre</a>
-                    <a href="#">Corporate Information</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">Account</a>
-                    <a href="#">Terms of Use</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">Privacy</a>
-                </div>
-            </div>
-
-            <select>
-                <option>English</option>
-                <option>हिन्दी</option>
-            </select>
-
-            <br><br>
-            <p>Netflix India</p>
+            <p>Netflix Talks India</p>
             <br>
         </div>
     </footer>
@@ -90,15 +61,35 @@
             }
         });
     </script>
+
+    <!--Hover effect-->
+<script>
+  const grid = document.getElementById("pixelGrid");
+
+  const pixelSize = 64; // 60px + 4px gap
+  const columns = Math.ceil(window.innerWidth / pixelSize);
+  const rows = Math.ceil(window.innerHeight / pixelSize);
+  const pixelCount = columns * rows;
+
+  for (let i = 0; i < pixelCount; i++) {
+    const pixel = document.createElement("div");
+    pixel.classList.add("pixel");
+
+    pixel.addEventListener("mouseenter", () => {
+      pixel.style.backgroundColor = "red";
+      setTimeout(() => {
+        pixel.style.backgroundColor = "#0a0a0a";
+      }, 800);
+    });
+
+    grid.appendChild(pixel);
+  }
+</script>
+
+
     <!-- Toastify JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="firebase-auth.js"></script>
-
-
-    <script src="auth.js">
-
-    </script>
-
 </body>
 
 </html>
