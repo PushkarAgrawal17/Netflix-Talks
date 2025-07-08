@@ -19,7 +19,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 40px;
+    padding: 50px 70px 40px 50px;
     height: 100px;
     background: linear-gradient(to bottom, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0));
 
@@ -33,7 +33,8 @@ body {
 
 /* Netflix Logo */
 .logo img {
-    height: 60px;
+    width: 300px;
+    filter: drop-shadow(1px 1px black);
 }
 
 /* Links\Tabs in the center */
