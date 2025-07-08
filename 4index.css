@@ -1125,21 +1125,19 @@ body.popup-open {
 
 
 
+/* --------- Popup Content Styling --------- */
 
-
-
-/* ---------- Popup Content Styling ---------- */
 .popup-content {
-  background: rgba(20, 20, 20, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-  border-radius: 16px;
-  backdrop-filter: blur(20px);
-  padding: 2rem;
-  width: 80vw;
-  height: 80vh;
-  overflow-y: auto;
-  position: relative;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    width: 80vw;
+    height: 80vh;
+    overflow-y: auto;
+    position: relative;
 }
 
 /* ---------- Container Structure ---------- */
