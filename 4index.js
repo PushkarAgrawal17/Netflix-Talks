@@ -647,11 +647,13 @@ function addGlobalPopupListeners() {
     closeBtn.addEventListener("click", () => {
         popup.style.display = "none";
         document.body.style.overflow = "auto";
+        document.getElementById("comment-input").value="";
     });
 
     overlay.addEventListener("click", () => {
         popup.style.display = "none";
         document.body.style.overflow = "auto";
+        document.getElementById("comment-input").value="";
     });
 }
 
