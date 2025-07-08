@@ -1062,32 +1062,35 @@ body.popup-open {
     overflow: hidden;
 }
 
-
+/* Popup setting */
 
 
 .popup-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
 .popup-content {
-  position: relative; /* ✅ THIS LINE IS CRUCIAL */
-  background: rgba(20, 20, 20, 0.95);
-  width: 80vw;
-  height: 80vh;
-  padding: 2rem;
-  border-radius: 12px;
-  overflow-y: auto;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    position: relative; /* ✅ THIS LINE IS CRUCIAL */
+    background: rgba(20, 20, 20, 0.95);
+    width: 80vw;
+    height: 80vh;
+    padding: 2rem;
+    border-radius: 12px;
+    overflow-y: auto;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
 }
+
+
+
 
 #closePopupBtn {
   position: absolute;
@@ -1109,9 +1112,6 @@ body.popup-open {
 }
 
 
-
-
-
 @keyframes popupFadeIn {
   from {
     transform: scale(0.95);
@@ -1122,11 +1122,6 @@ body.popup-open {
     opacity: 1;
   }
 }
-
-
-
-
-
 
 
 
