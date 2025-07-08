@@ -519,8 +519,8 @@ function addPosterListeners(container) {
                     commentsList.innerHTML = "";
                     const commentsQuery = query(collection(mmovieRef, "comments"), orderBy("timestamp", "desc"));
                     const commentsSnapshot = await getDocs(commentsQuery);
-                    if (commentsSnapshot.empty){
-                        commentsList.innerHTML=`<p style="font-size:14px; color:#777; text-align:center; ">No comments yet.</p>`;
+                    if (commentsSnapshot.empty) {
+                        commentsList.innerHTML = `<p style="font-size:14px; color:#777; text-align:center; ">No comments yet.</p>`;
                         return;
                     }
                     commentsSnapshot.forEach(async (docSnap) => {
@@ -564,71 +564,69 @@ function addPosterListeners(container) {
                                 comment: replyText,
                                 timestamp: new Date()
                             });
+
                             showToast("Reply posted!", "gray");
 
-                            // ✅ Append reply directly to the replies container
                             const replyContainer = div.querySelector(`#replies-${commentId}`);
-                            const replyDiv = document.createElement("div");
-                            replyDiv.classList.add("reply-card");
-                            replyDiv.innerHTML = `
-                                <p>${user.email || user.displayName}</p>
-                                <h4>${replyText}</h4>
-                                <div class="comment-meta">${new Date().toLocaleString()}</div>
-                            `;
-                            replyContainer.appendChild(replyDiv);
+                            const toggleBtn = div.querySelector(".toggle-replies-btn");
+
+                            // ✅ Refresh replies
+                            await loadReplies(commentId, replyContainer, toggleBtn);
                             replyContainer.style.display = "block";
 
-                            // ✅ Update reply count in toggle button
-                            const toggleBtn = div.querySelector(".toggle-replies-btn");
-                            const match = toggleBtn.textContent.match(/View (\d+)/);
-                            let currentCount = match ? parseInt(match[1]) : 0;
-                            currentCount++;
-                            toggleBtn.textContent = `💬 Hide ${currentCount} repl${currentCount === 1 ? 'y' : 'ies'}`;
-
-                            // Hide reply input
+                            // Reset input
                             div.querySelector(`#reply-${commentId} textarea`).value = "";
-                            div.querySelector(`#reply-${commentId}`).style.display = "none";
+                            div.querySelector(`#reply-${commentId}`).style.display = "block";
 
                         });
 
                         // Toggle showing replies
-                        div.querySelector(".toggle-replies-btn").addEventListener("click", async () => {
+                        div.querySelector(".toggle-replies-btn").addEventListener("click", async (e) => {
                             const replyContainer = div.querySelector(`#replies-${commentId}`);
+                            const toggleBtn = e.target;
 
-                            // If already visible, just toggle
                             if (replyContainer.style.display === "block") {
                                 replyContainer.style.display = "none";
-                                const count = replyContainer.children.length;
+                                const count = Array.from(replyContainer.children).filter(child => child.tagName === "DIV").length;
                                 toggleBtn.textContent = `💬 View ${count} repl${count === 1 ? 'y' : 'ies'}`;
-                                return;
-                            }
-
-                            // Clear before loading
-                            replyContainer.innerHTML = "";
-
-                            // Fetch replies
-                            const repliesSnap = await getDocs(query(collection(mmovieRef, "comments", commentId, "replies"), orderBy("timestamp", "desc")));
-                            if (repliesSnap.empty) {
-                                replyContainer.innerHTML = `<p style="font-size:14px;color:#777;">No replies yet.</p>`;
                             } else {
-                                repliesSnap.forEach((replyDoc) => {
-                                    const reply = replyDoc.data();
-                                    const replyDiv = document.createElement("div");
-                                    replyDiv.classList.add("reply-card");
-                                    replyDiv.innerHTML = `
-                                        <p>${reply.username}</p>
-                                        <h4>${reply.comment}</h4>
-                                        <div class="comment-meta">${new Date(reply.timestamp?.toDate?.() || reply.timestamp).toLocaleString()}</div>
-                                    `;
-                                    replyContainer.appendChild(replyDiv);
-                                });
+                                // Call reusable reply loader
+                                await loadReplies(commentId, replyContainer, toggleBtn);
+                                replyContainer.style.display = "block";
                             }
-
-                            replyContainer.style.display = "block";
                         });
-
                     });
                 }
+                async function loadReplies(commentId, replyContainer, toggleBtn) {
+                    replyContainer.innerHTML = ""; // Clear old replies
+
+                    const repliesSnap = await getDocs(
+                        query(
+                            collection(mmovieRef, "comments", commentId, "replies"),
+                            orderBy("timestamp", "desc")
+                        )
+                    );
+
+                    if (repliesSnap.empty) {
+                        replyContainer.innerHTML = `<p style="font-size:14px;color:#777;">No replies yet.</p>`;
+                    } else {
+                        repliesSnap.forEach((replyDoc) => {
+                            const reply = replyDoc.data();
+                            const replyDiv = document.createElement("div");
+                            replyDiv.classList.add("reply-card");
+                            replyDiv.innerHTML = `
+                                <p>${reply.username}</p>
+                                <h4>${reply.comment}</h4>
+                                <div class="comment-meta">${new Date(reply.timestamp?.toDate?.() || reply.timestamp).toLocaleString()}</div>
+                            `;
+                            replyContainer.appendChild(replyDiv);
+                        });
+                    }
+
+                    const count = Array.from(replyContainer.children).filter(child => child.tagName === "DIV").length;
+                    toggleBtn.textContent = `💬 Hide ${count} repl${count === 1 ? 'y' : 'ies'}`;
+                }
+
 
                 loadComments();
             });
@@ -651,13 +649,13 @@ function addGlobalPopupListeners() {
     closeBtn.addEventListener("click", () => {
         popup.style.display = "none";
         document.body.style.overflow = "auto";
-        document.getElementById("comment-input").value="";
+        document.getElementById("comment-input").value = "";
     });
 
     overlay.addEventListener("click", () => {
         popup.style.display = "none";
         document.body.style.overflow = "auto";
-        document.getElementById("comment-input").value="";
+        document.getElementById("comment-input").value = "";
     });
 }
 
