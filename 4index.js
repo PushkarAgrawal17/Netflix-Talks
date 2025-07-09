@@ -432,7 +432,7 @@ export function addPosterListeners(container) {
                     if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
                     if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
 
-                    // ✅ UPDATE COUNTS
+                    // Update counts
                     const updatedMovieSnap = await getDoc(mmovieRef);
                     const updatedMovieData = updatedMovieSnap.exists() ? updatedMovieSnap.data() : {};
                     popup.querySelector("#like-count").textContent = (updatedMovieData.likedBy || []).length;
@@ -484,7 +484,7 @@ export function addPosterListeners(container) {
                     if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
                     if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
 
-                    // ✅ UPDATE COUNTS
+                    // Update counts
                     const updatedMovieSnap = await getDoc(mmovieRef);
                     const updatedMovieData = updatedMovieSnap.exists() ? updatedMovieSnap.data() : {};
                     popup.querySelector("#like-count").textContent = (updatedMovieData.likedBy || []).length;
@@ -575,7 +575,7 @@ export function addPosterListeners(container) {
                             const replyContainer = div.querySelector(`#replies-${commentId}`);
                             const toggleBtn = div.querySelector(".toggle-replies-btn");
 
-                            // ✅ Refresh replies
+                            // Refresh replies
                             await loadReplies(commentId, replyContainer, toggleBtn);
                             replyContainer.style.display = "block";
 
