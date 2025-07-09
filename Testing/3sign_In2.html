@@ -5,15 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In | Netflix Clone</title>
-    <link rel="stylesheet" href="2auth.css" />
+    <link rel="stylesheet" href="2auth2.css" />
     <link rel="icon" type="image/png" href="./Images/favicon.png" />
     <!-- Toastify CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 </head>
 
-<body class="auth-body">
-    <div class="hero-section">
+<body>
+  <div class="pixel-grid" id="pixelGrid"></div>
+
         <!-- Navbar -->
         <header class="navbar">
             <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Logo" class="logo" />
@@ -26,9 +27,9 @@
         </header>
 
         <!-- Main Center Content -->
-        <div class="center-wrapper">
-            <div class="container">
+            <div class="signin-container">
                 <h1>Sign In</h1>
+                <form class="signup-form" id="signup-form">
                 <div class="input-box">
                     <input type="email" id="email" placeholder="Email Address" />
                 </div>
@@ -43,58 +44,41 @@
                 <div class="signup">
                     New to Netflix?
                     <a class="link" href="2sign_Up.html">Sign up now.</a>
-                </div>
                 <br />
                 <div class="captcha">
                     This page is protected by Google reCAPTCHA to ensure you're not a
                     bot.
-                    <br /><br />
+                    <br />
                     <a href="#">Learn more.</a>
                 </div>
-            </div>
-        </div>
-
-        <!-- Background Overlay -->
-        <div class="hero-overlay"></div>
-        <img src="Images/BG.png" alt="Background" class="background-img" />
+                </form>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content-wrapper">
-            <p>Questions? Call <a href="#">000-800-919-1743</a></p>
-            <br />
+    <!--------------- Scripts --------------->
+<!-- Pixel Hover Script (0.8s) -->
+  <script>
+    const grid = document.getElementById("pixelGrid");
 
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="#">FAQ</a>
-                    <a href="#">Cookie Preferences</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">Help Centre</a>
-                    <a href="#">Corporate Information</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">Account</a>
-                    <a href="#">Terms of Use</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">Privacy</a>
-                </div>
-            </div>
+    const pixelSize = 64; // 60px + 4px gap
+    const columns = Math.ceil(window.innerWidth / pixelSize);
+    const rows = Math.ceil(window.innerHeight / pixelSize);
+    const pixelCount = columns * rows;
 
-            <select>
-                <option>English</option>
-                <option>हिन्दी</option>
-            </select>
+    for (let i = 0; i < pixelCount; i++) {
+      const pixel = document.createElement("div");
+      pixel.classList.add("pixel");
 
-            <br /><br />
-            <p>Netflix India</p>
-            <br />
-        </div>
-    </footer>
+      pixel.addEventListener("mouseenter", () => {
+        pixel.style.backgroundColor = "red";
+        setTimeout(() => {
+          pixel.style.backgroundColor = "#0a0a0a";
+        }, 800); // ← Change timeout duration here
+      });
 
-    <!--------------- Scipts --------------->
+      grid.appendChild(pixel);
+    }
+  </script>
+
     <script type="module">
         import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
         import { app } from "./firebase-auth.js";
