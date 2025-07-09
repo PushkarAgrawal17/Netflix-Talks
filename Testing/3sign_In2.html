@@ -53,8 +53,32 @@
                 </div>
             </div>
     </div>
-    
-    <!--------------- Scipts --------------->
+
+    <!--------------- Scripts --------------->
+<!-- Pixel Hover Script (0.8s) -->
+  <script>
+    const grid = document.getElementById("pixelGrid");
+
+    const pixelSize = 64; // 60px + 4px gap
+    const columns = Math.ceil(window.innerWidth / pixelSize);
+    const rows = Math.ceil(window.innerHeight / pixelSize);
+    const pixelCount = columns * rows;
+
+    for (let i = 0; i < pixelCount; i++) {
+      const pixel = document.createElement("div");
+      pixel.classList.add("pixel");
+
+      pixel.addEventListener("mouseenter", () => {
+        pixel.style.backgroundColor = "red";
+        setTimeout(() => {
+          pixel.style.backgroundColor = "#0a0a0a";
+        }, 800); // ← Change timeout duration here
+      });
+
+      grid.appendChild(pixel);
+    }
+  </script>
+
     <script type="module">
         import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
         import { app } from "./firebase-auth.js";
