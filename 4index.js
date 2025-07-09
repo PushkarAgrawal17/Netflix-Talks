@@ -572,8 +572,21 @@ export function addPosterListeners(container) {
                             ${data.isPoll
                                 ? `<h4>🗳️ ${data.question}</h4>
                                     <ul class="poll-options">
-                                    ${data.options.map((opt, idx) => `<li data-idx="${idx}" data-id="${commentId}" class="poll-vote-option">${opt} (${data.votes?.[idx] || 0})</li>`).join("")}
-                                     </ul>`
+                                    ${data.options.map((opt, idx) => {
+                                    const count = data.votes?.[idx] || 0;
+                                    const totalVotes = data.votes?.reduce((a, b) => a + b, 0) || 0;
+                                    const percent = totalVotes ? Math.round((count / totalVotes) * 100) : 0;
+
+                                    return `
+                                    <li data-idx="${idx}" data-id="${commentId}" class="poll-vote-option">
+                                        <div class="poll-label">${opt}</div>
+                                        <div class="poll-bar-container">
+                                        <div class="poll-bar" style="width: ${percent}%;"></div>
+                                        </div>
+                                        <div class="poll-meta">${count} votes • ${percent}%</div>
+                                    </li>`;
+                                }).join("")}
+                                    </ul>`
                                 : `<h4>${data.comment}</h4>`}
 
                             <div class="comment-meta">${new Date(data.timestamp?.toDate?.() || data.timestamp).toLocaleString()}</div>
