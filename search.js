@@ -229,6 +229,12 @@ popupContent.classList.add("genre-active");
 backToSearchBtn.classList.remove("hidden");
 genreTitle.style.display = "block";
 genreDropdown.style.display = "flex";
+
+// ✅ HIDE & CLEAR regular search results
+    searchResultsContainer.classList.add("hidden");
+    searchResults.innerHTML = "";
+
+    recentContainer.classList.add("hidden"); // ✅ Hide recent
 });
 
 // Back to normal search mode
