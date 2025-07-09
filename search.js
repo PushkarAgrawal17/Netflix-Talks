@@ -1,7 +1,7 @@
 const baseURL = "https://api.themoviedb.org/3";
 const imgURL = "https://image.tmdb.org/t/p/w500";
 
-import {addPosterListeners} from  "./4index.js";
+import { addPosterListeners } from "./4index.js";
 
 // --- Elements ---
 const searchInput = document.getElementById("searchInput");
@@ -227,12 +227,12 @@ const genreTitle = document.getElementById("genreFilterTitle");
 
 // Enable genre mode
 genreToggleBtn.addEventListener("click", () => {
-popupContent.classList.add("genre-active");
-backToSearchBtn.classList.remove("hidden");
-genreTitle.style.display = "block";
-genreDropdown.style.display = "flex";
+    popupContent.classList.add("genre-active");
+    backToSearchBtn.classList.remove("hidden");
+    genreTitle.style.display = "block";
+    genreDropdown.style.display = "flex";
 
-// ✅ HIDE & CLEAR regular search results
+    // ✅ HIDE & CLEAR regular search results
     searchResultsContainer.classList.add("hidden");
     searchResults.innerHTML = "";
 
