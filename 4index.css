@@ -722,6 +722,85 @@ body {
     background: #ff2c30;
 }
 
+/* ==== Poll Section Styling ==== */
+
+.poll-options {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.poll-vote-option {
+    padding: 10px 14px;
+    background: #1e1e1e;
+    color: #ddd;
+    border: 1px solid #444;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    font-size: 15px;
+    position: relative;
+}
+
+.poll-vote-option:hover {
+    background: #2a2a2a;
+    transform: scale(1.01);
+}
+
+.poll-vote-option.voted {
+    background-color: #1db954;
+    color: white;
+    border: 1px solid transparent;
+    font-weight: 600;
+}
+
+.poll-vote-option.voted::after {
+    content: "✓";
+    position: absolute;
+    right: 14px;
+    color: white;
+    font-size: 14px;
+}
+
+#poll-ui {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.poll-option {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+}
+
+.poll-option:focus {
+    border-color: #1db954;
+    box-shadow: 0 0 3px #1db954;
+}
+
+#add-poll-option {
+    background-color: #333;
+    color: #1db954;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+#add-poll-option:hover {
+    background-color: #444;
+}
+
+
 .comment-card {
     margin-top: 18px;
     padding: 16px;

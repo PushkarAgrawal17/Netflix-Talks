@@ -42,6 +42,9 @@ function showToast(message, color = "#00b09b") {
     }).showToast();
 }
 
+let pollOptionCount = 2;
+
+
 // -------- Safety check for TMDB API Key --------
 if (typeof apiKey === "undefined") {
     alert("API key is missing. Please create config.js with your TMDB API key.");
@@ -91,7 +94,7 @@ async function addToMyListFirestore(movie) {
     }
 
     await setDoc(movieRef, {
-        id:movie.id,
+        id: movie.id,
         title: movie.title,
         bgImg: movie.bgImg,
         bgImgLowRes: movie.bgImgLowRes,
@@ -225,9 +228,18 @@ function createGlobalPopup() {
         <div class="comment-section">
             <h3>Comments</h3>
             <div class="comment-input-box">
-                <textarea id="comment-input" placeholder="Add a comment..."></textarea>
+                <textarea id="comment-input" placeholder="Add a comment or type 'poll:' to create a poll..."></textarea>
+    
+                <!-- Poll UI (initially hidden) -->
+                <div id="poll-ui" style="display: none; margin-top: 8px;">
+                    <input type="text" class="poll-option" placeholder="Option 1">
+                    <input type="text" class="poll-option" placeholder="Option 2">
+                    <button id="add-poll-option">+ Add Option</button>
+                </div>
+    
                 <button id="post-comment">Post</button>
             </div>
+
             <div id="comments-list"></div>
         </div>
     </div>`;
@@ -506,19 +518,40 @@ export function addPosterListeners(container) {
 
                 postCommentBtn.onclick = async () => {
                     const commentText = commentInput.value.trim();
+                    const isPoll = commentText.toLowerCase().startsWith("poll:");
+                    const pollOptions = Array.from(document.querySelectorAll(".poll-option"))
+                        .map(opt => opt.value.trim())
+                        .filter(opt => opt);
+
                     if (!commentText) return;
 
                     const commentRef = doc(collection(mmovieRef, "comments"));
-                    await setDoc(commentRef, {
-                        username: user.email || user.displayName,
-                        comment: commentText,
-                        timestamp: new Date()
-                    });
+
+                    if (isPoll && pollOptions.length >= 2) {
+                        await setDoc(commentRef, {
+                            username: user.email || user.displayName,
+                            isPoll: true,
+                            question: commentText.slice(5).trim(),
+                            options: pollOptions,
+                            votes: Array(pollOptions.length).fill(0),
+                            voters: {}, // 🆕 ADD THIS LINE
+                            timestamp: new Date()
+                        });
+                    } else {
+                        await setDoc(commentRef, {
+                            username: user.email || user.displayName,
+                            comment: commentText,
+                            isPoll: false,
+                            timestamp: new Date()
+                        });
+                    }
 
                     commentInput.value = "";
-                    showToast("Comment posted!", "#1db954");
+                    document.querySelector("#poll-ui").style.display = "none";
+                    showToast("Posted!", "#1db954");
                     loadComments();
                 };
+
 
                 async function loadComments() {
                     commentsList.innerHTML = "";
@@ -536,7 +569,13 @@ export function addPosterListeners(container) {
                         div.classList.add("comment-card");
                         div.innerHTML = `
                             <p>${data.username}</p>
-                            <h4>${data.comment}</h4>
+                            ${data.isPoll
+                                ? `<h4>🗳️ ${data.question}</h4>
+                                    <ul class="poll-options">
+                                    ${data.options.map((opt, idx) => `<li data-idx="${idx}" data-id="${commentId}" class="poll-vote-option">${opt} (${data.votes?.[idx] || 0})</li>`).join("")}
+                                     </ul>`
+                                : `<h4>${data.comment}</h4>`}
+
                             <div class="comment-meta">${new Date(data.timestamp?.toDate?.() || data.timestamp).toLocaleString()}</div>
                             <div class="reply-btn" data-id="${commentId}">Reply</div>
                             <div class="reply-box" id="reply-${commentId}" style="display:none;">
@@ -551,7 +590,62 @@ export function addPosterListeners(container) {
                         const replyCount = repliesSnap.size;
                         div.querySelector(".toggle-replies-btn").textContent = `💬 View ${replyCount} repl${replyCount === 1 ? 'y' : 'ies'}`;
 
+
+                        // Highlight the voted option for this user (if any)
+                        if (data.isPoll && data.voters && data.voters[user.uid] !== undefined) {
+                            const votedIdx = data.voters[user.uid];
+                            const votedOption = div.querySelector(`.poll-vote-option[data-idx="${votedIdx}"]`);
+                            if (votedOption) votedOption.classList.add("voted");
+                        }
+
                         commentsList.appendChild(div);
+
+                        div.querySelectorAll(".poll-vote-option").forEach(option => {
+                            option.addEventListener("click", async () => {
+                                const selectedIdx = parseInt(option.dataset.idx);
+                                const commentId = option.dataset.id;
+                                const commentDocRef = doc(mmovieRef, "comments", commentId);
+                                const docSnap = await getDoc(commentDocRef);
+                                if (!docSnap.exists()) return;
+
+                                const data = docSnap.data();
+                                const votes = data.votes || Array(data.options.length).fill(0);
+                                const voters = data.voters || {};
+
+                                const prevVote = voters[user.uid];
+
+                                if (prevVote === selectedIdx) {
+                                    // 🗑️ User clicked again on same option → remove vote
+                                    votes[selectedIdx] = Math.max(0, votes[selectedIdx] - 1);
+                                    delete voters[user.uid];
+
+                                    await updateDoc(commentDocRef, {
+                                        votes: votes,
+                                        voters: voters
+                                    });
+
+                                    showToast("Vote removed!", "#e67e22");
+                                } else {
+                                    // 🔁 Change vote (if voted before)
+                                    if (prevVote !== undefined) {
+                                        votes[prevVote] = Math.max(0, votes[prevVote] - 1);
+                                    }
+
+                                    votes[selectedIdx]++;
+                                    voters[user.uid] = selectedIdx;
+
+                                    await updateDoc(commentDocRef, {
+                                        votes: votes,
+                                        voters: voters
+                                    });
+
+                                    showToast(prevVote !== undefined ? "Vote changed!" : "Vote recorded!", "#3498db");
+                                }
+
+                                loadComments(); // 🔁 refresh UI
+                            });
+                        });
+
 
                         // Reply button toggle
                         div.querySelector(".reply-btn").addEventListener("click", () => {
@@ -632,6 +726,22 @@ export function addPosterListeners(container) {
                     toggleBtn.textContent = `💬 Hide ${count} repl${count === 1 ? 'y' : 'ies'}`;
                 }
                 loadComments();
+
+                commentInput.addEventListener("input", () => {
+                    const isPoll = commentInput.value.trim().toLowerCase().startsWith("poll:");
+                    document.querySelector("#poll-ui").style.display = isPoll ? "block" : "none";
+                });
+
+                document.getElementById("add-poll-option").onclick = () => {
+                    pollOptionCount++;
+
+                    const input = document.createElement("input");
+                    input.type = "text";
+                    input.classList.add("poll-option");
+                    input.placeholder = `Option ${pollOptionCount}`;
+                    document.getElementById("poll-ui").insertBefore(input, document.getElementById("add-poll-option"));
+                };
+
             });
 
             const tempImg = new Image();
@@ -649,18 +759,38 @@ function addGlobalPopupListeners() {
     const closeBtn = popup.querySelector(".close-btn");
     const overlay = popup.querySelector(".popup-overlay");
 
-    closeBtn.addEventListener("click", () => {
-        popup.style.display = "none";
-        document.body.style.overflow = "auto";
-        document.getElementById("comment-input").value = "";
-    });
+    function resetPollInputs() {
+        pollOptionCount = 2; // 👈 reset count when popup is closed
+        const pollUI = document.getElementById("poll-ui");
 
-    overlay.addEventListener("click", () => {
+        // Remove all except first 2
+        const allInputs = [...pollUI.querySelectorAll(".poll-option")];
+        allInputs.slice(2).forEach(input => input.remove());
+
+        // Reset first two inputs
+        allInputs.slice(0, 2).forEach((input, i) => {
+            input.value = "";
+            input.placeholder = `Option ${i + 1}`;
+        });
+
+        pollUI.style.display = "none"; // hide poll UI
+    }
+
+
+    function closePopup() {
         popup.style.display = "none";
         document.body.style.overflow = "auto";
+
+        // Reset comment box
         document.getElementById("comment-input").value = "";
-    });
+
+        resetPollInputs();
+    }
+
+    closeBtn.addEventListener("click", closePopup);
+    overlay.addEventListener("click", closePopup);
 }
+
 
 createGlobalPopup();
 
