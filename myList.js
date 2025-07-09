@@ -34,6 +34,8 @@ function showToast(message, color = "#00b09b") {
   }).showToast();
 }
 
+let pollOptionCount = 2;
+
 window.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".poster-grid");
   if (!container) return;
@@ -71,6 +73,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".poster").forEach((poster) => {
       poster.addEventListener("click", async () => {
+
+        console.log(`Clicked poster ID:${poster.dataset.id}`);
+
         const popup = document.getElementById("mylist-popup");
         if (!popup) return;
 
@@ -103,35 +108,6 @@ window.addEventListener("DOMContentLoaded", () => {
           document.body.style.overflow = "auto";
           location.reload();
         };
-
-        //       // 🔘 Create placeholder for buttons if not present in HTML
-        //       let popupActions = popup.querySelector(".popup-actions");
-        //       if (!popupActions) {
-        //         popupActions = document.createElement("div");
-        //         popupActions.classList.add("popup-actions");
-        //         popupActions.innerHTML = `
-        //   <button id="like-btn" class="like-btn"><i class="fas fa-thumbs-up"></i><span id="like-count">0</span></button>
-        //   <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i><span id="dislike-count">0</span></button>
-        //   <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
-        // `;
-        //         popup.querySelector(".popup-box").appendChild(popupActions);
-        //       }
-
-        //       // ✅ Create comment section if not present
-        //       let commentSection = popup.querySelector(".comment-section");
-        //       if (!commentSection) {
-        //         commentSection = document.createElement("div");
-        //         commentSection.classList.add("comment-section");
-        //         commentSection.innerHTML = `
-        //   <h3>Comments</h3>
-        //   <div class="comment-input-box">
-        //       <textarea id="comment-input" placeholder="Add a comment..."></textarea>
-        //       <button id="post-comment">Post</button>
-        //   </div>
-        //   <div id="comments-list"></div>
-        // `;
-        //         popup.querySelector(".popup-box").appendChild(commentSection);
-        //       }
 
         // 🔥 Like/Dislike/Share logic
         const likeBtn = popup.querySelector("#like-btn");
@@ -281,19 +257,40 @@ window.addEventListener("DOMContentLoaded", () => {
 
         postCommentBtn.onclick = async () => {
           const commentText = commentInput.value.trim();
+          const isPoll = commentText.toLowerCase().startsWith("poll:");
+          const pollOptions = Array.from(document.querySelectorAll(".poll-option"))
+            .map(opt => opt.value.trim())
+            .filter(opt => opt);
+
           if (!commentText) return;
 
           const commentRef = doc(collection(mmovieRef, "comments"));
-          await setDoc(commentRef, {
-            username: user.email || user.displayName,
-            comment: commentText,
-            timestamp: new Date()
-          });
+
+          if (isPoll && pollOptions.length >= 2) {
+            await setDoc(commentRef, {
+              username: user.email || user.displayName,
+              isPoll: true,
+              question: commentText.slice(5).trim(),
+              options: pollOptions,
+              votes: Array(pollOptions.length).fill(0),
+              voters: {}, // 🆕 ADD THIS LINE
+              timestamp: new Date()
+            });
+          } else {
+            await setDoc(commentRef, {
+              username: user.email || user.displayName,
+              comment: commentText,
+              isPoll: false,
+              timestamp: new Date()
+            });
+          }
 
           commentInput.value = "";
-          showToast("Comment posted!", "#1db954");
+          document.querySelector("#poll-ui").style.display = "none";
+          showToast("Posted!", "#1db954");
           loadComments();
         };
+
 
         async function loadComments() {
           commentsList.innerHTML = "";
@@ -311,7 +308,26 @@ window.addEventListener("DOMContentLoaded", () => {
             div.classList.add("comment-card");
             div.innerHTML = `
                                     <p>${data.username}</p>
-                                    <h4>${data.comment}</h4>
+                                    ${data.isPoll
+                ? `<h4>🗳️ ${data.question}</h4>
+                                            <ul class="poll-options">
+                                            ${data.options.map((opt, idx) => {
+                  const count = data.votes?.[idx] || 0;
+                  const totalVotes = data.votes?.reduce((a, b) => a + b, 0) || 0;
+                  const percent = totalVotes ? Math.round((count / totalVotes) * 100) : 0;
+
+                  return `
+                                            <li data-idx="${idx}" data-id="${commentId}" class="poll-vote-option">
+                                                <div class="poll-label">${opt}</div>
+                                                <div class="poll-bar-container">
+                                                <div class="poll-bar" style="width: ${percent}%;"></div>
+                                                </div>
+                                                <div class="poll-meta">${count} votes • ${percent}%</div>
+                                            </li>`;
+                }).join("")}
+                                            </ul>`
+                : `<h4>${data.comment}</h4>`}
+        
                                     <div class="comment-meta">${new Date(data.timestamp?.toDate?.() || data.timestamp).toLocaleString()}</div>
                                     <div class="reply-btn" data-id="${commentId}">Reply</div>
                                     <div class="reply-box" id="reply-${commentId}" style="display:none;">
@@ -326,7 +342,62 @@ window.addEventListener("DOMContentLoaded", () => {
             const replyCount = repliesSnap.size;
             div.querySelector(".toggle-replies-btn").textContent = `💬 View ${replyCount} repl${replyCount === 1 ? 'y' : 'ies'}`;
 
+
+            // Highlight the voted option for this user (if any)
+            if (data.isPoll && data.voters && data.voters[user.uid] !== undefined) {
+              const votedIdx = data.voters[user.uid];
+              const votedOption = div.querySelector(`.poll-vote-option[data-idx="${votedIdx}"]`);
+              if (votedOption) votedOption.classList.add("voted");
+            }
+
             commentsList.appendChild(div);
+
+            div.querySelectorAll(".poll-vote-option").forEach(option => {
+              option.addEventListener("click", async () => {
+                const selectedIdx = parseInt(option.dataset.idx);
+                const commentId = option.dataset.id;
+                const commentDocRef = doc(mmovieRef, "comments", commentId);
+                const docSnap = await getDoc(commentDocRef);
+                if (!docSnap.exists()) return;
+
+                const data = docSnap.data();
+                const votes = data.votes || Array(data.options.length).fill(0);
+                const voters = data.voters || {};
+
+                const prevVote = voters[user.uid];
+
+                if (prevVote === selectedIdx) {
+                  // 🗑️ User clicked again on same option → remove vote
+                  votes[selectedIdx] = Math.max(0, votes[selectedIdx] - 1);
+                  delete voters[user.uid];
+
+                  await updateDoc(commentDocRef, {
+                    votes: votes,
+                    voters: voters
+                  });
+
+                  showToast("Vote removed!", "#e67e22");
+                } else {
+                  // 🔁 Change vote (if voted before)
+                  if (prevVote !== undefined) {
+                    votes[prevVote] = Math.max(0, votes[prevVote] - 1);
+                  }
+
+                  votes[selectedIdx]++;
+                  voters[user.uid] = selectedIdx;
+
+                  await updateDoc(commentDocRef, {
+                    votes: votes,
+                    voters: voters
+                  });
+
+                  showToast(prevVote !== undefined ? "Vote changed!" : "Vote recorded!", "#3498db");
+                }
+
+                loadComments(); // 🔁 refresh UI
+              });
+            });
+
 
             // Reply button toggle
             div.querySelector(".reply-btn").addEventListener("click", () => {
@@ -407,6 +478,21 @@ window.addEventListener("DOMContentLoaded", () => {
           toggleBtn.textContent = `💬 Hide ${count} repl${count === 1 ? 'y' : 'ies'}`;
         }
         loadComments();
+
+        commentInput.addEventListener("input", () => {
+          const isPoll = commentInput.value.trim().toLowerCase().startsWith("poll:");
+          document.querySelector("#poll-ui").style.display = isPoll ? "block" : "none";
+        });
+
+        document.getElementById("add-poll-option").onclick = () => {
+          pollOptionCount++;
+
+          const input = document.createElement("input");
+          input.type = "text";
+          input.classList.add("poll-option");
+          input.placeholder = `Option ${pollOptionCount}`;
+          document.getElementById("poll-ui").insertBefore(input, document.getElementById("add-poll-option"));
+        };
       });
     });
 
@@ -414,11 +500,32 @@ window.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".popup-overlay")?.addEventListener("click", closePopup);
     document.querySelector(".close-btn")?.addEventListener("click", closePopup);
 
+    function resetPollInputs() {
+        pollOptionCount = 2; // 👈 reset count when popup is closed
+        const pollUI = document.getElementById("poll-ui");
+
+        // Remove all except first 2
+        const allInputs = [...pollUI.querySelectorAll(".poll-option")];
+        allInputs.slice(2).forEach(input => input.remove());
+
+        // Reset first two inputs
+        allInputs.slice(0, 2).forEach((input, i) => {
+            input.value = "";
+            input.placeholder = `Option ${i + 1}`;
+        });
+
+        pollUI.style.display = "none"; // hide poll UI
+    }
+
     function closePopup() {
       const popup = document.getElementById("mylist-popup");
       if (popup) {
         popup.style.display = "none";
         document.body.style.overflow = "auto";
+         // Reset comment box
+        document.getElementById("comment-input").value = "";
+
+        resetPollInputs();
       }
     }
   });
