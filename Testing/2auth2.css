@@ -65,6 +65,7 @@ body {
     z-index: 5;
     backdrop-filter: blur(6px);
     transform: translate(-50%, -50%);
+    /* animation: fadeInUp 0.6s ease forwards; */
 }
 
 .signup-container h1 {
@@ -85,14 +86,19 @@ body {
 }
 
 .signup-form input {
+  width: 100%;                         /* full width of parent */
+  max-width: 100%;                     /* prevent overflow */
   background-color: #1a1a1a;
   border: 1px solid #333;
   color: #fff;
   padding: 14px;
   font-size: 14px;
   border-radius: 6px;
-  transition: border 0.3s;
+  transition: border 0.3s, transform 0.3s;
+  box-sizing: border-box;             /* crucial: padding won’t overflow now */
+  animation: fadeInUp 0.6s ease;      /* keeps the sexy entrance intact */
 }
+
 
 .signup-form input:focus {
   border: 1px solid grey;
@@ -107,6 +113,7 @@ body {
 .signup-form input::placeholder {
   color: #ccc;
   text-transform: capitalize;
+  
 }
 
 .signup-form button {
@@ -152,16 +159,16 @@ body {
   animation: fadeInUp 0.6s ease;
 }
 
-@keyframes fadeInUp {
+/* @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translate(-50%, calc(-50% + 20px)); /* Y offset on top of the center */
+    transform: translate(-50%, -60%);
   }
   to {
     opacity: 1;
     transform: translate(-50%, -50%);
   }
-}
+} */
 
 /* ========== PIXEL GRID ========== */
 .pixel-grid {
