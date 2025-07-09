@@ -1,28 +1,58 @@
-const tileContainer = document.getElementById("tile-bg");
-const tileSize = 80;
-const gap = 4;
+// Pixel Hover Script(0.8s)
+window.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById("pixelGrid");
 
-function createTiles() {
-    const columns = Math.floor(window.innerWidth / (tileSize + gap));
-    const rows = Math.floor(window.innerHeight / (tileSize + gap));
-    const total = columns * rows;
+    const pixelSize = 64;
+    const columns = Math.ceil(window.innerWidth / pixelSize);
+    const rows = Math.ceil(window.innerHeight / pixelSize);
+    const pixelCount = columns * rows;
 
-    tileContainer.innerHTML = '';
+    for (let i = 0; i < pixelCount; i++) {
+        const pixel = document.createElement("div");
+        pixel.classList.add("pixel");
 
-    for (let i = 0; i < total; i++) {
-        const tile = document.createElement("div");
-        tile.classList.add("tile");
-
-        // Hover-triggered glow
-        tile.addEventListener("mouseenter", () => {
-            tile.classList.remove("glowing");
-            void tile.offsetWidth; // Force reflow to restart animation
-            tile.classList.add("glowing");
+        pixel.addEventListener("mouseenter", () => {
+            pixel.style.backgroundColor = "red";
+            setTimeout(() => {
+                pixel.style.backgroundColor = "#0a0a0a";
+            }, 800);
         });
 
-        tileContainer.appendChild(tile);
+        grid.appendChild(pixel);
     }
-}
+});
 
-window.addEventListener("resize", createTiles);
-window.addEventListener("DOMContentLoaded", createTiles);
+
+// Forgot Password Script
+import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+import { app } from "./firebase-auth.js";
+
+const auth = getAuth(app);
+
+document.querySelector(".forgot-password").addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    if (!email) {
+        alert("Please enter your email address first!");
+        return;
+    }
+
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert(`Password reset email sent to ${email}`);
+    } catch (error) {
+        console.error(error);
+        alert(`Error: ${error.message}`);
+    }
+});
+
+// Email Prefill
+window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get("email");
+    if (email) {
+        const emailInput = document.querySelector('input[type="email"]');
+        if (emailInput) emailInput.value = email;
+    }
+});
