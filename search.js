@@ -1,7 +1,7 @@
 const baseURL = "https://api.themoviedb.org/3";
 const imgURL = "https://image.tmdb.org/t/p/w500";
 
-import {addPosterListeners} from  "./4index.js";
+import { addPosterListeners } from "./4index.js";
 
 // --- Elements ---
 const searchInput = document.getElementById("searchInput");
@@ -71,7 +71,7 @@ async function performSearch(saveToRecent = false) {
         const data = await res.json();
 
         const filtered = data.results
-            .filter((m) => !m.adult && m.poster_path) // ⛔ skip adult and no-poster
+            .filter((m) => !m.adult && m.poster_path) // skip adult and no-poster
             .filter((m) => genreVal ? m.genre_ids.includes(+genreVal) : true);
 
         if (filtered.length === 0) {
@@ -81,7 +81,7 @@ async function performSearch(saveToRecent = false) {
                 const poster = createPoster(movie);
                 searchResults.appendChild(poster);
             });
-            addPosterListeners(searchResults); // ✅ This enables the popup on search results
+            addPosterListeners(searchResults); // This enables the popup on search results
             if (saveToRecent) {
                 saveRecentSearch(query);
             }
@@ -108,13 +108,13 @@ genreFilter.addEventListener("change", async () => {
         const res = await fetch(`${baseURL}/discover/movie?api_key=${apiKey}&with_genres=${genreId}&sort_by=popularity.desc&include_adult=false`);
         const data = await res.json();
 
-        const movies = data.results.filter((m) => m.poster_path); // ⛔ skip missing posters
+        const movies = data.results.filter((m) => m.poster_path); // skip missing posters
 
         movies.forEach((movie) => {
             const poster = createPoster(movie);
             genreResultsList.appendChild(poster);
         });
-        addPosterListeners(genreResultsList); // ✅ This enables popup on genre results
+        addPosterListeners(genreResultsList); // This enables popup on genre results
         genreResults.classList.remove("hidden");
     } catch (err) {
         console.error("Genre fetch failed", err);
@@ -126,9 +126,9 @@ function createPoster(movie) {
     const poster = document.createElement("img");
     poster.src = `${imgURL}${movie.poster_path}`;
     poster.alt = movie.title;
-    poster.classList.add("search-result-poster", "movie-poster"); // ✅ MUST include "movie-poster"
+    poster.classList.add("search-result-poster", "movie-poster"); // Must include "movie-poster"
 
-    // ✅ Add required data-* attributes for popup logic
+    // Add required data-* attributes for popup logic
     poster.dataset.id = movie.id;
     poster.dataset.title = movie.title;
     poster.dataset.poster = `${imgURL}${movie.backdrop_path || movie.poster_path}`;
@@ -227,16 +227,16 @@ const genreTitle = document.getElementById("genreFilterTitle");
 
 // Enable genre mode
 genreToggleBtn.addEventListener("click", () => {
-popupContent.classList.add("genre-active");
-backToSearchBtn.classList.remove("hidden");
-genreTitle.style.display = "block";
-genreDropdown.style.display = "flex";
+    popupContent.classList.add("genre-active");
+    backToSearchBtn.classList.remove("hidden");
+    genreTitle.style.display = "block";
+    genreDropdown.style.display = "flex";
 
-// ✅ HIDE & CLEAR regular search results
+    // HIDE & CLEAR regular search results
     searchResultsContainer.classList.add("hidden");
     searchResults.innerHTML = "";
 
-    recentContainer.classList.add("hidden"); // ✅ Hide recent
+    recentContainer.classList.add("hidden"); // Hide recent
 });
 
 // Back to normal search mode

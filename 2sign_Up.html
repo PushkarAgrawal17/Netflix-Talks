@@ -39,7 +39,8 @@
                     </div>
                     <div class="password-wrapper">
                         <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
-                        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('confirmPassword', this)"></i>
+                        <i class="fa-solid fa-eye toggle-password"
+                            onclick="togglePassword('confirmPassword', this)"></i>
                     </div>
                     <button type="submit">Create Account</button>
                 </form>
@@ -101,15 +102,16 @@
     <!-- Toastify JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="firebase-auth.js"></script>
+    
     <!-- eye button for password -->
     <script>
-    function togglePassword(id, icon) {
-        const input = document.getElementById(id);
-        const isPassword = input.type === "password";
-        input.type = isPassword ? "text" : "password";
-        icon.classList.toggle("fa-eye");
-        icon.classList.toggle("fa-eye-slash");
-    }
+        function togglePassword(id, icon) {
+            const input = document.getElementById(id);
+            const isPassword = input.type === "password";
+            input.type = isPassword ? "text" : "password";
+            icon.classList.toggle("fa-eye");
+            icon.classList.toggle("fa-eye-slash");
+        }
     </script>
 
 </body>

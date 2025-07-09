@@ -22,7 +22,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-
 // Forgot Password Script
 import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 import { app } from "./firebase-auth.js";
@@ -56,3 +55,12 @@ window.addEventListener("DOMContentLoaded", () => {
         if (emailInput) emailInput.value = email;
     }
 });
+
+// Eye button for password
+function togglePassword(id, icon) {
+    const input = document.getElementById(id);
+    const isPassword = input.type === "password";
+    input.type = isPassword ? "text" : "password";
+    icon.classList.toggle("fa-eye");
+    icon.classList.toggle("fa-eye-slash");
+}
