@@ -7,6 +7,7 @@
     <title>Sign In | Netflix Clone</title>
     <link rel="stylesheet" href="2auth.css" />
     <link rel="icon" type="image/png" href="./Images/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <!-- Toastify CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
@@ -33,7 +34,10 @@
                     <input type="email" id="email" placeholder="Email Address" />
                 </div>
                 <div class="input-box">
+                    <div class="password-wrapper">
                     <input type="password" id="password" placeholder="Password" />
+                    <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('password', this)"></i>
+                    </div>
                 </div>
                 <button onclick="login()" class="sign-in-btn">Sign In</button>
                 <div class="options">
@@ -134,6 +138,17 @@
     <!-- Toastify JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="firebase-auth.js"></script>
+    <!-- eye button for password -->
+    <script>
+    function togglePassword(id, icon) {
+        const input = document.getElementById(id);
+        const isPassword = input.type === "password";
+        input.type = isPassword ? "text" : "password";
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
+    }
+    </script>
+
 </body>
 
 </html>

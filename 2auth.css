@@ -453,3 +453,38 @@ body {
         align-items: flex-start;
     }
 }
+
+/* Eye button for password */
+
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: border 0.3s;
+}
+
+.password-wrapper input:focus {
+    border: 1px solid grey;
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+    font-size: 18px;
+}
