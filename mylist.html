@@ -7,8 +7,10 @@
     <title>My List | Netflix Clone</title>
     <link rel="icon" type="image/png" href="./Images/favicon.png" />
     <link rel="stylesheet" href="mylist.css" />
+    <link rel="stylesheet" href="4index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -22,7 +24,6 @@
     <div class="mylist-container">
         <h1 class="mylist-heading">My List</h1>
         <div class="poster-grid">
-            <script type="module" src="myList.js"></script>
         </div>
 
         <!--To show popups on clicking on posters-->
@@ -37,12 +38,28 @@
                 </div>
                 <div class="popup-tags"></div>
                 <p class="popup-description"></p>
-                <button id="remove-btn"
+                <div class="popup-actions">
+                    <button id="remove-btn"
                     style="margin-left: 1rem; padding: 10px 16px; background: red; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Remove
                     from My List</button>
+                    <button id="like-btn" class="like-btn"><i class="fas fa-thumbs-up"></i><span id="like-count">0</span></button>
+                    <button id="dislike-btn" class="dislike-btn"><i class="fas fa-thumbs-down"></i><span id="dislike-count"> 0</span></button>
+                    <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
+                </div>
+                <div class="comment-section">
+                    <h3>Comments</h3>
+                    <div class="comment-input-box">
+                        <textarea id="comment-input" placeholder="Add a comment..."></textarea>
+                        <button id="post-comment">Post</button>
+                    </div>
+                    <div id="comments-list"></div>
+                </div>
             </div>
         </div>
     </div>
+    <!-- Toastify JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="myList.js"></script>
 </body>
 
 </html>

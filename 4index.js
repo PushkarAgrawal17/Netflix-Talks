@@ -82,7 +82,7 @@ async function addToMyListFirestore(movie) {
     }
 
     const uid = user.uid;
-    const movieRef = doc(db, "users", uid, "myList", movie.title);
+    const movieRef = doc(db, "users", uid, "myList", movie.id);
     const docSnap = await getDoc(movieRef);
 
     if (docSnap.exists()) {
@@ -91,6 +91,7 @@ async function addToMyListFirestore(movie) {
     }
 
     await setDoc(movieRef, {
+        id:movie.id,
         title: movie.title,
         bgImg: movie.bgImg,
         bgImgLowRes: movie.bgImgLowRes,
@@ -128,6 +129,7 @@ function loadHeroSlides() {
                     <div class="slide-buttons">
                     <button><i class="fas fa-play"></i> Play</button>
                     <button class="mylist-btn"
+                        data-id="${movie.id}"
                         data-title="${movie.title}"
                         data-bg="${bgImg}"
                         data-bg-low="${bgImgLowRes}"
@@ -159,6 +161,7 @@ function loadHeroSlides() {
                 btn.addEventListener("click", () => {
                     console.log("My List button clicked!");
                     const movie = {
+                        id: btn.dataset.id,
                         title: btn.dataset.title,
                         bgImg: btn.dataset.bg,
                         bgImgLowRes: btn.dataset.bgLow,
@@ -301,6 +304,7 @@ export function addPosterListeners(container) {
             });
 
             const movie = {
+                id,
                 title,
                 bgImg: highRes,
                 bgImgLowRes: lowRes,
@@ -317,7 +321,7 @@ export function addPosterListeners(container) {
                 }
 
                 const uid = user.uid;
-                const movieRef = doc(db, "users", uid, "myList", movie.title);
+                const movieRef = doc(db, "users", uid, "myList", movie.id);
                 const docSnap = await getDoc(movieRef);
                 const exists = docSnap.exists();
 
@@ -329,7 +333,7 @@ export function addPosterListeners(container) {
 
                 popupBtn.onclick = async () => {
                     const uid = user.uid;
-                    const movieRef = doc(db, "users", uid, "myList", movie.title);
+                    const movieRef = doc(db, "users", uid, "myList", movie.id);
                     const docSnap = await getDoc(movieRef);
                     const exists = docSnap.exists();
                     if (exists) {
@@ -338,6 +342,7 @@ export function addPosterListeners(container) {
                         showToast("Removed from My List", "red")
                     } else {
                         await setDoc(movieRef, {
+                            id,
                             title,
                             bgImg: highRes,
                             bgImgLowRes: lowRes,
