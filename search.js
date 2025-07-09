@@ -20,7 +20,6 @@ const voiceBtn = document.getElementById("voiceBtn");
 let allGenres = [];
 let recent = [];
 
-// --- INIT ---
 fetchGenres();
 
 // --- Fetch Genres ---
@@ -178,50 +177,41 @@ voiceBtn?.addEventListener("click", () => {
 // --- Back Button ---
 const backBtn = document.getElementById("backBtn");
 if (backBtn) {
-  backBtn.addEventListener("click", () => {
-    window.history.back();
-  });
+    backBtn.addEventListener("click", () => {
+        window.history.back();
+    });
 }
 
-
 // Genre toggle animation logic
-  const genreToggleBtn = document.getElementById("genreToggleBtn");
+const genreToggleBtn = document.getElementById("genreToggleBtn");
 const searchBarContainer = document.getElementById("searchBarContainer");
-// const voiceBtn = document.getElementById("voiceBtn");
 const genreDropdown = document.querySelector(".genre-dropdown");
 
 if (genreToggleBtn && searchBarContainer && voiceBtn && genreDropdown) {
-  genreToggleBtn.addEventListener("click", () => {
-    searchBarContainer.classList.add("hide");
-    voiceBtn.classList.add("hide");
+    genreToggleBtn.addEventListener("click", () => {
+        searchBarContainer.classList.add("hide");
+        voiceBtn.classList.add("hide");
 
-    setTimeout(() => {
-      genreDropdown.classList.add("show");
-    }, 400);
-  });
+        setTimeout(() => {
+            genreDropdown.classList.add("show");
+        }, 400);
+    });
 } else {
-  console.warn("❌ Some elements not found: genreToggleBtn / searchBarContainer / voiceBtn / genreDropdown");
+    console.warn("Warning! Some elements not found: genreToggleBtn / searchBarContainer / voiceBtn / genreDropdown");
 }
 
 
-//Working Genre button 
-
-
-
+//Working Genre button
 document.getElementById("genreToggleBtn").addEventListener("click", () => {
-const popupContent = document.querySelector(".popup-content");
-popupContent.classList.add("genre-active");
+    const popupContent = document.querySelector(".popup-content");
+    popupContent.classList.add("genre-active");
 });
 
 
-
 // === Genre Mode Toggle ===
-// const genreToggleBtn = document.getElementById("genreToggleBtn");
 const backToSearchBtn = document.getElementById("backToSearchBtn");
 const popupContent = document.querySelector(".popup-content");
 const genreTitle = document.getElementById("genreFilterTitle");
-// const genreDropdown = document.querySelector(".genre-dropdown");
-// const genreResults = document.getElementById("genreResults"); // ✅ add this
 
 // Enable genre mode
 genreToggleBtn.addEventListener("click", () => {
@@ -239,10 +229,10 @@ genreDropdown.style.display = "flex";
 
 // Back to normal search mode
 backToSearchBtn.addEventListener("click", () => {
-popupContent.classList.remove("genre-active");
-backToSearchBtn.classList.add("hidden");
-genreTitle.style.display = "none";
-genreDropdown.style.display = "none";
-genreResults.classList.add("hidden"); // ✅ Hide genre result section
-document.getElementById("genreFilter").selectedIndex = 0;
+    popupContent.classList.remove("genre-active");
+    backToSearchBtn.classList.add("hidden");
+    genreTitle.style.display = "none";
+    genreDropdown.style.display = "none";
+    genreResults.classList.add("hidden"); // Hide genre result section
+    document.getElementById("genreFilter").selectedIndex = 0;
 });
