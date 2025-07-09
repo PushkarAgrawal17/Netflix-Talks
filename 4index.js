@@ -269,7 +269,7 @@ function fetchAndDisplayMovies(url, containerId) {
         });
 }
 
-function addPosterListeners(container) {
+export function addPosterListeners(container) {
     const popup = document.getElementById("global-popup");
     const posterTitle = popup.querySelector(".popup-title-img");
     const posterImg = popup.querySelector(".popup-movie-img");

@@ -1,6 +1,8 @@
 const baseURL = "https://api.themoviedb.org/3";
 const imgURL = "https://image.tmdb.org/t/p/w500";
 
+import {addPosterListeners} from  "./4index.js";
+
 // --- Elements ---
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
@@ -79,7 +81,7 @@ async function performSearch(saveToRecent = false) {
                 const poster = createPoster(movie);
                 searchResults.appendChild(poster);
             });
-
+            addPosterListeners(searchResults); // ✅ This enables the popup on search results
             if (saveToRecent) {
                 saveRecentSearch(query);
             }
@@ -112,7 +114,7 @@ genreFilter.addEventListener("change", async () => {
             const poster = createPoster(movie);
             genreResultsList.appendChild(poster);
         });
-
+        addPosterListeners(genreResultsList); // ✅ This enables popup on genre results
         genreResults.classList.remove("hidden");
     } catch (err) {
         console.error("Genre fetch failed", err);
@@ -124,7 +126,17 @@ function createPoster(movie) {
     const poster = document.createElement("img");
     poster.src = `${imgURL}${movie.poster_path}`;
     poster.alt = movie.title;
-    poster.classList.add("search-result-poster");
+    poster.classList.add("search-result-poster", "movie-poster"); // ✅ MUST include "movie-poster"
+
+    // ✅ Add required data-* attributes for popup logic
+    poster.dataset.id = movie.id;
+    poster.dataset.title = movie.title;
+    poster.dataset.poster = `${imgURL}${movie.backdrop_path || movie.poster_path}`;
+    poster.dataset.highresPoster = `https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`;
+    poster.dataset.shortPoster = `${imgURL}${movie.poster_path}`;
+    poster.dataset.description = movie.overview || "No description available";
+    poster.dataset.tags = `${movie.release_date?.split('-')[0] || "?"}, Rating: ${movie.vote_average || "?"}, Popularity: ${Math.round(movie.popularity || 0)}`;
+
     return poster;
 }
 
@@ -215,10 +227,16 @@ const genreTitle = document.getElementById("genreFilterTitle");
 
 // Enable genre mode
 genreToggleBtn.addEventListener("click", () => {
-    popupContent.classList.add("genre-active");
-    backToSearchBtn.classList.remove("hidden");
-    genreTitle.style.display = "block";
-    genreDropdown.style.display = "flex";
+popupContent.classList.add("genre-active");
+backToSearchBtn.classList.remove("hidden");
+genreTitle.style.display = "block";
+genreDropdown.style.display = "flex";
+
+// ✅ HIDE & CLEAR regular search results
+    searchResultsContainer.classList.add("hidden");
+    searchResults.innerHTML = "";
+
+    recentContainer.classList.add("hidden"); // ✅ Hide recent
 });
 
 // Back to normal search mode
