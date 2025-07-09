@@ -282,3 +282,242 @@ body {
         opacity: 1;
     }
 }
+
+/* My list, like, dislike, share buttons  */
+.popup-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.popup-actions button {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.mylist-btn,
+.popup-mylist-btn {
+    background-color: #ff000d;
+    color: white;
+    font-weight: bold;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.mylist-btn:hover,
+.popup-mylist-btn:hover {
+    background-color: #bd0912;
+}
+
+.like-btn {
+    background-color: #1db954;
+    color: white;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.like-btn.active,
+.like-btn:hover {
+    background-color: #084522;
+}
+
+.dislike-btn {
+    background-color: #e80e0e;
+    color: white;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.dislike-btn.active,
+.dislike-btn:hover {
+    background-color: #670000;
+}
+
+.share-btn {
+    background-color: #00bfff;
+    color: white;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.share-btn:hover {
+    background-color: #00536e;
+    color: white;
+}
+
+/* Comment section */
+.comment-section {
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    margin: 30px 20px 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+.comment-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: #ffffff;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+}
+
+.comment-input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.comment-input-box textarea {
+    resize: none;
+    padding: 12px;
+    background: #2b2b2b;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    min-height: 80px;
+    transition: border-color 0.3s;
+}
+
+.comment-input-box textarea:focus {
+    border-color: #e50914;
+    outline: none;
+}
+
+.comment-input-box button {
+    align-self: flex-end;
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.comment-input-box button:hover {
+    background: #ff2c30;
+}
+
+.comment-card {
+    margin-top: 18px;
+    padding: 16px;
+    background: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.comment-card p {
+    font-size: 1rem;
+    color: #f1f1f1;
+    line-height: 1.5;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.comment-meta {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    font-weight: 600;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    display: block;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #555;
+    word-break: break-all;
+}
+
+/* Reply section */
+.reply-btn {
+    font-size: 13px;
+    color: #3ea6ff;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: color 0.3s;
+}
+
+.reply-btn:hover {
+    color: #61c0ff;
+}
+
+.reply-box {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reply-box textarea {
+    width: 100%;
+    padding: 10px;
+    background: #222;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 6px;
+    resize: none;
+    min-height: 60px;
+    font-size: 0.9rem;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+.reply-box button {
+    align-self: flex-end;
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    margin-top: 5px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.reply-box button:hover {
+    background: #ff2c30;
+}
+
+.reply-card {
+    margin-left: 25px;
+    margin-top: 10px;
+    padding-left: 15px;
+    border-left: 3px solid #444;
+    background: #222;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.toggle-replies-btn {
+    background: none;
+    color: #1da1f2;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 0;
+    transition: color 0.3s;
+}
+
+.toggle-replies-btn:hover {
+    color: #42b0ff;
+}
+
+
