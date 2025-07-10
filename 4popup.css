@@ -306,6 +306,86 @@
     word-break: break-word;
 }
 
+/* Poll Section */
+.poll-options {
+    list-style: none;
+    padding: 0;
+    margin-top: 12px;
+}
+
+.poll-vote-option {
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #fff;
+}
+
+.poll-vote-option:hover {
+    background-color: #292929;
+}
+
+.poll-vote-option.voted {
+    border-color: #1db954;
+    box-shadow: 0 0 5px #1db954;
+}
+
+.poll-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.poll-bar-container {
+    background-color: #333;
+    height: 8px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 6px 0;
+}
+
+.poll-bar {
+    height: 100%;
+    background-color: #1db954;
+    transition: width 0.4s ease;
+}
+
+.poll-meta {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.poll-option {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+}
+
+.poll-option:focus {
+    border-color: #1db954;
+    box-shadow: 0 0 3px #1db954;
+}
+
+#add-poll-option {
+    background-color: #333;
+    color: #1db954;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+#add-poll-option:hover {
+    background-color: #444;
+}
+
 /* ------- Reply section ------- */
 .reply-btn {
     font-size: 13px;
