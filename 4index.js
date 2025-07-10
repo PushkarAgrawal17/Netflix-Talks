@@ -19,14 +19,9 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
-    authDomain: "netflix-web-project.firebaseapp.com",
-    projectId: "netflix-web-project",
-    storageBucket: "netflix-web-project.appspot.com",
-    messagingSenderId: "616557096999",
-    appId: "1:616557096999:web:027b9189b6f5b283115e02"
-};
+// Imports from config.js
+import { firebaseConfig } from "./config.js";
+import { apiKey } from "./config.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
