@@ -130,7 +130,6 @@ function loadHeroSlides() {
                     <h1 class="slide-title">${movie.title}</h1>
                     <p>${movie.overview}</p>
                     <div class="slide-buttons">
-                    <button><i class="fas fa-play"></i> Play</button>
                     <button class="mylist-btn"
                         data-id="${movie.id}"
                         data-title="${movie.title}"
@@ -229,14 +228,14 @@ function createGlobalPopup() {
             <h3>Comments</h3>
             <div class="comment-input-box">
                 <textarea id="comment-input" placeholder="Add a comment or type 'poll:' to create a poll..."></textarea>
-    
+
                 <!-- Poll UI (initially hidden) -->
                 <div id="poll-ui" style="display: none; margin-top: 8px;">
                     <input type="text" class="poll-option" placeholder="Option 1">
                     <input type="text" class="poll-option" placeholder="Option 2">
                     <button id="add-poll-option">+ Add Option</button>
                 </div>
-    
+
                 <button id="post-comment">Post</button>
             </div>
 
