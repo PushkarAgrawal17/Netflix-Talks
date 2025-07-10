@@ -63,7 +63,7 @@ onAuthStateChanged(auth, (user) => {
         bio: document.getElementById("bio").value,
         instagram: document.getElementById("insta").value,
         facebook: document.getElementById("facebook").value,
-        otherLink: document.getElementById("otherLink").value
+        otherLink: document.getElementById("otherLink").value,
       };
       try {
         await updateDoc(userRef, info);
@@ -75,7 +75,7 @@ onAuthStateChanged(auth, (user) => {
         duration: 3000,
         gravity: "bottom",
         position: "left",
-        backgroundColor: "#00b09b"
+        backgroundColor: "#00b09b",
       }).showToast();
       closeModal();
     });

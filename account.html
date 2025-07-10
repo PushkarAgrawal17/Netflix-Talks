@@ -1,72 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Account | Netflix Talks</title>
-  <link rel="icon" href="./Images/favicon.png" />
-  <link rel="stylesheet" href="account.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
-</head>
-<body>
-  <nav class="account-navbar">
-    <div class="nav-left">
-      <a href="4index.html"><i class="fas fa-arrow-left back-btn" id="goBack"></i></a>
-    </div>
-    <div class="nav-center">
-      <img src="Images/Netflix-Logo2.png" alt="Netflix Logo" class="nav-logo" />
-    </div>
-  </nav>
-
-  <main class="account-container">
-    <div class="profile-pic-wrapper">
-      <img src="Images/profileIcons/1.jpg" alt="Profile" class="profile-pic" id="mainProfilePic" />
-      <i class="fa-solid fa-pen-to-square edit-icon" id="editIcon"></i>
-    </div>
-
-    <div class="profile-modal" id="profileModal">
-      <h3>Choose a Profile</h3>
-      <div class="profile-options">
-        <img src="Images/profileIcons/1.jpg" class="option-pic" />
-        <img src="Images/profileIcons/2.jpg" class="option-pic" />
-        <img src="Images/profileIcons/3.jpg" class="option-pic" />
-        <img src="Images/profileIcons/4.jpg" class="option-pic" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account | Netflix Talks</title>
+    <link rel="icon" href="./Images/favicon.png" />
+    <link rel="stylesheet" href="account.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+  </head>
+  <body>
+    <nav class="account-navbar">
+      <div class="nav-left">
+        <a href="4index.html"
+          ><i class="fas fa-arrow-left back-btn" id="goBack"></i
+        ></a>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label for="username">Username</label>
-      <div style="position: relative;">
-        <input type="text" id="username" readonly />
-        <i class="fa-solid fa-pen-to-square" id="editUsername" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+      <div class="nav-center">
+        <img
+          src="Images/Netflix-Logo2.png"
+          alt="Netflix Logo"
+          class="nav-logo"
+        />
       </div>
+    </nav>
+
+    <main class="account-container">
+      <div class="profile-pic-wrapper">
+        <img
+          src="Images/profileIcons/1.jpg"
+          alt="Profile"
+          class="profile-pic"
+          id="mainProfilePic"
+        />
+        <i class="fa-solid fa-pen-to-square edit-icon" id="editIcon"></i>
+      </div>
+
+      <div class="profile-modal" id="profileModal">
+        <h3>Choose a Profile</h3>
+        <div class="profile-options">
+          <img src="Images/profileIcons/1.jpg" class="option-pic" />
+          <img src="Images/profileIcons/2.jpg" class="option-pic" />
+          <img src="Images/profileIcons/3.jpg" class="option-pic" />
+          <img src="Images/profileIcons/4.jpg" class="option-pic" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <div style="position: relative">
+          <input type="text" id="username" readonly />
+          <i
+            class="fa-solid fa-pen-to-square"
+            id="editUsername"
+            style="
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              cursor: pointer;
+            "
+          ></i>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" readonly />
+      </div>
+
+      <button class="signout-btn" id="moreInfoBtn">
+        <i class="fas fa-user-edit"></i> Tell Us More
+      </button>
+      <button class="signout-btn" id="changePasswordBtn">
+        <i class="fas fa-key"></i> Change Password
+      </button>
+      <button class="signout-btn" id="signOutBtn">
+        <i class="fas fa-sign-out-alt"></i> <a href="3sign_In.html">Sign Out</a>
+      </button>
+    </main>
+
+    <div id="modalOverlay"></div>
+
+    <div id="moreInfoModal">
+      <span class="closeModal" id="closeModalBtn">&times;</span>
+      <h3>Edit More Info</h3>
+      <input type="text" id="pronouns" placeholder="Your Pronouns" />
+      <input type="text" id="bio" placeholder="Bio" />
+      <input type="text" id="insta" placeholder="Instagram Handle" />
+      <input type="text" id="facebook" placeholder="Facebook Handle" />
+      <input type="text" id="otherLink" placeholder="Other Link" />
+      <button id="saveMoreInfo">Save</button>
     </div>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" readonly />
-    </div>
-
-    <button class="signout-btn" id="moreInfoBtn"><i class="fas fa-user-edit"></i> Tell Us More</button>
-    <button class="signout-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Change Password</button>
-    <button class="signout-btn" id="signOutBtn"><i class="fas fa-sign-out-alt"></i> <a href="3sign_In.html">Sign Out</a></button>
-  </main>
-
-  <div id="modalOverlay"></div>
-
-  <div id="moreInfoModal">
-    <span class="closeModal" id="closeModalBtn">&times;</span>
-    <h3>Edit More Info</h3>
-    <input type="text" id="pronouns" placeholder="Your Pronouns" />
-    <input type="text" id="bio" placeholder="Bio" />
-    <input type="text" id="insta" placeholder="Instagram Handle" />
-    <input type="text" id="facebook" placeholder="Facebook Handle" />
-    <input type="text" id="otherLink" placeholder="Other Link" />
-    <button id="saveMoreInfo">Save</button>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <script type="module" src="account.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="account.js"></script>
+  </body>
 </html>
