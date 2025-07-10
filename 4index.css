@@ -21,7 +21,7 @@ body {
     justify-content: space-between;
     padding: 50px 70px 40px 50px;
     height: 100px;
-    background: linear-gradient(to bottom, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0));
+    background: linear-gradient(to bottom, rgba(20, 20, 20, 0.9), transparent);
     position: fixed;
     top: 0;
     width: 100%;
@@ -44,18 +44,21 @@ body {
 .nav-links ul {
     display: flex;
     list-style: none;
-    gap: 24px;
+    gap: 30px;
 }
 
 .nav-links li {
-    color: #fff;
-    font-size: 14px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    transition: color 0.2s;
+    filter: drop-shadow(1px 1px 5px white);
+    transition: color 0.3s, transform 0.3s ease;
 }
 
 .nav-links li:hover {
-    color: #b3b3b3;
+    color: rgb(221, 221, 221);
+    transform: scale(1.1);
 }
 
 .nav-links a {
@@ -70,13 +73,22 @@ body {
     align-items: center;
     gap: 20px;
     position: relative;
-    z-index: 1001
+    z-index: 1001;
+    filter: drop-shadow(0 0 5px white);
+}
+
+.nav-icons #global-chat-icon {
+    width: 32px;
+    height: auto;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .nav-icons i {
     color: white;
     font-size: 18px;
     cursor: pointer;
+    margin-top: 10px;
     margin-right: 15px;
     transition: color 0.2s ease;
 }
