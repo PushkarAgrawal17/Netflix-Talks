@@ -12,7 +12,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
 import { firebaseConfig } from "./config.js";
-import { Toastify } from "https://cdn.jsdelivr.net/npm/toastify-js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
