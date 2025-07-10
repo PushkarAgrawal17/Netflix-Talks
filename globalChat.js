@@ -40,21 +40,31 @@ onAuthStateChanged(auth, (user) => {
     const chatQuery = query(chatRef, orderBy("timestamp", "desc"), limit(200));
 
     onSnapshot(chatQuery, (snapshot) => {
+        console.log("Snapshot received:", snapshot.docs.length);
+
         const messages = snapshot.docs.reverse();
         displayMessages(messages);
     });
 
     // Send message on Send button click
-    sendButton.addEventListener("click", async () => {
+    sendButton.addEventListener("click", () => {
         const message = messageInput.value.trim();
-        if (!message) return; // Don't send empty messages
+        if (!message) return;
 
+        console.log("Sending message:", message);
         try {
-            await addDoc(chatRef, {
+            const email = user.email || user.uid || "(unknown)";
+            console.log("Sending:", message, "from:", email);
+
+            addDoc(collection(db, "global_chat"), {
                 email: user.email,
-                message,
+                message: message,
                 timestamp: serverTimestamp()
-            });
+            })
+                .then(() => console.log("addDoc success"))
+                .catch(e => console.error("addDoc failed", e));
+
+            console.log("Message sent");
             messageInput.value = ""; // Clear input after sending
         } catch (error) {
             console.error("Error sending message:", error);
@@ -106,29 +116,33 @@ onAuthStateChanged(auth, (user) => {
 
 
 function displayMessages(docs) {
-    messagesContainer.innerHTML = ""; // Clear previous messages
+    messagesContainer.innerHTML = "";
 
     docs.forEach((doc) => {
         const data = doc.data();
 
         const time = data.timestamp?.toDate().toLocaleString() || "";
-
         const msg = document.createElement("div");
         msg.classList.add("message-box");
 
-        msg.innerHTML = `
-        <p><strong>${data.email}</strong><span class="time">${time}</span></p>
-        <p>${escapeHtml(data.message)}</p>
-        `;
+        // Add class if the message is from current user
+        if (data.email === auth.currentUser.email) {
+            msg.classList.add("self");
+        }
 
+        const emailTime = document.createElement("p");
+        emailTime.classList.add("message-meta");
+        emailTime.innerHTML = `<strong>${data.email || "unknown"}</strong><span class="time">${time}</span>`;
+
+        const messageContent = document.createElement("p");
+        messageContent.textContent = data.message || "[no message]";
+
+        msg.appendChild(emailTime);
+        msg.appendChild(messageContent);
         messagesContainer.appendChild(msg);
     });
 
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
-
-function escapeHtml(text) {
-    const div = document.createElement("div");
-    div.textContent = text;
-    return div.innerHTML;
+    setTimeout(() => {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }, 100);
 }
