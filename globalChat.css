@@ -41,17 +41,24 @@ body {
     user-select: none;
 }
 
-.chat-header h1 {
-    font-weight: 500;
-    font-size: 2.1rem;
-    letter-spacing: 2.5px;
-    margin-bottom: 0.4rem;
-    text-shadow: 0 0 8px #6f7eff;
+/* Netflix Logo */
+.logo img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(1px 1px white);
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
 }
 
 .chat-header p {
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 1.3rem;
+    color: #fff;
     opacity: 0.9;
     letter-spacing: 0.05em;
 }
