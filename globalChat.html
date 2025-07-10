@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Global Chat | Netflix Talks</title>
+    <link rel="stylesheet" href="globalChat.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>🌐 Netflix Talks</h1>
+            <p>Global Chat Room</p>
+        </header>
+
+        <main id="chat-messages" class="messages-area"></main>
+
+        <form id="chat-form" class="input-area" autocomplete="off">
+            <button type="button" id="emoji-button" aria-label="Emoji Picker">😊</button>
+            <input type="text" id="messageInput" placeholder="Type your message..." maxlength="300" required />
+            <button type="submit" id="sendButton" aria-label="Send Message">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="white" viewBox="0 0 24 24">
+                    <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+                </svg>
+            </button>
+
+            <emoji-picker id="emoji-picker" style="display:none;"></emoji-picker>
+        </form>
+
+    </div>
+
+    <!-- Scripts -->
+    <!-- Emoji Picker ScriptS -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+
+    <script type="module" src="config.js"></script>
+    <script type="module" src="globalChat.js"></script>
+</body>
+
+</html>

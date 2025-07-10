@@ -3,16 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebas
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 import { fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
-
-// Your web app's firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
-    authDomain: "netflix-web-project.firebaseapp.com",
-    projectId: "netflix-web-project",
-    storageBucket: "netflix-web-project.firebasestorage.app",
-    messagingSenderId: "616557096999",
-    appId: "1:616557096999:web:027b9189b6f5b283115e02"
-};
+import { firebaseConfig } from "./config.js";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

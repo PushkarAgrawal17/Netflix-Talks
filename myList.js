@@ -11,14 +11,8 @@ import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
-    authDomain: "netflix-web-project.firebaseapp.com",
-    projectId: "netflix-web-project",
-    storageBucket: "netflix-web-project.appspot.com",
-    messagingSenderId: "616557096999",
-    appId: "1:616557096999:web:027b9189b6f5b283115e02"
-};
+import { firebaseConfig } from "./config.js";
+import { Toastify } from "https://cdn.jsdelivr.net/npm/toastify-js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -109,7 +103,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     location.reload();
                 };
 
-                // 🔥 Like/Dislike/Share logic
+                // Like/Dislike/Share logic
                 const likeBtn = popup.querySelector("#like-btn");
                 const dislikeBtn = popup.querySelector("#dislike-btn");
                 const shareBtn = popup.querySelector("#share-btn");
@@ -183,7 +177,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
                     if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
 
-                    // ✅ UPDATE COUNTS
+                    // UPDATE COUNTS
                     const updatedMovieSnap = await getDoc(mmovieRef);
                     const updatedMovieData = updatedMovieSnap.exists() ? updatedMovieSnap.data() : {};
                     popup.querySelector("#like-count").textContent = (updatedMovieData.likedBy || []).length;
@@ -235,7 +229,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
                     if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
 
-                    // ✅ UPDATE COUNTS
+                    // UPDATE COUNTS
                     const updatedMovieSnap = await getDoc(mmovieRef);
                     const updatedMovieData = updatedMovieSnap.exists() ? updatedMovieSnap.data() : {};
                     popup.querySelector("#like-count").textContent = (updatedMovieData.likedBy || []).length;
@@ -273,7 +267,7 @@ window.addEventListener("DOMContentLoaded", () => {
                             question: commentText.slice(5).trim(),
                             options: pollOptions,
                             votes: Array(pollOptions.length).fill(0),
-                            voters: {}, // 🆕 ADD THIS LINE
+                            voters: {}, // ADD THIS LINE
                             timestamp: new Date()
                         });
                     } else {
@@ -367,7 +361,7 @@ window.addEventListener("DOMContentLoaded", () => {
                                 const prevVote = voters[user.uid];
 
                                 if (prevVote === selectedIdx) {
-                                    // 🗑️ User clicked again on same option → remove vote
+                                    // User clicked again on same option → remove vote
                                     votes[selectedIdx] = Math.max(0, votes[selectedIdx] - 1);
                                     delete voters[user.uid];
 
@@ -378,7 +372,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
                                     showToast("Vote removed!", "#e67e22");
                                 } else {
-                                    // 🔁 Change vote (if voted before)
+                                    // Change vote (if voted before)
                                     if (prevVote !== undefined) {
                                         votes[prevVote] = Math.max(0, votes[prevVote] - 1);
                                     }
@@ -394,7 +388,7 @@ window.addEventListener("DOMContentLoaded", () => {
                                     showToast(prevVote !== undefined ? "Vote changed!" : "Vote recorded!", "#3498db");
                                 }
 
-                                loadComments(); // 🔁 refresh UI
+                                loadComments(); // refresh UI
                             });
                         });
 
@@ -501,7 +495,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.querySelector(".close-btn")?.addEventListener("click", closePopup);
 
         function resetPollInputs() {
-            pollOptionCount = 2; // 👈 reset count when popup is closed
+            pollOptionCount = 2; // reset count when popup is closed
             const pollUI = document.getElementById("poll-ui");
 
             // Remove all except first 2

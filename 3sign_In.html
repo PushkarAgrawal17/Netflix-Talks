@@ -36,7 +36,7 @@
                 <div class="input-box">
                     <div class="password-wrapper">
                         <input type="password" id="password" placeholder="Password" />
-                        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('password', this)"></i>
+                        <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePassword('password', this)"></i>
                     </div>
                 </div>
                 <button onclick="login()" class="sign-in-btn">Sign In</button>
@@ -138,7 +138,6 @@
     <!-- Toastify JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="firebase-auth.js"></script>
-    
     <!-- eye button for password -->
     <script>
         function togglePassword(id, icon) {

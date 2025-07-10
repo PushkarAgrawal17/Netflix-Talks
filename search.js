@@ -2,6 +2,7 @@ const baseURL = "https://api.themoviedb.org/3";
 const imgURL = "https://image.tmdb.org/t/p/w500";
 
 import { addPosterListeners } from "./4index.js";
+import { apiKey } from "./config.js";
 
 // --- Elements ---
 const searchInput = document.getElementById("searchInput");

@@ -36,12 +36,12 @@
 
             <div class="password-wrapper">
                 <input type="password" id="regPassword" placeholder="Password" required />
-                <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('regPassword', this)"></i>
+                <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePassword('regPassword', this)"></i>
             </div>
 
             <div class="password-wrapper">
                 <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
-                <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('confirmPassword', this)"></i>
+                <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePassword('confirmPassword', this)"></i>
             </div>
             <button type="submit">Create Account</button>
         </form>
@@ -53,6 +53,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="firebase-auth.js"></script>
+
     <!-- eye button for password -->
     <script>
         function togglePassword(id, icon) {

@@ -56,11 +56,12 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Eye button for password
-function togglePassword(id, icon) {
-    const input = document.getElementById(id);
-    const isPassword = input.type === "password";
-    input.type = isPassword ? "text" : "password";
-    icon.classList.toggle("fa-eye");
-    icon.classList.toggle("fa-eye-slash");
-}
+// Not working here!!!!!!!!!!!!!
+// // Eye button for password
+// function togglePassword(id, icon) {
+//     const input = document.getElementById(id);
+//     const isPassword = input.type === "password";
+//     input.type = isPassword ? "text" : "password";
+//     icon.classList.toggle("fa-eye-slash");
+//     icon.classList.toggle("fa-eye");
+// }
