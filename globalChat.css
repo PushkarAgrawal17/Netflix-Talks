@@ -8,7 +8,6 @@
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, rgb(3, 3, 16), rgb(12, 12, 87), rgb(17, 17, 163));
-    /* background: rgb(3, 3, 16); */
     color: #fff;
     height: 100vh;
     display: flex;
