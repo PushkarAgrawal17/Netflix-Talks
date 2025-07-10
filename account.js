@@ -10,7 +10,6 @@ import {
   doc,
   getDoc,
   updateDoc,
-  setDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -28,6 +27,137 @@ const db = getFirestore(app);
 
 const usernameInput = document.getElementById("username");
 const emailInput = document.getElementById("email");
+const editUsernameIcon = document.getElementById("editUsername");
+const signOutBtn = document.getElementById("signOutBtn");
+const editIcon = document.getElementById("editIcon");
+const profileModal = document.getElementById("profileModal");
+const mainProfilePic = document.getElementById("mainProfilePic");
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const userRef = doc(db, "users", user.uid);
+
+    // Fetch existing data
+    getDoc(userRef).then((docSnap) => {
+      const data = docSnap.data();
+      usernameInput.value = data.fullName || "Netflix User";
+      emailInput.value = data.email || user.email;
+
+      // Set profilePic
+      if (data.profilePic) {
+        mainProfilePic.src = data.profilePic;
+      } else {
+        const defaultPic = "Images/profileIcons/1.jpg";
+        mainProfilePic.src = defaultPic;
+        updateDoc(userRef, { profilePic: defaultPic });
+      }
+    });
+
+    // Username edit
+    editUsernameIcon.addEventListener("click", () => {
+      usernameInput.removeAttribute("readonly");
+      usernameInput.focus();
+
+      usernameInput.addEventListener(
+        "blur",
+        async () => {
+          const newName = usernameInput.value;
+          await updateDoc(userRef, { fullName: newName });
+          usernameInput.setAttribute("readonly", true);
+          Toastify({
+            text: "Username updated successfully!",
+            duration: 3000,
+            gravity: "bottom",
+            position: "left",
+            backgroundColor: "#00b09b",
+          }).showToast();
+        },
+        { once: true }
+      );
+    });
+
+    // Change Password
+    document
+      .getElementById("changePasswordBtn")
+      .addEventListener("click", async () => {
+        try {
+          await sendPasswordResetEmail(auth, user.email);
+          Toastify({
+            text: "Password reset email sent.",
+            duration: 3000,
+            gravity: "bottom",
+            position: "left",
+            backgroundColor: "#00b09b",
+          }).showToast();
+        } catch (error) {
+          Toastify({
+            text: "Error: " + error.message,
+            duration: 3000,
+            gravity: "bottom",
+            position: "left",
+            backgroundColor: "#ff4d4d",
+          }).showToast();
+        }
+      });
+
+    // Sign Out
+    signOutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      signOut(auth).then(() => {
+        window.location.href = "3sign_In.html";
+      });
+    });
+
+    // Pic selection + Firestore update
+    document.querySelectorAll(".option-pic").forEach((pic) => {
+      pic.addEventListener("click", async () => {
+        const selectedPic = pic.src.substring(pic.src.indexOf("Images/"));
+        mainProfilePic.src = selectedPic;
+
+        try {
+          await updateDoc(userRef, { profilePic: selectedPic });
+          Toastify({
+            text: "Profile picture updated!",
+            duration: 3000,
+            gravity: "bottom",
+            position: "left",
+            backgroundColor: "#00b09b",
+          }).showToast();
+        } catch (err) {
+          Toastify({
+            text: "Error updating pic: " + err.message,
+            duration: 3000,
+            gravity: "bottom",
+            position: "left",
+            backgroundColor: "#ff4d4d",
+          }).showToast();
+        }
+
+        profileModal.style.display = "none";
+      });
+    });
+
+    // Toggle modal
+    editIcon.addEventListener("click", () => {
+      profileModal.style.display =
+        profileModal.style.display === "block" ? "none" : "block";
+    });
+
+    // Hide modal on outside click
+    window.addEventListener("click", (e) => {
+      if (
+        e.target !== profileModal &&
+        !profileModal.contains(e.target) &&
+        e.target !== editIcon
+      ) {
+        profileModal.style.display = "none";
+      }
+    });
+  } else {
+    window.location.href = "3sign_In.html";
+  }
+});
+///////////////////////////////////TELL US MORE LOGIC////////////////////
 const moreInfoBtn = document.getElementById("moreInfoBtn");
 const moreInfoModal = document.getElementById("moreInfoModal");
 const modalOverlay = document.getElementById("modalOverlay");
@@ -39,13 +169,13 @@ const inputs = {
   bio: document.getElementById("bio"),
   instagram: document.getElementById("insta"),
   facebook: document.getElementById("facebook"),
-  otherLink: document.getElementById("otherLink")
+  otherLink: document.getElementById("otherLink"),
 };
 
 let userRef;
 
 onAuthStateChanged(auth, async (user) => {
-  if (!user) return window.location.href = "3sign_In.html";
+  if (!user) return (window.location.href = "3sign_In.html");
 
   userRef = doc(db, "users", user.uid);
 
@@ -90,39 +220,143 @@ onAuthStateChanged(auth, async (user) => {
       duration: 3000,
       gravity: "bottom",
       position: "left",
-      backgroundColor: "#00b09b"
+      backgroundColor: "#00b09b",
     }).showToast();
     closeModal();
   });
 });
 
-// Profile option click logic
-document.querySelectorAll(".option-pic").forEach((pic) => {
-  pic.addEventListener("click", async () => {
-    const selectedPic = pic.getAttribute("src");
+const fields = {
+  pronouns: document.getElementById("pronouns"),
+  bio: document.getElementById("bio"),
+  instagram: document.getElementById("insta"),
+  facebook: document.getElementById("facebook"),
+  otherLink: document.getElementById("otherLink"),
+};
 
-    mainProfilePic.src = selectedPic;
+const labels = {
+  pronouns: "Pronouns",
+  bio: "Bio",
+  instagram: "Instagram Handle",
+  facebook: "Facebook Handle",
+  otherLink: "Other Link",
+};
 
-    try {
-      await updateDoc(userRef, { profilePic: selectedPic });
+let originalData = {}; // for detecting changes
 
+function floatLabelOnInput(input) {
+  input.addEventListener("input", () => {
+    if (input.value.trim() !== "") {
+      input.classList.add("filled");
+    } else {
+      input.classList.remove("filled");
+    }
+  });
+}
+
+function showFields(data = {}) {
+  Object.keys(fields).forEach((key) => {
+    fields[key].value = data[key] || "";
+    fields[key].classList.toggle("filled", !!data[key]);
+  });
+}
+
+// Handle unsaved changes detection
+function hasUnsavedChanges() {
+  return Object.keys(fields).some(
+    (key) => fields[key].value.trim() !== (originalData[key] || "")
+  );
+}
+
+// Save popup elements
+const confirmPopup = document.createElement("div");
+confirmPopup.innerHTML = `
+  <div style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+              background:#111; color:white; padding:20px; border-radius:10px;
+              z-index:1001; text-align:center;">
+    <p>You have unsaved changes. Do you want to save them?</p>
+    <button id="confirmSaveYes" style="margin:10px; padding:8px 12px; background:#e50914; color:white;">Yes</button>
+    <button id="confirmSaveNo" style="margin:10px; padding:8px 12px; background:gray; color:white;">No</button>
+  </div>
+`;
+confirmPopup.style.display = "none";
+confirmPopup.style.zIndex = 1001;
+document.body.appendChild(confirmPopup);
+
+// Show Tell Us More modal
+moreInfoBtn.addEventListener("click", async () => {
+  const docSnap = await getDoc(userRef);
+  const data = docSnap.data() || {};
+  originalData = {};
+
+  Object.keys(fields).forEach((key) => {
+    originalData[key] = data[key] || "";
+  });
+
+  showFields(originalData);
+  moreInfoModal.style.display = "block";
+  modalOverlay.style.display = "block";
+});
+
+// Float labels on interaction
+Object.values(fields).forEach((input) => floatLabelOnInput(input));
+
+// Handle modal close with unsaved changes
+function closeModalSafely() {
+  if (hasUnsavedChanges()) {
+    confirmPopup.style.display = "block";
+
+    document.getElementById("confirmSaveYes").onclick = async () => {
+      const updatedData = {};
+      Object.keys(fields).forEach((key) => {
+        updatedData[key] = fields[key].value.trim();
+      });
+
+      await updateDoc(userRef, updatedData);
       Toastify({
-        text: "Profile picture updated!",
+        text: "Changes saved!",
         duration: 3000,
         gravity: "bottom",
         position: "left",
         backgroundColor: "#00b09b",
       }).showToast();
-    } catch (err) {
-      Toastify({
-        text: "Error updating profile picture!",
-        duration: 3000,
-        gravity: "bottom",
-        position: "left",
-        backgroundColor: "#ff4d4d",
-      }).showToast();
-    }
 
-    profileModal.style.display = "none";
+      confirmPopup.style.display = "none";
+      modalOverlay.style.display = "none";
+      moreInfoModal.style.display = "none";
+    };
+
+    document.getElementById("confirmSaveNo").onclick = () => {
+      confirmPopup.style.display = "none";
+      modalOverlay.style.display = "none";
+      moreInfoModal.style.display = "none";
+    };
+  } else {
+    moreInfoModal.style.display = "none";
+    modalOverlay.style.display = "none";
+  }
+}
+
+closeModalBtn.addEventListener("click", closeModalSafely);
+modalOverlay.addEventListener("click", closeModalSafely);
+
+// Save button
+saveMoreInfo.addEventListener("click", async () => {
+  const updatedData = {};
+  Object.keys(fields).forEach((key) => {
+    updatedData[key] = fields[key].value.trim();
   });
+
+  await updateDoc(userRef, updatedData);
+  Toastify({
+    text: "Changes saved!",
+    duration: 3000,
+    gravity: "bottom",
+    position: "left",
+    backgroundColor: "#00b09b",
+  }).showToast();
+
+  moreInfoModal.style.display = "none";
+  modalOverlay.style.display = "none";
+  confirmPopup.style.display = "none";
 });
