@@ -8,6 +8,8 @@ import {
     limit,
     onSnapshot,
     addDoc,
+    getDocs,
+    deleteDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
@@ -36,14 +38,35 @@ onAuthStateChanged(auth, (user) => {
 
     const chatRef = collection(db, "global_chat");
 
-    // Query: get last 200 messages ordered newest first
-    const chatQuery = query(chatRef, orderBy("timestamp", "desc"), limit(200));
+    // Query: get last 100 messages ordered newest first
+    const chatQuery = query(chatRef, orderBy("timestamp", "desc"), limit(100));
 
-    onSnapshot(chatQuery, (snapshot) => {
+    onSnapshot(chatQuery, async (snapshot) => {
         console.log("Snapshot received:", snapshot.docs.length);
 
         const messages = snapshot.docs.reverse();
-        displayMessages(messages);
+        await displayMessages(messages);
+
+        // 🧹 Auto-delete old messages beyond the last 100
+        const oldestVisible = messages[0]?.data()?.timestamp;
+        if (oldestVisible) {
+            const oldMessagesQuery = query(
+                collection(db, "global_chat"),
+                orderBy("timestamp"),
+                limit(50) // Scan up to 50 old messages
+            );
+
+            getDocs(oldMessagesQuery).then((oldSnap) => {
+                oldSnap.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    if (data.timestamp?.toMillis() < oldestVisible.toMillis()) {
+                        // Delete message older than the 10th visible one
+                        deleteDoc(docSnap.ref);
+                    }
+                });
+            });
+        }
+
     });
 
     // Send message on Send button click
