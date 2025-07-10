@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In | Netflix Clone</title>
+    <link rel="stylesheet" href="2auth.css" />
+    <link rel="icon" type="image/png" href="Images/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+</head>
+
+<body>
+    <div class="pixel-grid" id="pixelGrid"></div>
+    <div class="glow-scan"></div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Logo" class="logo" />
+        <div class="navbar-actions">
+            <select class="language-select">
+                <option>English</option>
+                <option>हिन्दी</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Main Center Content -->
+    <div class="signin-container">
+        <h1>Sign In</h1>
+        <form class="signup-form" id="signup-form">
+            <div class="input-box">
+                <input type="email" id="email" placeholder="Email Address" />
+            </div>
+
+            <div class="password-wrapper">
+                <input type="password" id="password" placeholder="Password" />
+                <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('password', this)"></i>
+            </div>
+            
+            <button onclick="login()" class="sign-in-btn">Sign In</button>
+            <div class="options">
+                <label class="remember-me">
+                    <input type="checkbox" checked />
+                    <span>Remember me</span>
+                </label>
+                <a class="link forgot-password" href="#">Forgot password?</a>
+            </div>
+            <div class="signup">
+                New to Netflix?
+                <a class="link" href="2sign_Up.html">Sign up now.</a>
+            </div>
+            <div class="captcha">
+                This page is protected by Google reCAPTCHA to ensure you're not a
+                bot.
+                <a href="#">Learn more.</a>
+            </div>
+        </form>
+    </div>
+
+    <!--------------- Scripts --------------->
+    <!-- Toastify JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="firebase-auth.js"></script>
+    <!-- eye button for password -->
+    <script>
+        function togglePassword(id, icon) {
+            const input = document.getElementById(id);
+            const isPassword = input.type === "password";
+            input.type = isPassword ? "text" : "password";
+            icon.classList.toggle("fa-eye");
+            icon.classList.toggle("fa-eye-slash");
+        }
+    </script>
+</body>
+
+</html>

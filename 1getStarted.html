@@ -2,355 +2,347 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Get Started | Netflix Clone</title>
-    <link rel="stylesheet" href="1getStarted.css" />
-    <link rel="icon" type="image/png" href="./Images/favicon.png">
-     <!-- Toastify CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Started | Netflix Clone</title>
+  <link rel="stylesheet" href="1getStarted.css" />
+  <link rel="icon" type="image/png" href="./Images/favicon.png" />
+  <!-- Toastify CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
 </head>
 
 <body class="auth-body">
-    <div class="hero-section">
-        <!-- Navbar -->
-        <header class="navbar">
-            <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Logo" class="logo" />
-            <div class="navbar-actions">
-                <select class="language-select">
-                    <option>English</option>
-                    <option>हिन्दी</option>
-                </select>
-                <button class="sign-in-btn"><a href="3sign_In.html">Sign In</a></button>
-            </div>
-        </header>
+  <div class="hero-section">
+    <!-- Navbar -->
+    <header class="navbar">
+      <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Logo" class="logo" />
+      <div class="navbar-actions">
+        <select class="language-select">
+          <option>English</option>
+          <option>हिन्दी</option>
+        </select>
+        <button class="sign-in-btn">
+          <a href="3sign_In.html">Sign In</a>
+        </button>
+      </div>
+    </header>
 
-        <!-- Main Center Content -->
-        <div class="center-content">
-            <h1>Unlimited movies, TV shows and more</h1>
-            <h3>Starts at ₹149. Cancel at any time.</h3>
-            <p>Ready to watch? Enter your email to create or restart your membership.</p>
-            <form class="email-form" onsubmit="checkEmailAndRedirect(event)">
-                <input type="email" placeholder="Email address" required />
-                <button type="submit">Get Started &gt;</button>
-            </form>
-        </div>
-
-        <!-- Background Overlay -->
-        <div class="hero-overlay"></div>
-        <img src="Images/BG.png" alt="Background" class="background-img" />
+    <!-- Main Center Content -->
+    <div class="center-content">
+      <h1>Talks, Trends, and Timeless Tales</h1>
+      <h3>It costs nothing to begin. Cancel anytime.</h3>
+      <p>
+        Ready to dive into the buzz? Enter your email to join Netflix Talks.
+      </p>
+      <form class="email-form" onsubmit="checkEmailAndRedirect(event)">
+        <input type="email" placeholder="Email address" required />
+        <button type="submit">Get Started &gt;</button>
+      </form>
     </div>
 
-    <!-- Trending Now -->
-    <section class="trending-now">
-        <h2>Trending Now</h2>
+    <!-- Background Overlay -->
+    <div class="hero-overlay"></div>
+    <img src="Images/BG.png" alt="Background" class="background-img" />
+  </div>
 
-        <button class="arrow left" id="leftArrow">&#10094;</button>
-        <div class="trending-row" id="scrollContainer">
+  <!-- Trending Now -->
+  <section class="trending-now">
+    <h2>Trending Now</h2>
 
-            <div class="poster-card">
-                <span class="rank">1</span>
-                <img src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABWbVt8SbLqwQtrRbCG9VpQXX_Z6c57wYpD_UHJSW-eTT-oVf11K79jU-gQjcRfKqQ4aqPgsRjrPNLPcxfS1P6INHzVIQqhI7huMP5no6v-7or-WycCWfHPXs4xQmfZx0CvOY.webp?r=b91"
-                    alt="Movie 1" class="movie-poster"
-                    data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
-                    data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
-                    data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
-                    data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
-            </div>
+    <button class="arrow left" id="leftArrow">&#10094;</button>
+    <div class="trending-row" id="scrollContainer">
+      <div class="poster-card">
+        <span class="rank">1</span>
+        <img
+          src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABWbVt8SbLqwQtrRbCG9VpQXX_Z6c57wYpD_UHJSW-eTT-oVf11K79jU-gQjcRfKqQ4aqPgsRjrPNLPcxfS1P6INHzVIQqhI7huMP5no6v-7or-WycCWfHPXs4xQmfZx0CvOY.webp?r=b91"
+          alt="Movie 1" class="movie-poster"
+          data-poster="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTKGSbts3Y_9HqUxwSsEPY7xtI4V3uiysuWsJPXH5SCesTJ28kMZzH2DSpmTwtSsiWye7xRgA6TZIpQd7OO17Qgldn1OP8F-WvZV.webp?r=dd0"
+          data-title="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTv9RpAmFgcFtuJJiOaVe_Mii2AUl0DBYOP7p5-KzLM4mP2pTQbyGaiAVZfVCPGWhjMC-gSFYoLvCAIjHFA-OKP6Am79-xySfQ.webp?r=dbfg"
+          data-description="Comedian Kapil Sharma hosts this laugh-out-loud variety talk show with celebrity guests, hilarious antics and his signature supporting cast."
+          data-tags="2025,U/A 13+,Talk Show,Comedies,Variety TV" />
+      </div>
 
-            <div class="poster-card">
-                <span class="rank">2</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABaW57jWqw0Gs9gqgmW816THwyNfPqphIiruQRFy9KXtt9PTPJpB4kzDKriPcpNjPKCj0itu1Yfjl-CR8rGEokBHPKE4O9lZQHXHRRpUHEelwoKk8lOf4gqlws-HnR2iZeSk4.webp?r=609"
-                    alt="Movie 2" class="movie-poster"
-                    data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABVV9gbt3EJsyDMLSD-0Jk01mW5lvHJX1STWaCA0VYXvolLOLAtSc3ufX4YLlJUFrL3QIzieFK_1tQJGhJbPCKqElfp48VWpHAjyx.webp?r=513"
-                    data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABfN2GooAt-gnW3UT0kolGtipbm2mr0Nf4zPasqpOWxQxZjzNKhroRAxacay-rgHzk6P9FhZWRGfTnbKXb8PhsMJAiCTdN9vd7g.webp?r=197"
-                    data-description="Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes."
-                    data-tags="2025,A,Show,Thrillers,Dramas" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">3</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYUCgDPIk4LvnEw_j-dC5ca65oxm4yP2Z7RFKlRcN6WYzCwNA4MhTNqTRrSAK9zND3cSjrYEpbQculmTCXPD09ZbvdCosdbuOjc.webp?r=062"
-                    alt="Movie 3" class="movie-poster"
-                    data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABWpu9szfm7s3CiWmYnl4ZXE3C09uyFRo9XB3c6bMzTXYy7_h6HOWt-hFCyCHKhyLT08-lnyN6a7j3oVx0bo5vGXVrQZeeZ-lZsHw.webp?r=f07"
-                    data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABY3unDCJhk5OWkhqi2NviaRp8JaXZHhh9qQX3CrlfpY-6vwj0S4klC-x1suzJRRPnidkYuBLBKS3-HcDmOASsqrUXIFa-lUEYA.webp?r=b9a"
-                    data-description="A mysterious stranger journeys to a remote town controlled by a callous crime lord, with one violent mission — restoring justice to its people."
-                    data-tags="2025,U/A 16+,Movie,Action" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">4</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABU73BvQjJgydQFEJ-vZZw9QtO8fL6lIxc71x9tOqxgDWh_BHokCWPIbGC5AxJjDk0D_sIH5KhmmYm9HLr3DKUXg8eo6nzF0rtSI.webp?r=d95"
-                    alt="Movie 4" class="movie-poster"
-                    data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABZAQ5LMWRmT-iltlIZSJlhFkJlWvDIyHK8bm14xWUEcNSWfACGT_0nwFJvGm4CyWGhBiFE8qDozr95feEjCEFaVGNi9i00KBMcF0.webp?r=de8"
-                    data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABeHNi00_lzXQBTtyPvQaNEl3oF-vnB-RUNqMyoj9D8R2sOlo0_ZROcvA3tSIlnOwC8BBivk_fUwGkxtZFng-dGVDh6tovdy6gw.webp?r=431"
-                    data-description="Transferred to a small town in Rajasthan, an honest income tax officer pursues a beloved politician whose public good deeds conceal rampant corruption."
-                    data-tags="2025,U/A 13+,Movie,Thrillers,Dramas" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">5</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYGL4_ns5MGTE5-Yd3ZQVB5apyY9yxQ39lxjT_27ehdoGzrxRwNc4osgXEeifcv9yO_MgMySL-p6hMxtQZnIEkZmyglIJ7wm7ik.webp?r=c23"
-                    alt="Movie 5" class="movie-poster"
-                    data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABRE5S0jlavEUwlJmeF6HC73EVjsQbCV33pM4cmADJqiH_kla-sDMBxd0jDfu_ZlYT-nnT922CdLMXhM7KGkQWRkIFK3YOyuFKo7Y.webp?r=608"
-                    data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTveUD4SZj_CXJC9Mp1UvpilkwTn5DaPjrbv5cuOpjWOXK7JJBtpafDDv1AIibSBWV5qjT0ZObzyQIW-SmImMO8fVj60gD76cg.webp?r=a57"
-                    data-description="The Homicide Intervention Team (HIT) sends ruthless police officer Arjun Sarkaar to find a group of killers and stop their grisly murder spree."
-                    data-tags="2025,A,Movie,Thrillers" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">6</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABZ2Btia34ViHOdbGThR2xD0XYVD9vkdTkUULeET8PcHeq12ebMOJyLaTD1yS26NaRfUqDMknk2XnomOCg78WEKeN3VEDdOKzFRayBGveEZ-MeOaVD-v0z5P25idICKgt-nXX.webp?r=a1c"
-                    alt="Movie 6" class="movie-poster"
-                    data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABRG9a53BAgMDnJKkVsknQGApMGsrpx-CEWLIrAxfR-zb-bsElwM_Y-nFwILbf6XbQraG1gpv8Ks-qIxFs6y-D0x1H_VOAm2m3qTe.webp?r=ca8"
-                    data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABbr-sxMP0Ic-OCQTC_aBJ_E4N0q6FQ8YLlHBjfIoobvzhf6cTygjHH2HGWiE7vR6u2JWgtAF52-yFuLJYJmIN7FG5GKPF_-QLQ.webp?r=5bc"
-                    data-description="Rana Naidu is the go-to problem solver for the rich and famous. But when his father is released from jail, the one mess he can't handle may be his own."
-                    data-tags="2025,A,Show,Thrillers,Dramas" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">7</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABWtQdcUd4n6VKz6HTm_IbI2cOq0VDU7fDQpomIXBLuCYqtJ4j8hj2pz7j6spnX2osjRgTMJQ9xkMieYZWqC6xC8G4tGlTLJBm3I.webp?r=cc2"
-                    alt="Movie 7" class="movie-poster"
-                    data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABYMJSLWBdyrlfE0kSfapEQqvKFWHmaJQ7LZ5Tue_4eWI_8qXCra6u9m_yBPQi7mdtAD_OTXOp7pZAvqZpjmkrA53XVNq8y57PcuX.webp?r=d40"
-                    data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABcP7f0lP743pZWaUreAwPl3inf85HmQyA_TDshWNlrpW_FQkBFWJJms6LSZ_mlixUUz7S1hzgiHLO9bvu8IDnM4wdXtt-Rw-Wg.webp?r=600"
-                    data-description="After the death of his father, warrior-king Sambhaji Maharaj battles Mughal forces led by Aurangzeb to keep the Maratha Empire alive."
-                    data-tags="2025,U/A 16+,Movie,Thrillers,Dramas" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">8</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYVcRfFB91jy3f8-_Alb6H4RUzqXFRA7ejjOfCOXF20XLRVeCyT3ZFEimKbZAimt2ayVUWXSnp6ApNxpoK0mA3XzJD__irrDkdMD6lDrOFPSvQqP8s0xn2dNBaU9JxIu4lUd.webp?r=63b"
-                    alt="Movie 8" class="movie-poster"
-                    data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABSUoW0f70j8QPRtzz1j2AhBTaRq9Vp2xJ_R6ZlG1S6U9RKtm_732pFAwc9C0CkcBIqKbK9S0oNkGx7Zq5i8DJi5e6nOON2RCx8KS.webp?r=641"
-                    data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABXwaXMBaGqpcrxEqzTySKVBZiWFsCpGIRFpOKJ5vVdSuq_ZXEU54YYpeP2nK5ImLb7FQC3zUfXigWPPHfFsyi4BUHE2zGAuXjrY.webp?r=0a3"
-                    data-description="When charming Prince Aviraaj meets Sophia, a self-made girl boss, the worlds of royalty and startups collide in a whirlwind of romance and ambition."
-                    data-tags="2025,A,Show,Comedies,Romance, Dramas" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">9</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABQqOh2yhpKE8385dV9hjlxxXtG63RjSjrlNOkx2yLuGMYe8JFTnA9ScVsioAhTa9Ds34ERhB2R4aBFUng1j54IFwl5JvjgVmGEU.webp?r=d66"
-                    alt="Movie 9" class="movie-poster"
-                    data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABUuGCYkQqZMDwIRFm1cgxufKlGHLoaGUlTjtx67lVA8bREjQpqJ6Gd1VYsM829O2452_3jj2F4Teg7n93zkhlOZsCT41bBlluXVo.webp?r=aca"
-                    data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABcnGc49Cok__0TVz8-HnrCZKO6zvbc2b5Wx64mjewQ0a7zb5U30YNjO5FdfixdhCIV5LWpDj7nWFd5XUBJGNXhRzoQOkd18Ebuk.webp?r=620"
-                    data-description="Raised by a criminal father, Paari leaves behind his adoptive family to build a quiet life with his love, Rukmini. But his violent past won't let him go."
-                    data-tags="2025,U/A 16+,Movie,Action,Dramas" />
-            </div>
-            <div class="poster-card">
-                <span class="rank">10</span>
-                <img src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABZFBdXweIqorvQIPkQbuKg9rFcZJJ8yCUzSX1ySYOsmrcMeUgLlY3YWvFcXee7lFjHwMT_Ofd03ttH-rTzAHPZskA6K-f4imBAY.webp?r=81d"
-                    alt="Movie 10" class="movie-poster"
-                    data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTnrXhS8eXFgiqnyknWaJtvhLTb6qr5zr1yBXGoSW5NwBjUdRy6avGyAteowzaF97mJ1YWFp7w8Zn4C753CdE0van9oE3TRfkWOs.webp?r=e3c"
-                    data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABR6Ci5IW08MKq6kudpmXv9KnEbiN4xm51B6xVGyDvquaT6jKl__Hyq-hcgWrpS6AQMjXAtqqH94DPoCgjQtYaOaH1inrC7MPoQ.webp?r=9f7"
-                    data-description="A tragic accident pushes the powerful Sikandar to protect the less fortunate by standing up to corruption and greed — using any means necessary."
-                    data-tags="2025,U/A 13+,Movie,Action,Dramas" />
-            </div>
-        </div>
-        <button class="arrow right" id="rightArrow">&#10095;</button>
-    </section>
-
-
-    <!-- Shared Popup -->
-    <div id="popup1" class="popup-css">
-        <div class="popup-overlay"></div>
-
-        <div class="popup-box">
-            <span class="close-btn">&times;</span>
-
-            <div class="poster-wrapper">
-                <img src="" class="popup-movie-img" alt="Movie Poster" />
-                <img src="" class="popup-title-img" alt="Title" />
-                <div class="popup-gradient-overlay"></div>
-            </div>
-
-            <div class="popup-tags"></div>
-
-            <p class="popup-description"></p>
-        </div>
+      <div class="poster-card">
+        <span class="rank">2</span>
+        <img
+          src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABaW57jWqw0Gs9gqgmW816THwyNfPqphIiruQRFy9KXtt9PTPJpB4kzDKriPcpNjPKCj0itu1Yfjl-CR8rGEokBHPKE4O9lZQHXHRRpUHEelwoKk8lOf4gqlws-HnR2iZeSk4.webp?r=609"
+          alt="Movie 2" class="movie-poster"
+          data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABVV9gbt3EJsyDMLSD-0Jk01mW5lvHJX1STWaCA0VYXvolLOLAtSc3ufX4YLlJUFrL3QIzieFK_1tQJGhJbPCKqElfp48VWpHAjyx.webp?r=513"
+          data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABfN2GooAt-gnW3UT0kolGtipbm2mr0Nf4zPasqpOWxQxZjzNKhroRAxacay-rgHzk6P9FhZWRGfTnbKXb8PhsMJAiCTdN9vd7g.webp?r=197"
+          data-description="Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes."
+          data-tags="2025,A,Show,Thrillers,Dramas" />
+      </div>
+      <div class="poster-card">
+        <span class="rank">3</span>
+        <img
+          src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYUCgDPIk4LvnEw_j-dC5ca65oxm4yP2Z7RFKlRcN6WYzCwNA4MhTNqTRrSAK9zND3cSjrYEpbQculmTCXPD09ZbvdCosdbuOjc.webp?r=062"
+          alt="Movie 3" class="movie-poster"
+          data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABWpu9szfm7s3CiWmYnl4ZXE3C09uyFRo9XB3c6bMzTXYy7_h6HOWt-hFCyCHKhyLT08-lnyN6a7j3oVx0bo5vGXVrQZeeZ-lZsHw.webp?r=f07"
+          data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABY3unDCJhk5OWkhqi2NviaRp8JaXZHhh9qQX3CrlfpY-6vwj0S4klC-x1suzJRRPnidkYuBLBKS3-HcDmOASsqrUXIFa-lUEYA.webp?r=b9a"
+          data-description="A mysterious stranger journeys to a remote town controlled by a callous crime lord, with one violent mission — restoring justice to its people."
+          data-tags="2025,U/A 16+,Movie,Action" />
+      </div>
+      <div class="poster-card">
+        <span class="rank">4</span>
+        <img
+          src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABU73BvQjJgydQFEJ-vZZw9QtO8fL6lIxc71x9tOqxgDWh_BHokCWPIbGC5AxJjDk0D_sIH5KhmmYm9HLr3DKUXg8eo6nzF0rtSI.webp?r=d95"
+          alt="Movie 4" class="movie-poster"
+          data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABZAQ5LMWRmT-iltlIZSJlhFkJlWvDIyHK8bm14xWUEcNSWfACGT_0nwFJvGm4CyWGhBiFE8qDozr95feEjCEFaVGNi9i00KBMcF0.webp?r=de8"
+          data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABeHNi00_lzXQBTtyPvQaNEl3oF-vnB-RUNqMyoj9D8R2sOlo0_ZROcvA3tSIlnOwC8BBivk_fUwGkxtZFng-dGVDh6tovdy6gw.webp?r=431"
+          data-description="Transferred to a small town in Rajasthan, an honest income tax officer pursues a beloved politician whose public good deeds conceal rampant corruption."
+          data-tags="2025,U/A 13+,Movie,Thrillers,Dramas" />
+      </div>
+      <div class="poster-card">
+        <span class="rank">5</span>
+        <img
+          src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYGL4_ns5MGTE5-Yd3ZQVB5apyY9yxQ39lxjT_27ehdoGzrxRwNc4osgXEeifcv9yO_MgMySL-p6hMxtQZnIEkZmyglIJ7wm7ik.webp?r=c23"
+          alt="Movie 5" class="movie-poster"
+          data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABRE5S0jlavEUwlJmeF6HC73EVjsQbCV33pM4cmADJqiH_kla-sDMBxd0jDfu_ZlYT-nnT922CdLMXhM7KGkQWRkIFK3YOyuFKo7Y.webp?r=608"
+          data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTveUD4SZj_CXJC9Mp1UvpilkwTn5DaPjrbv5cuOpjWOXK7JJBtpafDDv1AIibSBWV5qjT0ZObzyQIW-SmImMO8fVj60gD76cg.webp?r=a57"
+          data-description="The Homicide Intervention Team (HIT) sends ruthless police officer Arjun Sarkaar to find a group of killers and stop their grisly murder spree."
+          data-tags="2025,A,Movie,Thrillers" />
+      </div>
+      <div class="poster-card">
+        <span class="rank">6</span>
+        <img
+          src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABZ2Btia34ViHOdbGThR2xD0XYVD9vkdTkUULeET8PcHeq12ebMOJyLaTD1yS26NaRfUqDMknk2XnomOCg78WEKeN3VEDdOKzFRayBGveEZ-MeOaVD-v0z5P25idICKgt-nXX.webp?r=a1c"
+          alt="Movie 6" class="movie-poster"
+          data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABRG9a53BAgMDnJKkVsknQGApMGsrpx-CEWLIrAxfR-zb-bsElwM_Y-nFwILbf6XbQraG1gpv8Ks-qIxFs6y-D0x1H_VOAm2m3qTe.webp?r=ca8"
+          data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABbr-sxMP0Ic-OCQTC_aBJ_E4N0q6FQ8YLlHBjfIoobvzhf6cTygjHH2HGWiE7vR6u2JWgtAF52-yFuLJYJmIN7FG5GKPF_-QLQ.webp?r=5bc"
+          data-description="Rana Naidu is the go-to problem solver for the rich and famous. But when his father is released from jail, the one mess he can't handle may be his own."
+          data-tags="2025,A,Show,Thrillers,Dramas" />
+      </div>
+      <div class="poster-card">
+        <span class="rank">7</span>
+        <img
+          src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABWtQdcUd4n6VKz6HTm_IbI2cOq0VDU7fDQpomIXBLuCYqtJ4j8hj2pz7j6spnX2osjRgTMJQ9xkMieYZWqC6xC8G4tGlTLJBm3I.webp?r=cc2"
+          alt="Movie 7" class="movie-poster"
+          data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABYMJSLWBdyrlfE0kSfapEQqvKFWHmaJQ7LZ5Tue_4eWI_8qXCra6u9m_yBPQi7mdtAD_OTXOp7pZAvqZpjmkrA53XVNq8y57PcuX.webp?r=d40"
+          data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABcP7f0lP743pZWaUreAwPl3inf85HmQyA_TDshWNlrpW_FQkBFWJJms6LSZ_mlixUUz7S1hzgiHLO9bvu8IDnM4wdXtt-Rw-Wg.webp?r=600"
+          data-description="After the death of his father, warrior-king Sambhaji Maharaj battles Mughal forces led by Aurangzeb to keep the Maratha Empire alive."
+          data-tags="2025,U/A 16+,Movie,Thrillers,Dramas" />
+      </div>
+      <div class="poster-card">
+        <span class="rank">8</span>
+        <img
+          src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABYVcRfFB91jy3f8-_Alb6H4RUzqXFRA7ejjOfCOXF20XLRVeCyT3ZFEimKbZAimt2ayVUWXSnp6ApNxpoK0mA3XzJD__irrDkdMD6lDrOFPSvQqP8s0xn2dNBaU9JxIu4lUd.webp?r=63b"
+          alt="Movie 8" class="movie-poster"
+          data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABSUoW0f70j8QPRtzz1j2AhBTaRq9Vp2xJ_R6ZlG1S6U9RKtm_732pFAwc9C0CkcBIqKbK9S0oNkGx7Zq5i8DJi5e6nOON2RCx8KS.webp?r=641"
+          data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABXwaXMBaGqpcrxEqzTySKVBZiWFsCpGIRFpOKJ5vVdSuq_ZXEU54YYpeP2nK5ImLb7FQC3zUfXigWPPHfFsyi4BUHE2zGAuXjrY.webp?r=0a3"
+          data-description="When charming Prince Aviraaj meets Sophia, a self-made girl boss, the worlds of royalty and startups collide in a whirlwind of romance and ambition."
+          data-tags="2025,A,Show,Comedies,Romance, Dramas" />
+      </div>
+      <div class="poster-card">
+        <span class="rank">9</span>
+        <img
+          src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABQqOh2yhpKE8385dV9hjlxxXtG63RjSjrlNOkx2yLuGMYe8JFTnA9ScVsioAhTa9Ds34ERhB2R4aBFUng1j54IFwl5JvjgVmGEU.webp?r=d66"
+          alt="Movie 9" class="movie-poster"
+          data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABUuGCYkQqZMDwIRFm1cgxufKlGHLoaGUlTjtx67lVA8bREjQpqJ6Gd1VYsM829O2452_3jj2F4Teg7n93zkhlOZsCT41bBlluXVo.webp?r=aca"
+          data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABcnGc49Cok__0TVz8-HnrCZKO6zvbc2b5Wx64mjewQ0a7zb5U30YNjO5FdfixdhCIV5LWpDj7nWFd5XUBJGNXhRzoQOkd18Ebuk.webp?r=620"
+          data-description="Raised by a criminal father, Paari leaves behind his adoptive family to build a quiet life with his love, Rukmini. But his violent past won't let him go."
+          data-tags="2025,U/A 16+,Movie,Action,Dramas" />
+      </div>
+      <div class="poster-card">
+        <span class="rank">10</span>
+        <img
+          src="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABZFBdXweIqorvQIPkQbuKg9rFcZJJ8yCUzSX1ySYOsmrcMeUgLlY3YWvFcXee7lFjHwMT_Ofd03ttH-rTzAHPZskA6K-f4imBAY.webp?r=81d"
+          alt="Movie 10" class="movie-poster"
+          data-poster="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTnrXhS8eXFgiqnyknWaJtvhLTb6qr5zr1yBXGoSW5NwBjUdRy6avGyAteowzaF97mJ1YWFp7w8Zn4C753CdE0van9oE3TRfkWOs.webp?r=e3c"
+          data-title="https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABR6Ci5IW08MKq6kudpmXv9KnEbiN4xm51B6xVGyDvquaT6jKl__Hyq-hcgWrpS6AQMjXAtqqH94DPoCgjQtYaOaH1inrC7MPoQ.webp?r=9f7"
+          data-description="A tragic accident pushes the powerful Sikandar to protect the less fortunate by standing up to corruption and greed — using any means necessary."
+          data-tags="2025,U/A 13+,Movie,Action,Dramas" />
+      </div>
     </div>
+    <button class="arrow right" id="rightArrow">&#10095;</button>
+  </section>
 
+  <!-- Shared Popup -->
+  <div id="popup1" class="popup-css">
+    <div class="popup-overlay"></div>
 
-    <!-- More reasons to join -->
-    <section class="reasons-to-join">
-        <h2>More reasons to join</h2>
-        <div class="reason-grid">
-            <div class="reason-card">
-                <h3>Enjoy on your TV</h3>
-                <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
-                <img src="Images/MRTJ-Icon-1.png" alt="TV Icon" />
-            </div>
-            <div class="reason-card">
-                <h3>Download your shows to watch offline</h3>
-                <p>Save your favourites easily and always have something to watch.</p>
-                <img src="Images/MRTJ-Icon-2.png" alt="Download Icon" />
-            </div>
-            <div class="reason-card">
-                <h3>Watch everywhere</h3>
-                <p>Stream unlimited movies and TV shows on your phone, tablet, laptop and TV.</p>
-                <img src="Images/MRTJ-Icon-3.png" alt="Devices Icon" />
-            </div>
-            <div class="reason-card">
-                <h3>Create profiles for kids</h3>
-                <p>Send kids on adventures with their favourite characters in a space made just for them — free with
-                    your
-                    membership.</p>
-                <img src="Images/MRTJ-Icon-4.png" alt="Kids Icon" />
-            </div>
+    <div class="popup-box">
+      <span class="close-btn">&times;</span>
+
+      <div class="poster-wrapper">
+        <img src="" class="popup-movie-img" alt="Movie Poster" />
+        <img src="" class="popup-title-img" alt="Title" />
+        <div class="popup-gradient-overlay"></div>
+      </div>
+
+      <div class="popup-tags"></div>
+
+      <p class="popup-description"></p>
+    </div>
+  </div>
+
+  <!-- More reasons to join -->
+  <section class="reasons-to-join">
+    <h2>More reasons to join</h2>
+    <div class="reason-grid">
+      <div class="reason-card">
+        <h3>Connect from your laptop</h3>
+        <p>Check out people's views and opinions about your favourite actors!.</p>
+        <img src="Images/MRTJ-Icon-1.png" alt="TV Icon" />
+      </div>
+      <div class="reason-card">
+        <h3>Create lists!</h3>
+        <p>Save your favourites easily and always have something to say.</p>
+        <img src="Images/MRTJ-Icon-2.png" alt="Download Icon" />
+      </div>
+      <div class="reason-card">
+        <h3>Comment from anywhere</h3>
+        <p>Express your views and get insight on others prespective.</p>
+        <img src="Images/MRTJ-Icon-3.png" alt="Devices Icon" />
+      </div>
+      <div class="reason-card">
+        <h3>Create profiles with friends</h3>
+        <p>Make polls with your friends and enjoy as you see them unfold.</p>
+        <img src="Images/MRTJ-Icon-4.png" alt="Kids Icon" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <button class="faq-question">What is Netflix Talks?<span class="toggle-icon">+</span></button>
+      <div class="answer">Netflix Talks is where entertainment meets conversation. We spotlight the latest buzz,
+        trending titles, and deep dives into shows you love. All curated with commentary, community, and culture in
+        mind.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">How much does it cost?<span class="toggle-icon">+</span></button>
+      <div class="answer">It's absolutely free to get started. No charges, no hidden fees, and you can cancel anytime.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">What can I do on Netflix Talks?<span class="toggle-icon">+</span></button>
+      <div class="answer">Add reactions, drop your thoughts, share your takes, and connect with others over your
+        favorite scenes and shows.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Do I need a Netflix subscription?<span class="toggle-icon">+</span></button>
+      <div class="answer">Nope! Netflix Talks is a community platform separate from Netflix’s streaming service. Join
+        the convo without a subscription.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Can I share my own reviews?<span class="toggle-icon">+</span></button>
+      <div class="answer">Absolutely! Netflix Talks encourages community members to express their opinions, write
+        reviews, and even spark healthy debates.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Is there a mobile app?<span class="toggle-icon">+</span></button>
+      <div class="answer">Coming soon! We’re working on a mobile app so you can Talk, React, and Trend from anywhere.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content-wrapper">
+      <p>Questions? Call <a href="#">000-800-919-1743</a></p>
+      <div class="footer-grid">
+        <div class="footer-column">
+          <a href="#">FAQ</a>
+          <a href="#">Privacy</a>
+          <a href="#">Speed Test</a>
         </div>
-    </section>
-
-    <!-- FAQs -->
-    <section class="faq">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-            <button class="faq-question">
-                What is Netflix?
-                <span class="toggle-icon">+</span>
-            </button>
-            <div class="answer">Netflix is a streaming service that offers a wide variety of award-winning TV shows,
-                movies, anime, documentaries and more - on thousands of internet-connected devices. <br><br>
-                You can watch as much as you want, whenever you want, without a single ad – all for one low monthly
-                price. There's always something new to discover, and new TV shows and movies are added every week!</div>
+        <div class="footer-column">
+          <a href="#">Help Centre</a>
+          <a href="#">Cookie Preferences</a>
+          <a href="#">Legal Notices</a>
         </div>
-        <div class="faq-item">
-            <button class="faq-question">How much does Netflix cost?<span class="toggle-icon">+</span></button>
-            <div class="answer">Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for
-                one fixed monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts.</div>
+        <div class="footer-column">
+          <a href="#">Ways to Watch</a>
+          <a href="#">Only on Netflix Talks</a>
         </div>
-        <div class="faq-item">
-            <button class="faq-question">Where can I watch?<span class="toggle-icon">+</span></button>
-            <div class="answer">Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web
-                at netflix.com or on any internet-connected device that offers the Netflix app. <br><br>
-                You can also download your favourite shows with the iOS or Android app.</div>
+        <div class="footer-column">
+          <a href="#">Terms of Use</a>
+          <a href="#">Contact Us</a>
         </div>
-        <div class="faq-item">
-            <button class="faq-question">How do I cancel?<span class="toggle-icon">+</span></button>
-            <div class="answer">Netflix is flexible. No contracts and no commitments. Cancel online anytime. No
-                cancellation fees.</div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">What can I watch on Netflix?<span class="toggle-icon">+</span></button>
-            <div class="answer">Netflix has an extensive library of feature films, documentaries, TV shows, anime,
-                award-winning originals, and more.</div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">Is Netflix good for kids?<span class="toggle-icon">+</span></button>
-            <div class="answer">The Netflix Kids experience gives parents control while kids enjoy family-friendly
-                content in their own space.</div>
-        </div>
-    </section>
+      </div>
+      <select>
+        <option>English</option>
+        <option>हिन्दी</option>
+      </select>
+      <p class="recaptcha-msg">
+        This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a>
+      </p>
+    </div>
+  </footer>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content-wrapper">
-            <p>Questions? Call <a href="#">000-800-919-1743</a></p> <br>
+  <!-- Authentication Script -->
+  <script src="config.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script type="module" src="firebase-auth.js"></script>
 
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="#">FAQ</a>
-                    <a href="#">Investor Relations</a>
-                    <a href="#">Privacy</a>
-                    <a href="#">Speed Test</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">Help Centre</a>
-                    <a href="#">Jobs</a>
-                    <a href="#">Cookie Preferences</a>
-                    <a href="#">Legal Notices</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">Account</a>
-                    <a href="#">Ways to Watch</a>
-                    <a href="#">Corporate Information</a>
-                    <a href="#">Only on Netflix</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">Media Centre</a>
-                    <a href="#">Terms of Use</a>
-                    <a href="#">Contact Us</a>
-                </div>
-            </div>
+  <!-- Trending Now Script -->
+  <script>
+    // Arrows
+    const scrollContainer = document.getElementById("scrollContainer");
 
-            <select>
-                <option>English</option>
-                <option>हिन्दी</option>
-            </select>
+    document.getElementById("leftArrow").addEventListener("click", () => {
+      scrollContainer.scrollBy({ left: -1200, behavior: "smooth" });
+    });
 
-            <br><br>
-            <p>Netflix India</p>
-            <br>
-            <p class="recaptcha-msg">
-                This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a>
-            </p>
-        </div>
+    document.getElementById("rightArrow").addEventListener("click", () => {
+      scrollContainer.scrollBy({ left: 1200, behavior: "smooth" });
+    });
+  </script>
 
-    </footer>
+  <script>
+    //trending now posters
+    const popup = document.getElementById("popup1");
+    const posterImg = popup.querySelector(".popup-movie-img");
+    const titleImg = popup.querySelector(".popup-title-img");
+    const descElem = popup.querySelector(".popup-description");
+    const tagsWrap = popup.querySelector(".popup-tags");
+    const closeBtn = popup.querySelector(".close-btn");
+    const overlay = popup.querySelector(".popup-overlay");
 
+    // open popup on poster click
+    document.querySelectorAll(".movie-poster").forEach((poster) => {
+      poster.addEventListener("click", () => {
+        posterImg.src = poster.getAttribute("data-poster");
+        titleImg.src = poster.getAttribute("data-title");
+        descElem.textContent = poster.getAttribute("data-description");
 
-    <!-- Authentication Script -->
-    <script src="config.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script type="module" src="firebase-auth.js"></script>
+        // build tags
+        tagsWrap.innerHTML = "";
+        poster
+          .getAttribute("data-tags")
+          .split(",")
+          .forEach((tag) => {
+            const span = document.createElement("span");
+            span.textContent = tag.trim();
+            tagsWrap.appendChild(span);
+          });
 
-    <!-- Trending Now Script -->
-    <script>
-        // Arrows
-        const scrollContainer = document.getElementById("scrollContainer");
+        // ✅ SHOW POPUP only on click
+        popup.style.display = "flex";
+      });
+    });
 
-        document.getElementById("leftArrow").addEventListener("click", () => {
-            scrollContainer.scrollBy({ left: -1200, behavior: "smooth" });
-        });
+    // Close popup
+    closeBtn.addEventListener("click", () => {
+      popup.style.display = "none";
+    });
 
-        document.getElementById("rightArrow").addEventListener("click", () => {
-            scrollContainer.scrollBy({ left: 1200, behavior: "smooth" });
-        });
-    </script>
+    overlay.addEventListener("click", (e) => {
+      popup.style.display = "none";
+    });
+  </script>
 
-    <script>
-        //trending now posters
-        const popup = document.getElementById("popup1");
-        const posterImg = popup.querySelector(".popup-movie-img");
-        const titleImg = popup.querySelector(".popup-title-img");
-        const descElem = popup.querySelector(".popup-description");
-        const tagsWrap = popup.querySelector(".popup-tags");
-        const closeBtn = popup.querySelector(".close-btn");
-        const overlay = popup.querySelector(".popup-overlay");
-
-        // open popup on poster click
-        document.querySelectorAll(".movie-poster").forEach(poster => {
-            poster.addEventListener("click", () => {
-                posterImg.src = poster.getAttribute("data-poster");
-                titleImg.src = poster.getAttribute("data-title");
-                descElem.textContent = poster.getAttribute("data-description");
-
-                // build tags
-                tagsWrap.innerHTML = "";
-                poster.getAttribute("data-tags").split(",").forEach(tag => {
-                    const span = document.createElement("span");
-                    span.textContent = tag.trim();
-                    tagsWrap.appendChild(span);
-                });
-
-                // ✅ SHOW POPUP only on click
-                popup.style.display = "flex";
-            });
-        });
-
-
-        // Close popup
-        closeBtn.addEventListener("click", () => {
-            popup.style.display = "none";
-        });
-
-        overlay.addEventListener("click", e => {
-            popup.style.display = "none";
-        });
-    </script>
-
-    <!-- FAQ plus to cross -->
-    <script>
-        document.querySelectorAll('.faq-question').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.closest('.faq-item');
-                item.classList.toggle('open');
-            });
-        });
-    </script>
-
+  <!-- FAQ plus to cross -->
+  <script>
+    document.querySelectorAll(".faq-question").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const item = btn.closest(".faq-item");
+        item.classList.toggle("open");
+      });
+    });
+  </script>
 </body>
 
 </html>

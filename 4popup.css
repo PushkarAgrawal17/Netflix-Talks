@@ -1,0 +1,385 @@
+/* =============== Popup on Poster Click =============== */
+.popup-css {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+}
+
+.popup-box {
+    position: relative;
+    background-color: #141414;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    max-width: 800px;
+    min-width: 340px;
+    height: 90vh;
+    max-height: 95vh;
+
+    overflow-y: auto;
+    color: #fff;
+
+    padding-bottom: 20px;
+    margin-top: auto;
+
+    animation: popup-zoom 0.35s ease;
+    box-shadow: 0 0 15px rgba(222, 25, 25, 0.83);
+    z-index: 10001;
+    scroll-behavior: smooth;
+}
+
+.popup-box::-webkit-scrollbar {
+    display: none;
+}
+
+.popup-gradient-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80%;
+    border-radius: 0 0 6px 6px;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(to top, rgba(22, 22, 22, 1) 0%, rgba(6, 10, 23, 0) 100%);
+}
+
+.poster-wrapper {
+    position: relative;
+}
+
+.popup-movie-img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.popup-title-img {
+    width: 55%;
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    color: white;
+    font-size: 2rem;
+    font-family: "Merriweather", Times, serif;
+    font-weight: bolder;
+    text-shadow:
+        2px 2px 4px rgba(255, 0, 0, 0.8),
+        -1px -1px 0 #ff0000,
+        1px -1px 0 #ff0000,
+        -1px 1px 0 #ff0000,
+        1px 1px 0 #ff0000;
+    font-weight: bold;
+    z-index: 20;
+    text-transform: uppercase;
+}
+
+.popup-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-left: 10px;
+    font-size: 0.9rem;
+}
+
+.popup-tags span {
+    background-color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 6px;
+    z-index: 2;
+}
+
+.popup-description {
+    margin: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ccc;
+    z-index: 20;
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 30px;
+    font-size: 35px;
+    cursor: pointer;
+    z-index: 10001;
+    transition: transform 0.2s;
+    filter: drop-shadow(0 0 5px black);
+}
+
+.close-btn:hover {
+    transform: scale(1.2);
+}
+
+@keyframes popup-zoom {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/*-------- My list, like, dislike, share buttons --------*/
+.popup-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.popup-actions button {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* MyList button */
+.mylist-btn,
+.popup-mylist-btn {
+    background-color: #ff000d;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: bold;
+
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.mylist-btn:hover,
+.popup-mylist-btn:hover {
+    background-color: #bd0912;
+}
+
+/* Like button */
+.like-btn {
+    background-color: #1db954;
+    color: white;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.like-btn.active,
+.like-btn:hover {
+    background-color: #084522;
+}
+
+/* Dislike button */
+.dislike-btn {
+    background-color: #e80e0e;
+    color: white;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.dislike-btn.active,
+.dislike-btn:hover {
+    background-color: #670000;
+}
+
+/* Share button */
+.share-btn {
+    background-color: #00bfff;
+    color: white;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.share-btn:hover {
+    background-color: #00536e;
+    color: white;
+}
+
+/*------------------- Comment section -------------------*/
+.comment-section {
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    margin: 30px 20px 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+.comment-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: #ffffff;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+}
+
+/* Input area */
+.comment-input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.comment-input-box textarea {
+    resize: none;
+    min-height: 80px;
+    padding: 12px;
+    background: #2b2b2b;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.95rem;
+    transition: border-color 0.3s;
+}
+
+.comment-input-box textarea:focus {
+    border-color: #e50914;
+    outline: none;
+}
+
+.comment-input-box button {
+    align-self: flex-end;
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.comment-input-box button:hover {
+    background: #ff2c30;
+}
+
+/* Individual Comment */
+.comment-card {
+    margin-top: 18px;
+    padding: 16px;
+    background: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.comment-card p {
+    font-size: 1rem;
+    color: #f1f1f1;
+    line-height: 1.5;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.comment-meta {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    font-weight: 600;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #555;
+    word-break: break-word;
+}
+
+/* ------- Reply section ------- */
+.reply-btn {
+    font-size: 13px;
+    color: #3ea6ff;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: color 0.3s;
+}
+
+.reply-btn:hover {
+    color: #61c0ff;
+}
+
+.reply-box {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reply-box textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px;
+    background: #222;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 6px;
+    resize: none;
+    font-size: 0.9rem;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+.reply-box button {
+    align-self: flex-end;
+    background: #e50914;
+    color: white;
+    padding: 6px 14px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.reply-box button:hover {
+    background: #ff2c30;
+}
+
+/* Reply boxes */
+.reply-card {
+    margin-left: 25px;
+    margin-top: 10px;
+    padding-left: 15px;
+    border-left: 3px solid #444;
+    background: #222;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+/* View/Hide replies button */
+.toggle-replies-btn {
+    background: none;
+    color: #1da1f2;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 0;
+    transition: color 0.3s;
+}
+
+.toggle-replies-btn:hover {
+    color: #42b0ff;
+}

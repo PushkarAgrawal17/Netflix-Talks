@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Started | Netflix Talks</title>
+  <link rel="stylesheet" href="1getStarted2.css" />
+  <link rel="icon" type="image/png" href="./Images/favicon.png">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+
+<body class="auth-body">
+  <div class="hero-section">
+    <header class="navbar">
+      <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Talks Logo" class="logo" />
+      <div class="navbar-actions">
+        <select class="language-select">
+          <option>English</option>
+          <option>हिन्दी</option>
+        </select>
+        <button class="sign-in-btn"><a href="3sign_In.html">Sign In</a></button>
+      </div>
+    </header>
+
+    <div class="center-content">
+      <h1>Talks, Trends, and Timeless Tales</h1>
+      <h3>It costs nothing to begin. Cancel anytime.</h3>
+      <p>Ready to dive into the buzz? Enter your email to join Netflix Talks.</p>
+      <form class="email-form" onsubmit="checkEmailAndRedirect(event)">
+        <input type="email" placeholder="Email address" required />
+        <button type="submit">Get Started &gt;</button>
+      </form>
+    </div>
+
+    <div class="hero-overlay"></div>
+    <img src="Images/BG.png" alt="Background" class="background-img" />
+  </div>
+
+  <!-- Trending Now -->
+  <section class="trending-now">
+    <h2>Trending on Netflix Talks</h2>
+    <button class="arrow left" id="leftArrow">&#10094;</button>
+    <div class="trending-row" id="scrollContainer">
+      <div class="poster-card">
+        <span class="rank">1</span>
+        <img src="Images/sample-poster1.jpg" class="movie-poster" data-title="Sample Title"
+          data-description="Sample description for this title." data-tags="2025, U/A 13+, Talk Show" />
+      </div>
+      <div class="poster-card">
+        <span class="rank">2</span>
+        <img src="Images/sample-poster2.jpg" class="movie-poster" data-title="Another Title"
+          data-description="Another interesting synopsis goes here." data-tags="2025, A, Drama" />
+      </div>
+    </div>
+    <button class="arrow right" id="rightArrow">&#10095;</button>
+  </section>
+
+  <!-- More reasons to join -->
+  <section class="reasons-to-join">
+    <h2>More reasons to join</h2>
+    <div class="reason-grid">
+      <div class="reason-card">
+        <h3>Connect from your laptop</h3>
+        <p>Check out people's views and opinions about your favourite actors!.</p>
+        <img src="Images/MRTJ-Icon-1.png" alt="TV Icon" />
+      </div>
+      <div class="reason-card">
+        <h3>Create lists!</h3>
+        <p>Save your favourites easily and always have something to say.</p>
+        <img src="Images/MRTJ-Icon-2.png" alt="Download Icon" />
+      </div>
+      <div class="reason-card">
+        <h3>Comment from anywhere</h3>
+        <p>Express your views and get insight on others prespective.</p>
+        <img src="Images/MRTJ-Icon-3.png" alt="Devices Icon" />
+      </div>
+      <div class="reason-card">
+        <h3>Create profiles with friends</h3>
+        <p>Make polls with your friends and enjoy as you see them unfold.</p>
+        <img src="Images/MRTJ-Icon-4.png" alt="Kids Icon" />
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FAQ Section -->
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <button class="faq-question">What is Netflix Talks?<span class="toggle-icon">+</span></button>
+      <div class="answer">Netflix Talks is where entertainment meets conversation. We spotlight the latest buzz,
+        trending titles, and deep dives into shows you love. All curated with commentary, community, and culture in
+        mind.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">How much does it cost?<span class="toggle-icon">+</span></button>
+      <div class="answer">It's absolutely free to get started. No charges, no hidden fees, and you can cancel anytime.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">What can I do on Netflix Talks?<span class="toggle-icon">+</span></button>
+      <div class="answer">Add reactions, drop your thoughts, share your takes, and connect with others over your
+        favorite scenes and shows.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Do I need a Netflix subscription?<span class="toggle-icon">+</span></button>
+      <div class="answer">Nope! Netflix Talks is a community platform separate from Netflix’s streaming service. Join
+        the convo without a subscription.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Can I share my own reviews?<span class="toggle-icon">+</span></button>
+      <div class="answer">Absolutely! Netflix Talks encourages community members to express their opinions, write
+        reviews, and even spark healthy debates.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Is there a mobile app?<span class="toggle-icon">+</span></button>
+      <div class="answer">Coming soon! We’re working on a mobile app so you can Talk, React, and Trend from anywhere.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content-wrapper">
+      <p>Questions? Call <a href="#">000-800-919-1743</a></p>
+      <div class="footer-grid">
+        <div class="footer-column">
+          <a href="#">FAQ</a>
+          <a href="#">Privacy</a>
+          <a href="#">Speed Test</a>
+        </div>
+        <div class="footer-column">
+          <a href="#">Help Centre</a>
+          <a href="#">Cookie Preferences</a>
+          <a href="#">Legal Notices</a>
+        </div>
+        <div class="footer-column">
+          <a href="#">Ways to Watch</a>
+          <a href="#">Only on Netflix Talks</a>
+        </div>
+        <div class="footer-column">
+          <a href="#">Terms of Use</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+      <select>
+        <option>English</option>
+        <option>हिन्दी</option>
+      </select>
+      <p class="recaptcha-msg">
+        This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script type="module" src="firebase-auth.js"></script>
+
+  <!-- Trending scroll -->
+  <script>
+    document.getElementById("leftArrow").addEventListener("click", () => {
+      document.getElementById("scrollContainer").scrollBy({ left: -1200, behavior: "smooth" });
+    });
+    document.getElementById("rightArrow").addEventListener("click", () => {
+      document.getElementById("scrollContainer").scrollBy({ left: 1200, behavior: "smooth" });
+    });
+  </script>
+
+  <!-- FAQ toggle -->
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        item.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Netflix Clone</title>
 
+    <!-- CSS and Favicon -->
     <link rel="stylesheet" href="4index.css" />
-    <link rel="icon" type="image/png" href="./Images/favicon.png"> <!--Favicon -->
+    <link rel="stylesheet" href="4popup.css">
+    <link rel="stylesheet" href="search.css">
+    <link rel="icon" type="image/png" href="./Images/favicon.png">
 
+    <!-- Other links -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +45,7 @@
             <!-- Search icon -->
             <a><i id="openSearchBtn" class="fas fa-search"></i></a>
 
-            
+
             <!-- Notification icon -->
             <i class="fas fa-bell"></i>
             <!-- Profile icon -->
@@ -55,7 +59,7 @@
             </div>
         </div>
     </header>
-    
+
     <!-- Search popup -->
     <div id="searchPopup" class="popup-overlay hidden">
         <div class="popup-content">
@@ -88,8 +92,8 @@
                 </button>
 
                 <!-- Genre Dropdown -->
-                <div class="genre-dropdown"> <!-- ✅ Only class here -->
-                    <select id="genreFilter"> <!-- ✅ ID goes here -->
+                <div class="genre-dropdown">
+                    <select id="genreFilter">
                         <option value="">Select Genre</option>
                     </select>
                 </div>
@@ -114,13 +118,9 @@
                 <h3>Recent Searches:</h3>
                 <div id="recentSearches" class="recent-searches"></div>
             </div>
-
-            <!-- JS for Search
-            <script src="config.js"></script>
-            <script type="module" src="search.js"></script> -->
         </div>
     </div>
-    
+
     <!-- Hero Section -->
     <section class="hero-slideshow">
         <div id="hero-slides-container"></div>
@@ -233,12 +233,6 @@
         });
     </script>
 
-    <!-- Firebase (COMPAT) scripts -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script> -->
-
-    
     <!-- Pop up -->
     <script>
         const openBtn = document.getElementById('openSearchBtn');

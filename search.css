@@ -1,0 +1,267 @@
+/* ==================== Search Popup ==================== */
+.search-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.search-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.section-container h3 {
+    padding-top: 30px;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+#searchInput::placeholder {
+    color: rgb(146, 146, 146);
+}
+
+#searchInput:focus {
+    border-color: #e50914;
+}
+
+/* Search Buttons */
+#searchBtn,
+#voiceBtn {
+    background: linear-gradient(145deg, #e50914, #b0060f);
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.5);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#searchBtn:hover,
+#voiceBtn:hover {
+    background: #b0060f;
+    transform: scale(1.02);
+}
+
+/* Popup closing button */
+#closePopupBtn {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 10001;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#closePopupBtn:hover {
+    transform: scale(1.2);
+    color: #e50914;
+}
+
+
+/* ================== Search by Genre ================== */
+/* Genre button */
+#genreToggleBtn {
+    background: #222;
+    color: white;
+    font-weight: bold;
+    padding: 10px 18px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    align-self: flex-start;
+    margin-top: 10px;
+}
+
+#genreToggleBtn:hover {
+    background: #333;
+    transform: scale(1.03);
+}
+
+/* Genre dropdown */
+.genre-dropdown {
+    display: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.genre-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.genre-dropdown select {
+    width: 100%;
+    padding: 10px 16px;
+    margin-top: 10px;
+    background: #1c1c1c;
+    color: white;
+    border-radius: 8px;
+    border: 1px solid #444;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.genre-dropdown select:focus {
+    border-color: #e50914;
+    outline: none;
+}
+
+/* Genre active state */
+.genre-active #searchBarContainer,
+.genre-active #voiceBtn,
+.genre-active #searchBtn,
+.genre-active #genreToggleBtn {
+    display: none;
+}
+
+#genreFilterTitle {
+    display: none;
+    padding-top: 30px;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    animation: genreHeadingZoomIn 0.5s ease forwards;
+    transform-origin: top center;
+}
+
+@keyframes genreHeadingZoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(1) translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.2) translateY(-30px);
+    }
+}
+
+
+/* =================== Search Results =================== */
+.search-row-posters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1rem 20px 0 20px;
+}
+
+.search-row-posters img {
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-row-posters img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.7);
+}
+
+
+/* =================== Recent Searches ================== */
+.recent-searches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.recent-searches span {
+    background: #333;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.recent-searches span:hover {
+    background: #555;
+}
+
+
+/* =================== Search Popup =================== */
+body.popup-open {
+    overflow: hidden;
+}
+
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background: rgba(20, 20, 20, 1);
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem;
+    border-radius: 12px;
+    overflow-y: auto;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    scrollbar-width: thin;
+    scrollbar-color: black transparent;
+}
+
+.popup-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Back button in Search by genre */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: whitesmoke;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10001;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgb(38, 38, 38);
+    color: grey;
+    transform: scale(1.05);
+}

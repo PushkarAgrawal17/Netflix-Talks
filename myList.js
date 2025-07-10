@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".poster").forEach((poster) => {
       poster.addEventListener("click", async () => {
 
-        console.log(`Clicked poster ID:${poster.dataset.id}`);
+        console.log(Clicked poster ID:${poster.dataset.id});
 
         const popup = document.getElementById("mylist-popup");
         if (!popup) return;
@@ -109,7 +109,7 @@ window.addEventListener("DOMContentLoaded", () => {
           location.reload();
         };
 
-        // 🔥 Like/Dislike/Share logic
+        // Like/Dislike/Share logic
         const likeBtn = popup.querySelector("#like-btn");
         const dislikeBtn = popup.querySelector("#dislike-btn");
         const shareBtn = popup.querySelector("#share-btn");
@@ -183,7 +183,7 @@ window.addEventListener("DOMContentLoaded", () => {
           if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
           if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
 
-          // ✅ UPDATE COUNTS
+          // UPDATE COUNTS
           const updatedMovieSnap = await getDoc(mmovieRef);
           const updatedMovieData = updatedMovieSnap.exists() ? updatedMovieSnap.data() : {};
           popup.querySelector("#like-count").textContent = (updatedMovieData.likedBy || []).length;
@@ -235,7 +235,7 @@ window.addEventListener("DOMContentLoaded", () => {
           if (!(updatedUser.disliked || []).length) cleanUp.disliked = deleteField();
           if (Object.keys(cleanUp).length) await updateDoc(userRef, cleanUp);
 
-          // ✅ UPDATE COUNTS
+          // UPDATE COUNTS
           const updatedMovieSnap = await getDoc(mmovieRef);
           const updatedMovieData = updatedMovieSnap.exists() ? updatedMovieSnap.data() : {};
           popup.querySelector("#like-count").textContent = (updatedMovieData.likedBy || []).length;
@@ -244,7 +244,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
         shareBtn.onclick = () => {
-          const shareUrl = window.location.href + `#${movieId}`;
+          const shareUrl = window.location.href + #${movieId};
           navigator.clipboard.writeText(shareUrl).then(() => {
             showToast("Movie link copied to clipboard!", "#3498db");
           });
@@ -273,7 +273,7 @@ window.addEventListener("DOMContentLoaded", () => {
               question: commentText.slice(5).trim(),
               options: pollOptions,
               votes: Array(pollOptions.length).fill(0),
-              voters: {}, // 🆕 ADD THIS LINE
+              voters: {}, // ADD THIS LINE
               timestamp: new Date()
             });
           } else {
@@ -297,7 +297,7 @@ window.addEventListener("DOMContentLoaded", () => {
           const commentsQuery = query(collection(mmovieRef, "comments"), orderBy("timestamp", "desc"));
           const commentsSnapshot = await getDocs(commentsQuery);
           if (commentsSnapshot.empty) {
-            commentsList.innerHTML = `<p style="font-size:14px; color:#777; text-align:center; ">No comments yet.</p>`;
+            commentsList.innerHTML = <p style="font-size:14px; color:#777; text-align:center; ">No comments yet.</p>;
             return;
           }
           commentsSnapshot.forEach(async (docSnap) => {
@@ -309,7 +309,7 @@ window.addEventListener("DOMContentLoaded", () => {
             div.innerHTML = `
                                     <p>${data.username}</p>
                                     ${data.isPoll
-                ? `<h4>🗳️ ${data.question}</h4>
+                ? `<h4>🗳 ${data.question}</h4>
                                             <ul class="poll-options">
                                             ${data.options.map((opt, idx) => {
                   const count = data.votes?.[idx] || 0;
@@ -326,7 +326,7 @@ window.addEventListener("DOMContentLoaded", () => {
                                             </li>`;
                 }).join("")}
                                             </ul>`
-                : `<h4>${data.comment}</h4>`}
+                : <h4>${data.comment}</h4>}
         
                                     <div class="comment-meta">${new Date(data.timestamp?.toDate?.() || data.timestamp).toLocaleString()}</div>
                                     <div class="reply-btn" data-id="${commentId}">Reply</div>
@@ -340,13 +340,13 @@ window.addEventListener("DOMContentLoaded", () => {
             // Fetch reply count for this comment
             const repliesSnap = await getDocs(collection(mmovieRef, "comments", commentId, "replies"));
             const replyCount = repliesSnap.size;
-            div.querySelector(".toggle-replies-btn").textContent = `💬 View ${replyCount} repl${replyCount === 1 ? 'y' : 'ies'}`;
+            div.querySelector(".toggle-replies-btn").textContent = 💬 View ${replyCount} repl${replyCount === 1 ? 'y' : 'ies'};
 
 
             // Highlight the voted option for this user (if any)
             if (data.isPoll && data.voters && data.voters[user.uid] !== undefined) {
               const votedIdx = data.voters[user.uid];
-              const votedOption = div.querySelector(`.poll-vote-option[data-idx="${votedIdx}"]`);
+              const votedOption = div.querySelector(.poll-vote-option[data-idx="${votedIdx}"]);
               if (votedOption) votedOption.classList.add("voted");
             }
 
@@ -367,7 +367,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 const prevVote = voters[user.uid];
 
                 if (prevVote === selectedIdx) {
-                  // 🗑️ User clicked again on same option → remove vote
+                  // 🗑 User clicked again on same option → remove vote
                   votes[selectedIdx] = Math.max(0, votes[selectedIdx] - 1);
                   delete voters[user.uid];
 
@@ -378,7 +378,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
                   showToast("Vote removed!", "#e67e22");
                 } else {
-                  // 🔁 Change vote (if voted before)
+                  // Change vote (if voted before)
                   if (prevVote !== undefined) {
                     votes[prevVote] = Math.max(0, votes[prevVote] - 1);
                   }
@@ -394,20 +394,20 @@ window.addEventListener("DOMContentLoaded", () => {
                   showToast(prevVote !== undefined ? "Vote changed!" : "Vote recorded!", "#3498db");
                 }
 
-                loadComments(); // 🔁 refresh UI
+                loadComments(); // refresh UI
               });
             });
 
 
             // Reply button toggle
             div.querySelector(".reply-btn").addEventListener("click", () => {
-              const box = div.querySelector(`#reply-${commentId}`);
+              const box = div.querySelector(#reply-${commentId});
               box.style.display = box.style.display === "none" ? "block" : "none";
             });
 
             // Reply post
-            div.querySelector(`#reply-${commentId} button`).addEventListener("click", async () => {
-              const replyText = div.querySelector(`#reply-${commentId} textarea`).value.trim();
+            div.querySelector(#reply-${commentId} button).addEventListener("click", async () => {
+              const replyText = div.querySelector(#reply-${commentId} textarea).value.trim();
               if (!replyText) return;
               const replyRef = doc(collection(doc(mmovieRef, "comments", commentId), "replies"));
               await setDoc(replyRef, {
@@ -418,28 +418,28 @@ window.addEventListener("DOMContentLoaded", () => {
 
               showToast("Reply posted!", "gray");
 
-              const replyContainer = div.querySelector(`#replies-${commentId}`);
+              const replyContainer = div.querySelector(#replies-${commentId});
               const toggleBtn = div.querySelector(".toggle-replies-btn");
 
-              // ✅ Refresh replies
+              // Refresh replies
               await loadReplies(commentId, replyContainer, toggleBtn);
               replyContainer.style.display = "block";
 
               // Reset input
-              div.querySelector(`#reply-${commentId} textarea`).value = "";
-              div.querySelector(`#reply-${commentId}`).style.display = "block";
+              div.querySelector(#reply-${commentId} textarea).value = "";
+              div.querySelector(#reply-${commentId}).style.display = "block";
 
             });
 
             // Toggle showing replies
             div.querySelector(".toggle-replies-btn").addEventListener("click", async (e) => {
-              const replyContainer = div.querySelector(`#replies-${commentId}`);
+              const replyContainer = div.querySelector(#replies-${commentId});
               const toggleBtn = e.target;
 
               if (replyContainer.style.display === "block") {
                 replyContainer.style.display = "none";
                 const count = Array.from(replyContainer.children).filter(child => child.tagName === "DIV").length;
-                toggleBtn.textContent = `💬 View ${count} repl${count === 1 ? 'y' : 'ies'}`;
+                toggleBtn.textContent = 💬 View ${count} repl${count === 1 ? 'y' : 'ies'};
               } else {
                 // Call reusable reply loader
                 await loadReplies(commentId, replyContainer, toggleBtn);
@@ -459,7 +459,7 @@ window.addEventListener("DOMContentLoaded", () => {
           );
 
           if (repliesSnap.empty) {
-            replyContainer.innerHTML = `<p style="font-size:14px;color:#777;">No replies yet.</p>`;
+            replyContainer.innerHTML = <p style="font-size:14px;color:#777;">No replies yet.</p>;
           } else {
             repliesSnap.forEach((replyDoc) => {
               const reply = replyDoc.data();
@@ -475,7 +475,7 @@ window.addEventListener("DOMContentLoaded", () => {
           }
 
           const count = Array.from(replyContainer.children).filter(child => child.tagName === "DIV").length;
-          toggleBtn.textContent = `💬 Hide ${count} repl${count === 1 ? 'y' : 'ies'}`;
+          toggleBtn.textContent = 💬 Hide ${count} repl${count === 1 ? 'y' : 'ies'};
         }
         loadComments();
 
@@ -490,7 +490,7 @@ window.addEventListener("DOMContentLoaded", () => {
           const input = document.createElement("input");
           input.type = "text";
           input.classList.add("poll-option");
-          input.placeholder = `Option ${pollOptionCount}`;
+          input.placeholder = Option ${pollOptionCount};
           document.getElementById("poll-ui").insertBefore(input, document.getElementById("add-poll-option"));
         };
       });
@@ -501,7 +501,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".close-btn")?.addEventListener("click", closePopup);
 
     function resetPollInputs() {
-        pollOptionCount = 2; // 👈 reset count when popup is closed
+        pollOptionCount = 2; // reset count when popup is closed
         const pollUI = document.getElementById("poll-ui");
 
         // Remove all except first 2
@@ -511,7 +511,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // Reset first two inputs
         allInputs.slice(0, 2).forEach((input, i) => {
             input.value = "";
-            input.placeholder = `Option ${i + 1}`;
+            input.placeholder = Option ${i + 1};
         });
 
         pollUI.style.display = "none"; // hide poll UI

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | Netflix Clone</title>
+    <link rel="stylesheet" href="2auth.css" />
+    <link rel="icon" type="image/png" href="Images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <!-- Pixel Background Grid -->
+    <div class="pixel-grid" id="pixelGrid"></div>
+    <div class="glow-scan"></div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Logo" class="logo" />
+        <div class="navbar-actions">
+            <select class="language-select">
+                <option>English</option>
+                <option>हिन्दी</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Sign-Up Form -->
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <form class="signup-form" id="signup-form">
+            <input type="text" id="fullName" placeholder="Full Name" required />
+            <input type="email" id="regEmail" placeholder="Email" required />
+
+            <div class="password-wrapper">
+                <input type="password" id="regPassword" placeholder="Password" required />
+                <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('regPassword', this)"></i>
+            </div>
+
+            <div class="password-wrapper">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+                <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('confirmPassword', this)"></i>
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
+        <p>Already have an account? <a href="3sign_In.html">Sign in here.</a></p>
+    </div>
+
+    <!--------------- Scripts --------------->
+    <!-- Toastify JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="firebase-auth.js"></script>
+    <!-- eye button for password -->
+    <script>
+        function togglePassword(id, icon) {
+            const input = document.getElementById(id);
+            const isPassword = input.type === "password";
+            input.type = isPassword ? "text" : "password";
+            icon.classList.toggle("fa-eye");
+            icon.classList.toggle("fa-eye-slash");
+        }
+    </script>
+</body>
+
+</html>
