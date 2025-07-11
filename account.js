@@ -33,6 +33,11 @@ const editIcon = document.getElementById("editIcon");
 const profileModal = document.getElementById("profileModal");
 const mainProfilePic = document.getElementById("mainProfilePic");
 
+if (localStorage.getItem("skipAnimation") === "true") {
+  document.body.classList.add("no-animation");
+  localStorage.removeItem("skipAnimation");
+}
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const userRef = doc(db, "users", user.uid);
@@ -240,7 +245,7 @@ function closeModalSafely() {
       });
 
       await updateDoc(userRef, updatedData);
-
+      
       Toastify({
         text: "Changes saved!",
         duration: 3000,
@@ -248,10 +253,12 @@ function closeModalSafely() {
         position: "left",
         backgroundColor: "#00b09b",
       }).showToast();
-
       confirmPopup.style.display = "none";
       moreInfoModal.style.display = "none";
       modalOverlay.style.display = "none";
+      localStorage.setItem("skipAnimation", "true");
+      location.reload();
+
     };
 
     document.getElementById("confirmSaveNo").onclick = () => {
@@ -281,6 +288,9 @@ saveMoreInfo.addEventListener("click", async () => {
     position: "left",
     backgroundColor: "#00b09b",
   }).showToast();
+  localStorage.setItem("skipAnimation", "true");
+  location.reload();
+
 
   moreInfoModal.style.display = "none";
   modalOverlay.style.display = "none";
