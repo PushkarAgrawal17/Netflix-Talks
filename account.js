@@ -157,74 +157,15 @@ onAuthStateChanged(auth, (user) => {
     window.location.href = "3sign_In.html";
   }
 });
-///////////////////////////////////TELL US MORE LOGIC////////////////////
+
+
+// ================= TELL US MORE LOGIC =================
+
 const moreInfoBtn = document.getElementById("moreInfoBtn");
 const moreInfoModal = document.getElementById("moreInfoModal");
 const modalOverlay = document.getElementById("modalOverlay");
 const closeModalBtn = document.getElementById("closeModalBtn");
 const saveMoreInfo = document.getElementById("saveMoreInfo");
-
-const inputs = {
-  pronouns: document.getElementById("pronouns"),
-  bio: document.getElementById("bio"),
-  instagram: document.getElementById("insta"),
-  facebook: document.getElementById("facebook"),
-  otherLink: document.getElementById("otherLink"),
-};
-
-let userRef;
-
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return (window.location.href = "3sign_In.html");
-
-  userRef = doc(db, "users", user.uid);
-
-  const docSnap = await getDoc(userRef);
-  const data = docSnap.data() || {};
-
-  usernameInput.value = data.fullName || "Netflix User";
-  emailInput.value = data.email || user.email;
-
-  // Open modal with pre-filled values
-  moreInfoBtn.addEventListener("click", () => {
-    for (let key in inputs) {
-      inputs[key].value = data[key] || "";
-    }
-    moreInfoModal.style.display = "block";
-    modalOverlay.style.display = "block";
-  });
-
-  // Close modal logic
-  const closeModal = () => {
-    moreInfoModal.style.display = "none";
-    modalOverlay.style.display = "none";
-  };
-  closeModalBtn.addEventListener("click", closeModal);
-  modalOverlay.addEventListener("click", closeModal);
-
-  // Save changes
-  saveMoreInfo.addEventListener("click", async () => {
-    const updatedData = {};
-    for (let key in inputs) {
-      updatedData[key] = inputs[key].value.trim();
-    }
-
-    try {
-      await updateDoc(userRef, updatedData);
-    } catch (err) {
-      await setDoc(userRef, updatedData, { merge: true });
-    }
-
-    Toastify({
-      text: "Info saved!",
-      duration: 3000,
-      gravity: "bottom",
-      position: "left",
-      backgroundColor: "#00b09b",
-    }).showToast();
-    closeModal();
-  });
-});
 
 const fields = {
   pronouns: document.getElementById("pronouns"),
@@ -234,41 +175,37 @@ const fields = {
   otherLink: document.getElementById("otherLink"),
 };
 
-const labels = {
-  pronouns: "Pronouns",
-  bio: "Bio",
-  instagram: "Instagram Handle",
-  facebook: "Facebook Handle",
-  otherLink: "Other Link",
-};
+let userRef;
+let originalData = {};
 
-let originalData = {}; // for detecting changes
-
-function floatLabelOnInput(input) {
-  input.addEventListener("input", () => {
-    if (input.value.trim() !== "") {
+function floatifyInput(input) {
+  const check = () => {
+    if (input.value.trim()) {
       input.classList.add("filled");
     } else {
       input.classList.remove("filled");
     }
+  };
+  input.addEventListener("input", check);
+  check(); // Initial state
+}
+
+Object.values(fields).forEach(floatifyInput);
+
+function fillFields(data = {}) {
+  Object.entries(fields).forEach(([key, input]) => {
+    input.value = data[key] || "";
+    input.classList.toggle("filled", !!data[key]);
   });
 }
 
-function showFields(data = {}) {
-  Object.keys(fields).forEach((key) => {
-    fields[key].value = data[key] || "";
-    fields[key].classList.toggle("filled", !!data[key]);
-  });
-}
-
-// Handle unsaved changes detection
 function hasUnsavedChanges() {
   return Object.keys(fields).some(
     (key) => fields[key].value.trim() !== (originalData[key] || "")
   );
 }
 
-// Save popup elements
+// Create confirmation popup for unsaved changes
 const confirmPopup = document.createElement("div");
 confirmPopup.innerHTML = `
   <div style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -283,36 +220,28 @@ confirmPopup.style.display = "none";
 confirmPopup.style.zIndex = 1001;
 document.body.appendChild(confirmPopup);
 
-// Show Tell Us More modal
-moreInfoBtn.addEventListener("click", async () => {
-  const docSnap = await getDoc(userRef);
-  const data = docSnap.data() || {};
-  originalData = {};
-
+function openModalWithData(data = {}) {
   Object.keys(fields).forEach((key) => {
     originalData[key] = data[key] || "";
   });
 
-  showFields(originalData);
+  fillFields(originalData);
   moreInfoModal.style.display = "block";
   modalOverlay.style.display = "block";
-});
+}
 
-// Float labels on interaction
-Object.values(fields).forEach((input) => floatLabelOnInput(input));
-
-// Handle modal close with unsaved changes
 function closeModalSafely() {
   if (hasUnsavedChanges()) {
     confirmPopup.style.display = "block";
 
     document.getElementById("confirmSaveYes").onclick = async () => {
       const updatedData = {};
-      Object.keys(fields).forEach((key) => {
-        updatedData[key] = fields[key].value.trim();
+      Object.entries(fields).forEach(([key, input]) => {
+        updatedData[key] = input.value.trim();
       });
 
       await updateDoc(userRef, updatedData);
+
       Toastify({
         text: "Changes saved!",
         duration: 3000,
@@ -322,14 +251,14 @@ function closeModalSafely() {
       }).showToast();
 
       confirmPopup.style.display = "none";
-      modalOverlay.style.display = "none";
       moreInfoModal.style.display = "none";
+      modalOverlay.style.display = "none";
     };
 
     document.getElementById("confirmSaveNo").onclick = () => {
       confirmPopup.style.display = "none";
-      modalOverlay.style.display = "none";
       moreInfoModal.style.display = "none";
+      modalOverlay.style.display = "none";
     };
   } else {
     moreInfoModal.style.display = "none";
@@ -337,17 +266,15 @@ function closeModalSafely() {
   }
 }
 
-closeModalBtn.addEventListener("click", closeModalSafely);
-modalOverlay.addEventListener("click", closeModalSafely);
-
-// Save button
+// Save button logic
 saveMoreInfo.addEventListener("click", async () => {
   const updatedData = {};
-  Object.keys(fields).forEach((key) => {
-    updatedData[key] = fields[key].value.trim();
+  Object.entries(fields).forEach(([key, input]) => {
+    updatedData[key] = input.value.trim();
   });
 
   await updateDoc(userRef, updatedData);
+
   Toastify({
     text: "Changes saved!",
     duration: 3000,
@@ -359,4 +286,23 @@ saveMoreInfo.addEventListener("click", async () => {
   moreInfoModal.style.display = "none";
   modalOverlay.style.display = "none";
   confirmPopup.style.display = "none";
+});
+
+// Modal close events
+closeModalBtn.addEventListener("click", closeModalSafely);
+modalOverlay.addEventListener("click", closeModalSafely);
+
+// Firebase: Get & Show Info
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return (window.location.href = "3sign_In.html");
+
+  userRef = doc(db, "users", user.uid);
+
+  const docSnap = await getDoc(userRef);
+  const data = docSnap.data() || {};
+
+  usernameInput.value = data.fullName || "Netflix User";
+  emailInput.value = data.email || user.email;
+
+  moreInfoBtn.addEventListener("click", () => openModalWithData(data));
 });
