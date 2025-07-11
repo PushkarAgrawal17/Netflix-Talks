@@ -414,12 +414,10 @@ a:hover {
 
 /* GHOST MODE */
 .ghost-toggle-wrapper {
-  position: absolute;
-  top: 20px;
-  right: 25px;
+  margin-top: 10px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  z-index: 10;
 }
 
 .ghost-label {
