@@ -1,245 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account | Netflix Clone</title>
-    <link rel="icon" type="image/png" href="./Images/favicon.png" />
-
+    <title>Account | Netflix Talks</title>
+    <link rel="icon" href="./Images/favicon.png" />
     <link rel="stylesheet" href="account.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Toastify CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-
-</head>
-
-<body>
-    <!-- Navbar -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+  </head>
+  <body>
     <nav class="account-navbar">
-        <div class="nav-left">
-            <a href="4index.html"><i class="fas fa-arrow-left back-btn" id="goBack"></i></a>
-        </div>
-        <div class="nav-center">
-            <img src="Images/Netflix-Logo2.png" alt="Netflix Logo" class="nav-logo" />
-        </div>
-
-        <!-- Keep right empty to center align via absolute -->
-        <div class="nav-right"></div>
+      <div class="nav-left">
+        <a href="4index.html"
+          ><i class="fas fa-arrow-left back-btn" id="goBack"></i
+        ></a>
+      </div>
+      <div class="nav-center">
+        <img
+          src="Images/Netflix-Talks-Photoroom.png"
+          alt="Netflix Logo"
+          class="nav-logo"
+        />
+      </div>
+      <div class="ghost-toggle-wrapper">
+        <label class="ghost-switch">
+          <input type="checkbox" id="ghostToggle" />
+          <span class="slider round"></span>
+        </label>
+        <span class="ghost-label">Ghost Mode</span>
+      </div>
     </nav>
 
-    <!-- Main Profile Section -->
     <main class="account-container">
-        <div class="profile-pic-wrapper">
-            <img src="Images/profileIcons/1.jpg" alt="Profile" class="profile-pic" id="mainProfilePic" />
-            <i class="fa-solid fa-pen-to-square edit-icon" id="editIcon"></i>
+      <div class="profile-pic-wrapper">
+        <img
+          src="Images/profileIcons/1.jpg"
+          alt="Profile"
+          class="profile-pic"
+          id="mainProfilePic"
+        />
+        <i class="fa-solid fa-pen-to-square edit-icon" id="editIcon"></i>
+      </div>
+
+      <div class="profile-modal" id="profileModal">
+        <h3>Choose a Profile</h3>
+        <div class="profile-options">
+          <img src="Images/profileIcons/1.jpg" class="option-pic" />
+          <img src="Images/profileIcons/2.jpg" class="option-pic" />
+          <img src="Images/profileIcons/3.jpg" class="option-pic" />
+          <img src="Images/profileIcons/4.jpg" class="option-pic" />
         </div>
+      </div>
 
-        <!-- Profile Pic Options -->
-        <div class="profile-modal" id="profileModal">
-            <h3>Choose a Profile</h3>
-            <div class="profile-options">
-                <img src="Images/profileIcons/1.jpg" class="option-pic" />
-                <img src="Images/profileIcons/2.jpg" class="option-pic" />
-                <img src="Images/profileIcons/3.jpg" class="option-pic" />
-                <img src="Images/profileIcons/4.jpg" class="option-pic" />
-            </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <div style="position: relative">
+          <input type="text" id="username" readonly />
+          <i
+            class="fa-solid fa-pen-to-square"
+            id="editUsername"
+            style="
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              cursor: pointer;
+            "
+          ></i>
         </div>
+      </div>
 
-        <!-- Username -->
-        <div class="form-group">
-            <label for="username">Username</label>
-            <div style="position: relative;">
-                <input type="text" id="username" readonly />
-                <i class="fa-solid fa-pen-to-square" id="editUsername"
-                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
-            </div>
-        </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" readonly />
+      </div>
 
-        <!-- Email -->
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" readonly />
-        </div>
-
-
-        <!-- Change Password Button -->
-        <button class="signout-btn" id="changePasswordBtn">
-            <i class="fas fa-key"></i> Change Password
-        </button>
-
-        <!-- Sign Out -->
-        <button class="signout-btn" id="signOutBtn">
-            <i class="fas fa-sign-out-alt"></i> <a href="3sign_In.html">Sign Out</a>
-        </button>
+      <button class="signout-btn" id="moreInfoBtn">
+        <i class="fas fa-user-edit"></i> Tell Us More
+      </button>
+      <button class="signout-btn" id="changePasswordBtn">
+        <i class="fas fa-key"></i> Change Password
+      </button>
+      <button class="signout-btn" id="signOutBtn">
+        <i class="fas fa-sign-out-alt"></i> <a href="3sign_In.html">Sign Out</a>
+      </button>
     </main>
 
-    <!-- Toastify JS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <div id="modalOverlay"></div>
 
-    <!-- <script src="account.js"></script> -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import {
-            getAuth,
-            onAuthStateChanged,
-            sendPasswordResetEmail,
-            signOut,
-        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-        import {
-            getFirestore,
-            doc,
-            getDoc,
-            updateDoc,
-        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+    <div id="moreInfoModal">
+      <span class="closeModal" id="closeModalBtn">&times;</span>
+      <h3>Edit More Info</h3>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyAmyFBiAahRlD8j15Am3UclG1-YJOmS5yQ",
-            authDomain: "netflix-web-project.firebaseapp.com",
-            projectId: "netflix-web-project",
-            storageBucket: "netflix-web-project.appspot.com",
-            messagingSenderId: "616557096999",
-            appId: "1:616557096999:web:027b9189b6f5b283115e02",
-        };
+      <div class="floating-input">
+        <input type="text" id="pronouns" placeholder=" " />
+        <label for="pronouns">Pronouns</label>
+      </div>
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+      <div class="floating-input">
+        <input type="text" id="bio" placeholder=" " />
+        <label for="bio">Bio</label>
+      </div>
 
-        const usernameInput = document.getElementById("username");
-        const emailInput = document.getElementById("email");
-        const editUsernameIcon = document.getElementById("editUsername");
-        const signOutBtn = document.getElementById("signOutBtn");
-        const editIcon = document.getElementById("editIcon");
-        const profileModal = document.getElementById("profileModal");
-        const mainProfilePic = document.getElementById("mainProfilePic");
+      <div class="floating-input">
+        <input type="text" id="insta" placeholder=" " />
+        <label for="insta">Instagram Handle</label>
+      </div>
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const userRef = doc(db, "users", user.uid);
+      <div class="floating-input">
+        <input type="text" id="facebook" placeholder=" " />
+        <label for="facebook">Facebook Handle</label>
+      </div>
 
-                // Fetch existing data
-                getDoc(userRef).then((docSnap) => {
-                    const data = docSnap.data();
-                    usernameInput.value = data.fullName || "Netflix User";
-                    emailInput.value = data.email || user.email;
+      <div class="floating-input">
+        <input type="text" id="otherLink" placeholder=" " />
+        <label for="otherLink">Other Link</label>
+      </div>
 
-                    // Set profilePic
-                    if (data.profilePic) {
-                        mainProfilePic.src = data.profilePic;
-                    } else {
-                        const defaultPic = "Images/profileIcons/1.jpg";
-                        mainProfilePic.src = defaultPic;
-                        updateDoc(userRef, { profilePic: defaultPic });
-                    }
-                });
+      <button id="saveMoreInfo">Save</button>
+    </div>
 
-                // Username edit
-                editUsernameIcon.addEventListener("click", () => {
-                    usernameInput.removeAttribute("readonly");
-                    usernameInput.focus();
-
-                    usernameInput.addEventListener(
-                        "blur",
-                        async () => {
-                            const newName = usernameInput.value;
-                            await updateDoc(userRef, { fullName: newName });
-                            usernameInput.setAttribute("readonly", true);
-                            Toastify({
-                                text: "Username updated successfully!",
-                                duration: 3000,
-                                gravity: "bottom",
-                                position: "left",
-                                backgroundColor: "#00b09b",
-                            }).showToast();
-                        },
-                        { once: true }
-                    );
-                });
-
-                // Change Password
-                document
-                    .getElementById("changePasswordBtn")
-                    .addEventListener("click", async () => {
-                        try {
-                            await sendPasswordResetEmail(auth, user.email);
-                            Toastify({
-                                text: "Password reset email sent.",
-                                duration: 3000,
-                                gravity: "bottom",
-                                position: "left",
-                                backgroundColor: "#00b09b",
-                            }).showToast();
-                        } catch (error) {
-                            Toastify({
-                                text: "Error: " + error.message,
-                                duration: 3000,
-                                gravity: "bottom",
-                                position: "left",
-                                backgroundColor: "#ff4d4d",
-                            }).showToast();
-                        }
-                    });
-
-                // Sign Out
-                signOutBtn.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    signOut(auth).then(() => {
-                        window.location.href = "3sign_In.html";
-                    });
-                });
-
-                // Pic selection + Firestore update
-                document.querySelectorAll(".option-pic").forEach((pic) => {
-                    pic.addEventListener("click", async () => {
-                        const selectedPic = pic.src.substring(pic.src.indexOf("Images/"));
-                        mainProfilePic.src = selectedPic;
-
-                        try {
-                            await updateDoc(userRef, { profilePic: selectedPic });
-                            Toastify({
-                                text: "Profile picture updated!",
-                                duration: 3000,
-                                gravity: "bottom",
-                                position: "left",
-                                backgroundColor: "#00b09b",
-                            }).showToast();
-                        } catch (err) {
-                            Toastify({
-                                text: "Error updating pic: " + err.message,
-                                duration: 3000,
-                                gravity: "bottom",
-                                position: "left",
-                                backgroundColor: "#ff4d4d",
-                            }).showToast();
-                        }
-
-                        profileModal.style.display = "none";
-                    });
-                });
-
-                // Toggle modal
-                editIcon.addEventListener("click", () => {
-                    profileModal.style.display =
-                        profileModal.style.display === "block" ? "none" : "block";
-                });
-
-                // Hide modal on outside click
-                window.addEventListener("click", (e) => {
-                    if (
-                        e.target !== profileModal &&
-                        !profileModal.contains(e.target) &&
-                        e.target !== editIcon
-                    ) {
-                        profileModal.style.display = "none";
-                    }
-                });
-            } else {
-                window.location.href = "3sign_In.html";
-            }
-        });
-    </script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="account.js"></script>
+  </body>
 </html>
