@@ -158,7 +158,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-
 // ================= TELL US MORE LOGIC =================
 
 const moreInfoBtn = document.getElementById("moreInfoBtn");
