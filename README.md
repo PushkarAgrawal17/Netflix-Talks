@@ -1,4 +1,4 @@
-# Netflix Clone 🎬
+# Netflix Talks 🎬
 
 A responsive front-end clone of Netflix built using **HTML**, **CSS**, and **JavaScript**, with **Firebase** used for authentication and data storage.
 
