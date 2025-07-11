@@ -58,6 +58,38 @@ onAuthStateChanged(auth, (user) => {
       }
     });
 
+    const ghostToggle = document.getElementById("ghostToggle");
+
+getDoc(userRef).then((docSnap) => {
+  const data = docSnap.data();
+
+  if (data?.anonymity) {
+    ghostToggle.checked = true;
+  }
+
+  ghostToggle.addEventListener("change", async () => {
+    try {
+      await updateDoc(userRef, { anonymity: ghostToggle.checked });
+
+      Toastify({
+        text: `Ghost Mode ${ghostToggle.checked ? "enabled 👻" : "disabled 😶"}`,
+        duration: 3000,
+        gravity: "bottom",
+        position: "left",
+        backgroundColor: ghostToggle.checked ? "#6e00ff" : "#444",
+      }).showToast();
+    } catch (error) {
+      console.error("Failed to update ghost mode:", error);
+      Toastify({
+        text: "Failed to update ghost mode!",
+        duration: 3000,
+        gravity: "bottom",
+        position: "left",
+        backgroundColor: "#ff4d4d",
+      }).showToast();
+    }
+  });
+});
     // Username edit
     editUsernameIcon.addEventListener("click", () => {
       usernameInput.removeAttribute("readonly");
