@@ -47,7 +47,7 @@ onAuthStateChanged(auth, (user) => {
         const messages = snapshot.docs.reverse();
         await displayMessages(messages);
 
-        // 🧹 Auto-delete old messages beyond the last 100
+        // Auto-delete old messages beyond the last 100
         const oldestVisible = messages[0]?.data()?.timestamp;
         if (oldestVisible) {
             const oldMessagesQuery = query(
@@ -127,11 +127,12 @@ onAuthStateChanged(auth, (user) => {
     });
 
     document.addEventListener("click", (event) => {
-        if (
-            emojiPicker.style.display === "block" &&
-            !emojiPicker.contains(event.target) &&
-            event.target !== emojiButton
-        ) {
+        const clickedInsideButton = event.target.closest("#emoji-button");
+        const clickedInsidePicker = emojiPicker.contains(event.target);
+
+        if (emojiPicker.style.display === "block"
+            && !clickedInsideButton
+            && !clickedInsidePicker) {
             emojiPicker.style.display = "none";
         }
     });
