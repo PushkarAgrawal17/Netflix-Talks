@@ -19,11 +19,12 @@ body {
     z-index: 10;
 }
 
-.nav-left i,
-.nav-right i {
+.nav-left i {
     font-size: 25px;
     cursor: pointer;
     color: white;
+    position: absolute;
+    top: auto;
 }
 
 .nav-center {
@@ -32,8 +33,17 @@ body {
     top: 10px;
 }
 
-.nav-center .nav-logo {
+.nav-center img {
+    max-width: 400px;
     height: 100px;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(1px 1px white);
+    transition: transform 0.3s ease;
+}
+
+.nav-center img:hover {
+    transform: scale(1.05);
 }
 
 /* Container */
@@ -272,8 +282,7 @@ a:hover {
     }
 }
 
-/* ================== Tell Us More Modal ================== */
-
+/* ================== Tell Us More Button ================== */
 #modalOverlay {
     position: fixed;
     top: 0;
