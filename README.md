@@ -1,53 +1,87 @@
-# Netflix Talks 🎬
+# **Netflix Talks** 🎬
 
-A responsive front-end clone of Netflix built using **HTML**, **CSS**, and **JavaScript**, with **Firebase** used for authentication and data storage.
+An **interactive social platform** for movie and TV show fans to connect, chat, share opinions, and have fun — all in a modern Netflix-style interface. built using **HTML**, **CSS**, and **JavaScript**, with **Firebase** used for authentication and data storage.
 
-## 🚀 Features
 
-- User signup & login using Firebase Authentication
-- Home screen UI similar to Netflix
-- Responsive layout for mobile & desktop
-- Movie banners and image sliders
-- Firebase Firestore integration for storing user data
+## 🚀 **Features**
 
-## 🛠️ Tech Stack
+- 🔐 Secure user signup & login via Firebase Authentication
+- 📝 Discussion panel and polls
+- 💬 Global Chat: Talk with users around the world
+- 📃 Personalised Watchlist stored in Firestore
+- 🖼️ Latest movie data from TMDB API
+- 📱 Fully responsive across devices
 
-- HTML
-- CSS
-- JavaScript
-- Firebase (Auth + Firestore)
 
-## 📁 Folder Structure  _(Might be updated in the future)_
+## 🛠️ **Tech Stack**
 
-   ```/Netflix-Clone
-   │
-   ├── index.html
-   ├── login.html
-   ├── signup.html
-   ├── style.css
-   ├── auth.css
-   ├── script.js
-   └── README.md
+- HTML, CSS, JavaScript (Vanilla)
+- Firebase (Authentication + Firestore)
+- TMDB API (for movie metadata)
+- Toastify.js (for notifications)
+
+
+## 📁 **Folder Structure  _(Might be updated in the future)_**
+
+```bash
+/Netflix-Talks
+│
+├── getStarted.html        # Initial email input
+├── sign_In.html           # Sign-in page
+├── sign_Up.html           # Sign-up page
+├── index.html             # Main homepage (dashboard)
+├── myList.html            # Personalised list
+├── globalChat.html        # Public chatroom
+├── account.html           # Personalised account page
+├── getStarted.css         # GetStarted Page styles
+├── auth.css               # Signup & signin pages styles
+├── index.css              # Homepage styles
+├── popup.css              # Movie popup styles
+├── search.css             # Search popup styles
+├── myList.css             # MyList page styles
+├── globalChat.css         # Chatroom styles
+├── account.css            # Account page styles
+├── firebase-auth.js       # JS logic for authentication
+├── index.js               # JS logic for homepage
+├── search.js              # JS logic for Search popup styles
+├── myList.js              # JS logic for MyList page
+├── globalChat.js          # Firebase-powered chat logic
+├── config.js              # API keys (excluded from repo)
+├── LICENSE
+└── README.md
 ```
 
 
-## 🧰 Setup Instructions
+## 🧰 **Setup Instructions**
 
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/PushkarAgrawal17/Netflix-Clone.git
    ```
-2. Create a `config.js` file in the root folder.
 
-3. Paste your TMDB API key like this:
+2. **Set up Firebase from the Firebase Console:**
+   - Enable Authentication (Email/Password)
+   - Create a Firestore database
+
+3. **Create a `config.js` file in the root folder with your TMDB API key and firebase configurations:**
    ```js
-   const apiKey = "your_actual_api_key_here";
+   export const apiKey = "YOUR_TMDB_API_KEY";
+
+   export const firebaseConfig = {
+      apiKey: "YOUR_FIREBASE_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "...",
+      appId: "..."
+   };
    ```
-4. Open index.html in a browser.
 
-5. Connect Firebase Auth & Firestore from the Firebase Console.
+4. **Open getStarted.html in a browser.**
 
-✅ That’s it! You're ready to go.
+> ℹ️ **All project files are plain HTML/CSS/JS, so you don’t need any build tools.**
+
+✅ **That’s it! You're ready to go.**
 
 
 ## 🧑‍💻 Collaborators
@@ -62,4 +96,4 @@ A responsive front-end clone of Netflix built using **HTML**, **CSS**, and **Jav
 
 This project is licensed under the [MIT License](./LICENSE).
 
-> ⚠️ This Netflix clone is built purely for educational purposes and is **not affiliated with or endorsed by Netflix** in any way.
+> ⚠️ Netflix Talks is built purely for learning and community engagement purposes. It is **not affiliated with or endorsed by Netflix** in any way.
