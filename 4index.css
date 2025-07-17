@@ -40,33 +40,6 @@ body {
     transform: scale(1.05);
 }
 
-/* Links\Tabs in the center */
-.nav-links ul {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-}
-
-.nav-links li {
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    filter: drop-shadow(1px 1px 5px white);
-    transition: color 0.3s, transform 0.3s ease;
-}
-
-.nav-links li:hover {
-    color: rgb(221, 221, 221);
-    transform: scale(1.1);
-}
-
-.nav-links a {
-    color: inherit;
-    text-decoration: none;
-}
-
-
 /* Icons on the right */
 .nav-icons {
     display: flex;
@@ -77,10 +50,26 @@ body {
     filter: drop-shadow(0 0 5px white);
 }
 
+.nav-icons #openSearchBtn {
+    width: 32px;
+    height: auto;
+    margin-top: 10px;
+    margin-right: 10px;
+    transform: scaleX(-1);
+    cursor: pointer;
+}
+
 .nav-icons #global-chat-icon {
     width: 32px;
     height: auto;
     margin-top: 10px;
+    margin-right: 10px;
+}
+
+.nav-icons #mylist-icon {
+    width: 32px;
+    height: auto;
+    margin-top: 9px;
     margin-right: 10px;
 }
 

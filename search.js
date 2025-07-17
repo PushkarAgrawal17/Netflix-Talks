@@ -187,7 +187,7 @@ voiceBtn?.addEventListener("click", () => {
     recognition.onerror = (e) => alert("Voice search error: " + e.error);
 });
 
-// --- Back Button ---
+// Back Button
 const backBtn = document.getElementById("backBtn");
 if (backBtn) {
     backBtn.addEventListener("click", () => {
@@ -214,7 +214,7 @@ if (genreToggleBtn && searchBarContainer && voiceBtn && genreDropdown) {
 }
 
 
-//Working Genre button
+// Working Genre button
 document.getElementById("genreToggleBtn").addEventListener("click", () => {
     const popupContent = document.querySelector(".popup-content");
     popupContent.classList.add("genre-active");
