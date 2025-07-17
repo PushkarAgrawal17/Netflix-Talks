@@ -829,7 +829,7 @@ document.querySelectorAll("#profileDropdown li").forEach((item) => {
     });
 });
 
-//sign-out button fixed
+//sign-out button
 const signOutBtn = document.getElementById("signOut");
 
 onAuthStateChanged(auth, (user) => {
