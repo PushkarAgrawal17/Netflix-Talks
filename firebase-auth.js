@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 import { fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+import { getFirestore, doc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 import { firebaseConfig } from "./config.js";
 
 // Initialize Firebase
@@ -19,10 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", register);
 });
 
-window.register = function (event) {
-    event.preventDefault(); // prevent form reload
+window.register = async function (event) {
+    event.preventDefault(); // Stop form submission
 
-    const fullName = document.getElementById("fullName").value.trim();
+    const fullName = document.getElementById("fullName").value.trim();  // Username (must be unique)
     const email = document.getElementById("regEmail").value.trim();
     const password = document.getElementById("regPassword").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
@@ -38,30 +38,51 @@ window.register = function (event) {
         return;
     }
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-            const user = userCredential.user;
+    try {
+        // STEP 1️⃣: Check if username already exists in Firestore
+        const q = query(
+            collection(db, "users"),
+            where("fullName", "==", fullName)
+        );
 
-            // Store fullName in Firestore
-            await setDoc(doc(db, "users", user.uid), {
-                fullName: fullName,
-                email: email,
-                createdAt: new Date()
-            });
-
-            alert("User registered successfully!");
-            window.location.href = `4index.html`;
-        })
-        .catch((error) => {
+        const querySnapshot = await getDocs(q);
+        console.log(querySnapshot);
+        if (!querySnapshot.empty) {
             Toastify({
-                text: `Error: ${error.message}`,
+                text: "Username already taken. Try something else.",
                 duration: 5000,
                 gravity: "bottom",
                 position: "left",
                 backgroundColor: "#ff4d4d",
             }).showToast();
+            return;  // Stop registration
+        }
+
+        // STEP 2️⃣: If username is unique, create user in Firebase Auth
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // STEP 3️⃣: Save user data in Firestore
+        await setDoc(doc(db, "users", user.uid), {
+            fullName: fullName,
+            email: email,
+            createdAt: new Date()
         });
-};
+
+        alert("User registered successfully!");
+        window.location.href = `4index.html`;
+
+    } catch (error) {
+        Toastify({
+            text: `Error: ${error.message}`,
+            duration: 5000,
+            gravity: "bottom",
+            position: "left",
+            backgroundColor: "#ff4d4d",
+        }).showToast();
+    }
+}
+
 
 // Login function
 window.login = function () {
