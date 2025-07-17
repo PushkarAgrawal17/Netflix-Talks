@@ -7,6 +7,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import {
     getFirestore,
+    collection,
+    query,
+    where,
+    getDocs,
     doc,
     getDoc,
     updateDoc,
@@ -89,11 +93,51 @@ onAuthStateChanged(auth, (user) => {
             usernameInput.removeAttribute("readonly");
             usernameInput.focus();
 
+            const originalName = usernameInput.value.trim();  // ✅ Store the current username here
+
             usernameInput.addEventListener(
                 "blur",
                 async () => {
-                    const newName = usernameInput.value;
+                    const newName = usernameInput.value.trim();
+
+                    if (!newName) {
+                        Toastify({
+                            text: "Username cannot be empty.",
+                            duration: 3000,
+                            gravity: "bottom",
+                            position: "left",
+                            backgroundColor: "#ff4d4d",
+                        }).showToast();
+                        usernameInput.value = originalName; // Optional
+                        usernameInput.setAttribute("readonly", true);
+                        return;
+                    }
+
+                    // 🔍 STEP 1: Check uniqueness before updating
+                    const q = query(
+                        collection(db, "users"),
+                        where("fullName", "==", newName)
+                    );
+
+                    const querySnapshot = await getDocs(q);
+
+                    // If username already exists and it's not user's current name
+                    if (!querySnapshot.empty && newName !== originalName) {
+                        Toastify({
+                            text: "Username already taken! Choose another.",
+                            duration: 3000,
+                            gravity: "bottom",
+                            position: "left",
+                            backgroundColor: "#ff4d4d",
+                        }).showToast();
+                        usernameInput.value = originalName;  // Revert
+                        usernameInput.setAttribute("readonly", true);
+                        return;
+                    }
+
+                    // ✅ STEP 2: Update in Firestore (safe)
                     await updateDoc(userRef, { fullName: newName });
+
                     usernameInput.setAttribute("readonly", true);
                     Toastify({
                         text: "Username updated successfully!",
