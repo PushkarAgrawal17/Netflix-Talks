@@ -60,12 +60,16 @@
 
             <div class="poster-wrapper">
                 <img class="popup-movie-img" alt="Movie Poster"/>
-                <div class="popup-gradient-overlay"></div>
                 <h2 class="popup-title-text" alt="Title"></h2>
-                <div class="popup-tags"></div>
-                <p class="popup-description"></p>
-                <button class="popup-close-btn">×</button>
+                <div class="popup-gradient-overlay"></div>
             </div>
+            <div class="popup-tags"></div>
+            <p class="popup-description"></p>
+            <!-- <button class="popup-close-btn">×</button> -->
+            <form class="email-form" onsubmit="checkEmailAndRedirect(event)">
+                <input type="email" placeholder="Email address" required />
+                <button type="submit">Get Started &gt;</button>
+            </form>
         </div>
     </div>
 

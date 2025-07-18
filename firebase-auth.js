@@ -108,7 +108,10 @@ window.login = function () {
 //GET STARTED EMAIL
 window.checkEmailAndRedirect = function (event) {
     event.preventDefault();
-    const emailInput = document.querySelector('.email-form input[type="email"]');
+    
+    // Scope to the form that was submitted:
+    const form = event.target;
+    const emailInput = form.querySelector('input[type="email"]');
     const email = emailInput.value.trim();
 
     if (!email) {
