@@ -217,7 +217,7 @@ a:hover {
     position: relative;
     flex-shrink: 0;
     width: 160px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease 300ms, box-shadow 0.3s ease 300ms;
 }
 
 .poster-card:hover {
