@@ -197,7 +197,7 @@ a:hover {
     margin-bottom: 1rem;
 }
 
-.trending-row {
+.row-container {
     display: flex;
     gap: 2rem;
     overflow-x: auto;
@@ -207,8 +207,7 @@ a:hover {
     padding: 20px 0 0 6px;
 }
 
-/* Hide scrollbar but keep functionality */
-.trending-row::-webkit-scrollbar {
+.row-container::-webkit-scrollbar {
     display: none;
 }
 
@@ -243,32 +242,6 @@ a:hover {
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
-.arrow {
-    position: absolute;
-    top: 57.5%;
-    transform: translateY(-50%);
-    font-size: 25px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 3;
-    padding: 99px 10px;
-    background-color: #262424;
-    border-radius: 10px;
-    user-select: none;
-}
-
-.arrow:hover {
-    background-color: #2e2e2e;
-}
-
-.arrow.left {
-    left: 6vw;
-}
-
-.arrow.right {
-    right: 6vw;
-}
-
 /* ============ Popup on Poster Click ============ */
 .popup-css {
     display: none;
@@ -276,11 +249,11 @@ a:hover {
     align-items: center;
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
     z-index: 9999;
     animation: popup-fade 0.3s ease;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .popup-overlay {
@@ -296,16 +269,18 @@ a:hover {
     position: relative;
     background-color: #141414;
     border-radius: 10px;
-    width: 40%;
+    width: 50%;
     max-width: 800px;
     min-width: 340px;
+    max-height: 90vh;
+
     color: #fff;
-    z-index: 10001;
+    overflow-y: auto;
+
     animation: popup-zoom 0.35s ease;
     box-shadow: 0 0 15px rgba(222, 25, 25, 0.83);
-    overflow-y: auto;
-    max-height: 90vh;
-    margin: 0;
+    z-index: 10001;
+    scroll-behavior: smooth;
 }
 
 .popup-box::-webkit-scrollbar {
@@ -317,7 +292,7 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 80%;
+    height: 100%;
     border-radius: 0 0 6px 6px;
     pointer-events: none;
     z-index: 1;
@@ -326,28 +301,44 @@ a:hover {
 
 .poster-wrapper {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .popup-movie-img {
     width: 100%;
+    height: auto;
     border-radius: 6px;
     object-fit: cover;
+    display: block;
 }
 
-.popup-title-img {
+.popup-title-text {
     width: 55%;
     position: absolute;
-    left: 5px;
-    bottom: 5px;
-    z-index: 2;
+    left: 20px;
+    bottom: 20px;
+    color: white;
+    font-size: 2rem;
+    font-family: "Merriweather", Times, serif;
+    font-weight: bold;
+    text-shadow:
+        2px 2px 4px rgba(255, 0, 0, 0.8),
+        -1px -1px 0 #ff0000,
+        1px -1px 0 #ff0000,
+        -1px 1px 0 #ff0000,
+        1px 1px 0 #ff0000;
+    z-index: 20;
+    text-transform: uppercase;
 }
 
 .popup-tags {
-    margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    font-size: 1rem;
+    gap: 5px;
+    margin-left: 10px;
+    font-size: 0.9rem;
 }
 
 .popup-tags span {
@@ -359,40 +350,27 @@ a:hover {
 }
 
 .popup-description {
-    position: relative;
     margin: 1rem;
+    font-size: 1rem;
     line-height: 1.6;
     color: #ccc;
-    font-size: 1rem;
     z-index: 20;
 }
 
 .close-btn {
     position: absolute;
-    top: 12px;
-    right: 14px;
-    font-size: 28px;
+    top: 16px;
+    right: 30px;
+    font-size: 35px;
     color: #fff;
     cursor: pointer;
     z-index: 10001;
     transition: transform 0.2s;
+    filter: drop-shadow(0 0 5px black);
 }
 
 .close-btn:hover {
     transform: scale(1.2);
-}
-
-/* Popup Animations */
-@keyframes popup-fade {
-    from {
-        background-color: rgba(0, 0, 0, 0);
-        backdrop-filter: blur(0);
-    }
-
-    to {
-        background-color: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(5px);
-    }
 }
 
 @keyframes popup-zoom {
