@@ -296,6 +296,8 @@ export function addPosterListeners(container) {
             const tags = poster.dataset.tags;
             const displayPoster = poster.dataset.shortPoster;
 
+            console.log(id);
+
             popup.style.display = "flex";
             document.body.style.overflow = "hidden";
             posterTitle.textContent = title;
@@ -506,6 +508,14 @@ export function addPosterListeners(container) {
                 };
 
                 //Comment Section
+                // Example (do this after login/signup is complete):
+                let currentUserName = "";
+
+                const userDocSnapComm = await getDoc(doc(db, "users", user.uid));
+                if (userDocSnapComm.exists()) {
+                    currentUserName = userDocSnapComm.data().fullName;
+                }
+
                 const commentInput = popup.querySelector("#comment-input");
                 const postCommentBtn = popup.querySelector("#post-comment");
                 const commentsList = popup.querySelector("#comments-list");
@@ -523,7 +533,7 @@ export function addPosterListeners(container) {
 
                     if (isPoll && pollOptions.length >= 2) {
                         await setDoc(commentRef, {
-                            username: user.email || user.displayName,
+                            username: currentUserName || user.email,
                             isPoll: true,
                             question: commentText.slice(5).trim(),
                             options: pollOptions,
@@ -533,7 +543,7 @@ export function addPosterListeners(container) {
                         });
                     } else {
                         await setDoc(commentRef, {
-                            username: user.email || user.displayName,
+                            username: currentUserName || user.email,
                             comment: commentText,
                             isPoll: false,
                             timestamp: new Date()
@@ -666,7 +676,7 @@ export function addPosterListeners(container) {
                             if (!replyText) return;
                             const replyRef = doc(collection(doc(mmovieRef, "comments", commentId), "replies"));
                             await setDoc(replyRef, {
-                                username: user.email || user.displayName,
+                                username: currentUserName || user.email,
                                 comment: replyText,
                                 timestamp: new Date()
                             });

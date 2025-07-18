@@ -10,7 +10,9 @@ import {
     addDoc,
     getDocs,
     deleteDoc,
-    serverTimestamp
+    serverTimestamp,
+    getDoc,
+    doc
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
 import {
@@ -29,12 +31,22 @@ const sendButton = document.getElementById("sendButton");
 const messagesContainer = document.getElementById("chat-messages");
 
 // Redirect to sign-in page if not logged in
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
     if (!user) {
         alert("Please sign in to access global chat.");
         window.location.href = "3sign_In.html";
         return;
     }
+
+    let currentUserName = "(unknown user)";
+
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+        currentUserName = userSnap.data().fullName || "(unknown user)";
+    }
+
 
     const chatRef = collection(db, "global_chat");
 
@@ -45,7 +57,7 @@ onAuthStateChanged(auth, (user) => {
         console.log("Snapshot received:", snapshot.docs.length);
 
         const messages = snapshot.docs.reverse();
-        await displayMessages(messages);
+        await displayMessages(messages, currentUserName);
 
         // Auto-delete old messages beyond the last 100
         const oldestVisible = messages[0]?.data()?.timestamp;
@@ -81,6 +93,7 @@ onAuthStateChanged(auth, (user) => {
 
             addDoc(collection(db, "global_chat"), {
                 email: user.email,
+                username: currentUserName,   // ✅ Save username
                 message: message,
                 timestamp: serverTimestamp()
             })
@@ -139,7 +152,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 
-function displayMessages(docs) {
+function displayMessages(docs, currentUserName) {
     messagesContainer.innerHTML = "";
 
     docs.forEach((doc) => {
@@ -150,13 +163,13 @@ function displayMessages(docs) {
         msg.classList.add("message-box");
 
         // Add class if the message is from current user
-        if (data.email === auth.currentUser.email) {
+        if (data.username === currentUserName) {
             msg.classList.add("self");
         }
 
         const emailTime = document.createElement("p");
         emailTime.classList.add("message-meta");
-        emailTime.innerHTML = `<strong>${data.email || "unknown"}</strong><span class="time">${time}</span>`;
+        emailTime.innerHTML = `<strong>${data.username || "unknown"}</strong><span class="time">${time}</span>`;
 
         const messageContent = document.createElement("p");
         messageContent.textContent = data.message || "[no message]";
