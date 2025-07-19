@@ -23,8 +23,8 @@ body {
     font-size: 25px;
     cursor: pointer;
     color: white;
-    position: absolute;
-    top: auto;
+    position: relative;
+
 }
 
 .nav-center {
@@ -522,7 +522,7 @@ input:checked+.slider:before {
 
 
 /* RESPONSIVE PAGE */
-@media (max-width: 768px) {
+@media (max-width: 1018px) {
     .account-navbar {
         padding: 16px 40px;
         flex-direction: column;
@@ -542,14 +542,13 @@ input:checked+.slider:before {
     }
 
     .nav-left i {
-        position: static;
         margin-bottom: 10px;
     }
 
     .account-container {
         margin: 30px auto;
         padding: 0 20px;
-        max-width: 90%;
+        max-width: 50%;
     }
 
     .profile-modal {
