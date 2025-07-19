@@ -519,3 +519,104 @@ input:checked+.slider:before {
     animation: none !important;
     transition: none !important;
 }
+
+
+/* RESPONSIVE PAGE */
+@media (max-width: 768px) {
+    .account-navbar {
+        padding: 16px 40px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-center {
+        position: static;
+        margin-top: 10px;
+        left: unset;
+        top: unset;
+    }
+
+    .nav-center img {
+        max-width: 220px;
+        height: auto;
+    }
+
+    .nav-left i {
+        position: static;
+        margin-bottom: 10px;
+    }
+
+    .account-container {
+        margin: 30px auto;
+        padding: 0 20px;
+        max-width: 90%;
+    }
+
+    .profile-modal {
+        max-width: 90%;
+        padding: 16px;
+    }
+
+    .profile-options {
+        gap: 8px;
+    }
+
+    .option-pic,
+    .upload-label {
+        width: 50px;
+        height: 50px;
+    }
+
+    .change-password-btn,
+    .tell-more-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .button-group {
+        gap: 14px;
+    }
+
+    #moreInfoModal {
+        padding: 20px 16px;
+    }
+
+    #moreInfoModal h3 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-center img {
+        max-width: 180px;
+        height: auto;
+    }
+
+    .profile-pic {
+        width: 90px;
+        height: 90px;
+    }
+
+    .edit-icon {
+        font-size: 11px;
+        padding: 4px;
+    }
+
+    .ghost-label {
+        font-size: 13px;
+    }
+
+    #saveMoreInfo {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #confirmPopup {
+        width: 90%;
+        font-size: 14px;
+    }
+
+    #confirmPopup button {
+        padding: 6px 10px;
+    }
+}
