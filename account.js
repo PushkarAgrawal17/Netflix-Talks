@@ -300,7 +300,7 @@ function openModalWithData(data = {}) {
     });
 
     fillFields(originalData);
-    moreInfoModal.style.display = "block";
+    moreInfoModal.style.display = "flex";
     modalOverlay.style.display = "block";
 }
 
