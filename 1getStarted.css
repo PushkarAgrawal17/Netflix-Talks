@@ -13,7 +13,6 @@ body {
 }
 
 
-
 /* ==================== Hero Section ==================== */
 .hero-section {
     position: relative;
@@ -54,7 +53,6 @@ body {
 }
 
 
-
 /* ======================= Navbar ======================= */
 .navbar {
     display: flex;
@@ -81,20 +79,6 @@ body {
     gap: 15px;
 }
 
-.language-select {
-    padding: 5px 10px;
-    background: transparent;
-    color: #ebdedede;
-    border: 1px solid #fff;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.language-select option {
-    background-color: #000;
-    cursor: pointer;
-}
-
 .sign-in-btn {
     background-color: #e50914;
     color: #fff;
@@ -103,6 +87,11 @@ body {
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.sign-in-btn:hover {
+    transform: scale(1.04);
 }
 
 a {
@@ -127,17 +116,17 @@ a:hover {
 }
 
 .center-content h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: bold;
 }
 
 .center-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     margin-top: 20px;
 }
 
 .center-content p {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     margin: 20px 0;
 }
 
@@ -526,7 +515,9 @@ a:hover {
     width: 100%;
     background-color: #000;
     color: #b3b3b3;
+    margin-top: 40px;
     padding: 2rem 1rem;
+    border-top: 1px solid rgb(55, 55, 55);
     font-size: 0.9rem;
     text-align: left;
 }
@@ -557,19 +548,9 @@ a:hover {
     padding: 0 0.5rem;
 }
 
-.footer .footer-content-wrapper p,
-.footer .footer-content-wrapper select {
+.footer .footer-content-wrapper p {
     text-align: left;
     display: block;
-}
-
-.footer select {
-    margin-top: 2rem;
-    padding: 5px;
-    background-color: #000;
-    color: #fff;
-    border: 1px solid gray;
-    border-radius: 4px;
 }
 
 .footer p {
