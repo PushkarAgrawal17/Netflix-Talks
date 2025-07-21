@@ -23,8 +23,7 @@ body {
     font-size: 25px;
     cursor: pointer;
     color: white;
-    position: absolute;
-    top: auto;
+    position: relative;
 }
 
 .nav-center {
@@ -49,7 +48,7 @@ body {
 /* Container */
 .account-container {
     max-width: 400px;
-    margin: 30px auto;
+    margin: 60px auto;
     text-align: center;
     animation: fadeInSlide 0.8s ease;
 }
@@ -228,7 +227,7 @@ a:hover {
 }
 
 .signout-btn i {
-    margin-right: 8px;
+    margin-right: 12px;
 }
 
 .signout-btn:hover {
@@ -283,46 +282,79 @@ a:hover {
 }
 
 /* ================== Tell Us More Button ================== */
+#moreInfoModal {
+    position: fixed;
+    display: none;
+    /* Initial state */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #111;
+    padding: 20px;
+    border-radius: 16px;
+    z-index: 1001;
+    display: none;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 0 15px rgba(222, 25, 25, 0.83);
+}
+
 #modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 998;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
     display: none;
-}
-
-#moreInfoModal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(15, 15, 15, 0.97);
-    padding: 30px 25px;
-    border-radius: 15px;
-    box-shadow: 0 0 25px #e50914cc;
-    z-index: 999;
-    width: 90%;
-    max-width: 450px;
-    color: #fff;
-    font-family: "Helvetica Neue", sans-serif;
 }
 
 #moreInfoModal h3 {
     text-align: center;
     font-size: 28px;
-    margin-bottom: 25px;
+    margin-bottom: 45px;
     color: #fff;
 }
 
-/* Floating Input Fields */
 .floating-input {
+    width: 90%;
+    display: flex;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
 }
+
+/* =============== Align Buttons =============== */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.tell-more-btn {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.tell-more-btn:hover {
+    background-color: #666;
+}
+
+/* Floating Input Fields */
 
 .floating-input input {
     width: 100%;
@@ -345,10 +377,12 @@ a:hover {
 
 .floating-input input.filled+label,
 .floating-input input:focus+label {
-    top: -8px;
-    left: 10px;
-    font-size: 12px;
+    top: -10px;
+    left: 5px;
+    font-size: 15px;
     color: #e50914;
+    filter: drop-shadow(0 0 5px #ffffffdb);
+
 }
 
 .floating-input label {
@@ -359,14 +393,16 @@ a:hover {
     color: #aaa;
     pointer-events: none;
     transition: 0.2s ease all;
-    background-color: #111;
+    /* background-color: #111; */
     padding: 0 4px;
     font-size: 14px;
+    filter: drop-shadow(0 0 3px #000000);
+    font-weight: 600;
 }
 
 /* Save Button */
 #saveMoreInfo {
-    width: 100%;
+    width: 45%;
     padding: 12px;
     border: none;
     background-color: #e50914;
@@ -376,6 +412,7 @@ a:hover {
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease;
+    margin-bottom: 10px;
 }
 
 #saveMoreInfo:hover {
@@ -489,4 +526,103 @@ input:checked+.slider:before {
 .no-animation * {
     animation: none !important;
     transition: none !important;
+}
+
+/* RESPONSIVE PAGE */
+@media (max-width: 1018px) {
+    .account-navbar {
+        padding: 16px 40px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-center {
+        position: static;
+        margin-top: 10px;
+        left: unset;
+        top: unset;
+    }
+
+    .nav-center img {
+        max-width: 220px;
+        height: auto;
+    }
+
+    .nav-left i {
+        margin-bottom: 10px;
+    }
+
+    .account-container {
+        margin: 30px auto;
+        padding: 0 20px;
+        max-width: 40%;
+    }
+
+    .profile-modal {
+        max-width: 90%;
+        padding: 16px;
+    }
+
+    .profile-options {
+        gap: 8px;
+    }
+
+    .option-pic,
+    .upload-label {
+        width: 50px;
+        height: 50px;
+    }
+
+    .change-password-btn,
+    .tell-more-btn {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .button-group {
+        gap: 14px;
+    }
+
+    #moreInfoModal {
+        padding: 20px 16px;
+    }
+
+    #moreInfoModal h3 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-center img {
+        max-width: 180px;
+        height: auto;
+    }
+
+    .profile-pic {
+        width: 90px;
+        height: 90px;
+    }
+
+    .edit-icon {
+        font-size: 11px;
+        padding: 4px;
+    }
+
+    .ghost-label {
+        font-size: 13px;
+    }
+
+    #saveMoreInfo {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #confirmPopup {
+        width: 90%;
+        font-size: 14px;
+    }
+
+    #confirmPopup button {
+        padding: 6px 10px;
+    }
 }
