@@ -17,12 +17,6 @@
         <!-- Navbar -->
         <header class="navbar">
             <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Logo" class="logo" />
-            <div class="navbar-actions">
-                <select class="language-select">
-                    <option>English</option>
-                    <option>हिन्दी</option>
-                </select>
-            </div>
         </header>
 
         <!-- Main Center Content -->
@@ -38,13 +32,12 @@
                         <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePassword('password', this)"></i>
                     </div>
                 </div>
-                <button onclick="login()" class="sign-in-btn">Sign In</button>
                 <div class="options">
-                    <label><input type="checkbox" checked /> Remember me</label>
                     <a class="link forgot-password" href="#">Forgot password?</a>
                 </div>
+                <button onclick="login()" class="sign-in-btn">Sign In</button>
                 <div class="signup">
-                    New to Netflix?
+                    New to Netflix Talks?
                     <a class="link" href="2sign_Up.html">Sign up now.</a>
                 </div>
                 <br />
@@ -86,14 +79,11 @@
                 </div>
             </div>
 
-            <select>
-                <option>English</option>
-                <option>हिन्दी</option>
-            </select>
-
-            <br /><br />
-            <p>Netflix India</p>
-            <br />
+            <br>
+            <p>Netflix Talks</p>
+            <p class="recaptcha-msg">
+                This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a>
+            </p>
         </div>
     </footer>
 

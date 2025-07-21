@@ -34,7 +34,7 @@ body {
     height: 99%;
     object-fit: cover;
     z-index: -2;
-    filter: brightness(0.5);
+    filter: brightness(0.6);
 }
 
 .hero-overlay {
@@ -43,7 +43,7 @@ body {
     left: 0;
     width: 100%;
     height: 99%;
-    background: rgba(6, 6, 6, 0.6);
+    background: rgba(4, 4, 15, 0.5);
     z-index: -1;
     overflow: visible;
 }
@@ -78,24 +78,6 @@ body {
 
 .logo:hover {
     transform: scale(1.05);
-}
-
-.navbar-actions {
-    display: flex;
-    gap: 15px;
-}
-
-.language-select {
-    padding: 5px 10px;
-    background: transparent;
-    color: #ebdedede;
-    border: 1px solid white;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.language-select option {
-    background-color: black;
 }
 
 
@@ -230,10 +212,6 @@ body {
     font-weight: 700;
 }
 
-.input-box {
-    margin-bottom: 20px;
-}
-
 .input-box input {
     background-color: #1a1a1a;
     border: 1px solid #333;
@@ -252,6 +230,7 @@ body {
 }
 
 .input-box input[type="email"] {
+    margin-bottom: 30px;
     text-transform: lowercase;
 }
 
@@ -270,7 +249,7 @@ body {
     color: white;
     cursor: pointer;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background: linear-gradient(145deg, #e50914, #b0060f);
     transition: transform 0.3s ease, background 0.3s;
 }
@@ -293,23 +272,18 @@ body {
 
 .options {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
     font-size: 0.9rem;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
     color: #b3b3b3;
-    margin-bottom: 20px;
-}
-
-.options input {
-    margin-right: 5px;
 }
 
 .signup {
-    color: #737373;
-    font-size: 0.9rem;
-    margin-top: 10px;
+    color: #ababab;
+    margin-top: 20px;
+    font-size: 14px;
 }
 
 .link {
@@ -320,11 +294,6 @@ body {
 
 .link:hover {
     text-decoration: underline;
-}
-
-.signup {
-    margin-top: 20px;
-    font-size: 14px;
 }
 
 .captcha {
