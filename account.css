@@ -48,9 +48,9 @@ body {
 /* Container */
 .account-container {
     max-width: 400px;
-    margin: 60px auto;
+    margin: 100px auto;
     text-align: center;
-    animation: fadeInSlide 0.8s ease;
+    animation: fadeInSlide 1s ease;
 }
 
 /* Profile Pic */
@@ -68,9 +68,7 @@ body {
     transform: translate(-50%, -50%);
     width: 140px;
     height: 140px;
-    background: radial-gradient(circle,
-            rgba(229, 9, 20, 0.4) 0%,
-            transparent 70%);
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.4) 0%, transparent 70%);
     border-radius: 0%;
     z-index: -1;
     filter: blur(2px);
@@ -212,25 +210,32 @@ a:hover {
     cursor: not-allowed;
 }
 
-/* Sign Out */
-.signout-btn {
+/* Account Buttons */
+.btn-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.account-btns {
     margin-top: 30px;
     padding: 12px 20px;
     background-color: #e50914;
     color: white;
     border: none;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.signout-btn i {
+.account-btns i {
     margin-right: 12px;
 }
 
-.signout-btn:hover {
+.account-btns:hover {
     background-color: #f40612;
     text-decoration: underline;
 }
@@ -285,7 +290,6 @@ a:hover {
 #moreInfoModal {
     position: fixed;
     display: none;
-    /* Initial state */
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -355,7 +359,6 @@ a:hover {
 }
 
 /* Floating Input Fields */
-
 .floating-input input {
     width: 100%;
     padding: 14px 10px 6px;
@@ -393,7 +396,6 @@ a:hover {
     color: #aaa;
     pointer-events: none;
     transition: 0.2s ease all;
-    /* background-color: #111; */
     padding: 0 4px;
     font-size: 14px;
     filter: drop-shadow(0 0 3px #000000);
@@ -422,45 +424,72 @@ a:hover {
 /* Close Icon */
 #closeModalBtn {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 25px;
+    right: 25px;
     font-size: 22px;
     color: #fff;
     cursor: pointer;
 }
 
 /* Confirmation Popup */
+/* Overlay behind popup */
+#confirmOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: none;
+}
+
+/* Popup */
 #confirmPopup {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.8);
     background: #111;
     color: white;
     padding: 20px;
     border-radius: 10px;
-    z-index: 1001;
+    border: 1px solid grey;
+    z-index: 10000;
     text-align: center;
     display: none;
+    opacity: 0;
+    animation: popupFadeIn 0.3s forwards;
 }
 
 #confirmPopup button {
+    background: #e50914;
+    color: white;
+    font-weight: bold;
     margin: 10px;
     padding: 8px 12px;
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
-#confirmSaveYes {
-    background: #e50914;
-    color: white;
+#confirmPopup button:hover {
+    background-color: #ff2c2c;
 }
 
-#confirmSaveNo {
-    background: gray;
-    color: white;
+/* Animation */
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
+
 
 /* GHOST MODE */
 .ghost-toggle-wrapper {

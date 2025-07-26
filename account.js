@@ -93,7 +93,7 @@ onAuthStateChanged(auth, (user) => {
             usernameInput.removeAttribute("readonly");
             usernameInput.focus();
 
-            const originalName = usernameInput.value.trim();  // ✅ Store the current username here
+            const originalName = usernameInput.value.trim();  // Store the current username here
 
             usernameInput.addEventListener(
                 "blur",
@@ -113,7 +113,7 @@ onAuthStateChanged(auth, (user) => {
                         return;
                     }
 
-                    // 🔍 STEP 1: Check uniqueness before updating
+                    // STEP 1: Check uniqueness before updating
                     const q = query(
                         collection(db, "users"),
                         where("fullName", "==", newName)
@@ -135,7 +135,7 @@ onAuthStateChanged(auth, (user) => {
                         return;
                     }
 
-                    // ✅ STEP 2: Update in Firestore (safe)
+                    // STEP 2: Update in Firestore (safe)
                     await updateDoc(userRef, { fullName: newName });
 
                     usernameInput.setAttribute("readonly", true);
@@ -280,19 +280,20 @@ function hasUnsavedChanges() {
 }
 
 // Create confirmation popup for unsaved changes
+const confirmOverlay = document.createElement("div");
+confirmOverlay.id = "confirmOverlay";
+confirmOverlay.style.display = "none";
+document.body.appendChild(confirmOverlay);
+
 const confirmPopup = document.createElement("div");
+confirmPopup.id = "confirmPopup"; // So the CSS applies
 confirmPopup.innerHTML = `
-  <div style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-              background:#111; color:white; padding:20px; border-radius:10px;
-              z-index:1001; text-align:center;">
     <p>You have unsaved changes. Do you want to save them?</p>
-    <button id="confirmSaveYes" style="margin:10px; padding:8px 12px; background:#e50914; color:white;">Yes</button>
-    <button id="confirmSaveNo" style="margin:10px; padding:8px 12px; background:gray; color:white;">No</button>
-  </div>
+    <button id="confirmSaveYes">Yes</button>
+    <button id="confirmSaveNo">No</button>
 `;
-confirmPopup.style.display = "none";
-confirmPopup.style.zIndex = 1001;
 document.body.appendChild(confirmPopup);
+
 
 function openModalWithData(data = {}) {
     Object.keys(fields).forEach((key) => {
@@ -306,6 +307,7 @@ function openModalWithData(data = {}) {
 
 function closeModalSafely() {
     if (hasUnsavedChanges()) {
+        confirmOverlay.style.display = "block";
         confirmPopup.style.display = "block";
 
         document.getElementById("confirmSaveYes").onclick = async () => {
@@ -323,7 +325,9 @@ function closeModalSafely() {
                 position: "left",
                 backgroundColor: "#00b09b",
             }).showToast();
+
             confirmPopup.style.display = "none";
+            confirmOverlay.style.display = "none";
             moreInfoModal.style.display = "none";
             modalOverlay.style.display = "none";
             localStorage.setItem("skipAnimation", "true");
@@ -332,6 +336,7 @@ function closeModalSafely() {
 
         document.getElementById("confirmSaveNo").onclick = () => {
             confirmPopup.style.display = "none";
+            confirmOverlay.style.display = "none";
             moreInfoModal.style.display = "none";
             modalOverlay.style.display = "none";
         };
@@ -340,6 +345,16 @@ function closeModalSafely() {
         modalOverlay.style.display = "none";
     }
 }
+
+confirmOverlay.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent closing by clicking background
+});
+
+// Prevent background clicks on confirm overlay
+document.getElementById("confirmOverlay").addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
 
 // Save button logic
 saveMoreInfo.addEventListener("click", async () => {
@@ -367,7 +382,10 @@ saveMoreInfo.addEventListener("click", async () => {
 
 // Modal close events
 closeModalBtn.addEventListener("click", closeModalSafely);
-modalOverlay.addEventListener("click", closeModalSafely);
+modalOverlay.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeModalSafely();
+});
 
 // Firebase: Get & Show Info
 onAuthStateChanged(auth, async (user) => {
