@@ -1,19 +1,19 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import {
-    getAuth,
-    onAuthStateChanged,
-    sendPasswordResetEmail,
-    signOut,
+  getAuth,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import {
-    getFirestore,
-    collection,
-    query,
-    where,
-    getDocs,
-    doc,
-    getDoc,
-    updateDoc,
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+  updateDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 import { firebaseConfig } from "./config.js";
@@ -31,8 +31,8 @@ const profileModal = document.getElementById("profileModal");
 const mainProfilePic = document.getElementById("mainProfilePic");
 
 if (localStorage.getItem("skipAnimation") === "true") {
-    document.body.classList.add("no-animation");
-    localStorage.removeItem("skipAnimation");
+  document.body.classList.add("no-animation");
+  localStorage.removeItem("skipAnimation");
 }
 
 onAuthStateChanged(auth, (user) => {
@@ -54,7 +54,7 @@ onAuthStateChanged(auth, (user) => {
                 updateDoc(userRef, { profilePic: defaultPic });
             }
         });
-
+        
         const ghostToggle = document.getElementById("ghostToggle");
 
         getDoc(userRef).then((docSnap) => {
@@ -88,6 +88,7 @@ onAuthStateChanged(auth, (user) => {
                 }
             });
         });
+        
         // Username edit
         editUsernameIcon.addEventListener("click", () => {
             usernameInput.removeAttribute("readonly");
@@ -150,7 +151,7 @@ onAuthStateChanged(auth, (user) => {
                 { once: true }
             );
         });
-
+        
         // Change Password
         document
             .getElementById("changePasswordBtn")
@@ -174,7 +175,7 @@ onAuthStateChanged(auth, (user) => {
                     }).showToast();
                 }
             });
-
+          
         // Sign Out
         signOutBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -211,7 +212,7 @@ onAuthStateChanged(auth, (user) => {
                 profileModal.style.display = "none";
             });
         });
-
+        
         // Toggle modal
         editIcon.addEventListener("click", () => {
             profileModal.style.display =
@@ -229,12 +230,11 @@ onAuthStateChanged(auth, (user) => {
             }
         });
     } else {
-        window.location.href = "3sign_In.html";
-    }
+    window.location.href = "3sign_In.html";
+  }
 });
-
+    
 // ================= TELL US MORE LOGIC =================
-
 const moreInfoBtn = document.getElementById("moreInfoBtn");
 const moreInfoModal = document.getElementById("moreInfoModal");
 const modalOverlay = document.getElementById("modalOverlay");
@@ -242,41 +242,43 @@ const closeModalBtn = document.getElementById("closeModalBtn");
 const saveMoreInfo = document.getElementById("saveMoreInfo");
 
 const fields = {
-    pronouns: document.getElementById("pronouns"),
-    bio: document.getElementById("bio"),
-    instagram: document.getElementById("insta"),
-    facebook: document.getElementById("facebook"),
-    otherLink: document.getElementById("otherLink"),
+  pronouns: document.getElementById("pronouns"),
+  bio: document.getElementById("bio"),
+  intrest: document.getElementById("intrest"),
+  hobbies: document.getElementById("hobbies"),
+  instagram: document.getElementById("insta"),
+  facebook: document.getElementById("facebook"),
+  otherLink: document.getElementById("otherLink"),
 };
 
 let userRef;
 let originalData = {};
 
 function floatifyInput(input) {
-    const check = () => {
-        if (input.value.trim()) {
-            input.classList.add("filled");
-        } else {
-            input.classList.remove("filled");
-        }
-    };
-    input.addEventListener("input", check);
-    check(); // Initial state
+  const check = () => {
+    if (input.value.trim()) {
+      input.classList.add("filled");
+    } else {
+      input.classList.remove("filled");
+    }
+  };
+  input.addEventListener("input", check);
+  check(); // Initial state
 }
 
 Object.values(fields).forEach(floatifyInput);
 
 function fillFields(data = {}) {
-    Object.entries(fields).forEach(([key, input]) => {
-        input.value = data[key] || "";
-        input.classList.toggle("filled", !!data[key]);
-    });
+  Object.entries(fields).forEach(([key, input]) => {
+    input.value = data[key] || "";
+    input.classList.toggle("filled", !!data[key]);
+  });
 }
 
 function hasUnsavedChanges() {
-    return Object.keys(fields).some(
-        (key) => fields[key].value.trim() !== (originalData[key] || "")
-    );
+  return Object.keys(fields).some(
+    (key) => fields[key].value.trim() !== (originalData[key] || "")
+  );
 }
 
 // Create confirmation popup for unsaved changes
@@ -296,13 +298,13 @@ document.body.appendChild(confirmPopup);
 
 
 function openModalWithData(data = {}) {
-    Object.keys(fields).forEach((key) => {
-        originalData[key] = data[key] || "";
-    });
+  Object.keys(fields).forEach((key) => {
+    originalData[key] = data[key] || "";
+  });
 
-    fillFields(originalData);
-    moreInfoModal.style.display = "flex";
-    modalOverlay.style.display = "block";
+  fillFields(originalData);
+  moreInfoModal.style.display = "flex";
+  modalOverlay.style.display = "block";
 }
 
 function closeModalSafely() {
@@ -360,24 +362,24 @@ document.getElementById("confirmOverlay").addEventListener("click", (e) => {
 saveMoreInfo.addEventListener("click", async () => {
     const updatedData = {};
     Object.entries(fields).forEach(([key, input]) => {
-        updatedData[key] = input.value.trim();
-    });
+    updatedData[key] = input.value.trim();
+  });
 
-    await updateDoc(userRef, updatedData);
+  await updateDoc(userRef, updatedData);
 
-    Toastify({
-        text: "Changes saved!",
-        duration: 3000,
-        gravity: "bottom",
-        position: "left",
-        backgroundColor: "#00b09b",
-    }).showToast();
-    localStorage.setItem("skipAnimation", "true");
-    location.reload();
+  Toastify({
+    text: "Changes saved!",
+    duration: 3000,
+    gravity: "bottom",
+    position: "left",
+    backgroundColor: "#00b09b",
+  }).showToast();
+  localStorage.setItem("skipAnimation", "true");
+  location.reload();
 
-    moreInfoModal.style.display = "none";
-    modalOverlay.style.display = "none";
-    confirmPopup.style.display = "none";
+  moreInfoModal.style.display = "none";
+  modalOverlay.style.display = "none";
+  confirmPopup.style.display = "none";
 });
 
 // Modal close events
@@ -389,15 +391,15 @@ modalOverlay.addEventListener("click", (e) => {
 
 // Firebase: Get & Show Info
 onAuthStateChanged(auth, async (user) => {
-    if (!user) return (window.location.href = "3sign_In.html");
+  if (!user) return (window.location.href = "3sign_In.html");
 
-    userRef = doc(db, "users", user.uid);
+  userRef = doc(db, "users", user.uid);
 
-    const docSnap = await getDoc(userRef);
-    const data = docSnap.data() || {};
+  const docSnap = await getDoc(userRef);
+  const data = docSnap.data() || {};
 
-    usernameInput.value = data.fullName || "Netflix User";
-    emailInput.value = data.email || user.email;
+  usernameInput.value = data.fullName || "Netflix User";
+  emailInput.value = data.email || user.email;
 
-    moreInfoBtn.addEventListener("click", () => openModalWithData(data));
+  moreInfoBtn.addEventListener("click", () => openModalWithData(data));
 });

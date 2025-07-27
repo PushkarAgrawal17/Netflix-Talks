@@ -261,3 +261,114 @@ emoji-picker {
         transform: translateY(0);
     }
 }
+
+
+
+
+/* Username */
+.username {
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+}
+
+.username:hover {
+    text-decoration: underline;
+}
+
+.username[data-anonymous="true"]::after {
+    content: "Ghost user";
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    background: #222;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.username[data-anonymous="true"]:hover::after {
+    opacity: 1;
+}
+
+/* Popup modal */
+
+.popup-content>p {
+    color: #eee;
+    padding: 10px 5px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.popup-content h2 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup.hidden {
+    display: none;
+}
+
+.popup-content {
+    background-color: #111;
+    padding: 30px 20px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 450px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.8);
+    /* Netflix red glow */
+    position: relative;
+}
+
+.popup-content .close-btn {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.popup-content .close-btn:hover {
+    color: #fff;
+}
+
+.social-link {
+    display: none;
+    /* Will be shown via JS if not anonymous */
+}
+
+.social-link a {
+    color: #e50914;
+    text-decoration: underline;
+}
+
+.social-link a:hover {
+    color: #fff;
+}
