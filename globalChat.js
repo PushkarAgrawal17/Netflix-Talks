@@ -209,88 +209,130 @@ async function displayMessages(docs, currentUserName) {
   attachUsernameEvents();
 }
 
+// function attachUsernameEvents() {
+//   const usernames = document.querySelectorAll(".username");
+//   const popup = document.getElementById("user-popup");
+//   const popupTitle = document.getElementById("popup-fullName");
+//   const popupPronouns = document.getElementById("popup-pronouns");
+//   const popupBio = document.getElementById("popup-bio");
+//   const popupInsta = document.getElementById("popup-instagram");
+//   const popupFb = document.getElementById("popup-facebook");
+//   const popupOther = document.getElementById("popup-other");
+//   const popupInterests = document.getElementById("popup-interests");
+//   const popupHobbies = document.getElementById("popup-hobbies");
+
+//   const closeBtn = document.querySelector(".close-btn");
+
+//   usernames.forEach((usernameSpan) => {
+//     const email = usernameSpan.dataset.email;
+//     const isAnon = usernameSpan.dataset.anonymous === "true";
+
+//     usernameSpan.addEventListener("click", async () => {
+//       try {
+//         const userQuery = query(collection(db, "users"));
+//         const usersSnap = await getDocs(userQuery);
+
+//         let matchedUser = null;
+//         usersSnap.forEach((doc) => {
+//           const user = doc.data();
+//           if (user.email === email) matchedUser = user;
+//         });
+
+//         if (!matchedUser) return;
+
+//         const showSocials = isAnon !== true;
+        
+//         //if user is ghost
+//         popupTitle.textContent = matchedUser.fullName || "No name";
+//         popupPronouns.textContent = `Pronouns: ${
+//           matchedUser.pronouns || "Not specified"
+//         }`;
+//         popupBio.textContent = `Bio: ${matchedUser.bio || "No bio yet"}`;
+//         popupInterests.textContent = `Interests: ${
+//           matchedUser.interests || "Not listed"
+//         }`;
+//         popupHobbies.textContent = `Hobbies: ${
+//           matchedUser.hobbies || "Not listed"
+//         }`;
+
+//         popupInsta.style.display =
+//           showSocials && matchedUser.instagram ? "block" : "none";
+//         popupFb.style.display =
+//           showSocials && matchedUser.facebook ? "block" : "none";
+//         popupOther.style.display =
+//           showSocials && matchedUser.other ? "block" : "none";
+
+//         if (matchedUser.instagram) {
+//           popupInsta.querySelector(
+//             "a"
+//           ).href = `https://www.instagram.com/${matchedUser.instagram}`;
+//           popupInsta.querySelector(
+//             "a"
+//           ).textContent = `@${matchedUser.instagram}`;
+//         }
+
+//         if (matchedUser.facebook) {
+//           popupFb.querySelector(
+//             "a"
+//           ).href = `https://www.facebook.com/${matchedUser.facebook}`;
+//           popupFb.querySelector("a").textContent = `@${matchedUser.facebook}`;
+//         }
+
+//         if (matchedUser.other) {
+//           popupOther.querySelector("a").href = matchedUser.other;
+//           popupOther.querySelector("a").textContent = matchedUser.other;
+//         }
+
+//         popup.classList.remove("hidden");
+//       } catch (error) {
+//         console.error("Error showing user popup:", error);
+//       }
+//     });
+
+//     // Tooltip (ghost user)
+//     if (isAnon) {
+//       usernameSpan.setAttribute("title", "Ghost user 👻");
+//     }
+//   });
+
+//   closeBtn.addEventListener("click", () => {
+//     document.getElementById("user-popup").classList.add("hidden");
+//   });
+// }
+
 function attachUsernameEvents() {
   const usernames = document.querySelectorAll(".username");
-  const popup = document.getElementById("user-popup");
-  const popupTitle = document.getElementById("popup-fullName");
-  const popupPronouns = document.getElementById("popup-pronouns");
-  const popupBio = document.getElementById("popup-bio");
-  const popupInsta = document.getElementById("popup-instagram");
-  const popupFb = document.getElementById("popup-facebook");
-  const popupOther = document.getElementById("popup-other");
-  const popupInterests = document.getElementById("popup-interests");
-  const popupHobbies = document.getElementById("popup-hobbies");
-
-  const closeBtn = document.querySelector(".close-btn");
 
   usernames.forEach((usernameSpan) => {
     const email = usernameSpan.dataset.email;
-    const isAnon = usernameSpan.dataset.anonymous === "true";
 
-    usernameSpan.addEventListener("click", async () => {
+    usernameSpan.addEventListener("mouseenter", async () => {
       try {
-        const userQuery = query(collection(db, "users"));
-        const usersSnap = await getDocs(userQuery);
+        const userDoc = await getUserDataByEmail(email);
+        if (!userDoc) return;
 
-        let matchedUser = null;
-        usersSnap.forEach((doc) => {
-          const user = doc.data();
-          if (user.email === email) matchedUser = user;
-        });
-
-        if (!matchedUser) return;
-
-        popupTitle.textContent = matchedUser.fullName || "No name";
-        popupPronouns.textContent = `Pronouns: ${
-          matchedUser.pronouns || "Not specified"
-        }`;
-        popupBio.textContent = `Bio: ${matchedUser.bio || "No bio yet"}`;
-        
-        popupInterests.textContent = `Interests: ${
-          matchedUser.interests || "Not listed"
-        }`;
-        popupHobbies.textContent = `Hobbies: ${
-          matchedUser.hobbies || "Not listed"
-        }`;
-
-        // Show socials ONLY if anonymous is false or not present
-        const showSocials = isAnon !== true;
-
-        popupInsta.style.display =
-          showSocials && matchedUser.instagram ? "block" : "none";
-        popupFb.style.display =
-          showSocials && matchedUser.facebook ? "block" : "none";
-        popupOther.style.display =
-          showSocials && matchedUser.other ? "block" : "none";
-
-        if (matchedUser.instagram) {
-          popupInsta.querySelector("a").href = matchedUser.instagram;
-          popupInsta.querySelector("a").textContent = matchedUser.instagram;
+        if (userDoc.anonymous) {
+          showGhostTooltip(usernameSpan);
         }
-
-        if (matchedUser.facebook) {
-          popupFb.querySelector("a").href = matchedUser.facebook;
-          popupFb.querySelector("a").textContent = matchedUser.facebook;
-        }
-
-        if (matchedUser.other) {
-          popupOther.querySelector("a").href = matchedUser.other;
-          popupOther.querySelector("a").textContent = matchedUser.other;
-        }
-
-        popup.classList.remove("hidden");
       } catch (error) {
-        console.error("Error showing user popup:", error);
+        console.error("Error during mouseenter:", error);
       }
     });
 
-    // Tooltip (ghost user)
-    if (isAnon) {
-      usernameSpan.setAttribute("title", "Ghost user 👻");
-    }
-  });
+    usernameSpan.addEventListener("mouseleave", () => {
+      hideGhostTooltip();
+    });
 
-  closeBtn.addEventListener("click", () => {
-    document.getElementById("user-popup").classList.add("hidden");
+    usernameSpan.addEventListener("click", async () => {
+      try {
+        const userDoc = await getUserDataByEmail(email);
+        if (!userDoc) return;
+
+        // Always open popup first, no matter anonymous or not
+        openUserPopup(userDoc);
+      } catch (error) {
+        console.error("Error during click:", error);
+      }
+    });
   });
 }
