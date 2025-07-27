@@ -15,23 +15,25 @@ async function fetchTrendingMovies() {
         scrollContainer.innerHTML = '';
 
         data.results.slice(0, 10).forEach((movie, index) => {
-            const poster = movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                : 'Images/default.jpg';
-
             const posterCard = document.createElement('div');
             posterCard.classList.add('poster-card');
+
+            const backdropLow = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+
+            const backdropHigh = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+
             posterCard.innerHTML = `
                 <span class="rank">${index + 1}</span>
-                <img src="${poster}" alt="${movie.title}" class="movie-poster"
-                    data-poster="${poster}"
-                    data-backdrop="https://image.tmdb.org/t/p/w780${movie.backdrop_path}"
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" class="movie-poster"
+                    data-backdrop-low="${backdropLow}"
+                    data-backdrop="${backdropHigh}"
                     data-title="${movie.title}"
                     data-description="${movie.overview}"
                     data-tags="${movie.release_date.split('-')[0]},${movie.vote_average >= 7 ? 'Popular' : 'Drama'},${movie.original_language.toUpperCase()}"/>
             `;
             scrollContainer.appendChild(posterCard);
         });
+
 
         attachPosterPopupEvents(); // rebind popup logic
     } catch (err) {
@@ -49,7 +51,23 @@ function attachPosterPopupEvents() {
 
     document.querySelectorAll(".movie-poster").forEach((poster) => {
         poster.addEventListener("click", () => {
-            posterImg.src = poster.getAttribute("data-backdrop");
+            const lowRes = poster.getAttribute("data-backdrop-low"); // w500
+            const highRes = poster.getAttribute("data-backdrop");     // original
+
+            // Load low-res first
+            posterImg.src = lowRes;
+            posterImg.style.filter = "blur(8px)";
+            posterImg.style.transition = "filter 0.4s ease";
+
+            // Preload high-res
+            const highResImg = new Image();
+            highResImg.src = highRes;
+            highResImg.onload = () => {
+                posterImg.src = highRes;
+                posterImg.style.filter = "blur(0)";
+            };
+
+            // Fill in other content
             textTitle.textContent = poster.getAttribute("data-title");
             descElem.textContent = poster.getAttribute("data-description");
 
@@ -64,7 +82,7 @@ function attachPosterPopupEvents() {
         });
     });
 
-    // Add popup close logic here
+    // Popup close logic
     const closeBtn = popup.querySelector(".close-btn");
     const overlay = popup.querySelector(".popup-overlay");
 
@@ -76,6 +94,7 @@ function attachPosterPopupEvents() {
         popup.style.display = "none";
     });
 }
+
 
 fetchTrendingMovies();
 
