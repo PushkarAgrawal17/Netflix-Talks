@@ -218,6 +218,9 @@ function attachUsernameEvents() {
   const popupInsta = document.getElementById("popup-instagram");
   const popupFb = document.getElementById("popup-facebook");
   const popupOther = document.getElementById("popup-other");
+  const popupInterests = document.getElementById("popup-interests");
+  const popupHobbies = document.getElementById("popup-hobbies");
+
   const closeBtn = document.querySelector(".close-btn");
 
   usernames.forEach((usernameSpan) => {
@@ -238,15 +241,27 @@ function attachUsernameEvents() {
         if (!matchedUser) return;
 
         popupTitle.textContent = matchedUser.fullName || "No name";
-        popupPronouns.textContent = `Pronouns: ${matchedUser.pronouns || "Not specified"}`;
+        popupPronouns.textContent = `Pronouns: ${
+          matchedUser.pronouns || "Not specified"
+        }`;
         popupBio.textContent = `Bio: ${matchedUser.bio || "No bio yet"}`;
+        
+        popupInterests.textContent = `Interests: ${
+          matchedUser.interests || "Not listed"
+        }`;
+        popupHobbies.textContent = `Hobbies: ${
+          matchedUser.hobbies || "Not listed"
+        }`;
 
         // Show socials ONLY if anonymous is false or not present
-        const showSocials = matchedUser.anonymity !== true;
+        const showSocials = isAnon !== true;
 
-        popupInsta.style.display = showSocials && matchedUser.instagram ? "block" : "none";
-        popupFb.style.display = showSocials && matchedUser.facebook ? "block" : "none";
-        popupOther.style.display = showSocials && matchedUser.other ? "block" : "none";
+        popupInsta.style.display =
+          showSocials && matchedUser.instagram ? "block" : "none";
+        popupFb.style.display =
+          showSocials && matchedUser.facebook ? "block" : "none";
+        popupOther.style.display =
+          showSocials && matchedUser.other ? "block" : "none";
 
         if (matchedUser.instagram) {
           popupInsta.querySelector("a").href = matchedUser.instagram;

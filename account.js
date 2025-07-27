@@ -244,6 +244,8 @@ const saveMoreInfo = document.getElementById("saveMoreInfo");
 const fields = {
     pronouns: document.getElementById("pronouns"),
     bio: document.getElementById("bio"),
+    intrest: document.getElementById("intrest"),
+    hobbies: document.getElementById("hobbies"),
     instagram: document.getElementById("insta"),
     facebook: document.getElementById("facebook"),
     otherLink: document.getElementById("otherLink"),
