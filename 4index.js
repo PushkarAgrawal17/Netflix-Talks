@@ -220,9 +220,9 @@ function createGlobalPopup() {
             <button id="share-btn" class="share-btn"><i class="fas fa-share"></i></button>
         </div>
         <div class="comment-section">
-            <h3>Comments</h3>
+            <h3>Discussion Panel</h3>
             <div class="comment-input-box">
-                <textarea id="comment-input" placeholder="Add a comment or type 'poll:' to create a poll..."></textarea>
+                <textarea id="comment-input" placeholder="Type something to start a discussion or type 'poll:' to create a poll..."></textarea>
 
                 <!-- Poll UI (initially hidden) -->
                 <div id="poll-ui" style="display: none; margin-top: 8px;">

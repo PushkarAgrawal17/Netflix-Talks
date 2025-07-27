@@ -36,206 +36,205 @@ if (localStorage.getItem("skipAnimation") === "true") {
 }
 
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const userRef = doc(db, "users", user.uid);
+    if (user) {
+        const userRef = doc(db, "users", user.uid);
 
-    // Fetch existing data
-    getDoc(userRef).then((docSnap) => {
-      const data = docSnap.data();
-      usernameInput.value = data.fullName || "Netflix User";
-      emailInput.value = data.email || user.email;
+        // Fetch existing data
+        getDoc(userRef).then((docSnap) => {
+            const data = docSnap.data();
+            usernameInput.value = data.fullName || "Netflix User";
+            emailInput.value = data.email || user.email;
 
-      // Set profilePic
-      if (data.profilePic) {
-        mainProfilePic.src = data.profilePic;
-      } else {
-        const defaultPic = "Images/profileIcons/1.jpg";
-        mainProfilePic.src = defaultPic;
-        updateDoc(userRef, { profilePic: defaultPic });
-      }
-    });
+            // Set profilePic
+            if (data.profilePic) {
+                mainProfilePic.src = data.profilePic;
+            } else {
+                const defaultPic = "Images/profileIcons/1.jpg";
+                mainProfilePic.src = defaultPic;
+                updateDoc(userRef, { profilePic: defaultPic });
+            }
+        });
+        
+        const ghostToggle = document.getElementById("ghostToggle");
 
-    const ghostToggle = document.getElementById("ghostToggle");
+        getDoc(userRef).then((docSnap) => {
+            const data = docSnap.data();
 
-    getDoc(userRef).then((docSnap) => {
-      const data = docSnap.data();
+            if (data?.anonymity) {
+                ghostToggle.checked = true;
+            }
 
-      if (data?.anonymity) {
-        ghostToggle.checked = true;
-      }
+            ghostToggle.addEventListener("change", async () => {
+                try {
+                    await updateDoc(userRef, { anonymity: ghostToggle.checked });
 
-      ghostToggle.addEventListener("change", async () => {
-        try {
-          await updateDoc(userRef, { anonymity: ghostToggle.checked });
+                    Toastify({
+                        text: `Ghost Mode ${ghostToggle.checked ? "enabled 👻" : "disabled 😶"
+                            }`,
+                        duration: 3000,
+                        gravity: "bottom",
+                        position: "left",
+                        backgroundColor: ghostToggle.checked ? "#6e00ff" : "#444",
+                    }).showToast();
+                } catch (error) {
+                    console.error("Failed to update ghost mode:", error);
+                    Toastify({
+                        text: "Failed to update ghost mode!",
+                        duration: 3000,
+                        gravity: "bottom",
+                        position: "left",
+                        backgroundColor: "#ff4d4d",
+                    }).showToast();
+                }
+            });
+        });
+        
+        // Username edit
+        editUsernameIcon.addEventListener("click", () => {
+            usernameInput.removeAttribute("readonly");
+            usernameInput.focus();
 
-          Toastify({
-            text: `Ghost Mode ${
-              ghostToggle.checked ? "enabled 👻" : "disabled 😶"
-            }`,
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: ghostToggle.checked ? "#6e00ff" : "#444",
-          }).showToast();
-        } catch (error) {
-          console.error("Failed to update ghost mode:", error);
-          Toastify({
-            text: "Failed to update ghost mode!",
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#ff4d4d",
-          }).showToast();
-        }
-      });
-    });
-    // Username edit
-    editUsernameIcon.addEventListener("click", () => {
-      usernameInput.removeAttribute("readonly");
-      usernameInput.focus();
+            const originalName = usernameInput.value.trim();  // Store the current username here
 
-      const originalName = usernameInput.value.trim(); // ✅ Store the current username here
+            usernameInput.addEventListener(
+                "blur",
+                async () => {
+                    const newName = usernameInput.value.trim();
 
-      usernameInput.addEventListener(
-        "blur",
-        async () => {
-          const newName = usernameInput.value.trim();
+                    if (!newName) {
+                        Toastify({
+                            text: "Username cannot be empty.",
+                            duration: 3000,
+                            gravity: "bottom",
+                            position: "left",
+                            backgroundColor: "#ff4d4d",
+                        }).showToast();
+                        usernameInput.value = originalName; // Optional
+                        usernameInput.setAttribute("readonly", true);
+                        return;
+                    }
 
-          if (!newName) {
-            Toastify({
-              text: "Username cannot be empty.",
-              duration: 3000,
-              gravity: "bottom",
-              position: "left",
-              backgroundColor: "#ff4d4d",
-            }).showToast();
-            usernameInput.value = originalName; // Optional
-            usernameInput.setAttribute("readonly", true);
-            return;
-          }
+                    // STEP 1: Check uniqueness before updating
+                    const q = query(
+                        collection(db, "users"),
+                        where("fullName", "==", newName)
+                    );
 
-          // 🔍 STEP 1: Check uniqueness before updating
-          const q = query(
-            collection(db, "users"),
-            where("fullName", "==", newName)
-          );
+                    const querySnapshot = await getDocs(q);
 
-          const querySnapshot = await getDocs(q);
+                    // If username already exists and it's not user's current name
+                    if (!querySnapshot.empty && newName !== originalName) {
+                        Toastify({
+                            text: "Username already taken! Choose another.",
+                            duration: 3000,
+                            gravity: "bottom",
+                            position: "left",
+                            backgroundColor: "#ff4d4d",
+                        }).showToast();
+                        usernameInput.value = originalName;  // Revert
+                        usernameInput.setAttribute("readonly", true);
+                        return;
+                    }
 
-          // If username already exists and it's not user's current name
-          if (!querySnapshot.empty && newName !== originalName) {
-            Toastify({
-              text: "Username already taken! Choose another.",
-              duration: 3000,
-              gravity: "bottom",
-              position: "left",
-              backgroundColor: "#ff4d4d",
-            }).showToast();
-            usernameInput.value = originalName; // Revert
-            usernameInput.setAttribute("readonly", true);
-            return;
-          }
+                    // STEP 2: Update in Firestore (safe)
+                    await updateDoc(userRef, { fullName: newName });
 
-          // ✅ STEP 2: Update in Firestore (safe)
-          await updateDoc(userRef, { fullName: newName });
+                    usernameInput.setAttribute("readonly", true);
+                    Toastify({
+                        text: "Username updated successfully!",
+                        duration: 3000,
+                        gravity: "bottom",
+                        position: "left",
+                        backgroundColor: "#00b09b",
+                    }).showToast();
+                },
+                { once: true }
+            );
+        });
+        
+        // Change Password
+        document
+            .getElementById("changePasswordBtn")
+            .addEventListener("click", async () => {
+                try {
+                    await sendPasswordResetEmail(auth, user.email);
+                    Toastify({
+                        text: "Password reset email sent.",
+                        duration: 3000,
+                        gravity: "bottom",
+                        position: "left",
+                        backgroundColor: "#00b09b",
+                    }).showToast();
+                } catch (error) {
+                    Toastify({
+                        text: "Error: " + error.message,
+                        duration: 3000,
+                        gravity: "bottom",
+                        position: "left",
+                        backgroundColor: "#ff4d4d",
+                    }).showToast();
+                }
+            });
+          
+        // Sign Out
+        signOutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            signOut(auth).then(() => {
+                window.location.href = "3sign_In.html";
+            });
+        });
 
-          usernameInput.setAttribute("readonly", true);
-          Toastify({
-            text: "Username updated successfully!",
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#00b09b",
-          }).showToast();
-        },
-        { once: true }
-      );
-    });
+        // Pic selection + Firestore update
+        document.querySelectorAll(".option-pic").forEach((pic) => {
+            pic.addEventListener("click", async () => {
+                const selectedPic = pic.src.substring(pic.src.indexOf("Images/"));
+                mainProfilePic.src = selectedPic;
 
-    // Change Password
-    document
-      .getElementById("changePasswordBtn")
-      .addEventListener("click", async () => {
-        try {
-          await sendPasswordResetEmail(auth, user.email);
-          Toastify({
-            text: "Password reset email sent.",
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#00b09b",
-          }).showToast();
-        } catch (error) {
-          Toastify({
-            text: "Error: " + error.message,
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#ff4d4d",
-          }).showToast();
-        }
-      });
+                try {
+                    await updateDoc(userRef, { profilePic: selectedPic });
+                    Toastify({
+                        text: "Profile picture updated!",
+                        duration: 3000,
+                        gravity: "bottom",
+                        position: "left",
+                        backgroundColor: "#00b09b",
+                    }).showToast();
+                } catch (err) {
+                    Toastify({
+                        text: "Error updating pic: " + err.message,
+                        duration: 3000,
+                        gravity: "bottom",
+                        position: "left",
+                        backgroundColor: "#ff4d4d",
+                    }).showToast();
+                }
 
-    // Sign Out
-    signOutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      signOut(auth).then(() => {
-        window.location.href = "3sign_In.html";
-      });
-    });
+                profileModal.style.display = "none";
+            });
+        });
+        
+        // Toggle modal
+        editIcon.addEventListener("click", () => {
+            profileModal.style.display =
+                profileModal.style.display === "block" ? "none" : "block";
+        });
 
-    // Pic selection + Firestore update
-    document.querySelectorAll(".option-pic").forEach((pic) => {
-      pic.addEventListener("click", async () => {
-        const selectedPic = pic.src.substring(pic.src.indexOf("Images/"));
-        mainProfilePic.src = selectedPic;
-
-        try {
-          await updateDoc(userRef, { profilePic: selectedPic });
-          Toastify({
-            text: "Profile picture updated!",
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#00b09b",
-          }).showToast();
-        } catch (err) {
-          Toastify({
-            text: "Error updating pic: " + err.message,
-            duration: 3000,
-            gravity: "bottom",
-            position: "left",
-            backgroundColor: "#ff4d4d",
-          }).showToast();
-        }
-
-        profileModal.style.display = "none";
-      });
-    });
-
-    // Toggle modal
-    editIcon.addEventListener("click", () => {
-      profileModal.style.display =
-        profileModal.style.display === "block" ? "none" : "block";
-    });
-
-    // Hide modal on outside click
-    window.addEventListener("click", (e) => {
-      if (
-        e.target !== profileModal &&
-        !profileModal.contains(e.target) &&
-        e.target !== editIcon
-      ) {
-        profileModal.style.display = "none";
-      }
-    });
-  } else {
+        // Hide modal on outside click
+        window.addEventListener("click", (e) => {
+            if (
+                e.target !== profileModal &&
+                !profileModal.contains(e.target) &&
+                e.target !== editIcon
+            ) {
+                profileModal.style.display = "none";
+            }
+        });
+    } else {
     window.location.href = "3sign_In.html";
   }
 });
-
+    
 // ================= TELL US MORE LOGIC =================
-
 const moreInfoBtn = document.getElementById("moreInfoBtn");
 const moreInfoModal = document.getElementById("moreInfoModal");
 const modalOverlay = document.getElementById("modalOverlay");
@@ -283,19 +282,20 @@ function hasUnsavedChanges() {
 }
 
 // Create confirmation popup for unsaved changes
+const confirmOverlay = document.createElement("div");
+confirmOverlay.id = "confirmOverlay";
+confirmOverlay.style.display = "none";
+document.body.appendChild(confirmOverlay);
+
 const confirmPopup = document.createElement("div");
+confirmPopup.id = "confirmPopup"; // So the CSS applies
 confirmPopup.innerHTML = `
-  <div style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-              background:#111; color:white; padding:20px; border-radius:10px;
-              z-index:1001; text-align:center;">
     <p>You have unsaved changes. Do you want to save them?</p>
-    <button id="confirmSaveYes" style="margin:10px; padding:8px 12px; background:#e50914; color:white;">Yes</button>
-    <button id="confirmSaveNo" style="margin:10px; padding:8px 12px; background:gray; color:white;">No</button>
-  </div>
+    <button id="confirmSaveYes">Yes</button>
+    <button id="confirmSaveNo">No</button>
 `;
-confirmPopup.style.display = "none";
-confirmPopup.style.zIndex = 1001;
 document.body.appendChild(confirmPopup);
+
 
 function openModalWithData(data = {}) {
   Object.keys(fields).forEach((key) => {
@@ -308,46 +308,60 @@ function openModalWithData(data = {}) {
 }
 
 function closeModalSafely() {
-  if (hasUnsavedChanges()) {
-    confirmPopup.style.display = "block";
+    if (hasUnsavedChanges()) {
+        confirmOverlay.style.display = "block";
+        confirmPopup.style.display = "block";
 
-    document.getElementById("confirmSaveYes").onclick = async () => {
-      const updatedData = {};
-      Object.entries(fields).forEach(([key, input]) => {
-        updatedData[key] = input.value.trim();
-      });
+        document.getElementById("confirmSaveYes").onclick = async () => {
+            const updatedData = {};
+            Object.entries(fields).forEach(([key, input]) => {
+                updatedData[key] = input.value.trim();
+            });
 
-      await updateDoc(userRef, updatedData);
+            await updateDoc(userRef, updatedData);
 
-      Toastify({
-        text: "Changes saved!",
-        duration: 3000,
-        gravity: "bottom",
-        position: "left",
-        backgroundColor: "#00b09b",
-      }).showToast();
-      confirmPopup.style.display = "none";
-      moreInfoModal.style.display = "none";
-      modalOverlay.style.display = "none";
-      localStorage.setItem("skipAnimation", "true");
-      location.reload();
-    };
+            Toastify({
+                text: "Changes saved!",
+                duration: 3000,
+                gravity: "bottom",
+                position: "left",
+                backgroundColor: "#00b09b",
+            }).showToast();
 
-    document.getElementById("confirmSaveNo").onclick = () => {
-      confirmPopup.style.display = "none";
-      moreInfoModal.style.display = "none";
-      modalOverlay.style.display = "none";
-    };
-  } else {
-    moreInfoModal.style.display = "none";
-    modalOverlay.style.display = "none";
-  }
+            confirmPopup.style.display = "none";
+            confirmOverlay.style.display = "none";
+            moreInfoModal.style.display = "none";
+            modalOverlay.style.display = "none";
+            localStorage.setItem("skipAnimation", "true");
+            location.reload();
+        };
+
+        document.getElementById("confirmSaveNo").onclick = () => {
+            confirmPopup.style.display = "none";
+            confirmOverlay.style.display = "none";
+            moreInfoModal.style.display = "none";
+            modalOverlay.style.display = "none";
+        };
+    } else {
+        moreInfoModal.style.display = "none";
+        modalOverlay.style.display = "none";
+    }
 }
+
+confirmOverlay.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent closing by clicking background
+});
+
+// Prevent background clicks on confirm overlay
+document.getElementById("confirmOverlay").addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
 
 // Save button logic
 saveMoreInfo.addEventListener("click", async () => {
-  const updatedData = {};
-  Object.entries(fields).forEach(([key, input]) => {
+    const updatedData = {};
+    Object.entries(fields).forEach(([key, input]) => {
     updatedData[key] = input.value.trim();
   });
 
@@ -370,7 +384,10 @@ saveMoreInfo.addEventListener("click", async () => {
 
 // Modal close events
 closeModalBtn.addEventListener("click", closeModalSafely);
-modalOverlay.addEventListener("click", closeModalSafely);
+modalOverlay.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeModalSafely();
+});
 
 // Firebase: Get & Show Info
 onAuthStateChanged(auth, async (user) => {
