@@ -1,67 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Account | Netflix Talks</title>
     <link rel="icon" href="./Images/favicon.png" />
     <link rel="stylesheet" href="account.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
-    />
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+</head>
 
-  <body>
+<body>
     <nav class="account-navbar">
-      <div class="nav-left">
-        <a href="4index.html"
-          ><i class="fas fa-arrow-left back-btn" id="goBack"></i
-        ></a>
-      </div>
-      <div class="nav-center">
-        <img
-          src="Images/Netflix-Talks-Photoroom.png"
-          alt="Netflix Logo"
-          class="nav-logo"
-        />
-      </div>
-      <div class="ghost-toggle-wrapper">
-        <label class="ghost-switch">
-          <input type="checkbox" id="ghostToggle" />
-          <span class="slider round"></span>
-        </label>
-        <span class="ghost-label">Ghost Mode</span>
-      </div>
+        <div class="nav-left">
+            <a href="4index.html"><i class="fas fa-arrow-left back-btn" id="goBack"></i></a>
+        </div>
+        <div class="nav-center">
+            <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Logo" class="nav-logo" />
+        </div>
+        <div class="ghost-toggle-wrapper">
+            <label class="ghost-switch">
+                <input type="checkbox" id="ghostToggle" />
+                <span class="slider round"></span>
+            </label>
+            <span class="ghost-label">Ghost Mode</span>
+        </div>
     </nav>
 
     <main class="account-container">
-      <div class="profile-pic-wrapper">
-        <img
-          src="Images/profileIcons/1.jpg"
-          alt="Profile"
-          class="profile-pic"
-          id="mainProfilePic"
-        />
-        <i class="fa-solid fa-pen-to-square edit-icon" id="editIcon"></i>
-      </div>
-
-      <div class="profile-modal" id="profileModal">
-        <h3>Choose a Profile</h3>
-        <div class="profile-options">
-          <img src="Images/profileIcons/1.jpg" class="option-pic" />
-          <img src="Images/profileIcons/2.jpg" class="option-pic" />
-          <img src="Images/profileIcons/3.jpg" class="option-pic" />
-          <img src="Images/profileIcons/4.jpg" class="option-pic" />
+        <div class="profile-pic-wrapper">
+            <img src="Images/profileIcons/1.jpg" alt="Profile" class="profile-pic" id="mainProfilePic" />
+            <i class="fa-solid fa-pen-to-square edit-icon" id="editIcon"></i>
         </div>
-      </div>
-        
-        
+
+        <div class="profile-modal" id="profileModal">
+            <h3>Choose a Profile</h3>
+            <div class="profile-options">
+                <img src="Images/profileIcons/1.jpg" class="option-pic" />
+                <img src="Images/profileIcons/2.jpg" class="option-pic" />
+                <img src="Images/profileIcons/3.jpg" class="option-pic" />
+                <img src="Images/profileIcons/4.jpg" class="option-pic" />
+            </div>
+        </div>
+
+
         <div class="form-group">
             <label for="username">Username</label>
             <div style="position: relative">
@@ -98,48 +82,49 @@
     <div id="modalOverlay"></div>
 
     <div id="moreInfoModal">
-      <span class="closeModal" id="closeModalBtn">&times;</span>
-      <h3>Edit More Info</h3>
+        <span class="closeModal" id="closeModalBtn">&times;</span>
+        <h3>Edit More Info</h3>
 
-      <div class="floating-input">
-        <input type="text" id="pronouns" placeholder=" " />
-        <label for="pronouns">Pronouns</label>
-      </div>
+        <div class="floating-input">
+            <input type="text" id="pronouns" placeholder=" " />
+            <label for="pronouns">Pronouns</label>
+        </div>
 
-      <div class="floating-input">
-        <input type="text" id="bio" placeholder=" " />
-        <label for="bio">Bio</label>
-      </div>
+        <div class="floating-input">
+            <input type="text" id="bio" placeholder=" " />
+            <label for="bio">Bio</label>
+        </div>
 
-      <div class="floating-input">
-        <input type="text" id="intrest" placeholder=" " />
-        <label for="intrests">Interests</label>
-      </div>
+        <div class="floating-input">
+            <input type="text" id="intrest" placeholder=" " />
+            <label for="intrests">Interests</label>
+        </div>
 
-      <div class="floating-input">
-        <input type="text" id="hobbies" placeholder=" " />
-        <label for="hobbies">Hobbies</label>
-      </div>
+        <div class="floating-input">
+            <input type="text" id="hobbies" placeholder=" " />
+            <label for="hobbies">Hobbies</label>
+        </div>
 
-      <div class="floating-input">
-        <input type="text" id="insta" placeholder=" " />
-        <label for="insta">Instagram Handle</label>
-      </div>
+        <div class="floating-input">
+            <input type="text" id="insta" placeholder=" " />
+            <label for="insta">Instagram Handle</label>
+        </div>
 
-      <div class="floating-input">
-        <input type="text" id="facebook" placeholder=" " />
-        <label for="facebook">Facebook Handle</label>
-      </div>
+        <div class="floating-input">
+            <input type="text" id="facebook" placeholder=" " />
+            <label for="facebook">Facebook Handle</label>
+        </div>
 
-      <div class="floating-input">
-        <input type="text" id="otherLink" placeholder=" " />
-        <label for="otherLink">Other Link</label>
-      </div>
+        <div class="floating-input">
+            <input type="text" id="otherLink" placeholder=" " />
+            <label for="otherLink">Other Link</label>
+        </div>
 
-      <button id="saveMoreInfo">Save</button>
+        <button id="saveMoreInfo">Save</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="account.js"></script>
-  </body>
+</body>
+
 </html>
