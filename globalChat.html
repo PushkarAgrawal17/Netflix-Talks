@@ -1,102 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Global Chat | Netflix Talks</title>
     <link rel="icon" type="image/png" href="./Images/favicon.png" />
     <link rel="stylesheet" href="globalChat.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
 
-  <body>
+<body>
     <div class="chat-container">
-      <header class="chat-header">
-        <a
-          href="4index.html"
-          class="back-button"
-          aria-label="Go back to homepage"
-        >
-          <i class="fas fa-arrow-left"></i>
-        </a>
+        <header class="chat-header">
+            <a href="4index.html" class="back-button" aria-label="Go back to homepage">
+                <i class="fas fa-arrow-left"></i>
+            </a>
 
-        <div class="logo">
-          <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Logo" />
-        </div>
-        <p>Global Chat Room</p>
-      </header>
+            <div class="logo">
+                <img src="Images/Netflix-Talks-Photoroom.png" alt="Netflix Logo" />
+            </div>
+            <p>Global Chat Room</p>
+        </header>
 
-      <!-- Username span to attach hover and click -->
-      <span class="username" data-email="user@example.com"></span>
-      <main id="chat-messages" class="messages-area"></main>
+        <!-- Username span to attach hover and click -->
+        <span class="username" data-email="user@example.com"></span>
+        <main id="chat-messages" class="messages-area"></main>
 
-      <form id="chat-form" class="input-area" autocomplete="off">
-        <button type="button" id="emoji-button" aria-label="Emoji Picker">
-          <i class="fa-solid fa-face-smile"></i>
-        </button>
-        <input
-          type="text"
-          id="messageInput"
-          placeholder="Type your message..."
-          maxlength="300"
-          required
-        />
-        <button type="submit" id="sendButton" aria-label="Send Message">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24"
-            width="24"
-            fill="white"
-            viewBox="0 0 24 24"
-          >
-            <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
-          </svg>
-        </button>
+        <form id="chat-form" class="input-area" autocomplete="off">
+            <button type="button" id="emoji-button" aria-label="Emoji Picker">
+                <i class="fa-solid fa-face-smile"></i>
+            </button>
+            <input type="text" id="messageInput" placeholder="Type your message..." maxlength="300" required />
+            <button type="submit" id="sendButton" aria-label="Send Message">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="white" viewBox="0 0 24 24">
+                    <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+                </svg>
+            </button>
 
-        <emoji-picker id="emoji-picker" style="display: none"></emoji-picker>
-      </form>
+            <emoji-picker id="emoji-picker" style="display: none"></emoji-picker>
+        </form>
     </div>
 
     <!-- Tooltip for Ghost User -->
     <div id="ghost-tooltip" class="ghost-tooltip" style="display: none">
-      Ghost user
+        Ghost user
     </div>
 
     <!-- User Info Popup -->
     <div id="user-popup" class="popup hidden">
-      <div class="popup-content">
-        <span class="close-btn">&times;</span>
-        <h2 id="popup-fullName"></h2>
-        <p id="popup-pronouns"></p>
-        <p id="popup-bio"></p>
-        <p id="popup-interests"></p>
-        <p id="popup-hobbies"></p>
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="popup-fullName"></h2>
+            <p id="popup-pronouns"></p>
+            <p id="popup-bio"></p>
+            <p id="popup-interests"></p>
+            <p id="popup-hobbies"></p>
 
-        <p id="popup-instagram" class="social-link">
-          Instagram: <a href="" target="_blank"></a>
-        </p>
-        <p id="popup-facebook" class="social-link">
-          Facebook: <a href="" target="_blank"></a>
-        </p>
-        <p id="popup-other" class="social-link">
-          Other: <a href="" target="_blank"></a>
-        </p>
-      </div>
+            <p id="popup-instagram" class="social-link">
+                Instagram: <a href="" target="_blank"></a>
+            </p>
+            <p id="popup-facebook" class="social-link">
+                Facebook: <a href="" target="_blank"></a>
+            </p>
+            <p id="popup-other" class="social-link">
+                Other: <a href="" target="_blank"></a>
+            </p>
+        </div>
     </div>
 
     <!-- Scripts -->
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"
-    ></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
     <script type="module" src="config.js"></script>
     <script type="module" src="globalChat.js"></script>
-  </body>
+</body>
+
 </html>
